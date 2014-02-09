@@ -3,7 +3,7 @@
     var config = angular.module('CarGas.Config', []);
 
     angular.extend(config, {
-        apiURL: 'http://localhost:3000',
+        apiURL: 'http://cargas-server.herokuapp.com',
         fuels: ['Fuel', function (Fuel) {
             return Fuel.query();
         }],
