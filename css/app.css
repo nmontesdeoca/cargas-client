@@ -1,0 +1,91 @@
+/* just suggested styles */
+body,
+header,
+nav {
+    min-width: 320px;
+}
+.content {
+    min-width: 304px;
+    /* content already has padding */
+    padding: 2.5%;
+}
+nav .tab-item {
+    height: auto;
+    padding: 0;
+}
+nav .tab-item a {
+    display: block;
+    height: 100%;
+    /* line-height: 46px; */
+    margin: 0;
+    width: 100%;
+}
+/* social buttons */
+.social-button {
+    background: transparent url(../../images/social-icons.png) no-repeat;
+    color: #fff;
+    height: 48px;
+    line-height: 46px;
+    margin-bottom: 10px;
+    padding: 0 0 0 3%;
+    text-shadow: none;
+    width: 96.9%;
+}
+
+.facebook-button {
+    background-color: #3f5dd0;
+    background-position: 0 -2px;
+}
+
+.facebook-button:active {
+    background: #3f5dd0 url(../../images/social-icons.png) no-repeat 0 -2px;
+    color: #fefefe;
+    padding: 0 0 0 3%;
+}
+
+.twitter-button {
+    background-color: #089ce8;
+    background-position: 0 -56px;
+}
+
+.twitter-button:active {
+    background: #089ce8 url(../../images/social-icons.png) no-repeat 0 -56px;
+    color: #fefefe;
+    padding: 0 0 0 3%;
+}
+
+.google-button {
+    background-color: #ea3d3e;
+    background-position: 0 -108px;
+}
+
+.google-button:active {
+    background: #ea3d3e url(../../images/social-icons.png) no-repeat 0 -108px;
+    color: #fefefe;
+    padding: 0 0 0 3%;
+}
+
+.enter-optional-text {
+    margin: 15px 0 5px;
+}
+
+[disabled] {
+    opacity: 0.5;
+}
+
+.list .edit {
+  right: 70px;
+}
+
+.ng-cloak {
+    display: none;
+}
+
+.bar-tab.ng-hide ~ .content {
+    bottom: 0;
+}
+
+.tab-item i {
+    color: #FFF;
+    margin-top: 10px;
+}

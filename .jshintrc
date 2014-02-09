@@ -1,0 +1,14 @@
+{
+    "boss": true, // permite hacer asignaciones en donde iría una condicion: for (var i = 0, person; person = people[i]; i++) {}
+    "browser": true, // define variables del browser como document, alert, console
+    "curly": true, // obliga a poner llaves aunque usemos un if de una linea
+    "eqeqeq": true, // obliga a usar === en vez de == y lo mismo para != y !===
+    "evil": false, // no permite usar eval
+    "expr": true, // permite usar expresiones donde iría una asignacion o una funcion: cells.length === 1 && cells.eq(0).removeAttr('colspan');
+    "onevar": true,
+    "regexdash": true, // permite usar - sin escapear en expresiones regulares
+    "sub": true, // permite usar [] cuando deberias usar . : person['name'] vs. person.name
+    "trailing": true, // no permite dejar espacios vacios luego de una sentencia
+    "white": true, // chequea el codigo según "Douglas Crockford's JavaScript coding style"
+    "wsh": true // venia por defecto, define variables globales para cuando el codigo corre como window script host. ref: http://en.wikipedia.org/wiki/Windows_Script_Host
+}

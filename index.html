@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en" ng-app="CarGas">
+<head>
+    <meta charset="UTF-8">
+    <title>CarGas</title>
+
+    <!-- Sets initial viewport load and disables zooming  -->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Set a shorter title for iOS6 devices when saved to home screen -->
+    <meta name="apple-mobile-web-app-title" content="CarGas">
+
+    <!-- Set Apple icons for when prototype is saved to home screen -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/touch-icons/apple-touch-icon-114x114.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/touch-icons/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/images/touch-icons/apple-touch-icon-57x57.png">
+
+    <link rel="stylesheet" href="/css/ratchet.css">
+    <link rel="stylesheet" href="/css/font-awesome.css">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+<body ng-controller="Main" class="ng-cloak">
+
+    <header class="bar-title" ng-show="title">
+        <h1 class="title">{{ title || 'Title' }}</h1>
+    </header>
+
+    <nav
+        class="bar-tab"
+        ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'">
+
+        <ul class="tab-inner">
+            <li ng-repeat="tab in tabs"
+                class="tab-item{{ menuSelected === tab.menu ? ' active' : '' }}">
+
+                <a href="{{ tab.href }}">
+                    <i class="fa fa-1g {{ tab.icon }}"></i>
+                    <div class="tab-label">{{ tab.text }}</div>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div ng-view class="content {{ menuSelected !== 'Refuels' ? 'content-padded' : '' }}"></div>
+
+    <script src="/js/vendor/angular/angular.js"></script>
+    <script src="/js/vendor/angular/angular-cookies.js"></script>
+    <script src="/js/vendor/angular/angular-animate.js"></script>
+    <script src="/js/vendor/angular/angular-touch.js"></script>
+    <script src="/js/vendor/angular/angular-route.js"></script>
+    <script src="/js/vendor/angular/angular-resource.js"></script>
+
+    <script src="/js/src/app/app.js"></script>
+    <script src="/js/src/app/config.js"></script>
+
+    <script src="/js/src/app/modules/Main/main.js"></script>
+    <script src="/js/src/app/modules/Main/controllers/Main.js"></script>
+
+    <script src="/js/src/app/modules/Refuel/refuel.js"></script>
+    <script src="/js/src/app/modules/Refuel/controllers/Refuel.Add.js"></script>
+    <script src="/js/src/app/modules/Refuel/controllers/Refuel.List.js"></script>
+    <script src="/js/src/app/modules/Refuel/controllers/Refuel.Edit.js"></script>
+    <script src="/js/src/app/modules/Refuel/services/Refuel.js"></script>
+
+    <script src="/js/src/app/modules/User/user.js"></script>
+    <script src="/js/src/app/modules/User/controllers/User.Login.js"></script>
+    <script src="/js/src/app/modules/User/controllers/User.Register.js"></script>
+    <script src="/js/src/app/modules/User/controllers/User.Account.js"></script>
+    <script src="/js/src/app/modules/User/controllers/User.Account.Fuels.js"></script>
+    <script src="/js/src/app/modules/User/controllers/User.Logout.js"></script>
+    <script src="/js/src/app/modules/User/services/User.js"></script>
+
+    <script src="/js/src/app/modules/Fuel/fuel.js"></script>
+    <script src="/js/src/app/modules/Fuel/services/Fuel.js"></script>
+</body>
+</html>

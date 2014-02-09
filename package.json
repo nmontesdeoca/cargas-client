@@ -1,0 +1,14 @@
+{
+    "name": "cargas-client",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node server"
+    },
+    "engines": {
+        "node": "0.10.24"
+    },
+    "dependencies": {
+        "express": "3.1.0"
+    }
+}

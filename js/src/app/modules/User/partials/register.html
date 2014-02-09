@@ -1,0 +1,21 @@
+<form ng-submit="register()" method="post">
+    <div class="input-group">
+        <div class="input-row">
+            <label>Nombre</label>
+            <input type="text" name="first-name" placeholder="Nicolas" ng-model="user.firstName">
+        </div>
+        <div class="input-row">
+            <label>Apellido</label>
+            <input type="text" name="last-name" placeholder="Montesdeoca" ng-model="user.lastName">
+        </div>
+        <div class="input-row">
+            <label>Email</label>
+            <input type="email" name="email" placeholder="nico@cargas.com" ng-model="user.email">
+        </div>
+        <div class="input-row">
+            <label>Password</label>
+            <input type="password" name="password" placeholder="secret" ng-model="user.password">
+        </div>
+    </div>
+    <button type="submit" class="button-block">Registrarme</button>
+</form>
