@@ -1,7 +1,9 @@
 CarGas
 ======
 
-Trata de ser una aplicacion orientada a moviles con el fin de permitirle a un usuario, registrar las recargas de combustible que le hace a su vehículo.
+Es una aplication cliente desarrollada con AngularJS by Google.
+
+CarGas sirve para administrar las recargas de combustible de tus vehiculos. Esta aplicación esta en fase de desarrollo.
 
 Qué ve un usuario cuando entra a CarGas ?
 
@@ -23,39 +25,6 @@ Qué puede hacer un usuario ?
     * ver historial de recargas
     * ver los gastos realizados con sus recargas, por dia, por mes, por año
     * podria tener varios vehiculos
-
-
-Idea de modelos
-
-    User
-    first_name      String
-    last_name       String
-    provider        String
-    hashed_password String
-    salt            String
-    authToken       String
-    facebook        Object
-    twitter         Object
-    google          Object
-    created_at      Date
-    updated_at      Date
-
-    Fuel
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    cost: { type: Number },
-    name: { type: String },
-    created_at: { type: Date, default: Date.now },
-    updated_at: { type: Date }
-
-    Refuel
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-    fuel: { type: mongoose.Schema.Types.ObjectId, ref: 'Fuel'},
-    cost: { type: Number },
-    capacity: { type: Number },
-    average: { type: Number },
-    kilometers: { type: Number },
-    created_at: { type: Date, default: Date.now },
-    updated_at: Date
 
 ### Contribuidores
 
