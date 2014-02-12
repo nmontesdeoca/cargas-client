@@ -3,7 +3,10 @@
     var config = angular.module('CarGas.Config', []);
 
     angular.extend(config, {
-        apiURL: 'http://localhost:3000', //'http://cargas-server.herokuapp.com',
+        // herokuapp
+        apiURL: 'http://cargas-server.herokuapp.com',
+        // local
+        // apiURL: 'http://localhost:3000',
         fuels: ['$location', 'Fuel', 'UserService', function ($location, Fuel, UserService) {
             if (!UserService.isLoggedIn) {
                 return $location.path('/login');
