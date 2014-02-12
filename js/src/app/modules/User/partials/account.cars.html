@@ -1,0 +1,29 @@
+<p class="count-negative" ng-show="error">{{ error }}</p>
+
+<form ng-submit="add()" name="form" novalidate>
+    <div class="input-group">
+        <div class="input-row">
+            <label>Nombre</label>
+            <input type="text" name="name" placeholder="Super 95 SP" ng-model="car.name" required>
+        </div>
+        <div class="input-row">
+            <label>Costo</label>
+            <input type="text" name="cost" placeholder="35.50" ng-model="car.cost" required>
+        </div>
+    </div>
+    <button type="submit" class="button-block" ng-disabled="!form.$valid">Agregar</button>
+</form>
+
+<!-- p class="count-negative error-message" ng-show="form.name.$error.required">Nombre valido requerido</p>
+<p class="count-negative error-message" ng-show="form.cost.$error.required">Costo valido requerido</p -->
+
+<ul class="list inset no-side-margin">
+    <li class="list-divider sub-title">Mis Vehiculos</li>
+    <li ng-show="!(cars | filter:myCars).length">No has agregado vehiculos</li>
+    <li ng-repeat="car in cars | filter:myCars">
+        <span>{{ car.name }} ({{ car.cost | currency }})</span>
+        <button class="button-negative" ng-click="delete(car._id)">
+            <i class="fa fa-trash-o"></i>
+        </button>
+    </li>
+</ul>

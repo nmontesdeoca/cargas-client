@@ -4,8 +4,11 @@ angular.module('CarGas.User')
     '$http',
     '$location',
     'User',
-    function ($scope, $http, $location, User) {
+    'Auth',
+    function ($scope, $http, $location, User, Auth) {
         $scope.user = {};
+
+        $scope.error = null;
 
         $scope.$parent.menuSelected = 'Register';
         $scope.$parent.title = 'Registro';
@@ -16,18 +19,20 @@ angular.module('CarGas.User')
                 lastName: $scope.user.lastName,
                 email: $scope.user.email,
                 password: $scope.user.password
-            }).$save(function () {
-                $http.post('/api/login', {
-                    email: $scope.user.email,
-                    password: $scope.user.password
-                }).then(
-                    function (user) {
-                        $location.url('/');
-                    },
-                    function () {
-                        $location.url('/login');
-                    }
-                );
+            }).$save(function (data) {
+                if (data.success !== false) {
+                    Auth.setCredentials($scope.user.email, $scope.user.password);
+                    $http.post('/api/login').then(
+                        function (user) {
+                            $location.url('/');
+                        },
+                        function () {
+                            $location.url('/login');
+                        }
+                    );
+                } else {
+                    $scope.error = data.message || 'Ha ocurrido un error';
+                }
             });
         };
     }

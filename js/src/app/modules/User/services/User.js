@@ -9,4 +9,14 @@ angular.module('CarGas.User').factory('User', [
         });
         // { addCar: { method: 'POST', url: '/api/user/:id/cars' } }
     }
+]).service('UserService', [
+    '$cookieStore',
+    function ($cookieStore) {
+        var config = angular.module('CarGas.Config');
+        // used from the templates
+        config.isLoggedIn = config.getCookie('authdata');
+        return {
+            isLoggedIn: config.isLoggedIn
+        }
+    }
 ]);
