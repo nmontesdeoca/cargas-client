@@ -3,22 +3,65 @@
     var config = angular.module('CarGas.Config', []);
 
     angular.extend(config, {
-        apiURL: 'http://cargas-server.herokuapp.com',
-        fuels: ['Fuel', function (Fuel) {
+        apiURL: 'http://localhost:3000', //'http://cargas-server.herokuapp.com',
+        fuels: ['$location', 'Fuel', 'UserService', function ($location, Fuel, UserService) {
+            if (!UserService.isLoggedIn) {
+                return $location.path('/login');
+            }
             return Fuel.query();
         }],
-        refuel: ['$route', 'Refuel', function ($route, Refuel) {
+        refuel: ['$route', '$location', 'Refuel', 'UserService', function ($route, $location, Refuel, UserService) {
+            if (!UserService.isLoggedIn) {
+                return $location.path('/login');
+            }
             return Refuel.get({ id: $route.current.params.id });
         }],
-        refuels: ['Refuel', '$location', '$cookieStore', function (Refuel, $location, $cookieStore) {
-            if (!$cookieStore.get('authdata')) {
+        refuels: ['Refuel', '$location', 'UserService', function (Refuel, $location, UserService) {
+            if (!UserService.isLoggedIn) {
                 return $location.path('/login');
             }
             return Refuel.query();
         }],
-        user: ['User', function (User) {
-            return User.getCurrentUser();
-        }]
+        user: ['User', 'UserService', function (User, UserService) {
+            if (UserService.isLoggedIn) {
+                return User.getCurrentUser();
+            }
+        }],
+        getCookie: function (ckName) {
+            var i,
+                cookieKey,
+                cookieValue,
+                cookiesArray = document.cookie.split(';'),
+                cookiesLength = cookiesArray.length,
+                currentValue,
+                indexOfEqual;
+            for (i = 0; i < cookiesLength; i++) {
+                currentValue = cookiesArray[i];
+                indexOfEqual = currentValue.indexOf('=');
+                cookieKey = currentValue.substr(0, indexOfEqual);
+                cookieValue = currentValue.substr(indexOfEqual + 1);
+                cookieKey = cookieKey.replace(/^\s+|\s+$/g, '');
+                if (cookieKey === ckName) {
+                    return unescape(cookieValue);
+                }
+            }
+            return null;
+        },
+        setCookie: function (ckName, value, exDays) {
+            var exDate,
+                expires = '',
+                ckValue;
+            if (exDays && parseFloat(exDays)) {
+                exDate = new Date();
+                exDate.setDate(exDate.getDate() + exDays);
+                expires = ';expires=' + exDate.toUTCString();
+            }
+            ckValue = escape(value) + expires;
+            document.cookie = ckName + '=' + ckValue;
+        },
+        deleteCookie: function (ckName) {
+            document.cookie = ckName + '=;expires=Thu, 01-Jan-1970 00:00:01 GMT';
+        }
     });
 
     config.config(['$httpProvider', function ($httpProvider) {
@@ -31,7 +74,7 @@
         function($q, $location, $cookieStore) {
             return {
                 request: function($config) {
-                    $config.headers['Authorization'] = 'Basic ' + $cookieStore.get('authdata');
+                    $config.headers['Authorization'] = 'Basic ' + config.getCookie('authdata');
 
                     return $config;
                 }
@@ -41,11 +84,15 @@
     .factory('Auth', ['Base64', '$cookieStore', '$http', function (Base64, $cookieStore, $http) {
         return {
             setCredentials: function (username, password) {
-                $cookieStore.put('authdata', Base64.encode(username + ':' + password));
+                // debugger
+                // var cookieExtraData = ';expires=' + (1 * 365 * 24 * 60 * 60 * 1000);// + ';path=/';
+                // $cookieStore.put('authdata', Base64.encode(username + ':' + password) + cookieExtraData);
+                config.setCookie('authdata', Base64.encode(username + ':' + password), 365 * 50);
             },
             clearCredentials: function () {
                 document.execCommand("ClearAuthenticationCache");
-                $cookieStore.remove('authdata');
+                // $cookieStore.remove('authdata');
+                config.deleteCookie('authdata');
             }
         };
     }])

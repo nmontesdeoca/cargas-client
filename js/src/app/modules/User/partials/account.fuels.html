@@ -14,20 +14,23 @@
     <button type="submit" class="button-block" ng-disabled="!form.$valid">Agregar</button>
 </form>
 
-<p class="count-negative" ng-show="form.name.$error.required">Nombre valido requerido</p>
-<p class="count-negative" ng-show="form.cost.$error.required">Costo valido requerido</p>
+<!-- p class="count-negative error-message" ng-show="form.name.$error.required">Nombre valido requerido</p>
+<p class="count-negative error-message" ng-show="form.cost.$error.required">Costo valido requerido</p -->
 
-<ul class="list inset">
-    <li>Combustibles</li>
+<ul class="list inset no-side-margin">
+    <li class="list-divider sub-title">Combustibles</li>
     <li ng-repeat="fuel in fuels | filter:defaultFuels">
         <span>{{ fuel.name }} ({{ fuel.cost | currency }})</span>
     </li>
 </ul>
 
-<ul class="list inset">
-    <li>Mis Combustibles</li>
+<ul class="list inset no-side-margin">
+    <li class="list-divider sub-title">Mis Combustibles</li>
+    <li ng-show="!(fuels | filter:myFuels).length">No has agregado combustibles</li>
     <li ng-repeat="fuel in fuels | filter:myFuels">
         <span>{{ fuel.name }} ({{ fuel.cost | currency }})</span>
-        <button class="button negative" ng-click="delete(fuel._id)">Eliminar</button>
+        <button class="button-negative" ng-click="delete(fuel._id)">
+            <i class="fa fa-trash-o"></i>
+        </button>
     </li>
 </ul>

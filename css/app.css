@@ -6,6 +6,8 @@ nav {
 }
 .content {
     min-width: 304px;
+}
+.content-padded {
     /* content already has padding */
     padding: 2.5%;
 }
@@ -73,6 +75,10 @@ nav .tab-item a {
     opacity: 0.5;
 }
 
+button[disabled] {
+    cursor: default;
+}
+
 .list .edit {
   right: 70px;
 }
@@ -88,4 +94,22 @@ nav .tab-item a {
 .tab-item i {
     color: #FFF;
     margin-top: 10px;
+}
+
+.error-message {
+    display: block;
+    font-size: 13px;
+    line-height: 17px;
+    margin: 15px 0;
+    padding: 10px 15px;
+}
+
+.list.no-side-margin {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.list .sub-title {
+    font-size: 16px;
+    line-height: 26px;
 }

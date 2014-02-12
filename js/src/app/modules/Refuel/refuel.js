@@ -7,14 +7,22 @@ angular.module('CarGas.Refuel', ['ngResource'])
         $routeProvider
 
         .when('/refuel', {
-            templateUrl: '/js/src/app/modules/Refuel/partials/form.html',
+            templateUrl: function () {
+                if (config.isLoggedIn) {
+                    return '/js/src/app/modules/Refuel/partials/form.html'
+                }
+            },
             controller: 'Refuel.Add',
             resolve: {
                 fuels: config.fuels
             }
         })
         .when('/refuel/:id', {
-            templateUrl: '/js/src/app/modules/Refuel/partials/form.html',
+            templateUrl: function () {
+                if (config.isLoggedIn) {
+                    return '/js/src/app/modules/Refuel/partials/form.html'
+                }
+            },
             controller: 'Refuel.Edit',
             resolve: {
                 fuels: config.fuels,
@@ -22,7 +30,11 @@ angular.module('CarGas.Refuel', ['ngResource'])
             }
         })
         .when('/refuels', {
-            templateUrl: '/js/src/app/modules/Refuel/partials/list.html',
+            templateUrl: function () {
+                if (config.isLoggedIn) {
+                    return '/js/src/app/modules/Refuel/partials/list.html'
+                }
+            },
             controller: 'Refuel.List',
             resolve: {
                 refuels: config.refuels

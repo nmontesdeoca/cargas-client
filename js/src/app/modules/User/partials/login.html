@@ -2,11 +2,11 @@
     <div class="input-group">
         <div class="input-row">
             <label>Email</label>
-            <input type="email" name="email" placeholder="nico@cargas.com" ng-model="user.email">
+            <input type="email" name="email" placeholder="nico@cargas.com" ng-model="user.email" required email>
         </div>
         <div class="input-row">
             <label>Password</label>
-            <input type="password" name="password" placeholder="secret" ng-model="user.password">
+            <input type="password" name="password" placeholder="secret" ng-model="user.password" required>
         </div>
     </div>
     <button type="submit" class="button-block">Ingresar</button>
@@ -18,4 +18,4 @@
     -->
     <p>No tienes cuenta a&uacute;n? <a href="/register">Registrarme</a></p>
 </form>
-<p class="count-negative" ng-show="error">{{error}}</p>
+<p class="count-negative error-message" ng-show="error">{{error}}</p>
