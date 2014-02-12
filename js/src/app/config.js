@@ -26,42 +26,7 @@
             if (UserService.isLoggedIn) {
                 return User.getCurrentUser();
             }
-        }],
-        getCookie: function (ckName) {
-            var i,
-                cookieKey,
-                cookieValue,
-                cookiesArray = document.cookie.split(';'),
-                cookiesLength = cookiesArray.length,
-                currentValue,
-                indexOfEqual;
-            for (i = 0; i < cookiesLength; i++) {
-                currentValue = cookiesArray[i];
-                indexOfEqual = currentValue.indexOf('=');
-                cookieKey = currentValue.substr(0, indexOfEqual);
-                cookieValue = currentValue.substr(indexOfEqual + 1);
-                cookieKey = cookieKey.replace(/^\s+|\s+$/g, '');
-                if (cookieKey === ckName) {
-                    return unescape(cookieValue);
-                }
-            }
-            return null;
-        },
-        setCookie: function (ckName, value, exDays) {
-            var exDate,
-                expires = '',
-                ckValue;
-            if (exDays && parseFloat(exDays)) {
-                exDate = new Date();
-                exDate.setDate(exDate.getDate() + exDays);
-                expires = ';expires=' + exDate.toUTCString();
-            }
-            ckValue = escape(value) + expires;
-            document.cookie = ckName + '=' + ckValue;
-        },
-        deleteCookie: function (ckName) {
-            document.cookie = ckName + '=;expires=Thu, 01-Jan-1970 00:00:01 GMT';
-        }
+        }]
     });
 
     config.config(['$httpProvider', function ($httpProvider) {
@@ -70,29 +35,64 @@
     .factory('httpRequestInterceptor', [
         '$q',
         '$location',
-        '$cookieStore',
-        function($q, $location, $cookieStore) {
+        'CookieManager',
+        function($q, $location, CookieManager) {
             return {
                 request: function($config) {
-                    $config.headers['Authorization'] = 'Basic ' + config.getCookie('authdata');
+                    $config.headers['Authorization'] = 'Basic ' + CookieManager.getCookie('authdata');
 
                     return $config;
                 }
             };
         }
     ])
-    .factory('Auth', ['Base64', '$cookieStore', '$http', function (Base64, $cookieStore, $http) {
+    .factory('CookieManager', function () {
+        return {
+            getCookie: function (cookieName) {
+                var i,
+                    cookieKey,
+                    cookieValue,
+                    cookiesArray = document.cookie.split(';'),
+                    cookiesLength = cookiesArray.length,
+                    currentValue,
+                    indexOfEqual;
+                for (i = 0; i < cookiesLength; i++) {
+                    currentValue = cookiesArray[i];
+                    indexOfEqual = currentValue.indexOf('=');
+                    cookieKey = currentValue.substr(0, indexOfEqual);
+                    cookieValue = currentValue.substr(indexOfEqual + 1);
+                    cookieKey = cookieKey.replace(/^\s+|\s+$/g, '');
+                    if (cookieKey === cookieName) {
+                        return unescape(cookieValue);
+                    }
+                }
+                return null;
+            },
+            setCookie: function (cookieName, value, exDays) {
+                var exDate,
+                    expires = '',
+                    ckValue;
+                if (exDays && parseFloat(exDays)) {
+                    exDate = new Date();
+                    exDate.setDate(exDate.getDate() + exDays);
+                    expires = ';expires=' + exDate.toUTCString();
+                }
+                ckValue = escape(value) + expires;
+                document.cookie = cookieName + '=' + ckValue;
+            },
+            deleteCookie: function (cookieName) {
+                document.cookie = cookieName + '=;expires=Thu, 01-Jan-1970 00:00:01 GMT';
+            }
+        };
+    })
+    .factory('Auth', ['Base64', '$http', 'CookieManager', function (Base64, $http, CookieManager) {
         return {
             setCredentials: function (username, password) {
-                // debugger
-                // var cookieExtraData = ';expires=' + (1 * 365 * 24 * 60 * 60 * 1000);// + ';path=/';
-                // $cookieStore.put('authdata', Base64.encode(username + ':' + password) + cookieExtraData);
-                config.setCookie('authdata', Base64.encode(username + ':' + password), 365 * 50);
+                CookieManager.setCookie('authdata', Base64.encode(username + ':' + password), 365 * 50);
             },
             clearCredentials: function () {
                 document.execCommand("ClearAuthenticationCache");
-                // $cookieStore.remove('authdata');
-                config.deleteCookie('authdata');
+                CookieManager.deleteCookie('authdata');
             }
         };
     }])
