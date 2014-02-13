@@ -1,7 +1,9 @@
 angular.module('CarGas.User', ['ngResource'])
 .config([
     '$routeProvider',
-    function ($routeProvider) {
+    'USER',
+    'FUELS',
+    function ($routeProvider, USER, FUELS) {
         var config = angular.module('CarGas.Config');
 
         $routeProvider
@@ -22,8 +24,8 @@ angular.module('CarGas.User', ['ngResource'])
             },
             controller: 'User.Account',
             resolve: {
-                fuels: config.fuels,
-                user: config.user
+                fuels: FUELS,
+                user: USER
             }
         })
         .when('/account/fuels', {
@@ -34,8 +36,8 @@ angular.module('CarGas.User', ['ngResource'])
             },
             controller: 'User.Account.Fuels',
             resolve: {
-                fuels: config.fuels,
-                user: config.user
+                fuels: FUELS,
+                user: USER
             }
         })
         .when('/account/cars', {
@@ -46,8 +48,8 @@ angular.module('CarGas.User', ['ngResource'])
             },
             controller: 'User.Account.Cars',
             resolve: {
-                fuels: config.fuels,
-                user: config.user
+                fuels: FUELS,
+                user: USER
             }
         })
         .when('/logout', {

@@ -5,7 +5,9 @@ angular.module('CarGas.User')
     '$location',
     'User',
     'Auth',
-    function ($scope, $http, $location, User, Auth) {
+    'ResolveAccessToken',
+    'API_URL',
+    function ($scope, $http, $location, User, Auth, ResolveAccessToken, API_URL) {
         $scope.user = {};
 
         $scope.error = null;
@@ -21,13 +23,31 @@ angular.module('CarGas.User')
                 password: $scope.user.password
             }).$save(function (data) {
                 if (data.success !== false) {
-                    Auth.setCredentials($scope.user.email, $scope.user.password);
-                    $http.post('/api/login').then(
-                        function (user) {
-                            $location.url('/');
-                        },
-                        function () {
-                            $location.url('/login');
+                    ResolveAccessToken($scope.user.email, $scope.user.password)
+                        .then(function (response) {
+                            $http
+                                .post(API_URL + '/login')
+                                .then(function (response) {
+                                    if (response && response.data) {
+                                        if (response.data.authenticated) {
+                                            $location.url('/');
+                                        } else {
+                                            // clear credentials
+                                            Auth.clearCredentials();
+                                            $scope.error = 'Email o contraseña incorrecta';
+                                        }
+                                    } else {
+                                        // clear credentials
+                                        Auth.clearCredentials();
+                                        $scope.error = 'Pasó algo!';
+                                    }
+                                },
+                                function () {
+                                    // debugger;
+                                    // clear credentials
+                                    Auth.clearCredentials();
+                                    $location.url('/login');
+                                });
                         }
                     );
                 } else {

@@ -1,7 +1,10 @@
 angular.module('CarGas.Refuel', ['ngResource'])
 .config([
     '$routeProvider',
-    function ($routeProvider) {
+    'FUELS',
+    'REFUEL',
+    'REFUELS',
+    function ($routeProvider, FUELS, REFUEL, REFUELS) {
         var config = angular.module('CarGas.Config');
 
         $routeProvider
@@ -14,7 +17,7 @@ angular.module('CarGas.Refuel', ['ngResource'])
             },
             controller: 'Refuel.Add',
             resolve: {
-                fuels: config.fuels
+                fuels: FUELS
             }
         })
         .when('/refuel/:id', {
@@ -25,8 +28,8 @@ angular.module('CarGas.Refuel', ['ngResource'])
             },
             controller: 'Refuel.Edit',
             resolve: {
-                fuels: config.fuels,
-                refuel: config.refuel
+                fuels: FUELS,
+                refuel: REFUEL
             }
         })
         .when('/refuels', {
@@ -37,7 +40,7 @@ angular.module('CarGas.Refuel', ['ngResource'])
             },
             controller: 'Refuel.List',
             resolve: {
-                refuels: config.refuels
+                refuels: REFUELS
             }
         });
     }

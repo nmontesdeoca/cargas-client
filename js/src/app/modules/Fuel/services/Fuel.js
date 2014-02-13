@@ -1,5 +1,5 @@
-angular.module('CarGas.Fuel').factory('Fuel', ['$resource', function ($resource) {
-    var config = angular.module('CarGas.Config');
-
-    return $resource(config.apiURL + '/fuel/:id', { id: '@_id' });
-}]);
+angular.module('CarGas.Fuel').factory('Fuel', ['$resource', 'API_URL',
+    function ($resource, API_URL) {
+        return $resource(API_URL + '/fuel/:id', { id: '@_id' });
+    }
+]);
