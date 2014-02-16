@@ -33,13 +33,23 @@ angular.module('CarGas.User')
                                 Auth.clearCredentials();
                                 $scope.error = 'Pasó algo!';
                             }
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
                         },
                         function () {
                             // debugger;
                             // clear credentials
                             Auth.clearCredentials();
                             $location.url('/login');
+                            if (!$scope.$$phase) {
+                                $scope.$apply();
+                            }
                         });
+
+                    if (!$scope.$$phase) {
+                        $scope.$apply();
+                    }
                 }
             );
         };

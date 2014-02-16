@@ -10,17 +10,14 @@ angular.module('CarGas.User').factory('User', [
     }
 ])
 
-.service('UserService', [
-    'CookieManager',
-    function (CookieManager) {
-        // used from templates
-        var config = angular.module('CarGas.Config');
-        config.isLoggedIn = CookieManager.getCookie('accessToken');
-        return {
-            isLoggedIn: config.isLoggedIn
-        }
-    }
-])
+.service('UserService', function () {
+    // used from templates
+    var config = angular.module('CarGas.Config');
+    config.isLoggedIn = window.localStorage.accessToken;
+    return {
+        isLoggedIn: config.isLoggedIn
+    };
+})
 
 .service('ResolveAccessToken', ['$q', '$http', 'Auth', 'API_URL', 'CLIENT_CREDENTIALS',
     function ($q, $http, Auth, API_URL, CLIENT_CREDENTIALS) {
