@@ -14,7 +14,6 @@ angular.module('CarGas.User').factory('User', [
     // used from templates
     var config = angular.module('CarGas.Config');
     config.isLoggedIn = window.localStorage.accessToken;
-    alert(config.isLoggedIn);
     return {
         isLoggedIn: config.isLoggedIn
     };
