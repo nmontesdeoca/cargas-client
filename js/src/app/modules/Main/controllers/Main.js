@@ -1,5 +1,5 @@
 angular.module('CarGas.Main')
-.controller('Main', ['$rootScope', function ($rootScope) {
+.controller('Main', ['$rootScope', '$scope', function ($rootScope, $scope) {
     $rootScope.menuSelected = 'Home';
 
     $rootScope.tabs = [
@@ -28,4 +28,14 @@ angular.module('CarGas.Main')
             icon: 'fa-power-off'
         }
     ];
+
+    $scope.menuToogle = function () {
+        var body = document.body;
+
+        if (~body.className.indexOf('menu-active')) {
+            body.className = body.className.replace('menu-active', '');
+        } else {
+            body.className += ' menu-active';
+        }
+    };
 }]);
