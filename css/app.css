@@ -158,3 +158,25 @@ button[disabled] {
 .tab-label {
     display: inline-block;
 }
+
+.swipe-to-edit {
+    background: -webkit-gradient(linear,left top,right top,color-stop(0, #4d4d4d),color-stop(0.4, #4d4d4d),color-stop(0.5, white),color-stop(0.6, #4d4d4d),color-stop(1, #4d4d4d));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-animation: slidetounlock 3s infinite;
+
+    font-size: 16px;
+
+    position: absolute;
+    right: 25px;
+    top: 35px;
+}
+
+@-webkit-keyframes slidetounlock {
+  0% {
+    background-position: 63px 0;
+  }
+  100% {
+    background-position: -63px 0;
+  }
+}

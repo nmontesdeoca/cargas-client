@@ -4,6 +4,7 @@
         <p>{{ refuel.kilometers }} kil&oacute;metros</p>
         <p>{{ refuel.capacity }} litros</p>
         <p>{{ refuel.createdAt | date:'dd-MM-yyyy'}}</p>
+        <p ng-hide="showActions" class="swipe-to-edit">Desliza para editar</p>
         <a href="/refuel/{{ refuel._id }}" class="button edit" ng-show="showActions">
             <i class="fa fa-edit fa-2x"></i>
         </a>
