@@ -29,7 +29,7 @@ angular.module('CarGas.Main')
         }
     ];
 
-    $scope.menuToogle = function () {
+    $scope.toggleMenu = function () {
         var body = document.body;
 
         if (~body.className.indexOf('menu-active')) {
