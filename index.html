@@ -28,30 +28,12 @@
     <header class="bar-title" ng-show="title">
         <h1 class="title">
             {{ title || 'Title' }}
-            <a href="#" class="pull-left main-menu" id="main-menu" ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'" ng-click="menuToogle()">☰</a>
+            <a href="#" class="pull-left main-menu" id="main-menu" ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'" ng-click="toggleMenu()">☰</a>
         </h1>
     </header>
 
-    <!--
-    <nav
-        class="bar-tab"
-        ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'">
-
-        <ul class="tab-inner">
-            <li ng-repeat="tab in tabs"
-                class="tab-item{{ menuSelected === tab.menu ? ' active' : '' }}">
-
-                <a href="{{ tab.href }}">
-                    <i class="fa fa-1g {{ tab.icon }}"></i>
-                    <div class="tab-label">{{ tab.text }}</div>
-                </a>
-            </li>
-        </ul>
-    </nav>
-    -->
-
     <nav class="main-nav" id="main-nav">
-        <a ng-repeat="tab in tabs" href="{{ tab.href }}" ng-click="menuToogle()">
+        <a ng-repeat="tab in tabs" href="{{ tab.href }}" ng-click="toggleMenu()">
             <i class="fa fa-1g {{ tab.icon }}"></i>
             <div class="tab-label">{{ tab.text }}</div>
         </a>
@@ -64,6 +46,8 @@
     <script src="/js/vendor/angular/angular-touch.js"></script>
     <script src="/js/vendor/angular/angular-route.js"></script>
     <script src="/js/vendor/angular/angular-resource.js"></script>
+
+    <script src="/js/vendor/angular-local-storage.js"></script>
 
     <script src="/js/src/app/app.js"></script>
 
