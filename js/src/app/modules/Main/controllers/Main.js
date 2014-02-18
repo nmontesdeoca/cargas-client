@@ -2,6 +2,10 @@ angular.module('CarGas.Main')
 .controller('Main', ['$rootScope', '$scope', function ($rootScope, $scope) {
     $rootScope.menuSelected = 'Home';
 
+    alert(window.localStorage.test);
+    window.localStorage.test = 'testing';
+    alert(window.localStorage.test);
+
     $rootScope.tabs = [
         {
             menu: 'Account',
