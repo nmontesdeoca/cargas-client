@@ -10,36 +10,15 @@ angular.module('CarGas.Config', [])
             'http://localhost:3000' :
             'http://cargas-server.herokuapp.com';
     })())
-    .constant('FUELS', ['$location', 'Fuel', 'UserService',
-        function ($location, Fuel, UserService) {
-            if (!UserService.isLoggedIn) {
-                return $location.path('/login');
-            }
-            return Fuel.query();
-        }
-    ])
-    .constant('REFUEL', ['$route', '$location', 'Refuel', 'UserService',
-        function ($route, $location, Refuel, UserService) {
-            if (!UserService.isLoggedIn) {
-                return $location.path('/login');
-            }
-            return Refuel.get({ id: $route.current.params.id });
-        }
-    ])
-    .constant('REFUELS', ['Refuel', '$location', 'UserService',
-        function (Refuel, $location, UserService) {
-            if (!UserService.isLoggedIn) {
-                return $location.path('/login');
-            }
-            return Refuel.query();
-        }
-    ])
-    .constant('USER', ['User', 'UserService', function (User, UserService) {
-        if (UserService.isLoggedIn) {
-            return User.getCurrentUser();
-        }
+    .constant('FUELS', ['Fuel', function (Fuel) {
+        return Fuel.query();
     }])
-
-    .config(['$httpProvider', function ($httpProvider) {
-        $httpProvider.interceptors.push('HttpRequestInterceptor');
+    .constant('REFUEL', ['$route', 'Refuel', function ($route, Refuel) {
+        return Refuel.get({ _id: parseInt($route.current.params.id, 10) });
+    }])
+    .constant('REFUELS', ['Refuel', function (Refuel) {
+        return Refuel.query();
+    }])
+    .constant('USER', ['User', function (User) {
+        return new User(User.query());
     }]);

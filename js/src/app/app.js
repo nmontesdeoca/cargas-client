@@ -1,6 +1,7 @@
 angular.module('CarGas', [
     'ngRoute',
     'ngTouch',
+    'LocalStorageModule',
     'CarGas.Config',
     'CarGas.Main',
     'CarGas.Fuel',
@@ -10,12 +11,15 @@ angular.module('CarGas', [
 .config([
     '$routeProvider',
     '$locationProvider',
-    function ($routeProvider, $locationProvider) {
+    'localStorageServiceProvider',
+    function ($routeProvider, $locationProvider, $localStorageServiceProvider) {
 
         $locationProvider.html5Mode(true);
 
         $routeProvider.otherwise({
             redirectTo: '/refuels'
         });
+
+        $localStorageServiceProvider.setPrefix('CarGas');
     }
 ]);

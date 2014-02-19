@@ -1,5 +1,6 @@
-angular.module('CarGas.Fuel').factory('Fuel', ['$resource', 'API_URL',
-    function ($resource, API_URL) {
-        return $resource(API_URL + '/fuel/:id', { id: '@_id' });
+angular.module('CarGas.Fuel').factory('Fuel', ['localStorageService', 'Model',
+    function (localStorageService, Model) {
+
+        return Model('fuels');
     }
 ]);

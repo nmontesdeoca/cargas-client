@@ -17,11 +17,7 @@ angular.module('CarGas.User', ['ngResource'])
             controller: 'User.Register'
         })
         .when('/account', {
-            templateUrl: function () {
-                if (config.isLoggedIn) {
-                    return '/js/src/app/modules/User/partials/account.html'
-                }
-            },
+            templateUrl: '/js/src/app/modules/User/partials/account.html',
             controller: 'User.Account',
             resolve: {
                 fuels: FUELS,
@@ -29,11 +25,7 @@ angular.module('CarGas.User', ['ngResource'])
             }
         })
         .when('/account/fuels', {
-            templateUrl: function () {
-                if (config.isLoggedIn) {
-                    return '/js/src/app/modules/User/partials/account.fuels.html'
-                }
-            },
+            templateUrl: '/js/src/app/modules/User/partials/account.fuels.html',
             controller: 'User.Account.Fuels',
             resolve: {
                 fuels: FUELS,
@@ -41,11 +33,7 @@ angular.module('CarGas.User', ['ngResource'])
             }
         })
         .when('/account/cars', {
-            templateUrl: function () {
-                if (config.isLoggedIn) {
-                    return '/js/src/app/modules/User/partials/account.cars.html'
-                }
-            },
+            templateUrl: '/js/src/app/modules/User/partials/account.cars.html',
             controller: 'User.Account.Cars',
             resolve: {
                 fuels: FUELS,

@@ -6,7 +6,8 @@ angular.module('CarGas.User')
     'Auth',
     'API_URL',
     'ResolveAccessToken',
-    function ($scope, $http, $location, Auth, API_URL, ResolveAccessToken) {
+    'Fuel',
+    function ($scope, $http, $location, Auth, API_URL, ResolveAccessToken, Fuel) {
         $scope.user = {};
         $scope.error = null;
 

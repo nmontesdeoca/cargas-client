@@ -12,11 +12,8 @@ angular.module('CarGas.Refuel')
         $scope.refuels = refuels;
 
         $scope.delete = function (id) {
-            var refuel = Refuel.get({ id: id }, function () {
-                refuel.$remove(function () {
-                    $location.path('/');
-                });
-            });
+            Refuel.get({ _id: id }).$remove();
+            $scope.refuels = Refuel.query();
         };
     }
 ]);

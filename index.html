@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="CarGas">
+<html lang="en" ng-app="CarGas" manifest="manifest.appcache">
 <head>
     <meta charset="UTF-8">
     <title>CarGas</title>
@@ -32,7 +32,7 @@
         </h1>
     </header>
 
-    <nav class="main-nav" id="main-nav">
+    <nav class="main-nav">
         <a ng-repeat="tab in tabs" href="{{ tab.href }}" ng-click="toggleMenu()">
             <i class="fa fa-1g {{ tab.icon }}"></i>
             <div class="tab-label">{{ tab.text }}</div>
@@ -48,13 +48,14 @@
     <script src="/js/vendor/angular/angular-resource.js"></script>
 
     <script src="/js/vendor/angular-local-storage.js"></script>
+    <script src="/js/vendor/underscore.js"></script>
 
     <script src="/js/src/app/app.js"></script>
 
     <script src="/js/src/app/modules/Config/config.js"></script>
+    <script src="/js/src/app/modules/Config/services/Model.js"></script>
     <script src="/js/src/app/modules/Config/services/Auth.js"></script>
     <script src="/js/src/app/modules/Config/services/Base64.js"></script>
-    <!--<script src="/js/src/app/modules/Config/services/CookieManager.js"></script>-->
     <script src="/js/src/app/modules/Config/services/HttpRequestInterceptor.js"></script>
 
     <script src="/js/src/app/modules/Main/main.js"></script>
@@ -73,6 +74,7 @@
     <script src="/js/src/app/modules/User/controllers/User.Account.Fuels.js"></script>
     <script src="/js/src/app/modules/User/controllers/User.Logout.js"></script>
     <script src="/js/src/app/modules/User/services/User.js"></script>
+    <script src="/js/src/app/modules/User/services/ResolveAccessToken.js"></script>
 
     <script src="/js/src/app/modules/Fuel/fuel.js"></script>
     <script src="/js/src/app/modules/Fuel/services/Fuel.js"></script>

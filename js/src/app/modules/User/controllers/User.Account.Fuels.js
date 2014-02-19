@@ -37,11 +37,9 @@ angular.module('CarGas.User')
         };
 
         $scope.delete = function (id) {
-            var fuel = Fuel.get({ id: id }, function () {
-                fuel.$remove();
-                $scope.fuels = $filter('filter')($scope.fuels, function (fuel) {
-                    return fuel._id !== id;
-                });
+            var fuel = Fuel.get({ _id: id }).$remove();
+            $scope.fuels = $filter('filter')($scope.fuels, function (fuel) {
+                return fuel._id !== id;
             });
         };
     }
