@@ -24,7 +24,7 @@ nav .tab-item a {
 }
 /* social buttons */
 .social-button {
-    background: transparent url(../../images/social-icons.png) no-repeat;
+    background: transparent url(../../../images/social-icons.png) no-repeat;
     color: #fff;
     height: 48px;
     line-height: 46px;
@@ -40,7 +40,7 @@ nav .tab-item a {
 }
 
 .facebook-button:active {
-    background: #3f5dd0 url(../../images/social-icons.png) no-repeat 0 -2px;
+    background: #3f5dd0 url(../../../images/social-icons.png) no-repeat 0 -2px;
     color: #fefefe;
     padding: 0 0 0 3%;
 }
@@ -51,7 +51,7 @@ nav .tab-item a {
 }
 
 .twitter-button:active {
-    background: #089ce8 url(../../images/social-icons.png) no-repeat 0 -56px;
+    background: #089ce8 url(../../../images/social-icons.png) no-repeat 0 -56px;
     color: #fefefe;
     padding: 0 0 0 3%;
 }
@@ -62,7 +62,7 @@ nav .tab-item a {
 }
 
 .google-button:active {
-    background: #ea3d3e url(../../images/social-icons.png) no-repeat 0 -108px;
+    background: #ea3d3e url(../../../images/social-icons.png) no-repeat 0 -108px;
     color: #fefefe;
     padding: 0 0 0 3%;
 }
