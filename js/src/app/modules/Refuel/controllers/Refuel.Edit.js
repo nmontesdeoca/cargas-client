@@ -1,12 +1,14 @@
 angular.module('CarGas.Refuel')
 .controller('Refuel.Edit', [
     '$scope',
+    '$rootScope',
     '$routeParams',
     '$location',
     'Refuel',
     'fuels',
     'refuel',
-    function ($scope, $routeParams, $location, Refuel, fuels, refuel) {
+    function ($scope, $rootScope, $routeParams, $location, Refuel, fuels, refuel) {
+        $rootScope.hideMenu();
 
         $scope.$parent.menuSelected = 'Refuel';
         $scope.$parent.title = 'Editar';

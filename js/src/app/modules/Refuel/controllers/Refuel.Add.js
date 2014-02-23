@@ -1,10 +1,13 @@
 angular.module('CarGas.Refuel')
 .controller('Refuel.Add', [
     '$scope',
+    '$rootScope',
     '$location',
     'Refuel',
     'fuels',
-    function ($scope, $location, Refuel, fuels) {
+    function ($scope, $rootScope, $location, Refuel, fuels) {
+
+        $rootScope.hideMenu();
 
         $scope.$parent.menuSelected = 'Refuel';
         $scope.$parent.title = 'Cargar';

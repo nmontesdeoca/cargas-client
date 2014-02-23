@@ -20,22 +20,53 @@ angular.module('CarGas.Main')
             href: '/refuels',
             text: 'Listar',
             icon: 'fa-archive'
-        },
-        {
-            menu: 'Logout',
-            href: '/logout',
-            text: 'Salir',
-            icon: 'fa-power-off'
         }
     ];
 
-    $scope.toggleMenu = function () {
-        var body = document.body;
+    angular.extend($rootScope, {
+        _addClass: function (el, className) {
+            if (el.classList) {
+                el.classList.add(className);
+            } else {
+                el.className += ' ' + className;
+            }
+        },
 
-        if (~body.className.indexOf('menu-active')) {
-            body.className = body.className.replace('menu-active', '');
-        } else {
-            body.className += ' menu-active';
+        _hasClass: function (el, className) {
+            if (el.classList) {
+                return el.classList.contains(className);
+            }
+            return new RegExp('(^| )' + className + '( |$)', 'gi').test(el.className);
+        },
+
+        _removeClass: function (el, className) {
+            if (el.classList) {
+                el.classList.remove(className);
+            } else {
+                el.className = el.className.replace(
+                    new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'),
+                    ' '
+                );
+            }
+        },
+
+        showMenu: function () {
+            $rootScope._addClass(document.body, 'menu-active');
+        },
+
+        hideMenu: function () {
+            $rootScope._removeClass(document.body, 'menu-active');
+        },
+
+        toggleMenu: function () {
+            var body = document.body;
+
+            if ($rootScope._hasClass(body, 'menu-active')) {
+                $rootScope._removeClass(body, 'menu-active');
+            } else {
+                $rootScope._addClass(body, 'menu-active');
+            }
         }
-    };
+    });
+
 }]);
