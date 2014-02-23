@@ -1,5 +1,5 @@
 var express = require('express'),
-    app = express(),
+    app = module.exports = express(),
     middleware = {
         manifestMiddleware: function (request, response, next) {
             if (request.path === '/manifest.appcache') {

@@ -4,8 +4,11 @@ header,
 nav {
     min-width: 320px;
 }
+.main-nav,
+.bar-title,
 .content {
-    min-width: 304px;
+    min-width: 0;
+    position: relative;
 }
 .content-padded {
     /* content already has padding */
@@ -121,15 +124,21 @@ button[disabled] {
 .main-nav {
     background: #3B3B3B;
     height: 100%;
-    min-width: 0;
     overflow-y: auto;
-    position: fixed;
-    top: 44px;
+
+    -webkit-transform: translateZ(0);
+       -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+         -o-transform: translateZ(0);
+            transform: translateZ(0);
+
     -webkit-transition: width .3s;
-    -moz-transition: width .3s;
-    -o-transition: width .3s;
-    transition: width .3s;
-    width: 0;
+       -moz-transition: width .3s;
+        -ms-transition: width .3s;
+         -o-transition: width .3s;
+            transition: width .3s;
+
+    width: 1px;
     z-index: 1;
 }
 
@@ -145,10 +154,6 @@ button[disabled] {
 
 .menu-active .main-nav {
     width: 200px;
-}
-
-.menu-active .content {
-    left: 200px;
 }
 
 .content {
@@ -179,4 +184,8 @@ button[disabled] {
   100% {
     background-position: -63px 0;
   }
+}
+
+.bar-title ~ .content {
+    top: 0;
 }

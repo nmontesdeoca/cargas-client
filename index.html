@@ -28,19 +28,19 @@
 </head>
 <body ng-controller="Main" class="ng-cloak">
 
+    <nav class="main-nav pull-left">
+        <a ng-repeat="tab in tabs" href="{{ tab.href }}" ng-click="toggleMenu()">
+            <i class="fa fa-1g {{ tab.icon }}"></i>
+            <div class="tab-label">{{ tab.text }}</div>
+        </a>
+    </nav>
+
     <header class="bar-title" ng-show="title">
         <h1 class="title">
             {{ title || 'Title' }}
             <a href="#" class="pull-left main-menu" id="main-menu" ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'" ng-click="toggleMenu()">☰</a>
         </h1>
     </header>
-
-    <nav class="main-nav">
-        <a ng-repeat="tab in tabs" href="{{ tab.href }}" ng-click="toggleMenu()">
-            <i class="fa fa-1g {{ tab.icon }}"></i>
-            <div class="tab-label">{{ tab.text }}</div>
-        </a>
-    </nav>
 
     <div ng-view class="content {{ menuSelected !== 'Refuels' ? 'content-padded' : '' }}"></div>
 

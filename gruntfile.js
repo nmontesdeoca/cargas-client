@@ -38,11 +38,20 @@ module.exports = function (grunt) {
                     ]
                 }
             }
-        }
+        },
+
+        watch: {}
+
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['uglify', 'cssmin']);
+    grunt.registerTask('server', 'Start a custom web server', function () {
+        grunt.log.writeln('Started web server on port 3000');
+        require('./server.js');
+    });
+
+    grunt.registerTask('default', ['uglify', 'cssmin', 'server', 'watch']);
 };
