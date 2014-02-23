@@ -9,7 +9,7 @@ var express = require('express'),
         },
         redirectToDomain: function (request, response, next) {
             if (request.host === 'cargas.herokuapp.com') {
-                response.redirect(301, 'http://www.cargasapp.com');
+                response.redirect(301, 'http://www.cargasapp.com' + request.path);
                 response.end();
             } else {
                 next.apply(this);
