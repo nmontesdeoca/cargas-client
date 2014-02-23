@@ -25,10 +25,15 @@ module.exports = function (grunt) {
                         'js/vendor/angular-local-storage.js',
                         'js/vendor/underscore.js',
                         'js/src/app/*.js',
+                        'js/src/app/modules/Config/*.js',
                         'js/src/app/modules/Config/**/*.js',
+                        'js/src/app/modules/Main/*.js',
                         'js/src/app/modules/Main/**/*.js',
+                        'js/src/app/modules/Refuel/*.js',
                         'js/src/app/modules/Refuel/**/*.js',
+                        'js/src/app/modules/User/*.js',
                         'js/src/app/modules/User/**/*.js',
+                        'js/src/app/modules/Fuel/*.js',
                         'js/src/app/modules/Fuel/**/*.js'
                     ]
                 }
