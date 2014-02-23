@@ -29,7 +29,7 @@
 <body ng-controller="Main" class="ng-cloak">
 
     <nav class="main-nav pull-left">
-        <a ng-repeat="tab in tabs" href="{{ tab.href }}" ng-click="toggleMenu()">
+        <a ng-repeat="tab in tabs" href="{{ tab.href }}">
             <i class="fa fa-1g {{ tab.icon }}"></i>
             <div class="tab-label">{{ tab.text }}</div>
         </a>
