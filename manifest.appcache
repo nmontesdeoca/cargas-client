@@ -5,6 +5,7 @@ CACHE MANIFEST
 /js/src/app/modules/Refuel/partials/list.html
 /js/src/app/modules/User/partials/account.cars.html
 /js/src/app/modules/User/partials/account.fuels.html
+/js/src/app/modules/User/partials/account.me.html
 /js/src/app/modules/User/partials/account.html
 /js/src/app/modules/User/partials/login.html
 /js/src/app/modules/User/partials/register.html

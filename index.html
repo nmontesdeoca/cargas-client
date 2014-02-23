@@ -42,7 +42,7 @@
         </h1>
     </header>
 
-    <div ng-view class="content {{ menuSelected !== 'Refuels' ? 'content-padded' : '' }}"></div>
+    <div ng-view class="content {{ menuSelected !== 'Refuels' && menuSelected !== 'Account' ? 'content-padded' : '' }}"></div>
 
     <script src="/js/dist/combined.min.js"></script>
 

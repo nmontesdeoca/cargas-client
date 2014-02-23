@@ -24,6 +24,14 @@ angular.module('CarGas.User', ['ngResource'])
                 user: USER
             }
         })
+        .when('/account/me', {
+            templateUrl: '/js/src/app/modules/User/partials/account.me.html',
+            controller: 'User.Account.Me',
+            resolve: {
+                fuels: FUELS,
+                user: USER
+            }
+        })
         .when('/account/fuels', {
             templateUrl: '/js/src/app/modules/User/partials/account.fuels.html',
             controller: 'User.Account.Fuels',

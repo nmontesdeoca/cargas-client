@@ -8,7 +8,7 @@ angular.module('CarGas.User')
     'Fuel',
     function ($scope, $location, $filter, user, fuels, Fuel) {
 
-        $scope.$parent.menuSelected = 'Account';
+        $scope.$parent.menuSelected = 'AccountFuels';
         $scope.$parent.title = 'Mi Cuenta';
 
         $scope.user = user;
