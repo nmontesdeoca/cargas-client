@@ -4,20 +4,44 @@ header,
 nav {
     min-width: 320px;
 }
+
 .main-nav,
 .bar-title,
 .content {
-    min-width: 0;
-    position: relative;
+    position: fixed;
 }
+
+.bar-title,
+.content {
+    min-width: 304px; /* for the scroll bar ? */
+    -webkit-transform: translateZ(0);
+       -moz-transform: translateZ(0);
+        -ms-transform: translateZ(0);
+         -o-transform: translateZ(0);
+            transform: translateZ(0);
+    -webkit-transition: left .3s;
+       -moz-transition: left .3s;
+        -ms-transition: left .3s;
+         -o-transition: left .3s;
+            transition: left .3s;
+}
+
+.main-nav {
+    /* reset */
+    min-width: 0;
+    z-index: 1;
+}
+
 .content-padded {
     /* content already has padding */
     padding: 2.5%;
 }
+
 nav .tab-item {
     height: auto;
     padding: 0;
 }
+
 nav .tab-item a {
     display: block;
     height: 100%;
@@ -25,6 +49,7 @@ nav .tab-item a {
     margin: 0;
     width: 100%;
 }
+
 /* social buttons */
 .social-button {
     background: transparent url(../../../images/social-icons.png) no-repeat;
@@ -125,21 +150,7 @@ button[disabled] {
     background: #3B3B3B;
     height: 100%;
     overflow-y: auto;
-
-    -webkit-transform: translateZ(0);
-       -moz-transform: translateZ(0);
-        -ms-transform: translateZ(0);
-         -o-transform: translateZ(0);
-            transform: translateZ(0);
-
-    -webkit-transition: width .3s;
-       -moz-transition: width .3s;
-        -ms-transition: width .3s;
-         -o-transition: width .3s;
-            transition: width .3s;
-
-    width: 1px;
-    z-index: 1;
+    width: 200px;
 }
 
 .main-nav a {
@@ -150,14 +161,6 @@ button[disabled] {
     display: block;
     padding: 15px;
     width: 170px;
-}
-
-.menu-active .main-nav {
-    width: 200px;
-}
-
-.content {
-    z-index: 0;
 }
 
 .tab-label {
@@ -186,6 +189,15 @@ button[disabled] {
   }
 }
 
-.bar-title ~ .content {
-    top: 0;
+.content {
+    z-index: 2;
+}
+
+.bar-title {
+    z-index: 3;
+}
+
+.menu-active .bar-title,
+.menu-active .content {
+    left: 200px;
 }
