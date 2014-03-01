@@ -143,7 +143,10 @@ button[disabled] {
 }
 
 .main-menu {
+    left: 0;
     margin: 0 0 0 15px;
+    position: absolute;
+    top: 0;
 }
 
 .main-nav {
@@ -200,4 +203,29 @@ button[disabled] {
 .menu-active .bar-title,
 .menu-active .content {
     left: 200px;
+}
+
+.cost {
+    font-size: 26px;
+}
+
+.description {
+    font-size: 16px;
+    text-align: right;
+}
+
+.cleared {
+    overflow: hidden;
+}
+
+.list > li {
+    padding: 10px 15px;
+}
+
+.nomargin {
+    margin: 0 !important;
+}
+
+.nopadding {
+    padding: 0 !important;
 }
