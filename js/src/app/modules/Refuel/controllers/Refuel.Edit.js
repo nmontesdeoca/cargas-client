@@ -30,6 +30,7 @@ angular.module('CarGas.Refuel')
                 });
             } else {
                 alert('Todos los campos son obligatorios');
+                $scope.apply();
             }
         };
 
