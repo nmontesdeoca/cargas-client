@@ -232,3 +232,11 @@ button[disabled] {
 .list .chevron {
     right: 0;
 }
+
+.error label {
+    color: #E71E1E;
+}
+
+.error select {
+    border: 1px solid #E71E1E;
+}
