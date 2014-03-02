@@ -31,7 +31,8 @@
     <header class="bar-title" ng-show="title">
         <h1 class="title">
             {{ title || 'Title' }}
-            <a href="#" class="pull-left main-menu" id="main-menu" ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'" ng-click="toggleMenu()"><i class="fa fa-1g fa-bars"></i></a>
+            <a href="#" class="main-menu" id="main-menu" ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'" ng-click="toggleMenu()"><i class="fa fa-1g fa-bars"></i></a>
+            <a href="/refuel" class="refuel-add" ng-show="menuSelected === 'Refuels'"><i class="fa fa-2px fa-plus"></i></a>
         </h1>
     </header>
 
