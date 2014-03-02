@@ -4,6 +4,12 @@ angular.module('CarGas.Main')
 
     $rootScope.tabs = [
         {
+            menu: 'Home',
+            href: '/',
+            text: 'Inicio',
+            icon: 'fa-briefcase'
+        },
+        {
             menu: 'Account',
             href: '/account',
             text: 'Mi Cuenta',

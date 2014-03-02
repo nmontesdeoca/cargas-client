@@ -4,6 +4,7 @@ angular.module('CarGas', [
     'LocalStorageModule',
     'CarGas.Config',
     'CarGas.Main',
+    'CarGas.Home',
     'CarGas.Fuel',
     'CarGas.Refuel',
     'CarGas.User'
@@ -17,7 +18,7 @@ angular.module('CarGas', [
         $locationProvider.html5Mode(true);
 
         $routeProvider.otherwise({
-            redirectTo: '/refuels'
+            redirectTo: '/'
         });
 
         $localStorageServiceProvider.setPrefix('CarGas');

@@ -142,7 +142,7 @@ button[disabled] {
     line-height: 26px;
 }
 
-.main-menu {
+.top-left {
     left: 0;
     margin: 0 0 0 15px;
     position: absolute;
@@ -241,9 +241,53 @@ button[disabled] {
     border: 1px solid #E71E1E;
 }
 
-.refuel-add {
+.top-right {
     margin: 0 15px 0 0;
     position: absolute;
     right: 0;
     top: 0;
+}
+
+.centered-list li {
+    text-align: center;
+}
+
+.circular-image {
+    background-size: cover;
+    border-radius: 100px;
+    -webkit-border-radius: 100px;
+       -moz-border-radius: 100px;
+        -ms-border-radius: 100px;
+         -o-border-radius: 100px;
+    display: block;
+    height: 150px;
+    margin: 0 auto;
+    width: 150px;
+}
+
+.a-left {
+    text-align: left !important;
+}
+
+.input-group .checkbox {
+    float: left;
+    margin-top: 12px;
+    width: 25px;
+}
+
+.input-group .input-file {
+    margin-top: 7px;
+    width: 65%;
+}
+
+.input-group .circular-image {
+    height: 75px;
+    margin: 45px auto 10px auto;
+    width: 75px;
+}
+
+.input-group .remove-image {
+    float: left;
+    margin-top: 7px;
+    width: 50%;
 }

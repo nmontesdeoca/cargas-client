@@ -31,8 +31,9 @@
     <header class="bar-title" ng-show="title">
         <h1 class="title">
             {{ title || 'Title' }}
-            <a href="#" class="main-menu" id="main-menu" ng-show="menuSelected !== 'Login' && menuSelected !== 'Register' && menuSelected !== 'Home'" ng-click="toggleMenu()"><i class="fa fa-1g fa-bars"></i></a>
-            <a href="/refuel" class="refuel-add" ng-show="menuSelected === 'Refuels'"><i class="fa fa-2px fa-plus"></i></a>
+            <a href="#" class="top-left" ng-show="menuSelected !== 'Login' && menuSelected !== 'Register'" ng-click="toggleMenu()"><i class="fa fa-1g fa-bars"></i></a>
+            <a href="/refuel" class="top-right" ng-show="menuSelected === 'Refuels'"><i class="fa fa-2px fa-plus"></i></a>
+            <a href="/account" class="top-right" ng-show="menuSelected === 'Home'"><i class="fa fa-2px fa-gear"></i></a>
         </h1>
     </header>
 
@@ -71,7 +72,11 @@
 
     <script src="/js/src/app/modules/Main/main.js"></script>
     <script src="/js/src/app/modules/Main/directives/SlideMenu.js"></script>
+    <script src="/js/src/app/modules/Main/directives/UploadImage.js"></script>
     <script src="/js/src/app/modules/Main/controllers/Main.js"></script>
+
+    <script src="/js/src/app/modules/Home/home.js"></script>
+    <script src="/js/src/app/modules/Home/controllers/Home.js"></script>
 
     <script src="/js/src/app/modules/Refuel/refuel.js"></script>
     <script src="/js/src/app/modules/Refuel/controllers/Refuel.Add.js"></script>
@@ -83,7 +88,6 @@
     <script src="/js/src/app/modules/User/controllers/User.Login.js"></script>
     <script src="/js/src/app/modules/User/controllers/User.Register.js"></script>
     <script src="/js/src/app/modules/User/controllers/User.Account.js"></script>
-    <script src="/js/src/app/modules/User/controllers/User.Account.Me.js"></script>
     <script src="/js/src/app/modules/User/controllers/User.Account.Fuels.js"></script>
     <script src="/js/src/app/modules/User/controllers/User.Logout.js"></script>
     <script src="/js/src/app/modules/User/services/User.js"></script>

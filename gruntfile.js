@@ -49,7 +49,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
 
     grunt.registerTask('server', 'Start a custom web server', function () {
-        grunt.log.writeln('Started web server on port 3000');
+        grunt.log.writeln('Started web server on port 3001');
         require('./server.js');
     });
 
