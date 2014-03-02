@@ -28,7 +28,8 @@ angular.module('CarGas.Refuel', ['ngResource'])
             templateUrl: '/js/src/app/modules/Refuel/partials/list.html',
             controller: 'Refuel.List',
             resolve: {
-                refuels: REFUELS
+                refuels: REFUELS,
+                fuels: FUELS
             }
         });
     }

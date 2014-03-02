@@ -21,6 +21,9 @@
         -->
     </li>
 </ul>
-<p class="content-padded" ng-show="!refuels.length">
+<p class="content-padded" ng-show="!fuels.length">
+    <a href="/account/fuels">Ingresa un combustible</a> para comenzar a ingresar tus recargas
+</p>
+<p class="content-padded" ng-show="!refuels.length && fuels.length">
     Que suertudo!, a&uacute;n no has recargado. Ingresa una <a href="/refuel">recarga aqu&iacute;</a>
 </p>

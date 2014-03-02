@@ -25,7 +25,7 @@
         -->
     </div>
     <button class="button button-block" ng-click="update()">Guardar</button>
-    <button class="button button-block button-negative" ng-show="refuel._id" ng-click="delete()">Eliminar</button>
+    <button class="button button-block button-negative" ng-show="refuel._id" ng-click="delete(refuel._id)">Eliminar</button>
 </form>
 <!--
 <p class="count-negative" ng-show="form.fuel.$error.required">Combustible valido requerido</p>
