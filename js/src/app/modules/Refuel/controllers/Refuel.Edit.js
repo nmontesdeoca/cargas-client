@@ -22,5 +22,10 @@ angular.module('CarGas.Refuel')
                 $location.path('/');
             });
         };
+
+        $scope.delete = function (id) {
+            Refuel.get({ _id: id }).$remove();
+            $scope.refuels = Refuel.query();
+        };
     }
 ]);

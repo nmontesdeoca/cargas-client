@@ -1,6 +1,6 @@
 <ul class="list">
     <li ng-repeat="refuel in refuels" ng-swipe-left="showActions = true" ng-swipe-right="showActions = false">
-        <a href="/refuel/{{ refuel._id }}" class="cleared nomargin nopadding">
+        <a href="/refuel/{{ refuel._id }}" class="cleared">
             <div class="pull-left">
                 <strong class="cost">{{ refuel.cost | currency }}</strong>
             </div>
