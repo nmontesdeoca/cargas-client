@@ -7,15 +7,15 @@
     <div class="input-group">
         <div class="input-row">
             <label>Costo $</label>
-            <input type="tel" name="cost" placeholder="1620" ng-model="refuel.cost" required>
+            <input type="number" name="cost" placeholder="1620" ng-model="refuel.cost" required>
         </div>
         <div class="input-row">
             <label>Litros</label>
-            <input type="tel" name="capacity" placeholder="45" ng-model="refuel.capacity" required>
+            <input type="number" name="capacity" placeholder="45" ng-model="refuel.capacity" required>
         </div>
         <div class="input-row">
             <label>Kilometraje</label>
-            <input type="tel" name="kilometers" placeholder="560" ng-model="refuel.kilometers" required>
+            <input type="number" name="kilometers" placeholder="560" ng-model="refuel.kilometers" required>
         </div>
     </div>
     <button class="button button-block" ng-click="update()" ng-disabled="!form.$valid">Guardar</button>
