@@ -10,12 +10,6 @@ angular.module('CarGas.Main')
             icon: 'fa-briefcase'
         },
         {
-            menu: 'Account',
-            href: '/account',
-            text: 'Mi Cuenta',
-            icon: 'fa-briefcase'
-        },
-        {
             menu: 'Refuel',
             href: '/refuel',
             text: 'Cargar',
