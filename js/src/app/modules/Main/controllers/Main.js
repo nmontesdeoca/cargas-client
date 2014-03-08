@@ -59,6 +59,8 @@ angular.module('CarGas.Main')
         },
 
         toggleMenu: function () {
+            alert('coming soon');
+            /*
             var body = document.body;
 
             if ($rootScope._hasClass(body, 'menu-active')) {
@@ -66,6 +68,7 @@ angular.module('CarGas.Main')
             } else {
                 $rootScope._addClass(body, 'menu-active');
             }
+            */
         }
     });
 

@@ -202,8 +202,7 @@ button[disabled] {
     z-index: 3;
 }
 
-.menu-active .bar-title,
-.menu-active .content {
+.menu-active [slide-menu] {
     left: 258px;
 }
 
