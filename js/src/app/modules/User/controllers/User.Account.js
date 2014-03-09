@@ -7,7 +7,7 @@ angular.module('CarGas.User')
     function ($scope, $rootScope, $location, user) {
         $rootScope.hideMenu();
 
-        // $scope.$parent.menuSelected = 'Account';
+        $scope.$parent.menuSelected = 'Account';
         $scope.$parent.title = 'Mi Cuenta';
 
         $scope.user = user;

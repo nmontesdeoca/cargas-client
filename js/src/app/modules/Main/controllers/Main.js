@@ -6,21 +6,34 @@ angular.module('CarGas.Main')
         {
             menu: 'Home',
             href: '/',
-            text: 'Inicio',
+            text: 'Cuenta',
             icon: 'fa-briefcase'
         },
         {
             menu: 'Refuel',
             href: '/refuel',
-            text: 'Cargar',
+            text: 'Recarga',
             icon: 'fa-plus'
         },
         {
             menu: 'Refuels',
             href: '/refuels',
-            text: 'Listar',
+            text: 'Recargas',
+            icon: 'fa-archive'
+        },
+        {
+            menu: 'Cars',
+            href: '/account/cars',
+            text: 'Vehiculos',
+            icon: 'fa-archive'
+        },
+        {
+            menu: 'Spent',
+            href: '/spents',
+            text: 'Gastos',
             icon: 'fa-archive'
         }
+
     ];
 
     angular.extend($rootScope, {
