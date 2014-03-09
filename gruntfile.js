@@ -27,6 +27,8 @@ module.exports = function (grunt) {
                         'js/src/app/*.js',
                         'js/src/app/modules/Config/*.js',
                         'js/src/app/modules/Config/**/*.js',
+                        'js/src/app/modules/Home/*.js',
+                        'js/src/app/modules/Home/**/*.js',
                         'js/src/app/modules/Main/*.js',
                         'js/src/app/modules/Main/**/*.js',
                         'js/src/app/modules/Refuel/*.js',
