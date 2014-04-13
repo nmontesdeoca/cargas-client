@@ -1,3 +1,5 @@
+var files = require('./files');
+
 module.exports = function (grunt) {
     grunt.initConfig({
 
@@ -16,28 +18,7 @@ module.exports = function (grunt) {
         uglify: {
             combine: {
                 files: {
-                    'js/dist/combined.min.js': [
-                        'js/vendor/angular/angular.js',
-                        'js/vendor/angular/angular-animate.js',
-                        'js/vendor/angular/angular-touch.js',
-                        'js/vendor/angular/angular-route.js',
-                        'js/vendor/angular/angular-resource.js',
-                        'js/vendor/angular-local-storage.js',
-                        'js/vendor/underscore.js',
-                        'js/src/app/*.js',
-                        'js/src/app/modules/Config/*.js',
-                        'js/src/app/modules/Config/**/*.js',
-                        'js/src/app/modules/Home/*.js',
-                        'js/src/app/modules/Home/**/*.js',
-                        'js/src/app/modules/Main/*.js',
-                        'js/src/app/modules/Main/**/*.js',
-                        'js/src/app/modules/Refuel/*.js',
-                        'js/src/app/modules/Refuel/**/*.js',
-                        'js/src/app/modules/User/*.js',
-                        'js/src/app/modules/User/**/*.js',
-                        'js/src/app/modules/Fuel/*.js',
-                        'js/src/app/modules/Fuel/**/*.js'
-                    ]
+                    'js/dist/combined.min.js': files(false)
                 }
             }
         },
