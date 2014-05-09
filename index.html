@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" ng-app="CarGas" manifest="manifest.appcache">
+<html lang="en" ng-app="CarGas">
 <head>
     <meta charset="UTF-8">
     <title>CarGas</title>
@@ -43,12 +43,7 @@
         </div>
     </div>
 
-    <nav class="main-nav pull-left" ng-show="title">
-        <a ng-repeat="tab in tabs" href="{{ tab.href }}">
-            <i class="fa fa-2x {{ tab.icon }}"></i>
-            <div class="tab-label">{{ tab.text }}</div>
-        </a>
-    </nav>
+    <nav left-navigation ng-show="title"></nav>
 
     <script src="/js/dist/combined.min.js"></script>
 
