@@ -9,15 +9,15 @@ angular.module('CarGas.User', ['ngResource'])
         $routeProvider
 
         .when('/login', {
-            templateUrl: '/js/src/modules/user/partials/login.html',
+            templateUrl: 'js/src/modules/user/partials/login.html',
             controller: 'User.Login'
         })
         .when('/register', {
-            templateUrl: '/js/src/modules/user/partials/register.html',
+            templateUrl: 'js/src/modules/user/partials/register.html',
             controller: 'User.Register'
         })
         .when('/account', {
-            templateUrl: '/js/src/modules/user/partials/account.html',
+            templateUrl: 'js/src/modules/user/partials/account.html',
             controller: 'User.Account',
             resolve: {
                 fuels: FUELS,
@@ -25,7 +25,7 @@ angular.module('CarGas.User', ['ngResource'])
             }
         })
         .when('/account/me', {
-            templateUrl: '/js/src/modules/user/partials/account.me.html',
+            templateUrl: 'js/src/modules/user/partials/account.me.html',
             controller: 'User.Account.Me',
             resolve: {
                 fuels: FUELS,
@@ -33,7 +33,7 @@ angular.module('CarGas.User', ['ngResource'])
             }
         })
         .when('/account/fuels', {
-            templateUrl: '/js/src/modules/user/partials/account.fuels.html',
+            templateUrl: 'js/src/modules/user/partials/account.fuels.html',
             controller: 'User.Account.Fuels',
             resolve: {
                 fuels: FUELS,
@@ -41,7 +41,7 @@ angular.module('CarGas.User', ['ngResource'])
             }
         })
         .when('/account/cars', {
-            templateUrl: '/js/src/modules/user/partials/account.cars.html',
+            templateUrl: 'js/src/modules/user/partials/account.cars.html',
             controller: 'User.Account.Cars',
             resolve: {
                 fuels: FUELS,

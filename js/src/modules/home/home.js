@@ -4,7 +4,7 @@ angular.module('CarGas.Home', [])
     'USER',
     function ($routeProvider, USER) {
         $routeProvider.when('/', {
-            templateUrl: '/js/src/modules/home/partials/home.html',
+            templateUrl: 'js/src/modules/home/partials/home.html',
             controller: 'Home',
             resolve: {
                 user: USER

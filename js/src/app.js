@@ -14,7 +14,7 @@ angular.module('CarGas', [
     '$locationProvider',
     'localStorageServiceProvider',
     function ($routeProvider, $locationProvider, $localStorageServiceProvider) {
-        $locationProvider.html5Mode(true);
+        // $locationProvider.html5Mode(true);
 
         $routeProvider.otherwise({
             redirectTo: '/'

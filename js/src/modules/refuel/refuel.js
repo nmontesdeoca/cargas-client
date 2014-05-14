@@ -10,14 +10,14 @@ angular.module('CarGas.Refuel', ['ngResource'])
         $routeProvider
 
         .when('/refuel', {
-            templateUrl: '/js/src/modules/refuel/partials/form.html',
+            templateUrl: 'js/src/modules/refuel/partials/form.html',
             controller: 'Refuel.Add',
             resolve: {
                 fuels: FUELS
             }
         })
         .when('/refuel/:id', {
-            templateUrl: '/js/src/modules/refuel/partials/form.html',
+            templateUrl: 'js/src/modules/refuel/partials/form.html',
             controller: 'Refuel.Edit',
             resolve: {
                 fuels: FUELS,
@@ -25,7 +25,7 @@ angular.module('CarGas.Refuel', ['ngResource'])
             }
         })
         .when('/refuels', {
-            templateUrl: '/js/src/modules/refuel/partials/list.html',
+            templateUrl: 'js/src/modules/refuel/partials/list.html',
             controller: 'Refuel.List',
             resolve: {
                 refuels: REFUELS,
