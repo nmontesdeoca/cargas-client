@@ -152,6 +152,7 @@ button[disabled] {
 .main-nav {
     background: #3B3B3B;
     height: 100%;
+    padding-top: 20px;
     overflow-y: auto;
     width: 258px;
 }

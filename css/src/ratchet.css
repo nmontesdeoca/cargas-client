@@ -151,7 +151,7 @@ a {
 /* Pad top/bottom of content so it doesn't hide behind .bar-title and .bar-tab.
    Note: For these to work, content must come after both bars in the markup */
 .bar-title ~ .content {
-  top: 44px;
+  top: 54px;
 }
 .bar-tab ~ .content {
   bottom: 51px;
@@ -166,7 +166,7 @@ a {
   right: 0;
   left: 0;
   z-index: 10;
-  height: 44px;
+  height: 54px;
   padding: 5px;
   box-sizing: border-box;
 }
@@ -223,7 +223,7 @@ a {
   width: 100%;
   font-size: 20px;
   font-weight: bold;
-  line-height: 44px;
+  line-height: 74px;
   color: #fff;
   text-align: center;
   text-shadow: 0 -1px rgba(0, 0, 0, .5);
