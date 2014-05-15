@@ -1,6 +1,6 @@
 <ul class="list">
     <li ng-repeat="refuel in refuels" ng-swipe-left="showActions = true" ng-swipe-right="showActions = false">
-        <a href="/refuel/{{ refuel._id }}" class="cleared">
+        <a href="#/refuel/{{ refuel._id }}" class="cleared">
             <div class="pull-left">
                 <strong class="cost">{{ refuel.cost | currency }}</strong>
             </div>
@@ -9,21 +9,11 @@
                 <p class="description">{{ refuel.capacity }} litros</p>
             </div>
         </a>
-        <!--
-        <p>{{ refuel.createdAt | date:'dd-MM-yyyy'}}</p>
-        <p ng-hide="showActions" class="swipe-to-edit">Desliza para editar</p>
-        <a href="/refuel/{{ refuel._id }}" class="button edit" ng-show="showActions">
-            <i class="fa fa-edit fa-2x"></i>
-        </a>
-        <button class="button-negative" ng-click="delete(refuel._id)" ng-show="showActions">
-            <i class="fa fa-trash-o fa-2x"></i>
-        </button>
-        -->
     </li>
 </ul>
 <p class="content-padded" ng-show="!fuels.length">
-    <a href="/account/fuels">Ingresa un combustible</a> para comenzar a ingresar tus recargas
+    <a href="#/account/fuels">Ingresa un combustible</a> para comenzar a ingresar tus recargas
 </p>
 <p class="content-padded" ng-show="!refuels.length && fuels.length">
-    Que suertudo!, a&uacute;n no has recargado. Ingresa una <a href="/refuel">recarga aqu&iacute;</a>
+    Que suertudo!, a&uacute;n no has recargado. Ingresa una <a href="#/refuel">recarga aqu&iacute;</a>
 </p>

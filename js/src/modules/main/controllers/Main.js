@@ -20,20 +20,7 @@ angular.module('CarGas.Main')
             href: '/refuels',
             text: 'Recargas',
             icon: 'fa-archive'
-        },
-        {
-            menu: 'Cars',
-            href: '/account/cars',
-            text: 'Vehiculos',
-            icon: 'fa-archive'
-        },
-        {
-            menu: 'Spent',
-            href: '/spents',
-            text: 'Gastos',
-            icon: 'fa-archive'
         }
-
     ];
 
     angular.extend($rootScope, {
@@ -63,25 +50,25 @@ angular.module('CarGas.Main')
             }
         },
 
-        showMenu: function () {
-            $rootScope._addClass(document.body, 'menu-active');
+        showMenu: function (menu) {
+            (menu || angular.element(document.querySelector('[slide-menu]')))
+                .css('webkitTransform', 'translate(258px)');
         },
 
-        hideMenu: function () {
-            $rootScope._removeClass(document.body, 'menu-active');
+        hideMenu: function (menu) {
+            (menu || angular.element(document.querySelector('[slide-menu]')))
+                .css('webkitTransform', 'translate(0px)');
         },
 
         toggleMenu: function () {
-            alert('coming soon');
-            /*
-            var body = document.body;
+            var menu = angular.element(document.querySelector('[slide-menu]')),
+                lastPosition = parseInt((menu.css('webkitTransform').match(/\d+/) || ["0"])[0], 10);
 
-            if ($rootScope._hasClass(body, 'menu-active')) {
-                $rootScope._removeClass(body, 'menu-active');
+            if (lastPosition) {
+                $rootScope.hideMenu(menu);
             } else {
-                $rootScope._addClass(body, 'menu-active');
+                $rootScope.showMenu(menu);
             }
-            */
         }
     });
 

@@ -203,9 +203,7 @@ button[disabled] {
     z-index: 3;
 }
 
-.menu-active [slide-menu] {
-    left: 258px;
-}
+.menu-active [slide-menu] {}
 
 .cost {
     font-size: 26px;
@@ -270,13 +268,14 @@ button[disabled] {
 }
 
 .input-group .checkbox {
-    float: left;
+    /*float: left;*/
     margin-top: 12px;
-    width: 25px;
+    /*width: 25px;*/
 }
 
 .input-group .input-file {
     border-bottom: 0;
+    float: right;
     margin-top: 7px;
     width: 65%;
 }

@@ -14,12 +14,13 @@ angular.module('CarGas.Main')
         config.start = function (data) {
             element.css('transition', 'none');
             start = data.x;
+            moved = 0;
             lastPosition = parseInt((element.css('webkitTransform').match(/\d+/) || ["0"])[0], 10);
         };
 
         config.move = function (data) {
             moved = data.x - start + lastPosition;
-            
+
             if (moved > MIN && moved < MAX) {
                 element.css('webkitTransform', 'translate(' + (moved) + 'px)');
             }
@@ -28,10 +29,12 @@ angular.module('CarGas.Main')
         config.end = function (data) {
             start = 0;
             element.css('transition', 'all .3s ease');
-            if (moved > MID) {
-                element.css('webkitTransform', 'translate(' + (MAX) + 'px)');
-            } else {
-                element.css('webkitTransform', 'translate(' + (MIN) + 'px)');
+            if (moved) {
+                if (moved > MID) {
+                    element.css('webkitTransform', 'translate(' + (MAX) + 'px)');
+                } else {
+                    element.css('webkitTransform', 'translate(' + (MIN) + 'px)');
+                }
             }
         };
 
