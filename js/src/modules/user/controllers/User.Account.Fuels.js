@@ -1,12 +1,15 @@
 angular.module('CarGas.User')
 .controller('User.Account.Fuels', [
     '$scope',
+    '$rootScope',
     '$location',
     '$filter',
     'user',
     'fuels',
     'Fuel',
-    function ($scope, $location, $filter, user, fuels, Fuel) {
+    function ($scope, $rootScope, $location, $filter, user, fuels, Fuel) {
+
+        $rootScope.hideMenu();
 
         $scope.$parent.menuSelected = 'AccountFuels';
         $scope.$parent.title = 'Mi Cuenta';
@@ -17,7 +20,7 @@ angular.module('CarGas.User')
 
         $scope.defaultFuels = function (fuel) {
             return !fuel.user;
-        },
+        };
 
         $scope.myFuels = function (fuel) {
             return fuel.user === $scope.user._id;
@@ -37,11 +40,13 @@ angular.module('CarGas.User')
         };
 
         $scope.delete = function (id) {
-            var fuel = Fuel.get({ _id: id }).$remove();
-            $scope.fuels = $filter('filter')($scope.fuels, function (fuel) {
-                return fuel._id !== id;
-            });
+            var fuel = Fuel.get({ _id: id });
+            if (confirm("Estas seguro que deseas eliminar el combustible " + fuel.get('name'))) {
+                fuel.$remove();
+                $scope.fuels = $filter('filter')($scope.fuels, function (fuel) {
+                    return fuel._id !== id;
+                });
+            }
         };
     }
 ]);
-

@@ -8,7 +8,7 @@
         </div>
         <div class="input-row">
             <label>Costo</label>
-            <input type="text" name="cost" placeholder="35.50" ng-model="fuel.cost" required>
+            <input type="number" name="cost" placeholder="35.50" ng-model="fuel.cost" required>
         </div>
     </div>
     <button type="submit" class="button-block" ng-disabled="!form.$valid">Agregar</button>
@@ -19,15 +19,8 @@
 
 <ul class="list inset no-side-margin">
     <li class="list-divider sub-title">Combustibles</li>
-    <li ng-repeat="fuel in fuels | filter:defaultFuels">
-        <span>{{ fuel.name }} ({{ fuel.cost | currency }})</span>
-    </li>
-</ul>
-
-<ul class="list inset no-side-margin">
-    <li class="list-divider sub-title">Mis Combustibles</li>
-    <li ng-show="!(fuels | filter:myFuels).length">No has agregado combustibles</li>
-    <li ng-repeat="fuel in fuels | filter:myFuels">
+    <li ng-show="!fuels.length">A&uacute;n no hay combustibles</li>
+    <li ng-repeat="fuel in fuels">
         <span>{{ fuel.name }} ({{ fuel.cost | currency }})</span>
         <button class="button-negative" ng-click="delete(fuel._id)">
             <i class="fa fa-trash-o"></i>

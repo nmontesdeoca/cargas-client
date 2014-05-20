@@ -26,7 +26,7 @@ angular.module('CarGas.Refuel')
             $scope.sent = true;
             if ($scope.validate()) {
                 $scope.refuel.$save(function () {
-                    $location.path('/');
+                    $location.path('/refuels');
                 });
             } else {
                 alert('Todos los campos son obligatorios');
@@ -37,9 +37,11 @@ angular.module('CarGas.Refuel')
         };
 
         $scope.delete = function (id) {
-            Refuel.get({ _id: id }).$remove();
-            $scope.refuels = Refuel.query();
-            $location.path('/refuels');
+            if (confirm('Esta seguro que desea eliminar esta recarga ?')) {
+                Refuel.get({ _id: id }).$remove();
+                $scope.refuels = Refuel.query();
+                $location.path('/refuels');
+            }
         };
     }
 ]);

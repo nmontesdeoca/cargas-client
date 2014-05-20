@@ -24,7 +24,7 @@ angular.module('CarGas.Refuel')
             $scope.sent = true;
             if ($scope.validate()) {
                 new Refuel($scope.refuel).$save(function () {
-                    $location.path('/list');
+                    $location.path('/refuels');
                 });
             } else {
                 alert('Todos los campos son obligatorios');

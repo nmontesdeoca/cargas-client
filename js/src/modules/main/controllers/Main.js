@@ -12,7 +12,7 @@ angular.module('CarGas.Main')
         {
             menu: 'Refuel',
             href: '/refuel',
-            text: 'Recarga',
+            text: 'Recargar',
             icon: 'fa-plus'
         },
         {
@@ -60,7 +60,8 @@ angular.module('CarGas.Main')
                 .css('webkitTransform', 'translate(0px)');
         },
 
-        toggleMenu: function () {
+        toggleMenu: function (e) {
+            e.preventDefault();
             var menu = angular.element(document.querySelector('[slide-menu]')),
                 lastPosition = parseInt((menu.css('webkitTransform').match(/\d+/) || ["0"])[0], 10);
 

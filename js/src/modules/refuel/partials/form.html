@@ -1,4 +1,8 @@
-<form class="form" name="form" novalidate>
+<p ng-show="!fuels.length">
+    <span>A&uacute;n no hay combustibles, </span>
+    <a href="#/account/fuels">ingresa uno aqu&iacute;</a>
+</p>
+<form class="form" name="form" novalidate ng-show="fuels.length">
     <div class="{{ sent && form.fuel.$error.required ? ' error' : ''}}">
         <select name="fuel" ng-model="refuel.fuel" ng-options="fuel._id as fuel.name for fuel in fuels" required>
             <option value="">-- Seleccionar Combustible --</option>

@@ -1,15 +1,18 @@
 <div>
     <ul class="list centered-list">
-        <li ng-show="user.showImage">
+        <li ng-show="user.showImage && user.image">
             <span class="circular-image" style="background-image: url({{ user.image }})"></span>
         </li>
-        <li>{{ user.firstName }} {{ user.lastName }}</li>
-        <li>{{ user.email }}</li>
+        <li ng-show="user.firstName">{{ user.firstName }} {{ user.lastName }}</li>
+        <li ng-show="user.email">{{ user.email }}</li>
         <li class="a-left">
             <a href="#/refuel">Recargar<span class="chevron"></span></a>
         </li>
         <li class="a-left">
             <a href="#/refuels">Recargas<span class="chevron"></span></a>
+        </li>
+        <li class="a-left">
+            <a href="#/account/fuels">Combustibles<span class="chevron"></span></a>
         </li>
     </ul>
 </div>
