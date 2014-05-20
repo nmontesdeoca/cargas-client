@@ -294,14 +294,8 @@ button[disabled] {
 
 
 /* fix for inputs on active or focus in iOS */
-input[type=text]:active,
-input[type=text]:focus,
-input[type=number]:active,
-input[type=number]:focus,
-input[type=date]:active,
-input[type=date]:focus {
-    outline: none;
-    -webkit-appearance: none;
-    -webkit-box-shadow: 0 0 8px #000000;
-    box-shadow: 0 0 8px #000000;
+input[type=text],
+input[type=number],
+input[type=date] {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
