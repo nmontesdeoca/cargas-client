@@ -3,12 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "./node_modules/bower/bin/bower install",
     "start": "node server"
   },
   "engines": {
     "node": "0.10.24"
   },
   "dependencies": {
+    "bower": "*",
     "express": "3.1.0"
   },
   "devDependencies": {
