@@ -1,3 +1,15 @@
 CACHE MANIFEST
-NETWORK:
-*
+/css/dist/combined.css
+/js/dist/combined.min.js
+/js/src/modules/home/partials/home.html
+/js/src/modules/refuel/partials/form.html
+/js/src/modules/refuel/partials/list.html
+/js/src/modules/user/partials/account.cars.html
+/js/src/modules/user/partials/account.fuels.html
+/js/src/modules/user/partials/account.html
+/js/src/modules/user/partials/login.html
+/js/src/modules/user/partials/register.html
+/fonts/fontawesome-webfont.woff?v=4.0.3
+/fonts/fontawesome-webfont.ttf?v=4.0.3
+/fonts/fontawesome-webfont.svg?v=4.0.3
+/index.html
