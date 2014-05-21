@@ -5,15 +5,18 @@ angular.module('CarGas.Refuel')
     '$location',
     'Refuel',
     'fuels',
-    function ($scope, $rootScope, $location, Refuel, fuels) {
-
+    'Utils',
+    function ($scope, $rootScope, $location, Refuel, fuels, Utils) {
         $rootScope.hideMenu();
 
         $scope.$parent.menuSelected = 'Refuel';
         $scope.$parent.title = 'Cargar';
 
         $scope.fuels = fuels;
-        $scope.refuel = {};
+
+        $scope.refuel = {
+            date: Utils.formatDate(new Date())
+        };
 
         $scope.validate = function () {
             return $scope.refuel.fuel && $scope.refuel.cost &&

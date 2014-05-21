@@ -1,5 +1,5 @@
-angular.module('CarGas.Config').factory('Model', ['localStorageService',
-    function (localStorageService) {
+angular.module('CarGas.Config').factory('Model', ['localStorageService', 'Utils',
+    function (localStorageService, Utils) {
 
         return function (storageKey, singleModel) {
 
@@ -35,7 +35,7 @@ angular.module('CarGas.Config').factory('Model', ['localStorageService',
             Model.prototype.$save = function (callback) {
                 var models = Model.query();
 
-                this.updateAt = new Date();
+                this.updatedAt = new Date();
 
                 if (this._id) {
                     _.extend(
@@ -44,7 +44,11 @@ angular.module('CarGas.Config').factory('Model', ['localStorageService',
                     );
                 } else {
                     this._id = Date.now();
-                    this.createdAt = new Date();
+
+                    if (!this.createdAt) {
+                        this.createdAt = this.updatedAt;
+                    }
+
                     if (singleModel) {
                         models = this;
                     } else {
