@@ -20,7 +20,21 @@ angular.module('CarGas.Config').factory('Model', ['localStorageService', 'Utils'
             };
 
             Model.query = function () {
-                return localStorageService.get(storageKey) || (singleModel ? {} : []);
+                var data = localStorageService.get(storageKey);
+
+                if (data) {
+                    if (singleModel) {
+                        if (data.inactive) {
+                            data = null;
+                        }
+                    } else {
+                        data = _.filter(data, function (model) {
+                            return !model.inactive;
+                        });
+                    }
+                }
+
+                return data || (singleModel ? {} : []);
             };
 
             Model.prototype.set = function (properties) {
@@ -35,7 +49,7 @@ angular.module('CarGas.Config').factory('Model', ['localStorageService', 'Utils'
             Model.prototype.$save = function (callback) {
                 var models = Model.query();
 
-                this.updatedAt = new Date();
+                this.updatedAt = Date.now();
 
                 if (this._id) {
                     _.extend(
@@ -43,11 +57,11 @@ angular.module('CarGas.Config').factory('Model', ['localStorageService', 'Utils'
                         this
                     );
                 } else {
-                    this._id = Date.now();
-
-                    if (!this.createdAt) {
-                        this.createdAt = this.updatedAt;
-                    }
+                    /**
+                     * _id is the updatedAt, because we can use it as identifier and also contains
+                     * the date and time of createdAt
+                     */
+                    this._id = this.updatedAt;
 
                     if (singleModel) {
                         models = this;
@@ -65,9 +79,11 @@ angular.module('CarGas.Config').factory('Model', ['localStorageService', 'Utils'
 
                 if (this._id) {
                     if (singleModel) {
-                        models = {};
+                        models.inactive = true;
+                        // models = {};
                     } else {
-                        models = _.without(models, _.findWhere(models, { _id: this._id }));
+                        _.findWhere(models, { _id: this._id }).inactive = true;
+                        // models = _.without(models, _.findWhere(models, { _id: this._id }));
                     }
                 }
 
