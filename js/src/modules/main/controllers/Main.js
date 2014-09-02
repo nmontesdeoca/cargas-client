@@ -5,23 +5,35 @@ angular.module('CarGas.Main')
     $rootScope.tabs = [
         {
             menu: 'Home',
-            href: '/',
+            href: '#/',
             text: 'Cuenta',
             icon: 'fa-briefcase'
         },
         {
             menu: 'Refuel',
-            href: '/refuel',
+            href: '#/refuel',
             text: 'Recargar',
             icon: 'fa-plus'
         },
         {
             menu: 'Refuels',
-            href: '/refuels',
+            href: '#/refuels',
             text: 'Recargas',
             icon: 'fa-archive'
+        },
+        {
+            menu: 'Contacto',
+            href: '#/',
+            text: 'Contacto',
+            icon: 'fa-envelope-o'
         }
     ];
+
+    $rootScope.mailto = function ($event) {
+        console.log('a');
+        $event.preventDefault();
+        window.location.href = "mailto:nico.racing.99@gmail.com";
+    };
 
     angular.extend($rootScope, {
         _addClass: function (el, className) {

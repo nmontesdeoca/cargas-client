@@ -3,7 +3,7 @@ angular.module('CarGas')
     return {
         restrict: 'A',
         template:
-            '<a ng-repeat="tab in tabs" href="#{{ tab.href }}">' +
+            '<a ng-repeat="tab in tabs" href="{{ tab.href }}">' +
                 '<i class="fa fa-2x {{ tab.icon }}"></i>' +
                 '<div class="tab-label">{{ tab.text }}</div>' +
             '</a>',
