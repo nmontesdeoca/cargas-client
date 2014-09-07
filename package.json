@@ -1,25 +1,17 @@
 {
-  "name": "cargas-client",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install",
-    "start": "node server"
-  },
-  "engines": {
-    "node": "0.10.24"
-  },
+  "name": "cargas",
+  "version": "1.0.0",
+  "description": "CarGas: An Ionic project",
   "dependencies": {
-    "bower": "*",
-    "express": "3.1.0"
+    "gulp": "^3.5.6",
+    "gulp-sass": "^0.7.1",
+    "gulp-concat": "^2.2.0",
+    "gulp-minify-css": "^0.3.0",
+    "gulp-rename": "^1.2.0"
   },
   "devDependencies": {
-    "grunt": "~0.4.2",
-    "grunt-contrib-uglify": "~0.3.2",
-    "grunt-contrib-cssmin": "~0.8.0",
-    "grunt-contrib-watch": "~0.5.3",
-    "karma": "^0.12.6",
-    "karma-jasmine": "^0.1.5",
-    "karma-chrome-launcher": "^0.1.3"
+    "bower": "^1.3.3",
+    "gulp-util": "^2.2.14",
+    "shelljs": "^0.3.0"
   }
 }
