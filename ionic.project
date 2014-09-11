@@ -1,5 +1,5 @@
 {
-  "name": "CarGas",
-  "app_id": "",
-  "sass": true
+    "name": "CarGas",
+    "app_id": "",
+    "sass": false
 }

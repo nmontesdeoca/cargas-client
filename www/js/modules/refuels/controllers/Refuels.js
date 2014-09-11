@@ -1,15 +1,15 @@
-angular.module('cars')
+angular.module('refuels')
 
-.controller('Cars', [
+.controller('Refuels', [
     '$scope',
     '$ionicPopup',
     '$state',
-    'Car',
-    function ($scope, $ionicPopup, $state, Car) {
+    'Refuel',
+    function ($scope, $ionicPopup, $state, Refuel) {
 
-        $scope.cars = Car.query();
+        $scope.refuels = Refuel.query();
 
-        $scope.delete = function (car) {
+        /*$scope.delete = function (car) {
             $ionicPopup.confirm({
                 title: 'Delete Car',
                 template: 'Are you sure you want to remove this car?'
@@ -23,6 +23,6 @@ angular.module('cars')
                     });
                 }
             });
-        };
+        };*/
 
 }]);

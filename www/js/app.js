@@ -2,6 +2,7 @@ angular.module('starter', [
     'ionic',
     'profile',
     'cars',
+    'refuels',
     'utils'
 ])
 
@@ -55,7 +56,7 @@ angular.module('utils', [])
         getObject: function (key) {
             return JSON.parse($window.localStorage[prefix + key] || '{}');
         }
-    }
+    };
 }])
 
 .factory('model', ['localstorage', function ($localStorage) {

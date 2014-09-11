@@ -1,21 +1,22 @@
 <ion-side-menus>
     <ion-pane ion-side-menu-content>
-        <ion-nav-bar class="bar-stable nav-title-slide-ios7">
+        <ion-nav-bar class="bar-calm nav-title-slide-ios7">
             <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
         </ion-nav-bar>
         <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
     </ion-pane>
 
     <ion-side-menu side="left">
-        <header class="bar bar-header bar-stable">
+        <!-- header class="bar bar-header bar-stable">
             <h1 class="title">Menu</h1>
-        </header>
-        <ion-content class="has-header">
+        </header -->
+        <ion-content class="dark-bg">
             <ion-list>
-                <ion-item nav-clear menu-close href="#/profile">Profile</ion-item>
-                <ion-item nav-clear menu-close href="#/cars">Cars</ion-item>
-                <ion-item nav-clear menu-close href="#/refuels">Refuels</ion-item>
-                <ion-item nav-clear menu-close href="#/spents">Spents</ion-item>
+                <ion-item class="item-dark" nav-clear menu-close href="#/profile">Profile</ion-item>
+                <ion-item class="item-dark" nav-clear menu-close href="#/cars">Cars</ion-item>
+                <ion-item class="item-dark" nav-clear menu-close href="#/fuels">Fuels</ion-item>
+                <ion-item class="item-dark" nav-clear menu-close href="#/refuels">Refuels</ion-item>
+                <ion-item class="item-dark" nav-clear menu-close href="#/spents">Spents</ion-item>
             </ion-list>
         </ion-content>
     </ion-side-menu>

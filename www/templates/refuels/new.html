@@ -1,24 +1,17 @@
-<ion-view title="New Car">
+<ion-view title="New Refuel">
     <ion-content class="has-header">
         <div class="list">
             <label class="item item-input item-floating-label">
                 <span class="input-label">Name</span>
-                <input type="text" ng-model="car.name" placeholder="Name">
+                <input type="text" ng-model="refuel.name" placeholder="Name">
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Year</span>
-                <input type="text" ng-model="car.year" placeholder="Year">
+                <input type="text" ng-model="refuel.year" placeholder="Year">
             </label>
             <label class="item item-input item-floating-label">
                 <span class="input-label">Overall kilometers</span>
-                <input type="text" ng-model="car.kilometers" placeholder="Overall kilometers">
-            </label>
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Image</span>
-                <input type="file" upload-image>
-            </label>
-            <label class="item item-input item-floating-label" ng-show="car.image">
-                <img src="{{ car.image }}" alt="{{ car.name }}" width="80" height="80" />
+                <input type="text" ng-model="refuel.kilometers" placeholder="Overall kilometers">
             </label>
         </div>
         <div class="padding">
