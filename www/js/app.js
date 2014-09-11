@@ -1,6 +1,7 @@
 angular.module('starter', [
     'ionic',
-    'profile'
+    'profile',
+    'cars'
 ])
 
 .run(['$ionicPlatform', function ($ionicPlatform) {

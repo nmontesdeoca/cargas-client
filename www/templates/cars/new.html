@@ -1,0 +1,19 @@
+<ion-view title="New Car">
+    <ion-content class="has-header">
+        <div class="list list-inset">
+            <label class="item item-input">
+                <input type="text" ng-model="car.name" placeholder="Name">
+            </label>
+            <label class="item item-input">
+                <input type="number" ng-model="car.year" placeholder="Year">
+            </label>
+            <label class="item item-input">
+                <input type="text" ng-model="car.kilometers" placeholder="Overall kilometers">
+            </label>
+
+        </div>
+        <div class="padding">
+            <button ng-click="create()" class="button button-block button-positive activated">Create</button>
+        </div>
+    </ion-content>
+</ion-view>
