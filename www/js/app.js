@@ -87,9 +87,11 @@ angular.module('utils', [])
                         data = null;
                     }
                 } else {
-                    data = _.filter(data, function (model) {
+                    data = _.chain(data).filter(function (model) {
                         return !model.inactive;
-                    });
+                    }).map(function (model) {
+                        return new Model(model);
+                    }).value();
                 }
             }
 
