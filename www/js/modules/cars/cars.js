@@ -1,4 +1,4 @@
-angular.module('cars', ['utils'])
+angular.module('cars', [])
 
 .config(['$stateProvider', function ($stateProvider) {
 

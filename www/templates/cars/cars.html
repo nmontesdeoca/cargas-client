@@ -12,9 +12,9 @@
             can-swipe="true">
 
             <ion-item ng-repeat="car in cars" class="item-thumbnail-left">
-                <img ng-src="{{car.image}}">
+                <img ng-src="{{ car.image || '//ionicframework.com/img/docs/blue-album.jpg'}}">
                 <h2>{{car.name}}</h2>
-                <p>{{car.description}}</p>
+                <p>{{car.year}}</p>
                 <ion-option-button class="button-assertive" ng-click="delete(car)">Delete</ion-option-button>
             </ion-item>
         </ion-list>

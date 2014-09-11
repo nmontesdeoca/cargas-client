@@ -1,4 +1,4 @@
-angular.module('profile', ['utils'])
+angular.module('profile', [])
 
 .config(['$stateProvider', function ($stateProvider) {
 

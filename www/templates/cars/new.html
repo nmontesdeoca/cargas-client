@@ -10,7 +10,12 @@
             <label class="item item-input">
                 <input type="text" ng-model="car.kilometers" placeholder="Overall kilometers">
             </label>
-
+            <label class="item item-input">
+                <input type="file" upload-image>
+            </label>
+            <label class="item item-input" ng-show="car.image">
+                <img src="{{ car.image }}" alt="{{ car.name }}" width="80" height="80" />
+            </label>
         </div>
         <div class="padding">
             <button ng-click="create()" class="button button-block button-positive activated">Create</button>
