@@ -2,6 +2,7 @@ angular.module('starter', [
     'ionic',
     'profile',
     'cars',
+    'refuels',
     'utils'
 ])
 
