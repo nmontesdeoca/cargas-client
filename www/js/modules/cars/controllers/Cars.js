@@ -14,12 +14,9 @@ angular.module('cars')
                 title: 'Delete Car',
                 template: 'Are you sure you want to remove this car?'
             }).then(function (yes) {
-                var $car;
                 if (yes) {
-                    $car = Car.get(car._id);
-                    $car.$remove(function () {
+                    car.$remove(function () {
                         $scope.cars = Car.query();
-                        $state.go('app.carList');
                     });
                 }
             });
