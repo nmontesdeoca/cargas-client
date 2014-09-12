@@ -15,11 +15,13 @@
             </label>
             <label class="item item-input item-select">
                 <span class="input-label">Year</span>
-                <select ng-model="car.year" ng-options="year for year in years()"></select>
+                <select ng-model="car.year" ng-options="year for year in years()">
+                    <option value="">Select</option>
+                </select>
             </label>
             <label class="item item-input">
                 <span class="input-label">Overall kilometers</span>
-                <input type="text" ng-model="car.kilometers">
+                <input type="number" ng-model="car.kilometers">
             </label>
         </div>
         <div class="padding">

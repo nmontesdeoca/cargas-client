@@ -27,11 +27,11 @@ angular.module('cars')
         $scope.years = function () {
             var years = [],
                 actualYear = new Date().getFullYear(),
-                i = actualYear,
-                range = 60;
+                // variable name could be firstYear
+                lastYear = 1935;
 
-            for (; i > actualYear - range; i--) {
-                years.push(i);
+            for (; actualYear >= lastYear; actualYear--) {
+                years.push(actualYear);
             }
 
             return years;
