@@ -3,6 +3,7 @@ angular.module('starter', [
     'profile',
     'cars',
     'refuels',
+    'settings',
     'utils'
 ])
 
@@ -24,7 +25,8 @@ angular.module('starter', [
     function ($stateProvider, $urlRouterProvider) {
         $stateProvider.state('app', {
             abstract: true,
-            templateUrl: "templates/menu.html"
+            templateUrl: "templates/menu.html",
+            controller: 'Menu'
         });
 
         $urlRouterProvider.otherwise('/profile');

@@ -1,6 +1,6 @@
 <ion-side-menus>
     <ion-pane ion-side-menu-content>
-        <ion-nav-bar class="bar-calm nav-title-slide-ios7">
+        <ion-nav-bar class="bar bar-calm nav-title-slide-ios7">
             <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
         </ion-nav-bar>
         <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
@@ -12,11 +12,7 @@
         </header -->
         <ion-content class="dark-bg">
             <ion-list>
-                <ion-item class="item-dark" nav-clear menu-close href="#/profile">Profile</ion-item>
-                <ion-item class="item-dark" nav-clear menu-close href="#/cars">Cars</ion-item>
-                <ion-item class="item-dark" nav-clear menu-close href="#/fuels">Fuels</ion-item>
-                <ion-item class="item-dark" nav-clear menu-close href="#/refuels">Refuels</ion-item>
-                <ion-item class="item-dark" nav-clear menu-close href="#/spents">Spents</ion-item>
+                <ion-item ng-repeat="menuItem in menuItems" class="item-dark" nav-clear menu-close href="{{menuItem.link}}">{{menuItem.name}}</ion-item>
             </ion-list>
         </ion-content>
     </ion-side-menu>
