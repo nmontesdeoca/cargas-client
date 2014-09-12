@@ -1,24 +1,25 @@
 <ion-view title="New Car">
     <ion-content class="has-header">
         <div class="list">
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Name</span>
-                <input type="text" ng-model="car.name" placeholder="Name">
+            <label class="item item-input item-select">
+                <span class="input-label">Make</span>
+                <select ng-model="car.make" ng-options="car.make for car in makes">
+                    <option value="">Select</option>
+                </select>
             </label>
-            <label class="item item-input item-floating-label">
+            <label class="item item-input item-select">
+                <span class="input-label">Model</span>
+                <select ng-model="car.model" ng-options="model for model in car.make.models">
+                    <option value="">Select</option>
+                </select>
+            </label>
+            <label class="item item-input item-select">
                 <span class="input-label">Year</span>
-                <input type="text" ng-model="car.year" placeholder="Year">
+                <select ng-model="car.year" ng-options="year for year in years()"></select>
             </label>
-            <label class="item item-input item-floating-label">
+            <label class="item item-input">
                 <span class="input-label">Overall kilometers</span>
-                <input type="text" ng-model="car.kilometers" placeholder="Overall kilometers">
-            </label>
-            <label class="item item-input item-floating-label">
-                <span class="input-label">Image</span>
-                <input type="file" upload-image>
-            </label>
-            <label class="item item-input item-floating-label" ng-show="car.image">
-                <img src="{{ car.image }}" alt="{{ car.name }}" width="80" height="80" />
+                <input type="text" ng-model="car.kilometers">
             </label>
         </div>
         <div class="padding">

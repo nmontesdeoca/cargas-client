@@ -9,6 +9,34 @@ angular.module('cars')
 
         $scope.car = new Car();
 
+        $scope.makes = [
+            {
+                make: 'Fiat',
+                models: ['Uno', 'Palio', 'Siena']
+            },
+            {
+                make: 'Renault',
+                models: ['Clio', 'Sandero', 'Megane']
+            },
+            {
+                make: 'Peugeot',
+                models: ['208', '307', '308']
+            }
+        ];
+
+        $scope.years = function () {
+            var years = [],
+                actualYear = new Date().getFullYear(),
+                i = actualYear,
+                range = 60;
+
+            for (; i > actualYear - range; i--) {
+                years.push(i);
+            }
+
+            return years;
+        };
+
         $scope.create = function () {
             $scope.car.$save(function () {
                 $ionicPopup.alert({
