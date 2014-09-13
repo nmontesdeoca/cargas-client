@@ -3,9 +3,10 @@ angular.module('refuels')
 .controller('Refuels', [
     '$scope',
     '$ionicPopup',
+    '$ionicListDelegate',
     '$state',
     'Refuel',
-    function ($scope, $ionicPopup, $state, Refuel) {
+    function ($scope, $ionicPopup, $ionicListDelegate, $state, Refuel) {
 
         $scope.refuels = Refuel.query();
 
@@ -22,6 +23,7 @@ angular.module('refuels')
                         $state.go('app.carList');
                     });
                 }
+                $ionicListDelegate.closeOptionButtons();
             });
         };*/
 

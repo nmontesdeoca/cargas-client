@@ -3,9 +3,10 @@ angular.module('cars')
 .controller('Cars', [
     '$scope',
     '$ionicPopup',
+    '$ionicListDelegate',
     '$state',
     'Car',
-    function ($scope, $ionicPopup, $state, Car) {
+    function ($scope, $ionicPopup, $ionicListDelegate, $state, Car) {
 
         $scope.cars = Car.query();
 
@@ -19,6 +20,7 @@ angular.module('cars')
                         $scope.cars = Car.query();
                     });
                 }
+                $ionicListDelegate.closeOptionButtons();
             });
         };
 
