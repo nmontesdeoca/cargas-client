@@ -3,6 +3,7 @@ angular.module('starter', [
     'profile',
     'cars',
     'refuels',
+    'fuels',
     'settings',
     'utils'
 ])

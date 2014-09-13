@@ -12,10 +12,10 @@ angular.module('starter')
             name: 'Cars',
             link: '#/cars'
         },
-        /*{
+        {
             name: 'Fuels',
             link: '#/fuels'
-        },*/
+        },
         {
             name: 'Refuels',
             link: '#/refuels'

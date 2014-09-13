@@ -1,0 +1,17 @@
+<ion-view title="New Fuel">
+    <ion-content class="has-header">
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Name</span>
+                <input type="text" ng-model="fuel.name" placeholder="Name">
+            </label>
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Price</span>
+                <input type="number" ng-model="fuel.price" placeholder="Price">
+            </label>
+        </div>
+        <div class="padding">
+            <button ng-click="create()" class="button button-block button-positive activated">Create</button>
+        </div>
+    </ion-content>
+</ion-view>
