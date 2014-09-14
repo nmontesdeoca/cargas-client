@@ -23,5 +23,5 @@ angular.module('cars')
                 $ionicListDelegate.closeOptionButtons();
             });
         };
-
-}]);
+    }
+]);

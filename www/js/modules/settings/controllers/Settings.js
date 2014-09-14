@@ -21,4 +21,5 @@ angular.module('settings')
             link: '#/settings/n'
         }];
 
-}]);
+    }
+]);

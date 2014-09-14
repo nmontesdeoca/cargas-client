@@ -9,7 +9,7 @@ angular.module('starter', [
 ])
 
 .run(['$ionicPlatform', function ($ionicPlatform) {
-    $ionicPlatform.ready(function() {
+    $ionicPlatform.ready(function () {
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
         }
@@ -31,16 +31,8 @@ angular.module('starter', [
         });
 
         $urlRouterProvider.otherwise('/profile');
-
-    // .state('app.single', {
-    //   url: "/playlists/:playlistId",
-    //   views: {
-    //     'menuContent' :{
-    //       templateUrl: "templates/playlist.html",
-    //       controller: 'PlaylistCtrl'
-    //     }
-    //   }
-}]);
+    }
+]);
 
 angular.module('utils', [])
 

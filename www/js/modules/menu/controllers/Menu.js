@@ -29,4 +29,5 @@ angular.module('starter')
             link: '#/settings'
         }];
 
-}]);
+    }
+]);

@@ -17,6 +17,19 @@ angular.module('cars', [])
         }
     })
 
+    .state('app.carEdit', {
+        url: '/cars/:id',
+        resolve: {
+            Cars: 'Car'
+        },
+        views: {
+            menuContent: {
+                templateUrl: 'templates/cars/edit.html',
+                controller: 'Cars.Edit'
+            }
+        }
+    })
+
     .state('app.carNew', {
         url: '/cars/new',
         views: {

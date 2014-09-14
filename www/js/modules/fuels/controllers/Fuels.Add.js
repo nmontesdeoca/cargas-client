@@ -19,5 +19,5 @@ angular.module('fuels')
                 });
             });
         };
-
-}]);
+    }
+]);

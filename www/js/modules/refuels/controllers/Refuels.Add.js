@@ -20,4 +20,5 @@ angular.module('refuels')
             });
         };
 
-}]);
+    }
+]);

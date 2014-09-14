@@ -23,5 +23,5 @@ angular.module('fuels')
                 $ionicListDelegate.closeOptionButtons();
             });
         };
-
-}]);
+    }
+]);
