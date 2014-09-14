@@ -13,12 +13,12 @@ angular.module('settings')
             link: '#/settings/language'
         },
         {
-            name: 'Setting 2',
-            link: '#/settings/2'
+            name: 'Terms and Conditions',
+            link: '#/settings/terms-conditions'
         },
         {
-            name: 'Setting n',
-            link: '#/settings/n'
+            name: 'About',
+            link: '#/settings/about'
         }];
 
     }

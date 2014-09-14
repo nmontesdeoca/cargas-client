@@ -19,6 +19,9 @@ angular.module('refuels', [])
 
     .state('app.refuelNew', {
         url: '/refuels/new',
+        resolve: {
+            cars: 'Car'
+        },
         views: {
             menuContent: {
                 templateUrl: 'templates/refuels/new.html',
