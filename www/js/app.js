@@ -8,7 +8,7 @@ angular.module('starter', [
     'utils'
 ])
 
-.run(['$ionicPlatform', function ($ionicPlatform) {
+.run(['$ionicPlatform', '$rootScope', function ($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function () {
         if (window.cordova && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -17,6 +17,9 @@ angular.module('starter', [
             // org.apache.cordova.statusbar required
             StatusBar.styleDefault();
         }
+
+        // to make underscore available at any template
+        $rootScope._ = _;
     });
 }])
 
@@ -35,6 +38,12 @@ angular.module('starter', [
 ]);
 
 angular.module('utils', [])
+
+.filter('distance', function () {
+    return function (value) {
+        return value += ' kms';
+    };
+})
 
 .factory('localstorage', ['$window', function ($window) {
     var prefix = '';

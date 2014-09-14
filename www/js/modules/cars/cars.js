@@ -11,8 +11,18 @@ angular.module('cars', [])
         },
         views: {
             menuContent: {
-                templateUrl: 'templates/cars/cars.html',
+                templateUrl: 'templates/cars/list.html',
                 controller: 'Cars'
+            }
+        }
+    })
+
+    .state('app.carNew', {
+        url: '/cars/new',
+        views: {
+            menuContent: {
+                templateUrl: 'templates/cars/form.html',
+                controller: 'Cars.Form'
             }
         }
     })
@@ -24,28 +34,8 @@ angular.module('cars', [])
         },
         views: {
             menuContent: {
-                templateUrl: 'templates/cars/edit.html',
-                controller: 'Cars.Edit'
-            }
-        }
-    })
-
-    .state('app.carNew', {
-        url: '/cars/new',
-        views: {
-            menuContent: {
-                templateUrl: 'templates/cars/new.html',
-                controller: 'Cars.Add'
-            }
-        }
-    })
-
-    .state('app.carNewMakeModel', {
-        url: '/cars/new/make-model',
-        views: {
-            menuContent: {
-                templateUrl: 'templates/cars/new-make-model.html',
-                controller: 'Cars.Add'
+                templateUrl: 'templates/cars/form.html',
+                controller: 'Cars.Form'
             }
         }
     });
