@@ -12,15 +12,30 @@ angular.module('cars')
         $scope.makes = [
             {
                 make: 'Fiat',
-                models: ['Uno', 'Palio', 'Siena']
+                models: [
+                    'Uno',
+                    'Palio',
+                    'Siena'
+                ].sort()
             },
             {
                 make: 'Renault',
-                models: ['Clio', 'Sandero', 'Megane']
+                models: [
+                    'Clio',
+                    'Sandero',
+                    'Megane'
+                ].sort()
             },
             {
                 make: 'Peugeot',
-                models: ['208', '307', '308']
+                models: [
+                    '208',
+                    '307',
+                    '308',
+                    '205',
+                    '405',
+                    '207'
+                ].sort()
             }
         ];
 
@@ -38,13 +53,27 @@ angular.module('cars')
         };
 
         $scope.create = function () {
+            // maybe is not the best way to do this but we are storing less data
+            $scope.car.make = $scope.car.make.make;
             $scope.car.$save(function () {
-                $ionicPopup.alert({
+                // maybe we can display an alert only when an error happens
+                /*$ionicPopup.alert({
                     title: 'Car',
                     template: 'Car added successfully.'
-                }).then(function () {
+                }).then(function () {*/
                     $state.go('app.carList');
-                });
+                //});
+            });
+        };
+
+        $scope.newMakeModel = function (newCar) {
+            console.log(newCar);
+            $ionicPopup.alert({
+                title: 'New Make and Model',
+                template: 'Thanks for suggest a new make and model.<br />' +
+                    'Your suggestion will be reviewed and we will let you know if it is accepted.'
+            }).then(function () {
+                $state.go('app.carNew');
             });
         };
 

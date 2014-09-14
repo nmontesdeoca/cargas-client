@@ -11,12 +11,12 @@ angular.module('fuels')
 
         $scope.create = function () {
             $scope.fuel.$save(function () {
-                $ionicPopup.alert({
+                /*$ionicPopup.alert({
                     title: 'Fuel',
                     template: 'Fuel added successfully.'
-                }).then(function () {
+                }).then(function () {*/
                     $state.go('app.fuelList');
-                });
+                //});
             });
         };
 

@@ -25,6 +25,16 @@ angular.module('cars', [])
                 controller: 'Cars.Add'
             }
         }
+    })
+
+    .state('app.carNewMakeModel', {
+        url: '/cars/new/make-model',
+        views: {
+            menuContent: {
+                templateUrl: 'templates/cars/new-make-model.html',
+                controller: 'Cars.Add'
+            }
+        }
     });
 
 }]);
