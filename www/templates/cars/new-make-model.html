@@ -1,0 +1,20 @@
+<ion-view title="New Make and Model">
+    <ion-content class="has-header">
+        <form name="newMakeModel">
+            <div class="list">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Make</span>
+                    <input type="text" ng-model="newCar.make" placeholder="Make" required>
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Model</span>
+                    <input type="text" ng-model="newCar.model" placeholder="Model" required>
+                </label>
+            </div>
+            <div class="padding">
+                <button ng-click="newMakeModel(newCar)" class="button button-block button-positive activated"
+                    ng-disabled="newMakeModel.$invalid">Save</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
