@@ -5,9 +5,18 @@ angular.module('cars')
     '$ionicPopup',
     '$state',
     'Car',
-    function ($scope, $ionicPopup, $state, Car) {
+    'Fuel',
+    function ($scope, $ionicPopup, $state, Car, Fuel) {
 
-        $scope.car = $state.params.id ? Car.get($state.params.id) : new Car();
+        $scope.car = $state.params.id ? Car.get({
+            _id: parseInt($state.params.id, 10)
+        }) : new Car();
+
+        $scope.fuels = Fuel.query();
+        $scope.fuels = _.object(
+            _.pluck($scope.fuels, '_id'),
+            _.pluck($scope.fuels, 'name')
+        );
 
         $scope.makes = [
             {
@@ -65,7 +74,6 @@ angular.module('cars')
         };
 
         $scope.newMakeModel = function (newCar) {
-            console.log(newCar);
             $ionicPopup.alert({
                 title: 'New Make and Model',
                 template: 'Thanks for suggest a new make and model.<br />' +

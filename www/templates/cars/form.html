@@ -20,6 +20,12 @@
                         <option value="">Select</option>
                     </select>
                 </label>
+                <label class="item item-input item-select">
+                    <span class="input-label">Fuel</span>
+                    <select ng-model="car.fuel" ng-options="key as value for (key, value) in fuels" required>
+                        <option value="">Select</option>
+                    </select>
+                </label>
                 <label class="item item-input">
                     <span class="input-label">Overall kilometers</span>
                     <input type="number" ng-model="car.kilometers" required>
