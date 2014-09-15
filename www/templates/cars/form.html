@@ -1,4 +1,4 @@
-<ion-view title="{{car._id ? 'New' : 'Edit'}} Car">
+<ion-view title="{{car._id ? 'Edit' : 'New'}} Car">
     <ion-content class="has-header">
         <form name="newCar">
             <div class="list">
@@ -33,7 +33,7 @@
             </div>
             <div class="padding">
                 <button ng-click="create(newCar)" class="button button-block button-positive activated"
-                    ng-disabled="newCar.$invalid">Create</button>
+                    ng-disabled="newCar.$invalid">{{car._id ? 'Save' : 'Create'}}</button>
                 <a class="button button-clear button-positive" href="#/cars/new/make-model">
                     Suggest new make and model
                 </a>

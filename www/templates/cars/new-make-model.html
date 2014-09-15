@@ -1,6 +1,6 @@
 <ion-view title="New Make and Model">
     <ion-content class="has-header">
-        <form name="newMakeModel">
+        <form name="newMakeModelForm">
             <div class="list">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Make</span>
@@ -13,7 +13,7 @@
             </div>
             <div class="padding">
                 <button ng-click="newMakeModel(newCar)" class="button button-block button-positive activated"
-                    ng-disabled="newMakeModel.$invalid">Save</button>
+                    ng-disabled="newMakeModelForm.$invalid">Send</button>
             </div>
         </form>
     </ion-content>

@@ -45,6 +45,10 @@ angular.module('cars')
                     '405',
                     '207'
                 ].sort()
+            },
+            {
+                make: 'Other',
+                models: ['Other']
             }
         ];
 
