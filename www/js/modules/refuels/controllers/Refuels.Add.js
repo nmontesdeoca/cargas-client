@@ -14,6 +14,12 @@ angular.module('refuels')
         $scope.refuel.date = utils.formatDate(new Date());
 
         $scope.cars = Car.query();
+        $scope.cars = _.object(
+            _.pluck($scope.cars, '_id'),
+            _.map($scope.cars, function (car) {
+                return car.make + ' ' + car.model;
+            })
+        );
 
         $scope.create = function () {
             $scope.refuel.$save(function () {

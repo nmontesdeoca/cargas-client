@@ -8,18 +8,9 @@
                 </label>
                 <label class="item item-input item-select">
                     <span class="input-label">Car</span>
-                    <select ng-model="refuel.car" required>
+                    <select ng-model="refuel.car" ng-options="key as value for (key, value) in cars" required>
                         <option value="">Select</option>
-                        <option ng-repeat="car in cars" value="{{car._id}}">{{car.make}} {{car.model}}</option>
                     </select>
-                </label>
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">Year</span>
-                    <input type="text" ng-model="refuel.year" placeholder="Year">
-                </label>
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">Overall kilometers</span>
-                    <input type="text" ng-model="refuel.kilometers" placeholder="Overall kilometers">
                 </label>
             </div>
             <div class="padding">
