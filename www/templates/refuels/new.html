@@ -1,6 +1,6 @@
 <ion-view title="New Refuel">
     <ion-content class="has-header">
-        <form name="newRefuel">
+        <form name="newRefuelForm">
             <div class="list">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Date</span>
@@ -8,22 +8,52 @@
                 </label>
                 <label class="item item-input item-select">
                     <span class="input-label">Car</span>
-                    <select ng-model="refuel.car" required>
+                    <select ng-model="refuel.car" required ng-change="selectFuel()">
                         <option value="">Select</option>
                         <option ng-repeat="car in cars" value="{{car._id}}">{{car.make}} {{car.model}}</option>
                     </select>
                 </label>
                 <label class="item item-input item-floating-label">
-                    <span class="input-label">Year</span>
-                    <input type="text" ng-model="refuel.year" placeholder="Year">
+                    <span class="input-label">Overall kilometers</span>
+                    <input type="number" ng-model="refuel.kilometers" placeholder="Overall kilometers">
+                </label>
+                <!-- populate the next fields based on the car selected,
+                if the car has no fuel selected the user can creted from here,
+                if there is fuel but the user modify it, we can offer save the changes
+                or create a new one (right now I don't how to do this, but would be great) -->
+                <!-- label class="item item-input item-floating-label">
+                    <span class="input-label">Fuel</span>
+                    <input type="text" ng-model="refuel.fuel" value="" placeholder="Fuel" required>
                 </label>
                 <label class="item item-input item-floating-label">
-                    <span class="input-label">Overall kilometers</span>
-                    <input type="text" ng-model="refuel.kilometers" placeholder="Overall kilometers">
+                    <span class="input-label">Fuel Price</span>
+                    <input type="number" ng-model="refuel.fuelcost" placeholder="Fuel Price" required>
+                </label -->
+
+                <label class="item item-input item-select">
+                    <span class="input-label">Fuel</span>
+                    <select name="fuel" ng-model="refuel.fuel" required ng-change="addNewFuel()">
+                        <option value="">Select</option>
+                        <option ng-repeat="fuel in fuels" value="{{fuel._id}}">{{fuel.name}}</option>
+                        <option value="new">Add new fuel</option>
+                    </select>
+                </label>
+
+                <!-- change the verbiage here, maybe capacity or another word that represents
+                in a better way the liters or gallons charge in the refuel -->
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Liters</span>
+                    <input type="number" ng-model="refuel.liters" placeholder="Liters" required>
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Amount</span>
+                    <input type="number" value="{{refuel.fuelcost * refuel.liters}}" placeholder="Amount" required>
                 </label>
             </div>
             <div class="padding">
-                <button ng-click="create()" class="button button-block button-positive activated">Create</button>
+                <button ng-click="create()" class="button button-block button-positive activated"
+                    ng-disabled="newRefuelForm.$invalid">Create</button>
+                {{refuel.fuelcost * refuel.liters}}
             </div>
         </form>
     </ion-content>

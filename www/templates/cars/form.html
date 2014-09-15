@@ -20,15 +20,22 @@
                         <option value="">Select</option>
                     </select>
                 </label>
+                <!-- maybe this field could be not required -->
                 <label class="item item-input item-select">
                     <span class="input-label">Fuel</span>
-                    <select ng-model="car.fuel" ng-options="key as value for (key, value) in fuels" required>
+                    <select ng-model="car.fuel" ng-options="key as value for (key, value) in fuels">
                         <option value="">Select</option>
                     </select>
                 </label>
-                <label class="item item-input">
+                <label class="item item-input item-floating-label">
                     <span class="input-label">Overall kilometers</span>
-                    <input type="number" ng-model="car.kilometers" required>
+                    <input type="number" ng-model="car.kilometers" placeholder="Overall kilometers" required>
+                </label>
+                <!-- the next field could be the plake but the user needs to identify its vehicles,
+                i.e. if their has two or more cars of the same make, model and year -->
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Description</span>
+                    <input type="text" ng-model="car.description" placeholder="Description">
                 </label>
             </div>
             <div class="padding">

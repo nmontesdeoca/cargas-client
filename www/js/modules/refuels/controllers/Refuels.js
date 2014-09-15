@@ -10,22 +10,19 @@ angular.module('refuels')
 
         $scope.refuels = Refuel.query();
 
-        /*$scope.delete = function (car) {
+        $scope.delete = function (refuel) {
             $ionicPopup.confirm({
-                title: 'Delete Car',
-                template: 'Are you sure you want to remove this car?'
+                title: 'Delete Refuel',
+                template: 'Are you sure you want to remove this refuel?'
             }).then(function (yes) {
-                var $car;
                 if (yes) {
-                    $car = Car.get(car._id);
-                    $car.$remove(function () {
-                        $scope.cars = Car.query();
-                        $state.go('app.carList');
+                    refuel.$remove(function () {
+                        $scope.refuels = Refuel.query();
                     });
                 }
                 $ionicListDelegate.closeOptionButtons();
             });
-        };*/
+        };
 
     }
 ]);
