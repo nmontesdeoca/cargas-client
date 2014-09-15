@@ -6,13 +6,14 @@ angular.module('refuels')
     '$state',
     'Refuel',
     'Car',
-    function ($scope, $ionicPopup, $state, Refuel, Car) {
+    'utils',
+    function ($scope, $ionicPopup, $state, Refuel, Car, utils) {
 
         $scope.refuel = new Refuel();
 
-        $scope.cars = Car.query();
+        $scope.refuel.date = utils.formatDate(new Date());
 
-        console.log($scope.cars);
+        $scope.cars = Car.query();
 
         $scope.create = function () {
             $scope.refuel.$save(function () {

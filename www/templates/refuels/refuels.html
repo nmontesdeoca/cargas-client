@@ -12,8 +12,8 @@
             can-swipe="true">
 
             <ion-item ng-repeat="refuel in refuels" class="item">
-                <h2>{{refuel.name}}</h2>
-                <p>{{refuel.year}}</p>
+                <h2>{{refuel.cost}}</h2>
+                <p>{{refuel.capacity | capacity}}</p>
                 <ion-option-button class="button-assertive" ng-click="delete(refuel)">Delete</ion-option-button>
             </ion-item>
         </ion-list>

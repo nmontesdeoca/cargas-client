@@ -45,6 +45,26 @@ angular.module('utils', [])
     };
 })
 
+.filter('capacity', function () {
+    return function (value) {
+        return value += ' lts';
+    };
+})
+
+.factory('utils', function () {
+    return {
+        formatDate: function (date) {
+            var month = parseInt(date.getMonth(), 10) + 1;
+
+            month = month > 9 ? month : '0' + month;
+
+            return date.getFullYear() + '-' +
+                month + '-' +
+                date.getDate();
+        }
+    };
+})
+
 .factory('localstorage', ['$window', function ($window) {
     var prefix = '';
     return {
@@ -89,6 +109,8 @@ angular.module('utils', [])
                 if (singleModel) {
                     if (data.inactive) {
                         data = null;
+                    } else {
+                        data = new Model(data);
                     }
                 } else {
                     data = _.chain(data).filter(function (model) {
