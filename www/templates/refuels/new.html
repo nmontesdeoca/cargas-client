@@ -1,6 +1,6 @@
 <ion-view title="New Refuel">
     <ion-content class="has-header">
-        <form name="newRefuel">
+        <form name="newRefuelForm">
             <div class="list">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Date</span>
@@ -8,17 +8,47 @@
                 </label>
                 <label class="item item-input item-select">
                     <span class="input-label">Car</span>
-                    <select ng-model="refuel.car" ng-options="key as value for (key, value) in cars" required>
+                    <select ng-model="refuel.car" ng-options="key as value for (key, value) in cars"
+                            ng-change="selectFuel()" required>
                         <option value="">Select</option>
                     </select>
                 </label>
                 <label class="item item-input">
+                    <button style="padding:0;" class="button button-clear button-small button-positive"
+                        ng-click="addNewCar()">Add car</button>
+                </label>
+
+                <label class="item item-input item-floating-label">
                     <span class="input-label">Overall kilometers</span>
-                    <input type="number" ng-model="refuel.overallKilometers" required>
+                    <input type="number" ng-model="refuel.overallKilometers" placeholder="Overall kilometers" required>
+                </label>
+
+                <label class="item item-input item-select">
+                    <span class="input-label">Fuel</span>
+                    <select name="fuel" ng-model="refuel.fuel" required ng-change="getFuelCost()">
+                        <option value="">Select</option>
+                        <option ng-repeat="fuel in fuels" value="{{fuel._id}}">{{fuel.name}}</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <button style="padding:0;" class="button button-clear button-small button-positive"
+                        ng-click="addNewFuel()">Add fuel</button>
+                </label>
+
+                <!-- change the verbiage here, maybe capacity or another word that represents
+                in a better way the liters or gallons charge in the refuel -->
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Capacity</span>
+                    <input type="number" ng-model="refuel.capacity" ng-change="setAmount()" placeholder="Capacity" required>
+                </label>
+                <label class="item item-input item-floating-label">
+                    <span id="amount-label" class="input-label">Amount</span>
+                    <input type="number" value="{{refuel.fuelcost * refuel.capacity}}" placeholder="Amount" required>
                 </label>
             </div>
             <div class="padding">
-                <button ng-click="create()" class="button button-block button-positive activated">Create</button>
+                <button ng-click="create()" class="button button-block button-positive activated"
+                    ng-disabled="newRefuelForm.$invalid">Create</button>
             </div>
         </form>
     </ion-content>

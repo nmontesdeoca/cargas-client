@@ -6,8 +6,9 @@ angular.module('refuels')
     '$state',
     'Refuel',
     'Car',
+    'Fuel',
     'utils',
-    function ($scope, $ionicPopup, $state, Refuel, Car, utils) {
+    function ($scope, $ionicPopup, $state, Refuel, Car, Fuel, utils) {
 
         $scope.refuel = new Refuel();
 
@@ -21,14 +22,42 @@ angular.module('refuels')
             })
         );
 
+        $scope.fuels = Fuel.query();
+
+        $scope.selectFuel = function () {
+            var car = Car.get({
+                _id: parseInt($scope.refuel.car, 10)
+            });
+            $scope.refuel.fuel = Fuel.get({
+                _id: parseInt(car.fuel, 10)
+            })._id;
+            $scope.getFuelCost();
+        };
+
+        $scope.addNewCar = function () {
+            $state.go('app.carNew');
+        };
+
+        $scope.addNewFuel = function () {
+            $state.go('app.fuelNew');
+        };
+
+        $scope.getFuelCost = function () {
+            if ($scope.refuel.fuel) {
+                $scope.refuel.fuelcost = Fuel.get({
+                    _id: parseInt($scope.refuel.fuel, 10)
+                }).price;
+            }
+        };
+
+        $scope.setAmount = function () {
+            $scope.refuel.cost = $scope.refuel.fuelcost * $scope.refuel.capacity;
+            document.getElementById('amount-label').classList[!isNaN($scope.refuel.cost) ? 'add' : 'remove']('has-input');
+        };
+
         $scope.create = function () {
             $scope.refuel.$save(function () {
-                $ionicPopup.alert({
-                    title: 'Refuel',
-                    template: 'Refuel added successfully.'
-                }).then(function () {
-                    $state.go('app.refuelList');
-                });
+                $state.go('app.refuelList');
             });
         };
 

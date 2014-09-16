@@ -4,9 +4,10 @@ angular.module('cars')
     '$scope',
     '$ionicPopup',
     '$state',
+    '$ionicViewService',
     'Car',
     'Fuel',
-    function ($scope, $ionicPopup, $state, Car, Fuel) {
+    function ($scope, $ionicPopup, $state, $ionicViewService, Car, Fuel) {
 
         $scope.car = $state.params.id ? Car.get({
             _id: parseInt($state.params.id, 10)
@@ -45,6 +46,10 @@ angular.module('cars')
                     '405',
                     '207'
                 ].sort()
+            },
+            {
+                make: 'Other',
+                models: ['Other']
             }
         ];
 
@@ -63,12 +68,13 @@ angular.module('cars')
 
         $scope.create = function () {
             $scope.car.$save(function () {
+                var backView = $ionicViewService.getBackView();
+                backView && backView.go();
                 // maybe we can display an alert only when an error happens
                 /*$ionicPopup.alert({
                     title: 'Car',
                     template: 'Car added successfully.'
                 }).then(function () {*/
-                $state.go('app.carList');
                 //});
             });
         };

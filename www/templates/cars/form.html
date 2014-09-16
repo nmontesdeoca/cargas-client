@@ -1,4 +1,4 @@
-<ion-view title="{{car._id ? 'New' : 'Edit'}} Car">
+<ion-view title="{{car._id ? 'Edit' : 'New'}} Car">
     <ion-content class="has-header">
         <form name="newCar">
             <div class="list">
@@ -20,16 +20,23 @@
                         <option value="">Select</option>
                     </select>
                 </label>
+                <!-- maybe this field could be not required -->
                 <label class="item item-input item-select">
                     <span class="input-label">Fuel</span>
-                    <select ng-model="car.fuel" ng-options="key as value for (key, value) in fuels" required>
+                    <select ng-model="car.fuel" ng-options="key as value for (key, value) in fuels">
                         <option value="">Select</option>
                     </select>
+                </label>
+                <!-- the next field could be the plake but the user needs to identify its vehicles,
+                i.e. if their has two or more cars of the same make, model and year -->
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Description</span>
+                    <input type="text" ng-model="car.description" placeholder="Description">
                 </label>
             </div>
             <div class="padding">
                 <button ng-click="create(newCar)" class="button button-block button-positive activated"
-                    ng-disabled="newCar.$invalid">Create</button>
+                    ng-disabled="newCar.$invalid">{{car._id ? 'Save' : 'Create'}}</button>
                 <a class="button button-clear button-positive" href="#/cars/new/make-model">
                     Suggest new make and model
                 </a>
