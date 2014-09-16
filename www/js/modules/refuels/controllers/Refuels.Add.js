@@ -50,16 +50,15 @@ angular.module('refuels')
             }
         };
 
-        $scope.setAmount = function () {
-            $scope.refuel.cost = $scope.refuel.fuelcost * $scope.refuel.capacity;
-            document.getElementById('amount-label').classList[!isNaN($scope.refuel.cost) ? 'add' : 'remove']('has-input');
-        };
-
         $scope.create = function () {
             $scope.refuel.$save(function () {
                 $state.go('app.refuelList');
             });
         };
+
+        $scope.$watch('refuel.fuelcost * refuel.capacity', function (newValue) {
+            $scope.refuel.amount = newValue;
+        });
 
     }
 ]);

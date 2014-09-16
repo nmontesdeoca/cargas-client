@@ -35,15 +35,14 @@
                         ng-click="addNewFuel()">Add fuel</button>
                 </label>
 
-                <!-- change the verbiage here, maybe capacity or another word that represents
-                in a better way the liters or gallons charge in the refuel -->
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Capacity</span>
-                    <input type="number" ng-model="refuel.capacity" ng-change="setAmount()" placeholder="Capacity" required>
+                    <input type="number" ng-model="refuel.capacity" placeholder="Capacity" required>
                 </label>
+
                 <label class="item item-input item-floating-label">
                     <span id="amount-label" class="input-label">Amount</span>
-                    <input type="number" value="{{refuel.fuelcost * refuel.capacity}}" placeholder="Amount" required>
+                    <input type="number" ng-model="refuel.amount" placeholder="Amount" required>
                 </label>
             </div>
             <div class="padding">
