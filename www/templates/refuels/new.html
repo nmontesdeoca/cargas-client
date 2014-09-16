@@ -8,14 +8,14 @@
                 </label>
                 <label class="item item-input item-select">
                     <span class="input-label">Car</span>
-                    <select ng-model="refuel.car" required ng-change="selectFuel()">
+                    <select ng-model="refuel.car" ng-options="key as value for (key, value) in cars"
+                            ng-change="selectFuel()" required>
                         <option value="">Select</option>
-                        <option ng-repeat="car in cars" value="{{car._id}}">{{car.make}} {{car.model}}</option>
                     </select>
                 </label>
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Overall kilometers</span>
-                    <input type="number" ng-model="refuel.kilometers" placeholder="Overall kilometers">
+                    <input type="number" ng-model="refuel.overallKilometers" placeholder="Overall kilometers" required>
                 </label>
                 <!-- populate the next fields based on the car selected,
                 if the car has no fuel selected the user can creted from here,
