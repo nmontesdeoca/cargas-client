@@ -31,23 +31,33 @@ angular.module('refuels')
             $scope.refuel.fuel = Fuel.get({
                 _id: parseInt(car.fuel, 10)
             })._id;
+            $scope.getFuelCost();
+        };
+
+        $scope.addNewCar = function () {
+            $state.go('app.carNew');
         };
 
         $scope.addNewFuel = function () {
-            if ($scope.refuel.fuel === 'new') {
-                $state.go('app.fuelNew');
+            $state.go('app.fuelNew');
+        };
+
+        $scope.getFuelCost = function () {
+            if ($scope.refuel.fuel) {
+                $scope.refuel.fuelcost = Fuel.get({
+                    _id: parseInt($scope.refuel.fuel, 10)
+                }).price;
             }
+        };
+
+        $scope.setAmount = function () {
+            $scope.refuel.cost = $scope.refuel.fuelcost * $scope.refuel.capacity;
+            document.getElementById('amount-label').classList[!isNaN($scope.refuel.cost) ? 'add' : 'remove']('has-input');
         };
 
         $scope.create = function () {
             $scope.refuel.$save(function () {
-                // same of other creation, maybe display an alert when an error happens
-                /*$ionicPopup.alert({
-                    title: 'Refuel',
-                    template: 'Refuel added successfully.'
-                }).then(function () {*/
-                    $state.go('app.refuelList');
-                //});
+                $state.go('app.refuelList');
             });
         };
 
