@@ -10,14 +10,18 @@ angular.module('refuels')
     'utils',
     function ($scope, $ionicPopup, $state, Refuel, Car, Fuel, utils) {
 
+        var refuelDate;
+
         $scope.refuel = $state.params.id ? Refuel.get({
             _id: parseInt($state.params.id, 10)
         }) : new Refuel();
 
+        refuelDate = $scope.refuel.date ? new Date($scope.refuel.date) : new Date();
+
         $scope.fuels = Fuel.query();
         $scope.cars = Car.query();
 
-        $scope.refuel.date = utils.formatDate(new Date());
+        $scope.refuel.date = utils.formatDateForInput(refuelDate);
 
         $scope.cars = _.object(
             _.pluck($scope.cars, '_id'),
@@ -42,6 +46,8 @@ angular.module('refuels')
         };
 
         $scope.create = function () {
+            // date saved as timestamp
+            $scope.refuel.date = utils.formatDateToTime($scope.refuel.date);
             $scope.refuel.$save(function () {
                 $state.go('app.refuelList');
             });
@@ -54,7 +60,7 @@ angular.module('refuels')
         });
 
         $scope.$watch('refuel.fuelObject.price * refuel.capacity', function (amount) {
-            $scope.refuel.amount = amount;
+            $scope.refuel.amount = !isNaN(amount) ? Math.round(amount * 100) / 100 : '';
         });
 
         $scope.$watch('refuel.car', function (carId) {

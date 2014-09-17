@@ -5,21 +5,23 @@ angular.module('cars')
     '$ionicPopup',
     '$state',
     '$ionicViewService',
+    '$ionicModal',
     'Car',
     'Fuel',
-    function ($scope, $ionicPopup, $state, $ionicViewService, Car, Fuel) {
+    function ($scope, $ionicPopup, $state, $ionicViewService, $ionicModal, Car, Fuel) {
 
         $scope.car = $state.params.id ? Car.get({
             _id: parseInt($state.params.id, 10)
         }) : new Car();
 
-        $scope.fuels = Fuel.query();
+        // the next sort doesn't work due to the object transformation at the next line...
+        $scope.fuels = _.sortBy(Fuel.query(), 'name');
         $scope.fuels = _.object(
             _.pluck($scope.fuels, '_id'),
             _.pluck($scope.fuels, 'name')
         );
 
-        $scope.makes = [
+        $scope.makes = _.sortBy([
             {
                 make: 'Fiat',
                 models: [
@@ -46,12 +48,13 @@ angular.module('cars')
                     '405',
                     '207'
                 ].sort()
-            },
-            {
-                make: 'Other',
-                models: ['Other']
             }
-        ];
+        ], 'make');
+
+        $scope.makes.push({
+            make: 'Other',
+            models: ['Other']
+        });
 
         $scope.years = function () {
             var years = [],
@@ -79,6 +82,30 @@ angular.module('cars')
             });
         };
 
+        $ionicModal.fromTemplateUrl('templates/fuels/new-modal.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.modal = modal;
+        });
+
+        $scope.addNewFuel = function () {
+            // $state.go('app.fuelNew');
+            $scope.fuel = new Fuel();
+            $scope.modal.show();
+        };
+
+        $scope.createFuel = function () {
+            $scope.fuel.$save(function () {
+                $scope.fuels = _.sortBy(Fuel.query(), 'name');
+                $scope.fuels = _.object(
+                    _.pluck($scope.fuels, '_id'),
+                    _.pluck($scope.fuels, 'name')
+                );
+                $scope.car.fuel = $scope.fuel._id.toString();
+                $scope.modal.hide();
+            });
+        };
+
         $scope.newMakeModel = function (newCar) {
             $ionicPopup.alert({
                 title: 'New Make and Model',
@@ -88,5 +115,10 @@ angular.module('cars')
                 $state.go('app.carNew');
             });
         };
+
+        // remove the modal instance of the DOM
+        $scope.$on('$destroy', function () {
+            $scope.modal.remove();
+        });
     }
 ]);
