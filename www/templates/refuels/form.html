@@ -1,0 +1,52 @@
+<ion-view title="{{refuel._id ? 'Edit' : 'New'}} Refuel">
+    <ion-content class="has-header">
+        <form name="newRefuelForm">
+            <div class="list">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Date</span>
+                    <input name="date" type="date" ng-model="refuel.date" placeholder="Date">
+                </label>
+                <label class="item item-input item-select">
+                    <span class="input-label">Car</span>
+                    <select ng-model="refuel.car" ng-options="key as value for (key, value) in cars" required>
+                        <option value="">Select</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <button style="padding:0;" class="button button-clear button-small button-positive"
+                        ng-click="addNewCar()">Add car</button>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Overall kilometers</span>
+                    <input type="number" ng-model="refuel.overallKilometers" placeholder="Overall kilometers" required>
+                </label>
+
+                <label class="item item-input item-select">
+                    <span class="input-label">Fuel</span>
+                    <select name="fuel" ng-model="refuel.fuel" ng-options="key as value for (key, value) in fuels" required>
+                        <option value="">Select</option>
+                    </select>
+                </label>
+                <label class="item item-input">
+                    <button style="padding:0;" class="button button-clear button-small button-positive"
+                        ng-click="addNewFuel()">Add fuel</button>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Capacity</span>
+                    <input type="number" ng-model="refuel.capacity" placeholder="Capacity" required>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                    <span id="amount-label" class="input-label">Amount</span>
+                    <input type="number" ng-model="refuel.amount" placeholder="Amount" required>
+                </label>
+            </div>
+            <div class="padding">
+                <button ng-click="create()" class="button button-block button-positive activated"
+                    ng-disabled="newRefuelForm.$invalid">Create</button>
+            </div>
+        </form>
+    </ion-content>
+</ion-view>
