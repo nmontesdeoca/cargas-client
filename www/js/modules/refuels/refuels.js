@@ -11,7 +11,7 @@ angular.module('refuels', [])
         },
         views: {
             menuContent: {
-                templateUrl: 'templates/refuels/refuels.html',
+                templateUrl: 'templates/refuels/list.html',
                 controller: 'Refuels'
             }
         }
@@ -24,8 +24,21 @@ angular.module('refuels', [])
         },
         views: {
             menuContent: {
-                templateUrl: 'templates/refuels/new.html',
-                controller: 'Refuels.Add'
+                templateUrl: 'templates/refuels/form.html',
+                controller: 'Refuels.Form'
+            }
+        }
+    })
+
+    .state('app.refuelEdit', {
+        url: '/refuels/:id',
+        resolve: {
+            cars: 'Car'
+        },
+        views: {
+            menuContent: {
+                templateUrl: 'templates/refuels/form.html',
+                controller: 'Refuels.Form'
             }
         }
     });
