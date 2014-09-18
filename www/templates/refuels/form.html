@@ -4,7 +4,7 @@
             <div class="list">
                 <label class="item item-input item-floating-label">
                     <span class="input-label">Date</span>
-                    <input name="date" type="date" ng-model="refuel.date" placeholder="Date">
+                    <input type="date" ng-model="refuel.date" placeholder="Date">
                 </label>
                 <label class="item item-input item-select">
                     <span class="input-label">Car</span>
@@ -13,7 +13,7 @@
                     </select>
                 </label>
                 <label class="item item-input">
-                    <button style="padding:0;" class="button button-clear button-small button-positive"
+                    <button class="button button-clear button-small button-positive no-padding-horizontal"
                         ng-click="addNewCar()">Add car</button>
                 </label>
 
@@ -24,12 +24,12 @@
 
                 <label class="item item-input item-select">
                     <span class="input-label">Fuel</span>
-                    <select name="fuel" ng-model="refuel.fuel" ng-options="key as value for (key, value) in fuels" required>
+                    <select ng-model="refuel.fuel" ng-options="key as value for (key, value) in fuels" required>
                         <option value="">Select</option>
                     </select>
                 </label>
                 <label class="item item-input">
-                    <button style="padding:0;" class="button button-clear button-small button-positive"
+                    <button class="button button-clear button-small button-positive no-padding-horizontal"
                         ng-click="addNewFuel()">Add fuel</button>
                 </label>
 
@@ -40,7 +40,7 @@
 
                 <label class="item item-input item-floating-label">
                     <span id="amount-label" class="input-label">Amount</span>
-                    <input type="number" ng-model="refuel.amount" placeholder="Amount" required>
+                    <input type="text" ng-model="refuel.amount" placeholder="Amount" required readonly>
                 </label>
             </div>
             <div class="padding">

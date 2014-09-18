@@ -1,5 +1,6 @@
 angular.module('starter', [
     'ionic',
+    'overview',
     'profile',
     'cars',
     'refuels',
@@ -33,7 +34,7 @@ angular.module('starter', [
             controller: 'Menu'
         });
 
-        $urlRouterProvider.otherwise('/profile');
+        $urlRouterProvider.otherwise('/overview');
     }
 ]);
 
@@ -53,7 +54,8 @@ angular.module('utils', [])
 
 .factory('utils', function () {
     return {
-        formatDate: function (date) {
+
+        formatDateForInput: function (date) {
             var month = parseInt(date.getMonth(), 10) + 1;
 
             month = month > 9 ? month : '0' + month;
@@ -61,6 +63,19 @@ angular.module('utils', [])
             return date.getFullYear() + '-' +
                 month + '-' +
                 date.getDate();
+        },
+
+        formatDateToTime: function (formattedDate) {
+            var splittedDate = formattedDate.split('-'),
+                year = parseInt(splittedDate[0], 10),
+                month = parseInt(splittedDate[1], 10) - 1,
+                day = parseInt(splittedDate[2], 10),
+                date = new Date();
+            date.setYear(year);
+            date.setMonth(month);
+            date.setDate(day);
+            date.setHours(0);
+            return date.getTime();
         }
     };
 })

@@ -9,7 +9,8 @@ angular.module('refuels')
     'Fuel',
     function ($scope, $ionicPopup, $ionicListDelegate, $state, Refuel, Fuel) {
 
-        $scope.refuels = Refuel.query();
+        // sort refuels by date (newest first)
+        $scope.refuels = _.sortBy(Refuel.query(), 'date').reverse();
         $scope.fuels = Fuel.query();
 
         $scope.delete = function (refuel) {

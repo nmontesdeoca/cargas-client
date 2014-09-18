@@ -5,6 +5,10 @@ angular.module('starter')
     function ($scope) {
 
         $scope.menuItems = [{
+            name: 'Overview',
+            link: '#/overview'
+        },
+        {
             name: 'Profile',
             link: '#/profile'
         },

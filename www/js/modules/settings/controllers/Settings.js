@@ -19,6 +19,10 @@ angular.module('settings')
         {
             name: 'About',
             link: '#/settings/about'
+        },
+        {
+            name: 'Help',
+            link: '#/settings/help'
         }];
 
     }

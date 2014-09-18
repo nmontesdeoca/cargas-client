@@ -5,21 +5,28 @@ angular.module('cars')
     '$ionicPopup',
     '$state',
     '$ionicViewService',
+    '$ionicModal',
     'Car',
     'Fuel',
-    function ($scope, $ionicPopup, $state, $ionicViewService, Car, Fuel) {
+    function ($scope, $ionicPopup, $state, $ionicViewService, $ionicModal, Car, Fuel) {
 
         $scope.car = $state.params.id ? Car.get({
             _id: parseInt($state.params.id, 10)
         }) : new Car();
 
-        $scope.fuels = Fuel.query();
-        $scope.fuels = _.object(
+        // the next sort doesn't work due to the object transformation at the next line...
+        $scope.fuels = _.sortBy(Fuel.query(), 'name');
+        // console.log('fuels: ', $scope.fuels);
+        /*$scope.fuels = _.object(
             _.pluck($scope.fuels, '_id'),
             _.pluck($scope.fuels, 'name')
-        );
+        );*/
 
-        $scope.makes = [
+        $scope.car.fuel = $scope.car.fuel ? _.findWhere($scope.fuels, {
+            _id: $scope.car.fuel._id
+        }) : '';
+
+        $scope.makes = _.sortBy([
             {
                 make: 'Fiat',
                 models: [
@@ -46,12 +53,13 @@ angular.module('cars')
                     '405',
                     '207'
                 ].sort()
-            },
-            {
-                make: 'Other',
-                models: ['Other']
             }
-        ];
+        ], 'make');
+
+        $scope.makes.push({
+            make: 'Other',
+            models: ['Other']
+        });
 
         $scope.years = function () {
             var years = [],
@@ -70,23 +78,63 @@ angular.module('cars')
             $scope.car.$save(function () {
                 var backView = $ionicViewService.getBackView();
                 backView && backView.go();
-                // maybe we can display an alert only when an error happens
-                /*$ionicPopup.alert({
-                    title: 'Car',
-                    template: 'Car added successfully.'
-                }).then(function () {*/
-                //});
             });
         };
 
-        $scope.newMakeModel = function (newCar) {
+        // create fuel modal
+        $ionicModal.fromTemplateUrl('templates/fuels/new-modal.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.fuelModal = modal;
+        });
+
+        $scope.addNewFuel = function () {
+            // $state.go('app.fuelNew');
+            $scope.fuel = new Fuel();
+            $scope.fuelModal.show();
+        };
+
+        $scope.createFuel = function () {
+            $scope.fuel.$save(function () {
+                $scope.fuels = _.sortBy(Fuel.query(), 'name');
+                /*$scope.fuels = _.object(
+                    _.pluck($scope.fuels, '_id'),
+                    _.pluck($scope.fuels, 'name')
+                );*/
+                $scope.car.fuel = _.findWhere($scope.fuels, {
+                    _id: $scope.fuel._id
+                });
+                $scope.fuelModal.hide();
+            });
+        };
+
+        // we have to do this to have access to this object from the modal and the $scope
+        $scope.newCar = {};
+
+        // create new make and model modal
+        $ionicModal.fromTemplateUrl('templates/cars/new-make-model.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.newMakeModelModal = modal;
+        });
+
+        $scope.newMakeModel = function () {
+            console.log($scope.newCar);
             $ionicPopup.alert({
                 title: 'New Make and Model',
                 template: 'Thanks for suggest a new make and model.<br />' +
                     'Your suggestion will be reviewed and we will let you know if it is accepted.'
             }).then(function () {
-                $state.go('app.carNew');
+                // $state.go('app.carNew');
+                $scope.newCar = {};
+                $scope.newMakeModelModal.hide();
             });
         };
+
+        // remove modal instances from DOM
+        $scope.$on('$destroy', function () {
+            $scope.fuelModal.remove();
+            $scope.newMakeModelModal.remove();
+        });
     }
 ]);

@@ -1,4 +1,8 @@
-<ion-view title="New Make and Model">
+<ion-modal-view>
+    <ion-header-bar class="bar bar-header bar-calm">
+          <h1 class="title">New Make and Model</h1>
+          <button class="button icon ion-close no-border" ng-click="newMakeModelModal.hide()"></button>
+    </ion-header-bar>
     <ion-content class="has-header">
         <form name="newMakeModelForm">
             <div class="list">
@@ -12,9 +16,9 @@
                 </label>
             </div>
             <div class="padding">
-                <button ng-click="newMakeModel(newCar)" class="button button-block button-positive activated"
+                <button ng-click="newMakeModel()" class="button button-block button-positive activated"
                     ng-disabled="newMakeModelForm.$invalid">Send</button>
             </div>
         </form>
     </ion-content>
-</ion-view>
+</ion-modal-view>
