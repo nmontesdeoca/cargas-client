@@ -1,6 +1,6 @@
 <ion-view title="{{car._id ? 'Edit' : 'New'}} Car">
     <ion-content class="has-header">
-        <form name="newCar">
+        <form name="newCarForm">
             <div class="list">
                 <label class="item item-input item-select">
                     <span class="input-label">Make</span>
@@ -23,7 +23,7 @@
                 <!-- maybe this field could be not required -->
                 <label class="item item-input item-select">
                     <span class="input-label">Fuel</span>
-                    <select ng-model="car.fuel" ng-options="key as value for (key, value) in fuels">
+                    <select ng-model="car.fuel" ng-options="fuel as fuel.name for fuel in fuels">
                         <option value="">Select</option>
                     </select>
                 </label>
@@ -39,11 +39,11 @@
                 </label>
             </div>
             <div class="padding">
-                <button ng-click="create(newCar)" class="button button-block button-positive activated"
-                    ng-disabled="newCar.$invalid">{{car._id ? 'Save' : 'Create'}}</button>
-                <a class="button button-clear button-positive" href="#/cars/new/make-model">
+                <button ng-click="create()" class="button button-block button-positive activated"
+                    ng-disabled="newCarForm.$invalid">{{car._id ? 'Save' : 'Create'}}</button>
+                <button class="button button-clear button-positive" ng-click="newMakeModelModal.show()">
                     Suggest new make and model
-                </a>
+                </button>
             </div>
         </form>
     </ion-content>

@@ -16,10 +16,15 @@ angular.module('cars')
 
         // the next sort doesn't work due to the object transformation at the next line...
         $scope.fuels = _.sortBy(Fuel.query(), 'name');
-        $scope.fuels = _.object(
+        // console.log('fuels: ', $scope.fuels);
+        /*$scope.fuels = _.object(
             _.pluck($scope.fuels, '_id'),
             _.pluck($scope.fuels, 'name')
-        );
+        );*/
+
+        $scope.car.fuel = $scope.car.fuel ? _.findWhere($scope.fuels, {
+            _id: $scope.car.fuel._id
+        }) : '';
 
         $scope.makes = _.sortBy([
             {
@@ -73,52 +78,63 @@ angular.module('cars')
             $scope.car.$save(function () {
                 var backView = $ionicViewService.getBackView();
                 backView && backView.go();
-                // maybe we can display an alert only when an error happens
-                /*$ionicPopup.alert({
-                    title: 'Car',
-                    template: 'Car added successfully.'
-                }).then(function () {*/
-                //});
             });
         };
 
+        // create fuel modal
         $ionicModal.fromTemplateUrl('templates/fuels/new-modal.html', {
             scope: $scope
         }).then(function (modal) {
-            $scope.modal = modal;
+            $scope.fuelModal = modal;
         });
 
         $scope.addNewFuel = function () {
             // $state.go('app.fuelNew');
             $scope.fuel = new Fuel();
-            $scope.modal.show();
+            $scope.fuelModal.show();
         };
 
         $scope.createFuel = function () {
             $scope.fuel.$save(function () {
                 $scope.fuels = _.sortBy(Fuel.query(), 'name');
-                $scope.fuels = _.object(
+                /*$scope.fuels = _.object(
                     _.pluck($scope.fuels, '_id'),
                     _.pluck($scope.fuels, 'name')
-                );
-                $scope.car.fuel = $scope.fuel._id.toString();
-                $scope.modal.hide();
+                );*/
+                $scope.car.fuel = _.findWhere($scope.fuels, {
+                    _id: $scope.fuel._id
+                });
+                $scope.fuelModal.hide();
             });
         };
 
-        $scope.newMakeModel = function (newCar) {
+        // we have to do this to have access to this object from the modal and the $scope
+        $scope.newCar = {};
+
+        // create new make and model modal
+        $ionicModal.fromTemplateUrl('templates/cars/new-make-model.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.newMakeModelModal = modal;
+        });
+
+        $scope.newMakeModel = function () {
+            console.log($scope.newCar);
             $ionicPopup.alert({
                 title: 'New Make and Model',
                 template: 'Thanks for suggest a new make and model.<br />' +
                     'Your suggestion will be reviewed and we will let you know if it is accepted.'
             }).then(function () {
-                $state.go('app.carNew');
+                // $state.go('app.carNew');
+                $scope.newCar = {};
+                $scope.newMakeModelModal.hide();
             });
         };
 
-        // remove the modal instance of the DOM
+        // remove modal instances from DOM
         $scope.$on('$destroy', function () {
-            $scope.modal.remove();
+            $scope.fuelModal.remove();
+            $scope.newMakeModelModal.remove();
         });
     }
 ]);
