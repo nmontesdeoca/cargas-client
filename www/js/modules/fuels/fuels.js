@@ -21,8 +21,18 @@ angular.module('fuels', [])
         url: '/fuels/new',
         views: {
             menuContent: {
-                templateUrl: 'templates/fuels/new.html',
-                controller: 'Fuels.Add'
+                templateUrl: 'templates/fuels/form.html',
+                controller: 'Fuels.Form'
+            }
+        }
+    })
+
+    .state('app.fuelEdit', {
+        url: '/fuels/:id',
+        views: {
+            menuContent: {
+                templateUrl: 'templates/fuels/form.html',
+                controller: 'Fuels.Form'
             }
         }
     });
