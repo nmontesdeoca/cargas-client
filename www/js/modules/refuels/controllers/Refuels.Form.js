@@ -11,19 +11,18 @@ angular.module('refuels')
     'utils',
     function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, utils) {
 
-        var refuelDate;
-
         $scope.refuel = $state.params.id ? Refuel.get({
             _id: parseInt($state.params.id, 10)
         }) : new Refuel();
 
-        refuelDate = $scope.refuel.date ? new Date($scope.refuel.date) : new Date();
+        $scope.refuel.date = utils.formatDateForInput(
+            $scope.refuel.date ? new Date($scope.refuel.date) : new Date()
+        );
 
         // $scope.fuels = Fuel.query();
         $scope.fuels = _.sortBy(Fuel.query(), 'name');
         $scope.cars = Car.query();
 
-        $scope.refuel.date = utils.formatDateForInput(refuelDate);
 
         $scope.cars = _.object(
             _.pluck($scope.cars, '_id'),
