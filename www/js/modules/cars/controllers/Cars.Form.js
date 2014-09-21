@@ -10,13 +10,11 @@ angular.module('cars')
     'makes',
     'Fuel',
     function ($scope, $ionicPopup, $ionicViewService, $ionicModal, car, fuels, makes, Fuel) {
-        
+
         $scope.car = car;
         $scope.fuels = fuels;
 
-        $scope.car.fuel = $scope.car.fuel ? _.findWhere($scope.fuels, {
-            _id: $scope.car.fuel._id
-        }) : '';
+        $scope.car.replaceFuel($scope.fuels);
 
         $scope.makes = makes;
 
@@ -55,10 +53,9 @@ angular.module('cars')
 
         $scope.createFuel = function () {
             $scope.fuel.$save(function () {
-                $scope.fuels = fuels;
-                $scope.car.fuel = _.findWhere($scope.fuels, {
-                    _id: $scope.fuel._id
-                });
+                // needed to query all the fuels adding the new one
+                $scope.fuels = Fuel.query();
+                $scope.car.replaceFuel($scope.fuels, $scope.fuel._id);
                 $scope.fuelModal.hide();
             });
         };
