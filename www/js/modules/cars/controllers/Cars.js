@@ -4,11 +4,10 @@ angular.module('cars')
     '$scope',
     '$ionicPopup',
     '$ionicListDelegate',
-    '$state',
-    'Car',
-    function ($scope, $ionicPopup, $ionicListDelegate, $state, Car) {
+    'cars',
+    function ($scope, $ionicPopup, $ionicListDelegate, cars) {
 
-        $scope.cars = Car.query();
+        $scope.cars = cars;
 
         $scope.delete = function (car) {
             $ionicPopup.confirm({
@@ -17,7 +16,7 @@ angular.module('cars')
             }).then(function (yes) {
                 if (yes) {
                     car.$remove(function () {
-                        $scope.cars = Car.query();
+                        $scope.cars = cars;
                     });
                 }
                 $ionicListDelegate.closeOptionButtons();

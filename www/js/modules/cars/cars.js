@@ -7,7 +7,9 @@ angular.module('cars', [])
     .state('app.carList', {
         url: '/cars',
         resolve: {
-            Cars: 'Car'
+            cars: ['Car', function (Car) {
+                return Car.query();
+            }]
         },
         views: {
             menuContent: {
@@ -19,6 +21,17 @@ angular.module('cars', [])
 
     .state('app.carNew', {
         url: '/cars/new',
+        resolve: {
+            car: ['Car', function (Car) {
+                return new Car();
+            }],
+            fuels: ['Fuel', function (Fuel) {
+                return _.sortBy(Fuel.query(), 'name');
+            }],
+            makes: ['utils', function (utils) {
+                return utils.getMakes();
+            }]
+        },
         views: {
             menuContent: {
                 templateUrl: 'templates/cars/form.html',
@@ -30,7 +43,17 @@ angular.module('cars', [])
     .state('app.carEdit', {
         url: '/cars/:id',
         resolve: {
-            Cars: 'Car'
+            car: ['$stateParams', 'Car', function ($stateParams, Car) {
+                return Car.get({
+                    _id: parseInt($stateParams.id, 10)
+                });
+            }],
+            fuels: ['Fuel', function (Fuel) {
+                return _.sortBy(Fuel.query(), 'name');
+            }],
+            makes: ['utils', function (utils) {
+                return utils.getMakes();
+            }]
         },
         views: {
             menuContent: {

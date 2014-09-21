@@ -76,6 +76,44 @@ angular.module('utils', [])
             date.setDate(day);
             date.setHours(0);
             return date.getTime();
+        },
+
+        getMakes: function () {
+            return _.sortBy([
+                {
+                    make: 'Fiat',
+                    models: [
+                        'Uno',
+                        'Palio',
+                        'Siena'
+                    ].sort()
+                },
+                {
+                    make: 'Renault',
+                    models: [
+                        'Clio',
+                        'Sandero',
+                        'Megane'
+                    ].sort()
+                },
+                {
+                    make: 'Peugeot',
+                    models: [
+                        '208',
+                        '307',
+                        '308',
+                        '205',
+                        '405',
+                        '207'
+                    ].sort()
+                },
+                {
+                    make: 'Other',
+                    models: [
+                        'Other'
+                    ].sort()
+                }
+            ], 'make');
         }
     };
 })
