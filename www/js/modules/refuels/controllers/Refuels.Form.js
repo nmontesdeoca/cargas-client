@@ -65,7 +65,7 @@ angular.module('refuels')
         $scope.createFuel = function () {
             $scope.fuel.$save(function () {
                 $scope.fuels = _.sortBy(Fuel.query(), 'name');
-                $scope.refuel.replaceFuel($scope.fuels);
+                $scope.refuel.replaceFuel($scope.fuels, $scope.fuel._id);
                 $scope.fuelModal.hide();
             });
         };
