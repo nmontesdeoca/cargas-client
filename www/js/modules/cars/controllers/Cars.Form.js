@@ -8,8 +8,9 @@ angular.module('cars')
     'car',
     'fuels',
     'makes',
+    'utils',
     'Fuel',
-    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, car, fuels, makes, Fuel) {
+    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, car, fuels, makes, utils, Fuel) {
 
         $scope.car = car;
         $scope.fuels = fuels;
