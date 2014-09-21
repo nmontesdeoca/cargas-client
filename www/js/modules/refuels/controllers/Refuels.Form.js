@@ -7,11 +7,12 @@ angular.module('refuels')
     '$ionicModal',
     'Refuel',
     'Car',
+    'Fuel',
     'refuel',
     'cars',
     'fuels',
     'utils',
-    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, refuel, cars, fuels, utils) {
+    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, refuel, cars, fuels, utils) {
         $scope.refuel = refuel;
         $scope.fuels = fuels;
         $scope.cars = cars;
