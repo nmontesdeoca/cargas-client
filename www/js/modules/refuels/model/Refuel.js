@@ -12,5 +12,15 @@ angular.module('refuels')
         return utils.replaceFuel.apply(this, arguments);
     };
 
+    /**
+     * adds each refuel amount and return the total spent
+     */
+    RefuelModel.getTotalSpent = function () {
+        return _.reduce(this.query(), function (memo, current) {
+            return memo + current.get('amount');
+        }, 0);
+    };
+
+
     return RefuelModel;
 }]);

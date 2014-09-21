@@ -24,10 +24,10 @@ angular.module('starter')
             name: 'Refuels',
             link: '#/refuels'
         },
-        /*{
+        {
             name: 'Spents',
             link: '#/spents'
-        },*/
+        },
         {
             name: 'Settings',
             link: '#/settings'
