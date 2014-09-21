@@ -3,7 +3,7 @@ CarGas
 
 Esta aplicación esta en fase de desarrollo.
 
-CarGas es una aplication desarrollada con Ionic que sirve para administrar las recargas de combustible de tus vehiculos.
+CarGas es una aplicación desarrollada con Ionic que sirve para administrar las recargas de combustible de tus vehiculos.
 
 ### Contribuidores
 
