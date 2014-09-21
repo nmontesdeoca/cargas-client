@@ -3,10 +3,10 @@ angular.module('profile')
 .controller('Profile', [
     '$scope',
     '$ionicPopup',
-    'Profile',
-    function ($scope, $ionicPopup, Profile) {
+    'profile',
+    function ($scope, $ionicPopup, profile) {
 
-        $scope.profile = Profile.query();
+        $scope.profile = profile;
 
         $scope.save = function () {
             $scope.profile.$save(function () {

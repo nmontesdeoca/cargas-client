@@ -5,7 +5,9 @@ angular.module('profile', [])
     $stateProvider.state('app.profile', {
         url: '/profile',
         resolve: {
-            Profile: 'Profile'
+            profile: ['Profile', function (Profile) {
+                return Profile.query();
+            }]
         },
         views: {
             menuContent: {
