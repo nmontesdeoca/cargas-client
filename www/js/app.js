@@ -114,6 +114,18 @@ angular.module('utils', [])
                     ].sort()
                 }
             ], 'make');
+        },
+
+        getYears: function () {
+            var years = [],
+                actualYear = new Date().getFullYear(),
+                firstYear = 1935;
+
+            for (; actualYear >= firstYear; actualYear--) {
+                years.push(actualYear);
+            }
+
+            return years;
         }
     };
 })

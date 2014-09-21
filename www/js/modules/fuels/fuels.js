@@ -7,7 +7,9 @@ angular.module('fuels', [])
     .state('app.fuelList', {
         url: '/fuels',
         resolve: {
-            Fuels: 'Fuel'
+            fuels: ['Fuel', function (Fuel) {
+                return Fuel.query();
+            }]
         },
         views: {
             menuContent: {
@@ -19,6 +21,11 @@ angular.module('fuels', [])
 
     .state('app.fuelNew', {
         url: '/fuels/new',
+        resolve: {
+            fuel: ['Fuel', function (Fuel) {
+                return new Fuel();
+            }]
+        },
         views: {
             menuContent: {
                 templateUrl: 'templates/fuels/form.html',
@@ -29,6 +36,13 @@ angular.module('fuels', [])
 
     .state('app.fuelEdit', {
         url: '/fuels/:id',
+        resolve: {
+            fuel: ['$stateParams', 'Fuel', function ($stateParams, Fuel) {
+                return Fuel.get({
+                    _id: parseInt($stateParams.id, 10)
+                });
+            }]
+        },
         views: {
             menuContent: {
                 templateUrl: 'templates/fuels/form.html',

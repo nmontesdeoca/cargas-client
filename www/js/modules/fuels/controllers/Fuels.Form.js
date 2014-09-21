@@ -2,15 +2,11 @@ angular.module('fuels')
 
 .controller('Fuels.Form', [
     '$scope',
-    '$ionicPopup',
     '$ionicViewService',
-    '$state',
-    'Fuel',
-    function ($scope, $ionicPopup, $ionicViewService, $state, Fuel) {
+    'fuel',
+    function ($scope, $ionicViewService, fuel) {
 
-        $scope.fuel = $state.params.id ? Fuel.get({
-            _id: parseInt($state.params.id, 10)
-        }) : new Fuel();
+        $scope.fuel = fuel;
 
         $scope.create = function () {
             $scope.fuel.$save(function () {

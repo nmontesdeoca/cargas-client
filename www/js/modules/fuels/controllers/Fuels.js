@@ -4,11 +4,11 @@ angular.module('fuels')
     '$scope',
     '$ionicPopup',
     '$ionicListDelegate',
-    '$state',
+    'fuels',
     'Fuel',
-    function ($scope, $ionicPopup, $ionicListDelegate, $state, Fuel) {
+    function ($scope, $ionicPopup, $ionicListDelegate, fuels, Fuel) {
 
-        $scope.fuels = Fuel.query();
+        $scope.fuels = fuels;
 
         $scope.delete = function (fuel) {
             $ionicPopup.confirm({

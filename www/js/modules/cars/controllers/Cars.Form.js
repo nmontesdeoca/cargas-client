@@ -13,23 +13,10 @@ angular.module('cars')
 
         $scope.car = car;
         $scope.fuels = fuels;
+        $scope.makes = makes;
+        $scope.years = utils.getYears();
 
         $scope.car.replaceFuel($scope.fuels);
-
-        $scope.makes = makes;
-
-        $scope.years = function () {
-            var years = [],
-                actualYear = new Date().getFullYear(),
-                // variable name could be firstYear
-                lastYear = 1935;
-
-            for (; actualYear >= lastYear; actualYear--) {
-                years.push(actualYear);
-            }
-
-            return years;
-        };
 
         $scope.create = function () {
             $scope.car.$save(function () {
@@ -46,14 +33,13 @@ angular.module('cars')
         });
 
         $scope.addNewFuel = function () {
-            // $state.go('app.fuelNew');
             $scope.fuel = new Fuel();
             $scope.fuelModal.show();
         };
 
         $scope.createFuel = function () {
             $scope.fuel.$save(function () {
-                // needed to query all the fuels adding the new one
+                // need to query all the fuels to get the new one
                 $scope.fuels = Fuel.query();
                 $scope.car.replaceFuel($scope.fuels, $scope.fuel._id);
                 $scope.fuelModal.hide();
@@ -71,13 +57,11 @@ angular.module('cars')
         });
 
         $scope.newMakeModel = function () {
-            console.log($scope.newCar);
             $ionicPopup.alert({
                 title: 'New Make and Model',
                 template: 'Thanks for suggest a new make and model.<br />' +
                     'Your suggestion will be reviewed and we will let you know if it is accepted.'
             }).then(function () {
-                // $state.go('app.carNew');
                 $scope.newCar = {};
                 $scope.newMakeModelModal.hide();
             });
