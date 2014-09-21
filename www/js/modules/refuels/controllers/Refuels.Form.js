@@ -7,40 +7,16 @@ angular.module('refuels')
     '$ionicModal',
     'Refuel',
     'Car',
-    'Fuel',
+    'refuel',
+    'cars',
+    'fuels',
     'utils',
-    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, utils) {
+    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, refuel, cars, fuels, utils) {
+        $scope.refuel = refuel;
+        $scope.fuels = fuels;
+        $scope.cars = cars;
 
-        $scope.refuel = $state.params.id ? Refuel.get({
-            _id: parseInt($state.params.id, 10)
-        }) : new Refuel();
-
-        $scope.refuel.date = utils.formatDateForInput(
-            $scope.refuel.date ? new Date($scope.refuel.date) : new Date()
-        );
-
-        // $scope.fuels = Fuel.query();
-        $scope.fuels = _.sortBy(Fuel.query(), 'name');
-        $scope.cars = Car.query();
-
-
-        $scope.cars = _.object(
-            _.pluck($scope.cars, '_id'),
-            _.map($scope.cars, function (car) {
-                return car.make + ' ' + car.model;
-            })
-        );
-
-        $scope.refuel.fuel = $scope.refuel.fuel ? _.findWhere($scope.fuels, {
-            _id: $scope.refuel.fuel._id
-        }) : '';
-
-        /*$scope.fuels = _.object(
-            _.pluck($scope.fuels, '_id'),
-            _.map($scope.fuels, function (fuel) {
-                return fuel.name;
-            })
-        );*/
+        $scope.refuel.replaceFuel($scope.fuels);
 
         $scope.addNewCar = function () {
             $state.go('app.carNew');
@@ -58,31 +34,18 @@ angular.module('refuels')
             });
         };
 
-        /*$scope.$watch('refuel.fuel', function (fuel) {
-            $scope.refuel.fuelObject = Fuel.get({
-                _id: parseInt(fuel)
-            });
-        });*/
-
         $scope.$watch('refuel.fuel.price * refuel.capacity', function (amount) {
             $scope.refuel.amount = !isNaN(amount) ? Math.round(amount * 100) / 100 : '';
         });
 
-        // TODO: this is not correct when enter to the page in edit mode, the refuel.fuel is overlapped by car.fuel
-        $scope.$watch('refuel.car', function (newValue, oldValue) {
-            //if (carId) {
-            // console.log($scope.refuel.car);
-            if (newValue !== oldValue) {
+        $scope.$watch('refuel.car', function (newCar, oldCar) {
+            if (newCar && newCar !== oldCar) {
                 var car = Car.get({
-                    _id: parseInt(newValue, 10)
+                    _id: parseInt(newCar, 10)
                 });
-                console.log('new value: ', newValue);
-                console.log('old value: ', oldValue);
-                $scope.refuel.fuel = car && car.fuel ? _.findWhere($scope.fuels, {
-                    _id: car.fuel._id
-                }) : '';
+
+                $scope.refuel.replaceFuel($scope.fuels, car.fuel._id);
             }
-            //}
         });
 
         // create fuel modal
@@ -101,13 +64,7 @@ angular.module('refuels')
         $scope.createFuel = function () {
             $scope.fuel.$save(function () {
                 $scope.fuels = _.sortBy(Fuel.query(), 'name');
-                /*$scope.fuels = _.object(
-                    _.pluck($scope.fuels, '_id'),
-                    _.pluck($scope.fuels, 'name')
-                );*/
-                $scope.refuel.fuel = _.findWhere($scope.fuels, {
-                    _id: $scope.fuel._id
-                });
+                $scope.refuel.replaceFuel($scope.fuels);
                 $scope.fuelModal.hide();
             });
         };

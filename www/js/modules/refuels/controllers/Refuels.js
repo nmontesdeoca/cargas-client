@@ -4,14 +4,14 @@ angular.module('refuels')
     '$scope',
     '$ionicPopup',
     '$ionicListDelegate',
-    '$state',
     'Refuel',
-    'Fuel',
-    function ($scope, $ionicPopup, $ionicListDelegate, $state, Refuel, Fuel) {
+    'refuels',
+    'fuels',
+    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels, fuels) {
 
         // sort refuels by date (newest first)
-        $scope.refuels = _.sortBy(Refuel.query(), 'date').reverse();
-        $scope.fuels = Fuel.query();
+        $scope.refuels = refuels;
+        $scope.fuels = fuels;
 
         $scope.delete = function (refuel) {
             $ionicPopup.confirm({

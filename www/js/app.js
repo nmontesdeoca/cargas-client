@@ -126,6 +126,12 @@ angular.module('utils', [])
             }
 
             return years;
+        },
+
+        replaceFuel: function (fuels, id) {
+            this.fuel = this.fuel ? _.findWhere(fuels, {
+                _id: (id || this.fuel._id)
+            }) : '';
         }
     };
 })
