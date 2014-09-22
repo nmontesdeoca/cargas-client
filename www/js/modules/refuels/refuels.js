@@ -8,7 +8,7 @@ angular.module('refuels', [])
         url: '/refuels',
         resolve: {
             refuels: ['Refuel', function (Refuel) {
-                return _.sortBy(Refuel.query(), 'date').reverse();
+                return Refuel.getRefuelsSortByDate();
             }],
             fuels: ['Fuel', function (Fuel) {
                 return _.sortBy(Fuel.query(), 'name');

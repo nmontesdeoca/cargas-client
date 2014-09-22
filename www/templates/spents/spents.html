@@ -3,8 +3,23 @@
         <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
-        <div class="padding">
-            Total spent: {{totalSpent | currency}}
-        </div>
+        <ion-list>
+            <ion-item class="item">
+                <h2>Total spent</h2>
+                <p>{{totalSpent | currency}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Spent by year</h2>
+                <p>{{spentByYear | currency}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Spent by month</h2>
+                <p>{{spentByMonth | currency}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Spent by day</h2>
+                <p>{{spentByDay | currency}}</p>
+            </ion-item>
+        </ion-list>
     </ion-content>
 </ion-view>

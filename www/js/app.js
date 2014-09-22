@@ -129,6 +129,31 @@ angular.module('utils', [])
             return years;
         },
 
+        millisecondsToSeconds: function (milliseconds) {
+            return milliseconds / 1000;
+        },
+
+        millisecondsToMinutes: function (milliseconds) {
+            return this.millisecondsToSeconds(milliseconds) / 60;
+        },
+
+        millisecondsToHours: function (milliseconds) {
+            return this.millisecondsToMinutes(milliseconds) / 60;
+        },
+
+        millisecondsToDays: function (milliseconds) {
+            return this.millisecondsToHours(milliseconds) / 24;
+        },
+
+        millisecondsToMonths: function (milliseconds) {
+            // we use 30 days here, but maybe we need to investigate which is the best way
+            return this.millisecondsToDays(milliseconds) / 30;
+        },
+
+        millisecondsToYears: function (milliseconds) {
+            return this.millisecondsToMonths(milliseconds) / 12;
+        },
+
         replaceFuel: function (fuels, id) {
             this.fuel = (this.fuel || id) ? _.findWhere(fuels, {
                 _id: (id || this.fuel._id)

@@ -20,7 +20,7 @@ angular.module('refuels')
             }).then(function (yes) {
                 if (yes) {
                     refuel.$remove(function () {
-                        $scope.refuels = Refuel.query();
+                        $scope.refuels = Refuel.getRefuelsSortByDate();
                     });
                 }
                 $ionicListDelegate.closeOptionButtons();
