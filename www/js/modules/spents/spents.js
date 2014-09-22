@@ -8,6 +8,12 @@ angular.module('spents', [])
             totalSpent: ['Refuel', function (Refuel) {
                 return Refuel.getTotalSpent();
             }],
+            totalKilometers: ['Refuel', function (Refuel) {
+                return Refuel.getTotalKilometers();
+            }],
+            totalCapacity: ['Refuel', function (Refuel) {
+                return Refuel.getTotalCapacity();
+            }],
             spentByYear: ['Refuel', 'utils', function (Refuel, utils) {
                 var firstDate = Refuel.getFirstRefuel().date,
                     lastDate = Refuel.getLastRefuel().date;

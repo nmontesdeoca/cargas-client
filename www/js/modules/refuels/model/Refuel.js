@@ -9,6 +9,22 @@ angular.module('refuels')
      */
 
     /**
+     * return the total kilometers (last refuel kms - first refuel kms)
+     */
+    RefuelModel.getTotalKilometers = function () {
+        return this.getLastRefuel().overallKilometers - this.getFirstRefuel().overallKilometers;
+    };
+
+    /**
+     * adds each refuel capacity and return the total
+     */
+    RefuelModel.getTotalCapacity = function () {
+        return _.reduce(this.query(), function (memo, current) {
+            return memo + current.get('capacity');
+        }, 0);
+    };
+
+    /**
      * adds each refuel amount and return the total spent
      */
     RefuelModel.getTotalSpent = function () {

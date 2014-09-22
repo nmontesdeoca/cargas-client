@@ -20,6 +20,14 @@
                 <h2>Spent by day</h2>
                 <p>{{spentByDay | currency}}</p>
             </ion-item>
+            <ion-item class="item">
+                <h2>Spent by kilometer</h2>
+                <p>{{totalSpent / totalKilometers | currency}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Kilometers by liter</h2>
+                <p>{{totalKilometers / totalCapacity}}</p>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
