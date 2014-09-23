@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "CarGas: An Ionic project",
     "dependencies": {
+        "ionic": "*",
         "gulp": "^3.5.6",
         "gulp-sass": "^0.7.1",
         "gulp-concat": "^2.2.0",
