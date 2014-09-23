@@ -1,50 +1,5 @@
 <ion-view title="{{car._id ? 'Edit' : 'New'}} Car">
     <ion-content class="has-header">
-        <form name="newCarForm">
-            <div class="list">
-                <label class="item item-input item-select">
-                    <span class="input-label">Make</span>
-                    <select ng-model="car.make" ng-options="car.make as car.make for car in makes" required>
-                        <option value="">Select</option>
-                    </select>
-                </label>
-                <label class="item item-input item-select">
-                    <span class="input-label">Model</span>
-                    <select ng-model="car.model" ng-options="model as model for model in _.findWhere(makes, {make: car.make}).models" required>
-                        <option value="">Select</option>
-                    </select>
-                </label>
-                <label class="item item-input item-select">
-                    <span class="input-label">Year</span>
-                    <select ng-model="car.year" ng-options="year for year in years" required>
-                        <option value="">Select</option>
-                    </select>
-                </label>
-                <!-- maybe this field could be not required -->
-                <label class="item item-input item-select">
-                    <span class="input-label">Fuel</span>
-                    <select ng-model="car.fuel" ng-options="fuel as fuel.name for fuel in fuels">
-                        <option value="">Select</option>
-                    </select>
-                </label>
-                <label class="item item-input">
-                    <button class="button button-clear button-small button-positive no-padding-horizontal"
-                        ng-click="addNewFuel()">Add fuel</button>
-                </label>
-                <!-- the next field could be the plake but the user needs to identify its vehicles,
-                i.e. if their has two or more cars of the same make, model and year -->
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">Description</span>
-                    <input type="text" ng-model="car.description" placeholder="Description">
-                </label>
-            </div>
-            <div class="padding">
-                <button ng-click="create()" class="button button-block button-positive activated"
-                    ng-disabled="newCarForm.$invalid">{{car._id ? 'Save' : 'Create'}}</button>
-                <button class="button button-clear button-positive" ng-click="newMakeModelModal.show()">
-                    Suggest new make and model
-                </button>
-            </div>
-        </form>
+        <div ng-include="'templates/cars/form-content.html'"></div>
     </ion-content>
 </ion-view>

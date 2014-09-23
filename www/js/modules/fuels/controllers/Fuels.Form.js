@@ -8,7 +8,7 @@ angular.module('fuels')
 
         $scope.fuel = fuel;
 
-        $scope.create = function () {
+        $scope.createFuel = function () {
             $scope.fuel.$save(function () {
                 var backView = $ionicViewService.getBackView();
                 backView && backView.go();
