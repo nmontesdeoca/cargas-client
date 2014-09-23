@@ -1,0 +1,16 @@
+<form name="newFuel">
+    <div class="list">
+        <label class="item item-input item-floating-label">
+            <span class="input-label">Name</span>
+            <input type="text" ng-model="fuel.name" placeholder="Name" required>
+        </label>
+        <label class="item item-input item-floating-label">
+            <span class="input-label">Price</span>
+            <input type="number" ng-model="fuel.price" placeholder="Price" required>
+        </label>
+    </div>
+    <div class="padding">
+        <button ng-click="createFuel()" class="button button-block button-positive activated"
+            ng-disabled="newFuel.$invalid">Create</button>
+    </div>
+</form>

@@ -1,20 +1,5 @@
 <ion-view title="New Fuel">
     <ion-content class="has-header">
-        <form name="newFuel">
-            <div class="list">
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">Name</span>
-                    <input type="text" ng-model="fuel.name" placeholder="Name" required>
-                </label>
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">Price</span>
-                    <input type="number" ng-model="fuel.price" placeholder="Price" required>
-                </label>
-            </div>
-            <div class="padding">
-                <button ng-click="create()" class="button button-block button-positive activated"
-                    ng-disabled="newFuel.$invalid">Create</button>
-            </div>
-        </form>
+        <div ng-include="'templates/fuels/form-content.html'"></div>
     </ion-content>
 </ion-view>

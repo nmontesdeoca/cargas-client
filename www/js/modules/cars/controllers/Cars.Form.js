@@ -19,7 +19,7 @@ angular.module('cars')
 
         $scope.car.replaceFuel($scope.fuels);
 
-        $scope.create = function () {
+        $scope.createCar = function () {
             $scope.car.$save(function () {
                 var backView = $ionicViewService.getBackView();
                 backView && backView.go();
@@ -27,7 +27,7 @@ angular.module('cars')
         };
 
         // create fuel modal
-        $ionicModal.fromTemplateUrl('templates/fuels/new-modal.html', {
+        $ionicModal.fromTemplateUrl('templates/fuels/form-modal.html', {
             scope: $scope
         }).then(function (modal) {
             $scope.fuelModal = modal;
