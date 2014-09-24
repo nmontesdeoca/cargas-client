@@ -13,7 +13,7 @@ angular.module('starter')
             link: '#/profile'
         },
         {
-            name: 'Cars',
+            name: 'Vehicles',
             link: '#/cars'
         },
         {

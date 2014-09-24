@@ -7,14 +7,14 @@
                     <input type="date" ng-model="refuel.date" placeholder="Date">
                 </label>
                 <label class="item item-input item-select">
-                    <span class="input-label">Car</span>
+                    <span class="input-label">Vehicle</span>
                     <select ng-model="refuel.car" ng-options="key as value for (key, value) in cars" required>
                         <option value="">Select</option>
                     </select>
                 </label>
                 <label class="item item-input">
                     <button class="button button-clear button-small button-positive no-padding-horizontal"
-                        ng-click="addNewCar()">Add car</button>
+                        ng-click="addNewCar()">Add Vehicle</button>
                 </label>
 
                 <label class="item item-input item-floating-label">
