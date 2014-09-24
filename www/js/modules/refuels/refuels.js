@@ -44,6 +44,11 @@ angular.module('refuels', [])
                         return car.make + ' ' + car.model;
                     })
                 );
+            }],
+            carByDefault: ['Car', function (Car) {
+                return Car.get({
+                    byDefault: true
+                });
             }]
         },
         views: {
@@ -78,6 +83,11 @@ angular.module('refuels', [])
                         return car.make + ' ' + car.model;
                     })
                 );
+            }],
+            carByDefault: ['Car', function (Car) {
+                return Car.get({
+                    byDefault: true
+                });
             }]
         },
         views: {

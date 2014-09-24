@@ -12,7 +12,8 @@ angular.module('refuels')
     'cars',
     'fuels',
     'utils',
-    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, refuel, cars, fuels, utils) {
+    'carByDefault',
+    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, refuel, cars, fuels, utils, carByDefault) {
         $scope.refuel = refuel;
         $scope.fuels = fuels;
         $scope.cars = cars;
@@ -45,6 +46,14 @@ angular.module('refuels')
             }
         });
 
+        // set car by default when is a new refuel
+        if (!$scope.refuel._id && carByDefault._id) {
+            $scope.refuel.car = carByDefault._id.toString();
+            if (carByDefault.fuel && carByDefault.fuel._id) {
+                $scope.refuel.replaceFuel($scope.fuels, carByDefault.fuel._id);
+            }
+        }
+
         // create car modal
         $ionicModal.fromTemplateUrl('templates/cars/form-modal.html', {
             scope: $scope
@@ -61,6 +70,9 @@ angular.module('refuels')
         };
 
         $scope.createCar = function () {
+            // this is to ensure that always there is only one car by default
+            utils.unsetDefaultCar(Car, $scope.car);
+
             $scope.car.$save(function () {
                 var cars = Car.query();
                 $scope.cars = _.object(

@@ -650,6 +650,15 @@ angular.module('utils', [])
             this.fuel = (this.fuel || id) ? _.findWhere(fuels, {
                 _id: (id || this.fuel._id)
             }) : '';
+        },
+        unsetDefaultCar: function (Car, newCar) {
+            var currentDefaultCar = Car.get({
+                byDefault: true
+            });
+            if (newCar.byDefault && currentDefaultCar._id && newCar._id !== currentDefaultCar._id) {
+                currentDefaultCar.byDefault = false;
+                currentDefaultCar.$save();
+            }
         }
     };
 })
