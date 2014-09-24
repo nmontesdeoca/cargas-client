@@ -20,6 +20,8 @@ angular.module('cars')
 
         $scope.car.replaceFuel($scope.fuels);
 
+        utils.turnOnDefaultCar(Car, $scope.car);
+
         $scope.createCar = function () {
             // this is to ensure that always there is only one car by default
             utils.unsetDefaultCar(Car, $scope.car);

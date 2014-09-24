@@ -659,6 +659,11 @@ angular.module('utils', [])
                 currentDefaultCar.byDefault = false;
                 currentDefaultCar.$save();
             }
+        },
+        turnOnDefaultCar: function (Car, newCar) {
+            if (!Car.query().length) {
+                newCar.byDefault = true;
+            }
         }
     };
 })

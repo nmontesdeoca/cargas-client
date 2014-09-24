@@ -28,15 +28,27 @@ angular.module('refuels')
             });
         };
 
-        $scope.$watch('refuel.fuel.price * refuel.capacity', function (amount) {
+        $scope.$watch('refuel.fuel', function (newFuel, oldFuel) {
+            if (newFuel && newFuel !== oldFuel) {
+                $scope.refuel.fuelPrice = newFuel.price;
+            } else {
+                $scope.refuel.fuelPrice = '';
+            }
+        });
+
+        $scope.$watch('refuel.fuelPrice * refuel.capacity', function (amount) {
             $scope.refuel.amount = !isNaN(amount) ? Math.round(amount * 100) / 100 : '';
         });
 
         // watch for amount, but we have to discuss something here...
+        // $scope.$watch('refuel.amount / refuel.capacity', function (fuelPrice) {
+        //    $scope.refuel.fuelPrice = !isNaN(fuelPrice) ? Math.round(fuelPrice * 100) / 100 : '';
+        // });
 
         $scope.$watch('refuel.car', function (newCar, oldCar) {
+            var car;
             if (newCar && newCar !== oldCar) {
-                var car = Car.get({
+                car = Car.get({
                     _id: parseInt(newCar, 10)
                 });
 
@@ -66,6 +78,7 @@ angular.module('refuels')
             $scope.car = new Car();
             $scope.makes = utils.getMakes();
             $scope.years = utils.getYears();
+            utils.turnOnDefaultCar(Car, $scope.car);
             $scope.carModal.show();
         };
 
