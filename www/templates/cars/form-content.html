@@ -27,14 +27,23 @@
         </label>
         <label class="item item-input">
             <button class="button button-clear button-small button-positive no-padding-horizontal"
-                ng-click="addNewFuel()">Add fuel</button>
+                ng-click="addNewFuel()">Add Fuel</button>
         </label>
         <!-- the next field could be the plake but the user needs to identify its vehicles,
         i.e. if their has two or more cars of the same make, model and year -->
-        <label class="item item-input item-floating-label">
+        <label class="item item-input">
             <span class="input-label">Description</span>
-            <input type="text" ng-model="car.description" placeholder="Description">
+            <input type="text" ng-model="car.description">
         </label>
+        <div class="item item-toggle">
+            Vehicle by Default
+            <label class="toggle toggle-possitive">
+                <input type="checkbox" ng-model="car.byDefault">
+                <div class="track">
+                    <div class="handle"></div>
+                </div>
+            </label>
+        </div>
     </div>
     <div class="padding">
         <button ng-click="createCar()" class="button button-block button-positive activated"

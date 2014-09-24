@@ -2,9 +2,9 @@
     <ion-content class="has-header">
         <form name="newRefuelForm">
             <div class="list">
-                <label class="item item-input item-floating-label">
+                <label class="item item-input">
                     <span class="input-label">Date</span>
-                    <input type="date" ng-model="refuel.date" placeholder="Date">
+                    <input type="date" ng-model="refuel.date" required>
                 </label>
                 <label class="item item-input item-select">
                     <span class="input-label">Vehicle</span>
@@ -17,9 +17,9 @@
                         ng-click="addNewCar()">Add Vehicle</button>
                 </label>
 
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">Overall kilometers</span>
-                    <input type="number" ng-model="refuel.overallKilometers" placeholder="Overall kilometers" required>
+                <label class="item item-input">
+                    <span class="input-label">Odometer</span>
+                    <input type="number" ng-model="refuel.overallKilometers" required>
                 </label>
 
                 <label class="item item-input item-select">
@@ -30,22 +30,22 @@
                 </label>
                 <label class="item item-input">
                     <button class="button button-clear button-small button-positive no-padding-horizontal"
-                        ng-click="addNewFuel()">Add fuel</button>
+                        ng-click="addNewFuel()">Add Fuel</button>
                 </label>
 
-                <label class="item item-input item-floating-label">
+                <label class="item item-input">
                     <span class="input-label">Capacity</span>
-                    <input type="number" ng-model="refuel.capacity" placeholder="Capacity" required>
+                    <input type="number" ng-model="refuel.capacity" required>
                 </label>
 
-                <label class="item item-input item-floating-label">
+                <label class="item item-input">
                     <span id="amount-label" class="input-label">Amount</span>
-                    <input type="text" ng-model="refuel.amount" placeholder="Amount" required>
+                    <input type="text" ng-model="refuel.amount" required>
                 </label>
             </div>
             <div class="padding">
                 <button ng-click="create()" class="button button-block button-positive activated"
-                    ng-disabled="newRefuelForm.$invalid">Create</button>
+                    ng-disabled="newRefuelForm.$invalid">{{refuel._id ? 'Save' : 'Create'}}</button>
             </div>
         </form>
     </ion-content>
