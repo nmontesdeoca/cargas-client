@@ -24,3 +24,12 @@
 .platform-android ion-side-menu .has-header {
     top: 0;
 }
+
+.item-select select {
+    direction: ltr;
+    height: 34px;
+    line-height: 16px;
+    margin-left: -4px;
+    padding: 2px 48px 1px 0;
+    position: relative;
+}
