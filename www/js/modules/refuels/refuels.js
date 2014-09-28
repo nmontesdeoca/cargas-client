@@ -45,23 +45,19 @@ angular.module('refuels', [])
             fuels: ['Fuel', function (Fuel) {
                 return _.sortBy(Fuel.query(), 'name');
             }],
-            cars: ['$stateParams', 'Car', 'Refuel', function ($stateParams, Car, Refuel) {
+            car: ['$stateParams', 'Car', 'Refuel', function ($stateParams, Car, Refuel) {
 
-                var cars = _.where(Car.query(), {'_id': Number($stateParams.carId)});
-                return _.map(cars, function(car) {
-                     // console.log('refuelsbyidtostring', Refuel.getRefuelsByCarId(car._id.toString()))
-                    var carId = car._id.toString();
-                    
+                var car = Car.get({'_id': Number($stateParams.carId)})
                     return _.extend(car, {
-                        'refuels': Refuel.getRefuelsByCarId(carId)
+                        'refuels': Refuel.getRefuelsByCarId($stateParams.carId)
                     });
-                });
+
             }]
         },
         views: {
             menuContent: {
-                templateUrl: 'templates/refuels/list.html',
-                controller: 'Refuels'
+                templateUrl: 'templates/refuels/one-car-list.html',
+                controller: 'OneCarRefuels'
             }
         }
     })
