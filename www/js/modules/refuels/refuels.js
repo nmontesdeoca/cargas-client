@@ -12,12 +12,52 @@ angular.module('refuels', [])
             }],
             fuels: ['Fuel', function (Fuel) {
                 return _.sortBy(Fuel.query(), 'name');
+            }],
+            cars: ['Car', 'Refuel', function (Car, Refuel) {
+                //remove cars that do not have refuels yet
+                var cars = _.filter(Car.query(), function(car) {
+                    return Refuel.getRefuelsByCarId(car._id.toString()).length > 0;
+                });
+
+                return _.map(cars, function(car) {
+                    var carId = car._id.toString();
+                    
+                    return _.extend(car, {
+                        'refuels': Refuel.getRefuelsByCarId(carId)
+                    });
+                });
             }]
         },
         views: {
             menuContent: {
                 templateUrl: 'templates/refuels/list.html',
                 controller: 'Refuels'
+            }
+        }
+    })
+
+    .state('app.refuelListByCar', {
+        url: '/refuels/by-car/:carId',
+        resolve: {
+            refuels: ['Refuel', function (Refuel) {
+                return Refuel.getRefuelsSortByDate();
+            }],
+            fuels: ['Fuel', function (Fuel) {
+                return _.sortBy(Fuel.query(), 'name');
+            }],
+            car: ['$stateParams', 'Car', 'Refuel', function ($stateParams, Car, Refuel) {
+
+                var car = Car.get({'_id': Number($stateParams.carId)})
+                    return _.extend(car, {
+                        'refuels': Refuel.getRefuelsByCarId($stateParams.carId)
+                    });
+
+            }]
+        },
+        views: {
+            menuContent: {
+                templateUrl: 'templates/refuels/one-car-list.html',
+                controller: 'OneCarRefuels'
             }
         }
     })
