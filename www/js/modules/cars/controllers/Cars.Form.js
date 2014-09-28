@@ -8,23 +8,23 @@ angular.module('cars')
     'car',
     'fuels',
     'makes',
-    'utils',
+    'Utils',
     'Car',
     'Fuel',
-    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, car, fuels, makes, utils, Car, Fuel) {
+    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, car, fuels, makes, Utils, Car, Fuel) {
 
         $scope.car = car;
         $scope.fuels = fuels;
         $scope.makes = makes;
-        $scope.years = utils.getYears();
+        $scope.years = Utils.getYears();
 
         $scope.car.replaceFuel($scope.fuels);
 
-        utils.turnOnDefaultCar(Car, $scope.car);
+        Utils.turnOnDefaultCar(Car, $scope.car);
 
         $scope.createCar = function () {
             // this is to ensure that always there is only one car by default
-            utils.unsetDefaultCar(Car, $scope.car);
+            Utils.unsetDefaultCar(Car, $scope.car);
             $scope.car.$save(function () {
                 var backView = $ionicViewService.getBackView();
                 backView && backView.go();

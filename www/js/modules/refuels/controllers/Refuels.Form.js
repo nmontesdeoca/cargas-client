@@ -11,9 +11,9 @@ angular.module('refuels')
     'refuel',
     'cars',
     'fuels',
-    'utils',
+    'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, refuel, cars, fuels, utils, carByDefault) {
+    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, refuel, cars, fuels, Utils, carByDefault) {
         $scope.refuel = refuel;
         $scope.fuels = fuels;
         $scope.cars = cars;
@@ -22,7 +22,7 @@ angular.module('refuels')
 
         $scope.create = function () {
             // date saved as timestamp
-            $scope.refuel.date = utils.formatDateToTime($scope.refuel.date);
+            $scope.refuel.date = Utils.formatDateToTime($scope.refuel.date);
             $scope.refuel.$save(function () {
                 $state.go('app.refuelList');
             });
@@ -76,15 +76,15 @@ angular.module('refuels')
         $scope.addNewCar = function () {
             // $state.go('app.carNew');
             $scope.car = new Car();
-            $scope.makes = utils.getMakes();
-            $scope.years = utils.getYears();
-            utils.turnOnDefaultCar(Car, $scope.car);
+            $scope.makes = Utils.getMakes();
+            $scope.years = Utils.getYears();
+            Utils.turnOnDefaultCar(Car, $scope.car);
             $scope.carModal.show();
         };
 
         $scope.createCar = function () {
             // this is to ensure that always there is only one car by default
-            utils.unsetDefaultCar(Car, $scope.car);
+            Utils.unsetDefaultCar(Car, $scope.car);
 
             $scope.car.$save(function () {
                 var cars = Car.query();

@@ -28,8 +28,8 @@ angular.module('cars', [])
             fuels: ['Fuel', function (Fuel) {
                 return _.sortBy(Fuel.query(), 'name');
             }],
-            makes: ['utils', function (utils) {
-                return utils.getMakes();
+            makes: ['Utils', function (Utils) {
+                return Utils.getMakes();
             }]
         },
         views: {
@@ -51,8 +51,8 @@ angular.module('cars', [])
             fuels: ['Fuel', function (Fuel) {
                 return _.sortBy(Fuel.query(), 'name');
             }],
-            makes: ['utils', function (utils) {
-                return utils.getMakes();
+            makes: ['Utils', function (Utils) {
+                return Utils.getMakes();
             }]
         },
         views: {
