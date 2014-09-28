@@ -6,8 +6,6 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
     sh = require('shelljs'),
-    express = require('express'),
-    app = express(),
     paths = {
         sass: ['./scss/**/*.scss']
     };
@@ -50,9 +48,4 @@ gulp.task('git-check', function (done) {
         process.exit(1);
     }
     done();
-});
-
-gulp.task('heroku', function () {
-    app.use(express.static(__dirname + "/www"));
-    app.listen(process.env.PORT || 5000);
 });
