@@ -1,22 +1,29 @@
 angular.module('cars')
 
+.config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel):/);
+}])
+
 .controller('Cars.Form', [
     '$scope',
     '$ionicPopup',
     '$ionicViewService',
     '$ionicModal',
+    '$ionicActionSheet',
     'car',
     'fuels',
     'makes',
     'Utils',
     'Car',
     'Fuel',
-    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, car, fuels, makes, Utils, Car, Fuel) {
+    'Camera',
+    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, $ionicActionSheet, car, fuels, makes, Utils, Car, Fuel, Camera) {
 
         $scope.car = car;
         $scope.fuels = fuels;
         $scope.makes = makes;
         $scope.years = Utils.getYears();
+        $scope.displayTakePicture = !!Camera.isAvailable;
 
         $scope.car.replaceFuel($scope.fuels);
 
@@ -78,5 +85,44 @@ angular.module('cars')
             $scope.fuelModal.remove();
             $scope.newMakeModelModal.remove();
         });
+
+        $scope.getPhoto = function () {
+            var hideSheet = $ionicActionSheet.show({
+                buttons: [{
+                    text: 'From camera'
+                }, {
+                    text: 'From Photo Album'
+                }],
+                // destructiveText: 'Delete',
+                titleText: 'Take Photo',
+                cancelText: 'Cancel',
+                cancel: function () {
+                    // add cancel code..
+                },
+                buttonClicked: function (index) {
+                    switch (index) {
+                    case 0:
+                        takePhoto(Camera.PictureSourceType.CAMERA);
+                        break;
+                    case 1:
+                        takePhoto(Camera.PictureSourceType.SAVEDPHOTOALBUM);
+                        break;
+                    default:
+                        break;
+                    }
+                    return true;
+                }
+            }),
+
+            takePhoto = function (sourceType) {
+                Camera.getPicture({
+                    sourceType: sourceType
+                }).then(function (imageURI) {
+                    $scope.car.image = imageURI;
+                }, function (err) {
+                    console.error(err);
+                });
+            };
+        };
     }
 ]);

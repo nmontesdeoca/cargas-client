@@ -12,7 +12,7 @@
             can-swipe="true">
 
             <ion-item ng-repeat="car in cars" href="#/cars/{{car._id}}" class="item-thumbnail-left">
-                <img ng-src="{{car.image || '//ionicframework.com/img/docs/blue-album.jpg'}}">
+                <img ng-src="{{car.image || 'http://ionicframework.com/img/docs/blue-album.jpg'}}">
                 <h2>{{car.make}} {{car.model}}</h2>
                 <p>{{car.year}}</p>
                 <p>{{car.description}}</p>

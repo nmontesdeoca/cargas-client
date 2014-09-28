@@ -36,3 +36,7 @@
     position: relative;
     width: 65%;*/
 }
+
+.item-photo img {
+    width: 100%;
+}

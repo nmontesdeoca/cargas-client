@@ -786,4 +786,36 @@ angular.module('utils', [])
         return Model;
 
     };
+}])
+
+.factory('Camera', ['$q', function ($q) {
+    var camera = navigator.camera || {
+        PictureSourceType: {}
+    };
+
+    return {
+        isAvailable: camera.getPicture,
+
+        PictureSourceType: camera.PictureSourceType,
+
+        getPicture: function (options) {
+            var q = $q.defer();
+            if (!this.isAvailable) {
+                q.reject('No Camera found');
+            } else {
+                options = angular.extend({
+                    destinationType: camera.DestinationType.FILE_URI
+                }, options);
+
+                camera.getPicture(function (result) {
+                    // Do any magic you need
+                    q.resolve(result);
+                }, function (err) {
+                    q.reject(err);
+                }, options);
+            }
+
+            return q.promise;
+        }
+    };
 }]);
