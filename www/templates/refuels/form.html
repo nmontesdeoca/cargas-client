@@ -24,7 +24,7 @@
 
                 <label class="item item-input item-select">
                     <span class="input-label">Fuel</span>
-                    <select ng-model="refuel.fuel" ng-options="fuel as fuel.name for fuel in fuels" required>
+                    <select ng-model="refuel.fuel" ng-options="fuel as fuel.name for fuel in fuels" ng-change="setElement('fuel')" required>
                         <option value="">Select</option>
                     </select>
                 </label>

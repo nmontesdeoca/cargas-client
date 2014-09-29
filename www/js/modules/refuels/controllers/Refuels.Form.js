@@ -19,9 +19,11 @@ angular.module('refuels')
         $scope.fuels = fuels;
         $scope.cars = cars;
 
+        // tests for edit 3 elements
         $scope.activeElement = null;
 
         $scope.setElement = function (element) {
+            console.log('focus on element: ', element);
             $scope.activeElement = element;
         };
 
@@ -47,6 +49,7 @@ angular.module('refuels')
             }
         });
 
+        // tests for edit 3 elements
         $scope.$watch('refuel.fuelPrice * refuel.capacity', function (newAmount, oldAmount) {
             console.log($scope.activeElement);
             /*console.group('Amount');
@@ -57,9 +60,12 @@ angular.module('refuels')
             if ($scope.activeElement !== 'amount' && newAmount !== oldAmount) {
                 $scope.refuel.amount = !isNaN(newAmount) ? Math.round(newAmount * 100) / 100 : '';
             }
+            if ($scope.activeElement === 'fuelPrice') {
+                $scope.refuel.fuel = null;
+            }
         });
 
-        // watch for amount, but we have to discuss something here...
+        // // tests for edit 3 elements
         $scope.$watch('refuel.amount / refuel.capacity', function (newFuelPrice, oldFuelPrice) {
             console.log($scope.activeElement);
             /*console.group('Fuel Price');
@@ -70,7 +76,6 @@ angular.module('refuels')
             // NaN !== NaN true
             if ($scope.activeElement !== 'fuelPrice' && newFuelPrice !== oldFuelPrice && !isNaN(newFuelPrice) && !isNaN(oldFuelPrice)) {
                 $scope.refuel.fuelPrice = !isNaN(newFuelPrice) ? Math.round(newFuelPrice * 100) / 100 : '';
-                $scope.refuel.fuel = '';
             }
         });
 
