@@ -1,8 +1,8 @@
 angular.module('refuels')
 
-.factory('Refuel', ['model', 'utils', function (model, utils) {
+.factory('Refuel', ['Model', 'Utils', function (Model, Utils) {
 
-    var RefuelModel = model('refuels');
+    var RefuelModel = Model('refuels');
 
     /**
      * Class methods - Static method
@@ -101,10 +101,10 @@ angular.module('refuels')
 
     // *
     //  * returns total gas filled by car id
-     
+
     // RefuelModel.getTotalCapacityByCarId = function (carId) {
     //     var refuelsByCar = this.getRefuelsByCarId(carId);
-        
+
     //     // practically the same as the getTotalCapacity function
     //     return _.reduce(refuelsByCar, function (memo, current) {
     //         return memo + current.get('capacity');
@@ -120,7 +120,7 @@ angular.module('refuels')
      * if the second parameter "id" is present, the correct fuel will be that
      */
     RefuelModel.prototype.replaceFuel = function () {
-        return utils.replaceFuel.apply(this, arguments);
+        return Utils.replaceFuel.apply(this, arguments);
     };
 
     /**

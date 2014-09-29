@@ -19,7 +19,7 @@ angular.module('refuels', [])
 
                 return _.map(cars, function(car) {
                     var carId = car._id.toString();
-                    
+
                     return _.extend(car, {
                         'refuels': car.getRefuels()
                     });
@@ -63,10 +63,10 @@ angular.module('refuels', [])
     .state('app.refuelNew', {
         url: '/refuels/new',
         resolve: {
-            refuel: ['Refuel', 'utils', function (Refuel, utils) {
+            refuel: ['Refuel', 'Utils', function (Refuel, Utils) {
                 var refuel = new Refuel();
 
-                refuel.date = utils.formatDateForInput(new Date());
+                refuel.date = Utils.formatDateForInput(new Date());
 
                 return refuel;
             }],
@@ -100,12 +100,12 @@ angular.module('refuels', [])
     .state('app.refuelEdit', {
         url: '/refuels/:id',
         resolve: {
-            refuel: ['$stateParams', 'Refuel', 'utils', function ($stateParams, Refuel, utils) {
+            refuel: ['$stateParams', 'Refuel', 'Utils', function ($stateParams, Refuel, Utils) {
                 var refuel = Refuel.get({
                     _id: parseInt($stateParams.id, 10)
                 });
 
-                refuel.date = utils.formatDateForInput(new Date(refuel.date));
+                refuel.date = Utils.formatDateForInput(new Date(refuel.date));
 
                 return refuel;
             }],

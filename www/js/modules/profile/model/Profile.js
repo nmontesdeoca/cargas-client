@@ -1,6 +1,6 @@
 angular.module('profile')
 
-.factory('Profile', ['model', function (model) {
+.factory('Profile', ['Model', function (Model) {
 
-    return model('profile', true);
+    return Model('profile', true);
 }]);
