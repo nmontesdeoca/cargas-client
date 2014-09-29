@@ -53,7 +53,7 @@ angular.module('utils', [])
     };
 })
 
-.factory('utils', function () {
+.factory('Utils', function () {
     return {
 
         formatDateForInput: function (date) {
@@ -651,6 +651,7 @@ angular.module('utils', [])
                 _id: (id || this.fuel._id)
             }) : '';
         },
+
         unsetDefaultCar: function (Car, newCar) {
             var currentDefaultCar = Car.get({
                 byDefault: true
@@ -660,6 +661,7 @@ angular.module('utils', [])
                 currentDefaultCar.$save();
             }
         },
+
         turnOnDefaultCar: function (Car, newCar) {
             if (!Car.query().length) {
                 newCar.byDefault = true;
@@ -668,7 +670,7 @@ angular.module('utils', [])
     };
 })
 
-.factory('localstorage', ['$window', function ($window) {
+.factory('LocalStorage', ['$window', function ($window) {
     var prefix = '';
     return {
         set: function (key, value) {
@@ -686,7 +688,7 @@ angular.module('utils', [])
     };
 }])
 
-.factory('model', ['localstorage', function ($localStorage) {
+.factory('Model', ['LocalStorage', function (LocalStorage) {
     return function (storageKey, singleModel) {
 
         var setProperties = function (value, key) {
@@ -706,7 +708,7 @@ angular.module('utils', [])
         };
 
         Model.query = function () {
-            var data = $localStorage.getObject(storageKey);
+            var data = LocalStorage.getObject(storageKey);
 
             if (data) {
                 if (singleModel) {
@@ -760,7 +762,7 @@ angular.module('utils', [])
                 }
             }
 
-            $localStorage.setObject(storageKey, models);
+            LocalStorage.setObject(storageKey, models);
             callback && callback.apply(this, [this]);
         };
 
@@ -777,11 +779,43 @@ angular.module('utils', [])
                 }
             }
 
-            $localStorage.setObject(storageKey, models);
+            LocalStorage.setObject(storageKey, models);
             callback && callback.apply(this, [this]);
         };
 
         return Model;
 
+    };
+}])
+
+.factory('Camera', ['$q', function ($q) {
+    var camera = navigator.camera || {
+        PictureSourceType: {}
+    };
+
+    return {
+        isAvailable: camera.getPicture,
+
+        PictureSourceType: camera.PictureSourceType,
+
+        getPicture: function (options) {
+            var q = $q.defer();
+            if (!this.isAvailable) {
+                q.reject('No Camera found');
+            } else {
+                options = angular.extend({
+                    destinationType: camera.DestinationType.FILE_URI
+                }, options);
+
+                camera.getPicture(function (result) {
+                    // Do any magic you need
+                    q.resolve(result);
+                }, function (err) {
+                    q.reject(err);
+                }, options);
+            }
+
+            return q.promise;
+        }
     };
 }]);
