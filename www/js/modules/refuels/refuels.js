@@ -15,15 +15,13 @@ angular.module('refuels', [])
             }],
             cars: ['Car', 'Refuel', function (Car, Refuel) {
                 //remove cars that do not have refuels yet
-                var cars = _.filter(Car.query(), function(car) {
-                    return Refuel.getRefuelsByCarId(car._id.toString()).length > 0;
-                });
+                var cars = Car.getRefueledCars();
 
                 return _.map(cars, function(car) {
                     var carId = car._id.toString();
                     
                     return _.extend(car, {
-                        'refuels': Refuel.getRefuelsByCarId(carId)
+                        'refuels': car.getRefuels()
                     });
                 });
             }]
@@ -49,7 +47,7 @@ angular.module('refuels', [])
 
                 var car = Car.get({'_id': Number($stateParams.carId)})
                     return _.extend(car, {
-                        'refuels': Refuel.getRefuelsByCarId($stateParams.carId)
+                        'refuels': car.getRefuels()
                     });
 
             }]

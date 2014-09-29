@@ -31,7 +31,12 @@ angular.module('starter')
         {
             name: 'Settings',
             link: '#/settings'
-        }];
+        },
+        {
+            name: 'Stats',
+            link: '#/stats'
+        }
+        ];
 
     }
 ]);

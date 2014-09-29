@@ -62,10 +62,29 @@ angular.module('refuels')
     };
 
     /**
-     * returns refuels by car id
+     * returns the refuels by certain date range
      */
-    RefuelModel.getRefuelsByCarId = function (carId) {
-        return _.where(this.query(), {'car': carId});
+    RefuelModel.getRefuelsByDateRange = function (startDate, endDate) {
+        var refuels = _.filter(this.query(), function(refuel) {
+                // console.log('refuel.date', refuel.date + ' ' + new Date(refuel.date));
+                return refuel.date >= startDate && refuel.date <= endDate;
+            });
+
+        return refuels;
+    };
+
+    /**
+     * returns all the refuels by a given month of a certain year
+     */
+    RefuelModel.getRefuelsByMonth = function (month, year) {
+        var refuels = this.query();
+        refuels = _.filter(refuels, function(refuel) {
+            var thisDate = new Date(refuel.date);
+            // console.log(thisDate.getYear())
+            return thisDate.getMonth() == month && thisDate.getYear() == year;
+        });
+
+        return refuels;
     };
 
     // /**
