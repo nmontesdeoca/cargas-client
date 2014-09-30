@@ -10,20 +10,22 @@ angular.module('starter', [
     'utils'
 ])
 
-.run(['$ionicPlatform', '$rootScope', function ($ionicPlatform, $rootScope) {
-    $ionicPlatform.ready(function () {
-        if (window.cordova && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if (window.StatusBar) {
-            // org.apache.cordova.statusbar required
-            StatusBar.styleDefault();
-        }
+.run(['$ionicPlatform', '$rootScope',
+    function ($ionicPlatform, $rootScope) {
+        $ionicPlatform.ready(function () {
+            if (window.cordova && window.cordova.plugins.Keyboard) {
+                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            }
+            if (window.StatusBar) {
+                // org.apache.cordova.statusbar required
+                StatusBar.styleDefault();
+            }
 
-        // to make underscore available at any template
-        $rootScope._ = _;
-    });
-}])
+            // to make underscore available at any template
+            $rootScope._ = _;
+        });
+    }
+])
 
 .config([
     '$stateProvider',

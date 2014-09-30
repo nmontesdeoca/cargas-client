@@ -8,7 +8,8 @@ angular.module('refuels')
     'refuels',
     'fuels',
     'car',
-    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels, fuels, car) {
+    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels,
+        fuels, car) {
 
         // sort refuels by date (newest first)
         $scope.refuels = refuels;

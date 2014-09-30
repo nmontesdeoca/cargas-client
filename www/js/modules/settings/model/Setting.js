@@ -1,6 +1,8 @@
 angular.module('settings')
 
-.factory('Setting', ['Model', function (Model) {
+.factory('Setting', ['Model',
+    function (Model) {
 
-    return Model('settings');
-}]);
+        return Model('settings');
+    }
+]);
