@@ -6,11 +6,14 @@ var gulp = require('gulp'),
     minifyCss = require('gulp-minify-css'),
     rename = require('gulp-rename'),
     sh = require('shelljs'),
+    jshint = require('gulp-jshint'),
+    prettify = require('gulp-jsbeautifier'),
     paths = {
-        sass: ['./scss/**/*.scss']
+        sass: ['./scss/**/*.scss'],
+        scripts: './www/js/**/*.js'
     };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'hint']);
 
 gulp.task('sass', function (done) {
     gulp.src('./scss/ionic.app.scss')
@@ -48,4 +51,19 @@ gulp.task('git-check', function (done) {
         process.exit(1);
     }
     done();
+});
+
+gulp.task('beautify', function () {
+    return gulp.src(paths.scripts)
+        .pipe(prettify({
+            config: '.jsbeautifyrc',
+            mode: 'VERIFY_AND_WRITE'
+        }))
+        .pipe(gulp.dest('./www/js'));
+});
+
+gulp.task('hint', ['beautify'], function () {
+    return gulp.src(paths.scripts)
+        .pipe(jshint())
+        .pipe(jshint.reporter('jshint-stylish'));
 });
