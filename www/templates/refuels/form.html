@@ -47,6 +47,11 @@
                     <span id="amount-label" class="input-label">Amount</span>
                     <input type="text" ng-model="refuel.amount" ng-focus="setElement('amount')" required>
                 </label>
+
+                <label class="item item-input" ng-show="refuel.consumption">
+                    <span id="amount-label" class="input-label">Consumption</span>
+                    <input type="text" ng-model="refuel.consumption" required>
+                </label>
             </div>
             <div class="padding">
                 <button ng-click="create()" class="button button-block button-positive activated"
