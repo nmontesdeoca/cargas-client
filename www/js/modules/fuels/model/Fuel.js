@@ -1,6 +1,6 @@
 angular.module('fuels')
 
-.factory('Fuel', ['model', function (model) {
+.factory('Fuel', ['Model', function (Model) {
 
-    return model('fuels');
+    return Model('fuels');
 }]);

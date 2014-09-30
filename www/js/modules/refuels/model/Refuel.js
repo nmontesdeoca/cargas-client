@@ -1,8 +1,8 @@
 angular.module('refuels')
 
-.factory('Refuel', ['model', 'utils', function (model, utils) {
+.factory('Refuel', ['Model', 'Utils', function (Model, Utils) {
 
-    var RefuelModel = model('refuels');
+    var RefuelModel = Model('refuels');
 
     /**
      * Class methods - Static method
@@ -62,6 +62,37 @@ angular.module('refuels')
     };
 
     /**
+     * returns refuels by car id
+     */
+    RefuelModel.getRefuelsByCarId = function (carId) {
+        return _.where(this.query(), {'car': carId});
+    };
+
+    // /**
+    //  * returns total spent by car id
+    //  */
+    // RefuelModel.getTotalSpentByCarId = function (carId) {
+    //     var refuelsByCar = this.getRefuelsByCarId(carId);
+
+    //     // practically the same as the getTotalSpent function
+    //     return _.reduce(refuelsByCar, function (memo, current) {
+    //         return memo + current.get('amount');
+    //     }, 0);
+    // };
+
+    // *
+    //  * returns total gas filled by car id
+
+    // RefuelModel.getTotalCapacityByCarId = function (carId) {
+    //     var refuelsByCar = this.getRefuelsByCarId(carId);
+
+    //     // practically the same as the getTotalCapacity function
+    //     return _.reduce(refuelsByCar, function (memo, current) {
+    //         return memo + current.get('capacity');
+    //     }, 0);
+    // };
+
+    /**
      * Instance methods
      */
 
@@ -70,7 +101,7 @@ angular.module('refuels')
      * if the second parameter "id" is present, the correct fuel will be that
      */
     RefuelModel.prototype.replaceFuel = function () {
-        return utils.replaceFuel.apply(this, arguments);
+        return Utils.replaceFuel.apply(this, arguments);
     };
 
     /**

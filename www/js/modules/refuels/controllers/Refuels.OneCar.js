@@ -1,19 +1,19 @@
 angular.module('refuels')
 
-.controller('Refuels', [
+.controller('OneCarRefuels', [
     '$scope',
     '$ionicPopup',
     '$ionicListDelegate',
     'Refuel',
     'refuels',
     'fuels',
-    'cars',
-    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels, fuels, cars) {
+    'car',
+    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels, fuels, car) {
 
         // sort refuels by date (newest first)
         $scope.refuels = refuels;
         $scope.fuels = fuels;
-        $scope.cars = cars;
+        $scope.car = car;
 
         $scope.delete = function (refuel) {
             $ionicPopup.confirm({

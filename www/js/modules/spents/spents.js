@@ -14,26 +14,26 @@ angular.module('spents', [])
             totalCapacity: ['Refuel', function (Refuel) {
                 return Refuel.getTotalCapacity();
             }],
-            spentByYear: ['Refuel', 'utils', function (Refuel, utils) {
+            spentByYear: ['Refuel', 'Utils', function (Refuel, Utils) {
                 var firstDate = Refuel.getFirstRefuel().date,
                     lastDate = Refuel.getLastRefuel().date;
 
                 return Refuel.getTotalSpent() /
-                    utils.millisecondsToYears(lastDate - firstDate);
+                    Utils.millisecondsToYears(lastDate - firstDate);
             }],
-            spentByMonth: ['Refuel', 'utils', function (Refuel, utils) {
+            spentByMonth: ['Refuel', 'Utils', function (Refuel, Utils) {
                 var firstDate = Refuel.getFirstRefuel().date,
                     lastDate = Refuel.getLastRefuel().date;
 
                 return Refuel.getTotalSpent() /
-                    utils.millisecondsToMonths(lastDate - firstDate);
+                    Utils.millisecondsToMonths(lastDate - firstDate);
             }],
-            spentByDay: ['Refuel', 'utils', function (Refuel, utils) {
+            spentByDay: ['Refuel', 'Utils', function (Refuel, Utils) {
                 var firstDate = Refuel.getFirstRefuel().date,
                     lastDate = Refuel.getLastRefuel().date;
 
                 return Refuel.getTotalSpent() /
-                    utils.millisecondsToDays(lastDate - firstDate);
+                    Utils.millisecondsToDays(lastDate - firstDate);
             }]
         },
         views: {

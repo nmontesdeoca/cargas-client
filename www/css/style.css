@@ -30,3 +30,7 @@
     left: 35%;
     padding-left: 10px;
 }
+
+.item-photo img {
+    width: 100%;
+}

@@ -35,6 +35,13 @@
             <span class="input-label">Description</span>
             <input type="text" ng-model="car.description">
         </label>
+        <label class="item item-input" ng-show="displayTakePicture">
+            <span class="input-label">Picture</span>
+            <button ng-click="getPhoto()" class="button button-dark activated">Take Photo</button>
+        </label>
+        <label class="item item-input padding item-photo" ng-show="car.image">
+            <img ng-src="{{car.image}}" alt="{{car.make + ' ' + car.model}}" />
+        </label>
         <div class="item item-toggle">
             Vehicle by Default
             <label class="toggle toggle-possitive">

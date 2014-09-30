@@ -24,7 +24,7 @@
 
                 <label class="item item-input item-select">
                     <span class="input-label">Fuel</span>
-                    <select ng-model="refuel.fuel" ng-options="fuel as fuel.name for fuel in fuels" required>
+                    <select ng-model="refuel.fuel" ng-options="fuel as fuel.name for fuel in fuels" ng-change="setElement('fuel')" required>
                         <option value="">Select</option>
                     </select>
                 </label>
@@ -35,17 +35,17 @@
 
                 <label class="item item-input">
                     <span class="input-label">Fuel Price</span>
-                    <input type="number" ng-model="refuel.fuelPrice" required>
+                    <input type="number" ng-model="refuel.fuelPrice" ng-focus="setElement('fuelPrice')" required>
                 </label>
 
                 <label class="item item-input">
                     <span class="input-label">Capacity</span>
-                    <input type="number" ng-model="refuel.capacity" required>
+                    <input type="number" ng-model="refuel.capacity" ng-focus="setElement('capacity')" required>
                 </label>
 
                 <label class="item item-input">
                     <span id="amount-label" class="input-label">Amount</span>
-                    <input type="text" ng-model="refuel.amount" required>
+                    <input type="text" ng-model="refuel.amount" ng-focus="setElement('amount')" required>
                 </label>
             </div>
             <div class="padding">
