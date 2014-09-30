@@ -34,3 +34,8 @@
 .item-photo img {
     width: 100%;
 }
+
+.item.item-dark,
+.item-complex.item-dark > .item-content {
+    border-color: #666;
+}
