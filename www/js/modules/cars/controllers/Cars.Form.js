@@ -19,8 +19,17 @@ angular.module('cars')
     'Camera',
     function ($scope, $ionicPopup, $ionicViewService, $ionicModal, $ionicActionSheet, car, fuels, makes, Utils, Car, Fuel, Camera) {
 
+        var getFuels = function () {
+            var sortedFuels = _.sortBy(Fuel.query(), 'name');
+            sortedFuels.push({
+                name:'Add New Fuel',
+                value: 'newFuel'
+            });
+            return sortedFuels;
+        };
+
         $scope.car = car;
-        $scope.fuels = fuels;
+        $scope.fuels = getFuels();
         $scope.makes = makes;
         $scope.years = Utils.getYears();
         $scope.displayTakePicture = !!Camera.isAvailable;
@@ -45,15 +54,23 @@ angular.module('cars')
             $scope.fuelModal = modal;
         });
 
+        $scope.$on('modal.hidden', function() {
+            if (arguments[1].modalEl.id === 'new-fuel-modal' && $scope.car.fuel && $scope.car.fuel.value === 'newFuel') {
+                $scope.car.fuel = null;
+            }
+        });
+
         $scope.addNewFuel = function () {
-            $scope.fuel = new Fuel();
-            $scope.fuelModal.show();
+            if ($scope.car.fuel && $scope.car.fuel.value === 'newFuel') {
+                $scope.fuel = new Fuel();
+                $scope.fuelModal.show();
+            }
         };
 
         $scope.createFuel = function () {
             $scope.fuel.$save(function () {
                 // need to query all the fuels to get the new one
-                $scope.fuels = Fuel.query();
+                $scope.fuels = getFuels();
                 $scope.car.replaceFuel($scope.fuels, $scope.fuel._id);
                 $scope.fuelModal.hide();
             });

@@ -21,13 +21,10 @@
         <!-- maybe this field could be not required -->
         <label class="item item-input item-select">
             <span class="input-label">Fuel</span>
-            <select ng-model="car.fuel" ng-options="fuel as fuel.name for fuel in fuels">
+            <select ng-model="car.fuel" ng-options="fuel as fuel.name for fuel in fuels" ng-change="addNewFuel()">
                 <option value="">Select</option>
+                <option value="newFuel">Add New Fuel</option>
             </select>
-        </label>
-        <label class="item item-input">
-            <button class="button button-clear button-small button-positive no-padding-horizontal"
-                ng-click="addNewFuel()">Add Fuel</button>
         </label>
         <!-- the next field could be the plake but the user needs to identify its vehicles,
         i.e. if their has two or more cars of the same make, model and year -->
@@ -37,7 +34,7 @@
         </label>
         <label class="item item-input" ng-show="displayTakePicture">
             <span class="input-label">Picture</span>
-            <button ng-click="getPhoto()" class="button button-dark activated">Take Photo</button>
+            <button ng-click="getPhoto()" class="button button-small button-possitive">Take Photo</button>
         </label>
         <label class="item item-input padding item-photo" ng-show="car.image">
             <img ng-src="{{car.image}}" alt="{{car.make + ' ' + car.model}}" />
