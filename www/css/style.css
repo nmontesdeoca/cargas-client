@@ -31,8 +31,12 @@
     padding-left: 10px;
 }
 
+.item-photo {
+    display: block;
+}
+
 .item-photo img {
-    width: 100%;
+    max-width: 100%;
 }
 
 .item.item-dark,
