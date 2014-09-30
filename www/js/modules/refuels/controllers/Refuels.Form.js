@@ -14,9 +14,8 @@ angular.module('refuels')
     'fuels',
     'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, $filter, Refuel,
-        Car,
-        Fuel, refuel, cars, fuels, utils, carByDefault) {
+    function ($scope, $ionicPopup, $state, $ionicModal, $filter, Refuel, Car, Fuel,
+        refuel, cars, fuels, Utils, carByDefault) {
 
         $scope.refuel = refuel;
         $scope.fuels = fuels;
