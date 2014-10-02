@@ -29,14 +29,33 @@
     direction: ltr;
     left: 35%;
     padding-left: 10px;
-    /*height: 34px;
-    line-height: 16px;
-    max-width: 65%;
-    padding: 2px 48px 1px 0;
-    position: relative;
-    width: 65%;*/
+}
+
+.item-photo {
+    display: block;
 }
 
 .item-photo img {
-    width: 100%;
+    max-width: 100%;
+}
+
+.item.item-dark,
+.item-complex.item-dark > .item-content {
+    border-color: #666;
+}
+
+
+/* background */
+.pane {
+    background: url(/img/backgrounds/night1.jpg);
+    background-position: center center;
+    background-size: auto 100%;
+    /*font-family: 'Ubuntu Condensed', sans-serif;*/
+}
+.bar.bar-header {
+    background: none;
+    border: none;
+}
+.button.big-main-button {
+    background: #000;
 }

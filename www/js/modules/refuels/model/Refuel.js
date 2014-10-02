@@ -1,6 +1,7 @@
 angular.module('refuels')
 
-.factory('Refuel', ['Model', 'Utils', function (Model, Utils) {
+.factory('Refuel', ['Model', 'Utils',
+    function (Model, Utils) {
 
     var RefuelModel = Model('refuels');
 
@@ -12,7 +13,8 @@ angular.module('refuels')
      * return the total kilometers (last refuel kms - first refuel kms)
      */
     RefuelModel.getTotalKilometers = function () {
-        return this.getLastRefuel().overallKilometers - this.getFirstRefuel().overallKilometers;
+        return this.getLastRefuel().overallKilometers - this.getFirstRefuel()
+            .overallKilometers;
     };
 
     /**
@@ -59,6 +61,15 @@ angular.module('refuels')
      */
     RefuelModel.hasRefuels = function () {
         return !!this.query().length;
+    };
+
+    /**
+     * returns refuels by car id
+     */
+    RefuelModel.getRefuelsByCarId = function (carId) {
+        return _.where(this.query(), {
+            'car': carId
+        });
     };
 
     /**

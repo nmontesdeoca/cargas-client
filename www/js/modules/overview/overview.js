@@ -1,23 +1,29 @@
-angular.module('overview',['dangle'])
+angular.module('overview', [])
 
-.config(['$stateProvider', function ($stateProvider) {
+.config(['$stateProvider',
+    function ($stateProvider) {
 
     $stateProvider
 
     .state('app.overview', {
         url: '/overview',
         resolve: {
-        	cars: ['Car', 'Refuel', 'utils', function(Car, Refuel, utils) {
-                var cars = Car.getRefueledCars();
+            refuels: ['Refuel', function(Refuel) {
+                return Refuel.getRefuelsSortByDate();
+            }],
+        	cars: ['Car', 'Refuel', 'Utils', function(Car, Refuel, Utils) {
+                return Car.query()
+                // var cars = Car.getRefueledCars();
 
-                return _.map(cars, function(car) {
-                	 // console.log('refuelsbyidtostring', Refuel.getRefuelsByCarId(car._id.toString()))
-                    car.refuels = car.getRefuels();
-                	return _.extend(car, {
-                		'totalSpent': car.getTotalSpent(),
-                		'totalCapacity': car.getTotalCapacity()
-                	});
-                });
+                // return _.map(cars, function(car) {
+
+                //     car.refuels = car.getRefuels();
+
+                // 	return _.extend(car, {
+                // 		'totalSpent': car.getTotalSpent(),
+                // 		'totalCapacity': car.getTotalCapacity()
+                // 	});
+                // });
         	}]
         	// ,
         	// refuels: ['Refuel', function(Refuel) {
@@ -30,7 +36,5 @@ angular.module('overview',['dangle'])
                 controller: 'Overview'
             }
         }
-    });
-
+    })
 }]);
-

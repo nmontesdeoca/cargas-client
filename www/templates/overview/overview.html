@@ -1,23 +1,34 @@
-<ion-view title="Overview">
+<ion-view title="Overview" class="overview-page">
     <ion-nav-buttons side="left">
         <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
         <div class="padding">
-            <div class="this-month">
 
-            	<h3>This month so far</h3>
-            	<ul ng-repeat="car in carsRefueledThisMonth()">
-            		<li>
+                <ion-item class="info-box">
+                    <h2>
+                        Last refuel to
+                        <strong>{{lastRefuel.car.getName()}}</strong>
+                    </h2>
+                    <p>
+                        <i class="ion-waterdrop"></i> {{ lastRefuel.capacity | capacity }} - 
+                        {{lastRefuel.amount | currency}}
+                        
+                    </p>
+                </ion-item>
+                <button ui-sref="app.refuelNew" class="button icon-left ion-plus button-dark button-block big-main-button">Add New Refuel</button>
+
+<!--             	<h3>This month so far</h3>
+            	<ul>
+            		<ion-item ng-repeat="car in carsRefueledThisMonth()">
 	            		<h4>{{car.make + ' ' + car.model}} </h4>
                         <strong>{{car.refuels.length}} refuels</strong> - 
 	            		<strong>{{car.totalSpent | currency}}</strong> - 
 	            		<strong>{{car.totalCapacity | capacity}}</strong>	
-            		</li>
-            	</ul>
-                <p>Total spent compared to same month last year</p>
-                <fs-bar bind="totalSpentCompare()" width="1" interval="year" />
-            </div>
+            		</ion-item>
+            	</ul> -->
+<!--                 <p>Total spent compared to same month last year</p>
+                <fs-date-histo interval="month" bind="totalSpentComparison" /> -->
         </div>
     </ion-content>
 </ion-view>
