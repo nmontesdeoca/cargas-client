@@ -8,13 +8,16 @@ angular.module('refuels')
     'refuels',
     'fuels',
     'cars',
-    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels,
-        fuels, cars) {
-
-        // sort refuels by date (newest first)
+    '$state',
+    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels, fuels, cars, $state) {
         $scope.refuels = refuels;
         $scope.fuels = fuels;
         $scope.cars = cars;
+
+        //if the car is only 1, go directly to see the refuels of that car
+        if (cars.length == 1) {
+            $state.go("app.refuelListByCar", {'carId': cars[0]._id});
+        }
 
         $scope.delete = function (refuel) {
             $ionicPopup.confirm({
@@ -29,6 +32,17 @@ angular.module('refuels')
                 $ionicListDelegate.closeOptionButtons();
             });
         };
+
+        $scope.formatRefuelsForGraph = function (refuels) {
+            var entries = _.map(refuels, function(refuel) {
+                return {
+                    time: refuel.date,
+                    count: refuel.amount
+                }
+            });
+            return { 'entries': entries };
+        };
+
 
     }
 ]);
