@@ -734,10 +734,7 @@ angular.module('utils', [])
             } else {
                 options = angular.extend({
                     quality: 50,
-                    destinationType: camera.DestinationType.FILE_URI,
-                    // fix for android
-                    targetWidth: 960,
-                    targetHeight: 960
+                    destinationType: camera.DestinationType.FILE_URI
                 }, options);
 
                 camera.getPicture(function (result) {
