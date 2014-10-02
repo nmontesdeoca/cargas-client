@@ -8,7 +8,8 @@ angular.module('spents')
     'spentByDay',
     'totalKilometers',
     'totalCapacity',
-    function ($scope, totalSpent, spentByYear, spentByMonth, spentByDay, totalKilometers, totalCapacity) {
+    function ($scope, totalSpent, spentByYear, spentByMonth, spentByDay,
+        totalKilometers, totalCapacity) {
         // we can use a simple object with all the data instead of multiple parameters
         $scope.totalSpent = totalSpent;
         $scope.spentByYear = spentByYear;

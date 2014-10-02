@@ -5,6 +5,7 @@ angular.module('refuels')
     '$ionicPopup',
     '$state',
     '$ionicModal',
+    '$filter',
     'Refuel',
     'Car',
     'Fuel',
@@ -13,7 +14,8 @@ angular.module('refuels')
     'fuels',
     'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, refuel, cars, fuels, utils, carByDefault) {
+    function ($scope, $ionicPopup, $state, $ionicModal, $filter, Refuel, Car, Fuel,
+        refuel, cars, fuels, Utils, carByDefault) {
 
         $scope.refuel = refuel;
         $scope.fuels = fuels;
@@ -50,15 +52,18 @@ angular.module('refuels')
         });
 
         // tests for edit 3 elements
-        $scope.$watch('refuel.fuelPrice * refuel.capacity', function (newAmount, oldAmount) {
+        $scope.$watch('refuel.fuelPrice * refuel.capacity', function (
+            newAmount, oldAmount) {
             console.log($scope.activeElement);
             /*console.group('Amount');
             console.log(newAmount);
             console.log(oldAmount);
             console.groupEnd();*/
             console.log('a: ', $scope.activeElement !== 'amount');
-            if ($scope.activeElement !== 'amount' && newAmount !== oldAmount) {
-                $scope.refuel.amount = !isNaN(newAmount) ? Math.round(newAmount * 100) / 100 : '';
+            if ($scope.activeElement !== 'amount' && newAmount !==
+                oldAmount) {
+                $scope.refuel.amount = !isNaN(newAmount) ? Math.round(
+                    newAmount * 100) / 100 : '';
             }
             if ($scope.activeElement === 'fuelPrice') {
                 $scope.refuel.fuel = null;
@@ -66,7 +71,8 @@ angular.module('refuels')
         });
 
         // // tests for edit 3 elements
-        $scope.$watch('refuel.amount / refuel.capacity', function (newFuelPrice, oldFuelPrice) {
+        $scope.$watch('refuel.amount / refuel.capacity', function (
+            newFuelPrice, oldFuelPrice) {
             console.log($scope.activeElement);
             /*console.group('Fuel Price');
             console.log(newFuelPrice);
@@ -74,8 +80,11 @@ angular.module('refuels')
             console.groupEnd();*/
             console.log('fp: ', $scope.activeElement !== 'fuelPrice');
             // NaN !== NaN true
-            if ($scope.activeElement !== 'fuelPrice' && newFuelPrice !== oldFuelPrice && !isNaN(newFuelPrice) && !isNaN(oldFuelPrice)) {
-                $scope.refuel.fuelPrice = !isNaN(newFuelPrice) ? Math.round(newFuelPrice * 100) / 100 : '';
+            if ($scope.activeElement !== 'fuelPrice' && newFuelPrice !==
+                oldFuelPrice && !isNaN(newFuelPrice) && !isNaN(
+                    oldFuelPrice)) {
+                $scope.refuel.fuelPrice = !isNaN(newFuelPrice) ? Math.round(
+                    newFuelPrice * 100) / 100 : '';
             }
         });
 
@@ -180,6 +189,16 @@ angular.module('refuels')
             $scope.carModal.remove();
             $scope.newMakeModelModal.remove();
         });
+
+        if (Refuel.hasRefuels() && refuel._id !== Refuel.getFirstRefuel()._id) {
+            $scope.previousRefuel = refuel.getPreviousRefuel();
+
+            $scope.$watch(
+                '(refuel.overallKilometers - previousRefuel.overallKilometers) / refuel.capacity',
+                function (newConsumption, oldConsumption) {
+                    refuel.consumption = $filter('number')(newConsumption);
+                });
+        }
 
     }
 ]);

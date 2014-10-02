@@ -1,0 +1,6 @@
+{
+    "js": {
+        "spaceAfterAnonFunction": true,
+        "wrapLineLength": 100
+    }
+}
