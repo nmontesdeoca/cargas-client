@@ -14,14 +14,11 @@ angular.module('refuels', [])
                 return _.sortBy(Fuel.query(), 'name');
             }],
             cars: ['Car', 'Refuel', function (Car, Refuel) {
-                //remove cars that do not have refuels yet
                 var cars = Car.getRefueledCars();
 
-                return _.map(cars, function(car) {
-                    var carId = car._id.toString();
-
+                return _.map(cars, function (car) {
                     return _.extend(car, {
-                        'refuels': car.getRefuels()
+                        refuels: car.getRefuels()
                     });
                 });
             }]
@@ -44,12 +41,13 @@ angular.module('refuels', [])
                 return _.sortBy(Fuel.query(), 'name');
             }],
             car: ['$stateParams', 'Car', 'Refuel', function ($stateParams, Car, Refuel) {
+                var car = Car.get({
+                    _id: Number($stateParams.carId)
+                });
 
-                var car = Car.get({'_id': Number($stateParams.carId)})
-                    return _.extend(car, {
-                        'refuels': car.getRefuels()
-                    });
-
+                return _.extend(car, {
+                    refuels: car.getRefuels()
+                });
             }]
         },
         views: {
