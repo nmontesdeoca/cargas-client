@@ -43,3 +43,19 @@
 .item-complex.item-dark > .item-content {
     border-color: #666;
 }
+
+
+/* background */
+.pane {
+    background: url(/img/backgrounds/night1.jpg);
+    background-position: center center;
+    background-size: auto 100%;
+    /*font-family: 'Ubuntu Condensed', sans-serif;*/
+}
+.bar.bar-header {
+    background: none;
+    border: none;
+}
+.button.big-main-button {
+    background: #000;
+}
