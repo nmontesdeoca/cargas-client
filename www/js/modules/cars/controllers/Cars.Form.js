@@ -137,7 +137,7 @@ angular.module('cars')
                 }).then(function (imageURI) {
                     $scope.car.image = imageURI;
                 }, function (err) {
-                    console.error(err);
+                    alert(err);
                 });
             };
         };

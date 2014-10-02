@@ -763,7 +763,11 @@ angular.module('utils', [])
                 q.reject('No Camera found');
             } else {
                 options = angular.extend({
-                    destinationType: camera.DestinationType.FILE_URI
+                    quality: 50,
+                    destinationType: camera.DestinationType.FILE_URI,
+                    // fix for android
+                    targetWidth: 960,
+                    targetHeight: 960
                 }, options);
 
                 camera.getPicture(function (result) {
