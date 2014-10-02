@@ -39,533 +39,498 @@ angular.module('utils', [])
         },
 
         getMakes: function () {
-            return _.sortBy([
-                {
-                    make: 'Asia',
-                    models: [
-                        'Topic',
-                        'Towner',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Audi',
-                    models: [
-                        'A1',
-                        'A3',
-                        'A4',
-                        'A5',
-                        'A6',
-                        'Q5',
-                        'Q7',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'BMW',
-                    models: [
-                        '2002',
-                        'Serie 1',
-                        'Serie 3',
-                        'Serie 5',
-                        'Serie 6',
-                        'Serie 7',
-                        'Serie M',
-                        'X1',
-                        'X3',
-                        'X5',
-                        'Z4',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Chevrolet',
-                    models: [
-                        'Agile',
-                        'Astra',
-                        'Aveo',
-                        'Blazer',
-                        'C-10',
-                        'Camaro',
-                        'Captiva',
-                        'Celta',
-                        'Chevette',
-                        'Cobalt',
-                        'Corsa',
-                        'Corsa Combo',
-                        'Corsa Pick-Up',
-                        'Cruze',
-                        'D-20',
-                        'D-Max',
-                        'Ipanema',
-                        'Kadett',
-                        'Mega',
-                        'Meriva',
-                        'Montana',
-                        'Monza',
-                        'Onix',
-                        'S10',
-                        'Sail',
-                        'Silverado',
-                        'Spark',
-                        'Tracker',
-                        'Vectra',
-                        'Vectra GT',
-                        'Zafira',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Chrysler',
-                    models: [
-                        '300 C',
-                        'Stratus',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Citroën',
-                    models: [
-                        'AX',
-                        'Berlingo',
-                        'BX',
-                        'C-Elysée',
-                        'C15',
-                        'C3',
-                        'C4',
-                        'C5',
-                        'Jumper',
-                        'Méhari',
-                        'Olcit',
-                        'Saxo',
-                        'Visa',
-                        'Xantia',
-                        'Xsara',
-                        'Xsara Picasso',
-                        'ZX',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Daewoo',
-                    models: [
-                        'Cielo',
-                        'Damas',
-                        'Espero',
-                        'Lanos',
-                        'Matiz',
-                        'Racer',
-                        'Tico',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Daihatsu',
-                    models: [
-                        'Applause',
-                        'Charade',
-                        'Cuore',
-                        'Hijet',
-                        'Sirion',
-                        'Terios'
-                    ]
-                },
-                {
-                    make: 'Dodge',
-                    models: [
-                        'Caravan',
-                        'Journey',
-                        'Ram',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Fiat',
-                    models: [
-                        '128',
-                        '147',
-                        '600',
-                        'Bravo',
-                        'Cinquecento',
-                        'Ducato',
-                        'Duna',
-                        'Elba',
-                        'Fiorino',
-                        'Fiorino Pick-Up',
-                        'Idea',
-                        'Oggi',
-                        'Palio',
-                        'Panda',
-                        'Panorama',
-                        'Premio',
-                        'Punto',
-                        'Siena',
-                        'Spazio',
-                        'Strada',
-                        'Strada Adventure',
-                        'Tempra',
-                        'Tipo',
-                        'Uno',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Ford',
-                    models: [
-                        'Courier',
-                        'Del Rey',
-                        'EcoSport',
-                        'Escort',
-                        'Explorer',
-                        'F-100',
-                        'F-150',
-                        'F-250',
-                        'F1000',
-                        'Falcon',
-                        'Festiva',
-                        'Fiesta',
-                        'Fiesta Max',
-                        'Focus',
-                        'Ka',
-                        'Pick-Up',
-                        'Ranger',
-                        'Taunus',
-                        'Verona',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Honda',
-                    models: [
-                        'Accord',
-                        'Civic',
-                        'CR-V',
-                        'Fit',
-                        'Odyssey',
-                        'Prelude',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Hyundai',
-                    models: [
-                        'Accent',
-                        'Atos',
-                        'Elantra',
-                        'Excel',
-                        'Galloper',
-                        'H1',
-                        'H100',
-                        'i10',
-                        'i30',
-                        'Porter',
-                        'Santa Fe',
-                        'Scoupe',
-                        'Sonata',
-                        'Tucson',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Isuzu',
-                    models: [
-                        'Pick-Up',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Jeep',
-                    models: [
-                        'Cherokee',
-                        'Cherokee Sport',
-                        'CJ',
-                        'Compass',
-                        'Grand Cherokee',
-                        'Willys',
-                        'Wrangler',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Kia',
-                    models: [
-                        'Avella',
-                        'Besta',
-                        'Carnival',
-                        'Cerato',
-                        'K 2700',
-                        'Picanto',
-                        'Pregio',
-                        'Pride',
-                        'Rio',
-                        'Sportage',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Land Rover',
-                    models: [
-                        'Discovery',
-                        'Freelander',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'MG',
-                    models: [
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Mazda',
-                    models: [
-                        '323',
-                        'B2500',
-                        'BT-50',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Mercedes Benz',
-                    models: [
-                        'Clase A',
-                        'Clase B',
-                        'Clase C',
-                        'Clase CLC',
-                        'Clase CLK',
-                        'Clase E',
-                        'Clase GLK',
-                        'Clase S',
-                        'Clase SL',
-                        'Clase SLK',
-                        'MB',
-                        'ML',
-                        'Sprinter',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Mini',
-                    models: [
-                        'Cooper',
-                        'Cooper S'
-                    ]
-                },
-                {
-                    make: 'Mitsubishi',
-                    models: [
-                        'Colt',
-                        'Eclipse',
-                        'Galant',
-                        'L200',
-                        'L300',
-                        'Lancer',
-                        'Montero',
-                        'Nativa',
-                        'Outlander',
-                        'Space Wagon',
-                        'Sportero',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Nissan',
-                    models: [
-                        '720',
-                        'D21',
-                        'D22',
-                        'Datsun',
-                        'Frontier',
-                        'Maxima',
-                        'Murano',
-                        'NX',
-                        'Pathfinder',
-                        'Pick-Up',
-                        'Sentra',
-                        'Sunny',
-                        'Terrano',
-                        'Tiida',
-                        'Trade',
-                        'Vanette',
-                        'Versa',
-                        'X-Trail',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Peugeot',
-                    models: [
-                        '106',
-                        '107',
-                        '205',
-                        '206',
-                        '207',
-                        '208',
-                        '3008',
-                        '301',
-                        '306',
-                        '307',
-                        '308',
-                        '309',
-                        '404',
-                        '404 Pick-Up',
-                        '405',
-                        '406',
-                        '407',
-                        '408',
-                        '5008',
-                        '504',
-                        '504 Pick-Up',
-                        '505',
-                        '605',
-                        'Boxer',
-                        'Expert',
-                        'Partner',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Porsche',
-                    models: [
-                        '911',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Renault',
-                    models: [
-                        'Clio',
-                        'Express',
-                        'Kangoo',
-                        'Kangoo Express',
-                        'Laguna',
-                        'Master',
-                        'Mégane',
-                        'Mégane II',
-                        'R11',
-                        'R12',
-                        'R18',
-                        'R19',
-                        'R9',
-                        'Scénic',
-                        'Symbol',
-                        'Trafic',
-                        'Twingo',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Rover',
-                    models: [
-                        '214',
-                        '416',
-                        '620',
-                        'Maestro',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Seat',
-                    models: [
-                        'Cordoba',
-                        'Toledo',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Subaru',
-                    models: [
-                        'Forester',
-                        'Impreza',
-                        'Legacy',
-                        'Outback',
-                        'Van',
-                        'Vivio',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Suzuki',
-                    models: [
-                        'Alto',
-                        'Baleno',
-                        'Carry',
-                        'Celerio',
-                        'Forza',
-                        'Grand Vitara',
-                        'Maruti',
-                        'Samurai',
-                        'Swift',
-                        'SX4',
-                        'Vitara',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Toyota',
-                    models: [
-                        '4Runner',
-                        'Bandeirante',
-                        'Camry',
-                        'Carina',
-                        'Celica',
-                        'Corolla',
-                        'Corona',
-                        'Hilux',
-                        'Hilux SW4',
-                        'Land Cruiser',
-                        'RAV4',
-                        'Starlet',
-                        'Tercel',
-                        'Yaris',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Volkswagen',
-                    models: [
-                        '1500',
-                        'Amazon',
-                        'Bora',
-                        'Brasilia',
-                        'Caddy',
-                        'Crossfox',
-                        'Fox',
-                        'Fusca',
-                        'GLI',
-                        'Gol',
-                        'Golf',
-                        'Kombi',
-                        'Logus',
-                        'Parati',
-                        'Passat',
-                        'Polo',
-                        'Quantum',
-                        'Santana',
-                        'Saveiro',
-                        'Senda',
-                        'Suran',
-                        'Tiguan',
-                        'Vento',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Volvo',
-                    models: [
-                        '460',
-                        'S40',
-                        'S60',
-                        'Other'
-                    ]
-                },
-                {
-                    make: 'Other',
-                    models: [
-                        'Other'
-                    ]
-                }
-            ], 'make');
+            return _.sortBy([{
+                make: 'Asia',
+                models: [
+                    'Topic',
+                    'Towner',
+                    'Other'
+                ]
+            }, {
+                make: 'Audi',
+                models: [
+                    'A1',
+                    'A3',
+                    'A4',
+                    'A5',
+                    'A6',
+                    'Q5',
+                    'Q7',
+                    'Other'
+                ]
+            }, {
+                make: 'BMW',
+                models: [
+                    '2002',
+                    'Serie 1',
+                    'Serie 3',
+                    'Serie 5',
+                    'Serie 6',
+                    'Serie 7',
+                    'Serie M',
+                    'X1',
+                    'X3',
+                    'X5',
+                    'Z4',
+                    'Other'
+                ]
+            }, {
+                make: 'Chevrolet',
+                models: [
+                    'Agile',
+                    'Astra',
+                    'Aveo',
+                    'Blazer',
+                    'C-10',
+                    'Camaro',
+                    'Captiva',
+                    'Celta',
+                    'Chevette',
+                    'Cobalt',
+                    'Corsa',
+                    'Corsa Combo',
+                    'Corsa Pick-Up',
+                    'Cruze',
+                    'D-20',
+                    'D-Max',
+                    'Ipanema',
+                    'Kadett',
+                    'Mega',
+                    'Meriva',
+                    'Montana',
+                    'Monza',
+                    'Onix',
+                    'S10',
+                    'Sail',
+                    'Silverado',
+                    'Spark',
+                    'Tracker',
+                    'Vectra',
+                    'Vectra GT',
+                    'Zafira',
+                    'Other'
+                ]
+            }, {
+                make: 'Chrysler',
+                models: [
+                    '300 C',
+                    'Stratus',
+                    'Other'
+                ]
+            }, {
+                make: 'Citroën',
+                models: [
+                    'AX',
+                    'Berlingo',
+                    'BX',
+                    'C-Elysée',
+                    'C15',
+                    'C3',
+                    'C4',
+                    'C5',
+                    'Jumper',
+                    'Méhari',
+                    'Olcit',
+                    'Saxo',
+                    'Visa',
+                    'Xantia',
+                    'Xsara',
+                    'Xsara Picasso',
+                    'ZX',
+                    'Other'
+                ]
+            }, {
+                make: 'Daewoo',
+                models: [
+                    'Cielo',
+                    'Damas',
+                    'Espero',
+                    'Lanos',
+                    'Matiz',
+                    'Racer',
+                    'Tico',
+                    'Other'
+                ]
+            }, {
+                make: 'Daihatsu',
+                models: [
+                    'Applause',
+                    'Charade',
+                    'Cuore',
+                    'Hijet',
+                    'Sirion',
+                    'Terios'
+                ]
+            }, {
+                make: 'Dodge',
+                models: [
+                    'Caravan',
+                    'Journey',
+                    'Ram',
+                    'Other'
+                ]
+            }, {
+                make: 'Fiat',
+                models: [
+                    '128',
+                    '147',
+                    '600',
+                    'Bravo',
+                    'Cinquecento',
+                    'Ducato',
+                    'Duna',
+                    'Elba',
+                    'Fiorino',
+                    'Fiorino Pick-Up',
+                    'Idea',
+                    'Oggi',
+                    'Palio',
+                    'Panda',
+                    'Panorama',
+                    'Premio',
+                    'Punto',
+                    'Siena',
+                    'Spazio',
+                    'Strada',
+                    'Strada Adventure',
+                    'Tempra',
+                    'Tipo',
+                    'Uno',
+                    'Other'
+                ]
+            }, {
+                make: 'Ford',
+                models: [
+                    'Courier',
+                    'Del Rey',
+                    'EcoSport',
+                    'Escort',
+                    'Explorer',
+                    'F-100',
+                    'F-150',
+                    'F-250',
+                    'F1000',
+                    'Falcon',
+                    'Festiva',
+                    'Fiesta',
+                    'Fiesta Max',
+                    'Focus',
+                    'Ka',
+                    'Pick-Up',
+                    'Ranger',
+                    'Taunus',
+                    'Verona',
+                    'Other'
+                ]
+            }, {
+                make: 'Honda',
+                models: [
+                    'Accord',
+                    'Civic',
+                    'CR-V',
+                    'Fit',
+                    'Odyssey',
+                    'Prelude',
+                    'Other'
+                ]
+            }, {
+                make: 'Hyundai',
+                models: [
+                    'Accent',
+                    'Atos',
+                    'Elantra',
+                    'Excel',
+                    'Galloper',
+                    'H1',
+                    'H100',
+                    'i10',
+                    'i30',
+                    'Porter',
+                    'Santa Fe',
+                    'Scoupe',
+                    'Sonata',
+                    'Tucson',
+                    'Other'
+                ]
+            }, {
+                make: 'Isuzu',
+                models: [
+                    'Pick-Up',
+                    'Other'
+                ]
+            }, {
+                make: 'Jeep',
+                models: [
+                    'Cherokee',
+                    'Cherokee Sport',
+                    'CJ',
+                    'Compass',
+                    'Grand Cherokee',
+                    'Willys',
+                    'Wrangler',
+                    'Other'
+                ]
+            }, {
+                make: 'Kia',
+                models: [
+                    'Avella',
+                    'Besta',
+                    'Carnival',
+                    'Cerato',
+                    'K 2700',
+                    'Picanto',
+                    'Pregio',
+                    'Pride',
+                    'Rio',
+                    'Sportage',
+                    'Other'
+                ]
+            }, {
+                make: 'Land Rover',
+                models: [
+                    'Discovery',
+                    'Freelander',
+                    'Other'
+                ]
+            }, {
+                make: 'MG',
+                models: [
+                    'Other'
+                ]
+            }, {
+                make: 'Mazda',
+                models: [
+                    '323',
+                    'B2500',
+                    'BT-50',
+                    'Other'
+                ]
+            }, {
+                make: 'Mercedes Benz',
+                models: [
+                    'Clase A',
+                    'Clase B',
+                    'Clase C',
+                    'Clase CLC',
+                    'Clase CLK',
+                    'Clase E',
+                    'Clase GLK',
+                    'Clase S',
+                    'Clase SL',
+                    'Clase SLK',
+                    'MB',
+                    'ML',
+                    'Sprinter',
+                    'Other'
+                ]
+            }, {
+                make: 'Mini',
+                models: [
+                    'Cooper',
+                    'Cooper S'
+                ]
+            }, {
+                make: 'Mitsubishi',
+                models: [
+                    'Colt',
+                    'Eclipse',
+                    'Galant',
+                    'L200',
+                    'L300',
+                    'Lancer',
+                    'Montero',
+                    'Nativa',
+                    'Outlander',
+                    'Space Wagon',
+                    'Sportero',
+                    'Other'
+                ]
+            }, {
+                make: 'Nissan',
+                models: [
+                    '720',
+                    'D21',
+                    'D22',
+                    'Datsun',
+                    'Frontier',
+                    'Maxima',
+                    'Murano',
+                    'NX',
+                    'Pathfinder',
+                    'Pick-Up',
+                    'Sentra',
+                    'Sunny',
+                    'Terrano',
+                    'Tiida',
+                    'Trade',
+                    'Vanette',
+                    'Versa',
+                    'X-Trail',
+                    'Other'
+                ]
+            }, {
+                make: 'Peugeot',
+                models: [
+                    '106',
+                    '107',
+                    '205',
+                    '206',
+                    '207',
+                    '208',
+                    '3008',
+                    '301',
+                    '306',
+                    '307',
+                    '308',
+                    '309',
+                    '404',
+                    '404 Pick-Up',
+                    '405',
+                    '406',
+                    '407',
+                    '408',
+                    '5008',
+                    '504',
+                    '504 Pick-Up',
+                    '505',
+                    '605',
+                    'Boxer',
+                    'Expert',
+                    'Partner',
+                    'Other'
+                ]
+            }, {
+                make: 'Porsche',
+                models: [
+                    '911',
+                    'Other'
+                ]
+            }, {
+                make: 'Renault',
+                models: [
+                    'Clio',
+                    'Express',
+                    'Kangoo',
+                    'Kangoo Express',
+                    'Laguna',
+                    'Master',
+                    'Mégane',
+                    'Mégane II',
+                    'R11',
+                    'R12',
+                    'R18',
+                    'R19',
+                    'R9',
+                    'Scénic',
+                    'Symbol',
+                    'Trafic',
+                    'Twingo',
+                    'Other'
+                ]
+            }, {
+                make: 'Rover',
+                models: [
+                    '214',
+                    '416',
+                    '620',
+                    'Maestro',
+                    'Other'
+                ]
+            }, {
+                make: 'Seat',
+                models: [
+                    'Cordoba',
+                    'Toledo',
+                    'Other'
+                ]
+            }, {
+                make: 'Subaru',
+                models: [
+                    'Forester',
+                    'Impreza',
+                    'Legacy',
+                    'Outback',
+                    'Van',
+                    'Vivio',
+                    'Other'
+                ]
+            }, {
+                make: 'Suzuki',
+                models: [
+                    'Alto',
+                    'Baleno',
+                    'Carry',
+                    'Celerio',
+                    'Forza',
+                    'Grand Vitara',
+                    'Maruti',
+                    'Samurai',
+                    'Swift',
+                    'SX4',
+                    'Vitara',
+                    'Other'
+                ]
+            }, {
+                make: 'Toyota',
+                models: [
+                    '4Runner',
+                    'Bandeirante',
+                    'Camry',
+                    'Carina',
+                    'Celica',
+                    'Corolla',
+                    'Corona',
+                    'Hilux',
+                    'Hilux SW4',
+                    'Land Cruiser',
+                    'RAV4',
+                    'Starlet',
+                    'Tercel',
+                    'Yaris',
+                    'Other'
+                ]
+            }, {
+                make: 'Volkswagen',
+                models: [
+                    '1500',
+                    'Amazon',
+                    'Bora',
+                    'Brasilia',
+                    'Caddy',
+                    'Crossfox',
+                    'Fox',
+                    'Fusca',
+                    'GLI',
+                    'Gol',
+                    'Golf',
+                    'Kombi',
+                    'Logus',
+                    'Parati',
+                    'Passat',
+                    'Polo',
+                    'Quantum',
+                    'Santana',
+                    'Saveiro',
+                    'Senda',
+                    'Suran',
+                    'Tiguan',
+                    'Vento',
+                    'Other'
+                ]
+            }, {
+                make: 'Volvo',
+                models: [
+                    '460',
+                    'S40',
+                    'S60',
+                    'Other'
+                ]
+            }, {
+                make: 'Other',
+                models: [
+                    'Other'
+                ]
+            }], 'make');
         },
 
         getYears: function () {
@@ -615,7 +580,8 @@ angular.module('utils', [])
             var currentDefaultCar = Car.get({
                 byDefault: true
             });
-            if (newCar.byDefault && currentDefaultCar._id && newCar._id !== currentDefaultCar._id) {
+            if (newCar.byDefault && currentDefaultCar._id && newCar._id !==
+                currentDefaultCar._id) {
                 currentDefaultCar.byDefault = false;
                 currentDefaultCar.$save();
             }
@@ -704,7 +670,9 @@ angular.module('utils', [])
 
             if (this._id) {
                 _.extend(
-                    (singleModel ? models : _.findWhere(models, { _id: this._id })),
+                    (singleModel ? models : _.findWhere(models, {
+                        _id: this._id
+                    })),
                     this
                 );
             } else {
@@ -733,7 +701,9 @@ angular.module('utils', [])
                     models.inactive = true;
                     // models = {};
                 } else {
-                    _.findWhere(models, { _id: this._id }).inactive = true;
+                    _.findWhere(models, {
+                        _id: this._id
+                    }).inactive = true;
                     // models = _.without(models, _.findWhere(models, { _id: this._id }));
                 }
             }
