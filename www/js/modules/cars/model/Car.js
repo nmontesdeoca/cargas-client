@@ -14,12 +14,15 @@ angular.module('cars')
         };
 
         /*
-    	* returns the refuels of the instantiated car
+    	* returns the refuels of the instantiated car sort by date
         */
         CarModel.prototype.getRefuels = function() {
-        	var refuels = this.refuels? this.refuels : Refuel.query();
-            return _.where(refuels, {'car': this._id.toString()});
-        }
+        	var refuels = this.refuels ? this.refuels : Refuel.getRefuelsSortByDate();
+
+            return _.where(refuels, {
+                car: this._id.toString()
+            });
+        };
 
         /*
     	* returns total money spent in refuels for a car

@@ -34,9 +34,6 @@ angular.module('refuels', [])
     .state('app.refuelListByCar', {
         url: '/refuels/by-car/:carId',
         resolve: {
-            refuels: ['Refuel', function (Refuel) {
-                return Refuel.getRefuelsSortByDate();
-            }],
             fuels: ['Fuel', function (Fuel) {
                 return _.sortBy(Fuel.query(), 'name');
             }],

@@ -4,14 +4,11 @@ angular.module('refuels')
     '$scope',
     '$ionicPopup',
     '$ionicListDelegate',
-    'Refuel',
     'refuels',
     'fuels',
     'car',
-    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels,
-        fuels, car) {
+    function ($scope, $ionicPopup, $ionicListDelegate, refuels, fuels, car) {
 
-        // sort refuels by date (newest first)
         $scope.refuels = refuels;
         $scope.fuels = fuels;
         $scope.car = car;
@@ -23,7 +20,7 @@ angular.module('refuels')
             }).then(function (yes) {
                 if (yes) {
                     refuel.$remove(function () {
-                        $scope.refuels = Refuel.getRefuelsSortByDate();
+                        $scope.car.refuels = $scope.car.getRefuels();
                     });
                 }
                 $ionicListDelegate.closeOptionButtons();
