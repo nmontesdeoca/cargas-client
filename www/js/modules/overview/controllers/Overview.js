@@ -6,16 +6,25 @@ angular.module('overview')
     'refuels',
     'Refuel',
     'Car',
-    function ($scope, cars, refuels, Refuel, Car) {
+    'Utils',
+    function ($scope, cars, refuels, Refuel, Car, Utils) {
         //add the car object to the last refuel
-        var lastRefuel = _.extend(refuels[0], {
-            car: Car.get(refuels[0].car)
+        var lastRefuel = refuels[0];
+
+        lastRefuel = _.extend(lastRefuel, {
+            car: Car.get(lastRefuel.car),
+            daysAgo: Utils.calculateDays(lastRefuel.date, new Date())
         });
 
+
     	_.extend($scope, {
-            cars: cars,
-            refuels: refuels,
-            lastRefuel: refuels[0]        
+            'cars': cars,
+            'refuels': refuels,
+            'lastRefuel': lastRefuel,
+            'totals': {
+                'totalSpent': Refuel.getTotalSpent(),
+                'totalCapacity': Refuel.getTotalCapacity()
+            }
         });
 
 

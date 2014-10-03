@@ -55,7 +55,30 @@
 .bar.bar-header {
     background: none;
     border: none;
+
 }
+.bar.bar-header * {
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.6);    
+}
+
 .button.big-main-button {
     background: #000;
+}
+.menu-content .list {
+    padding: 10px;
+}
+.item {
+    background: rgba(255,255,255,0.9);
+}
+.item .item-content {
+    background: none;
+}
+.overview-totals {
+    margin-top: 10px;
+}
+.overview-totals .col strong {
+    color: #fff;
+    font-size: 30px;
+    letter-spacing: 1.1;
+    text-shadow: 1px 1px 0 rgba(0,0,0,0.7);
 }
