@@ -15,8 +15,10 @@ angular.module('refuels')
         $scope.cars = cars;
 
         //if the car is only 1, go directly to see the refuels of that car
-        if (cars.length == 1) {
-            $state.go("app.refuelListByCar", {'carId': cars[0]._id});
+        if (cars.length === 1) {
+            $state.go('app.refuelListByCar', {
+                carId: cars[0]._id
+            });
         }
 
         $scope.delete = function (refuel) {

@@ -2,9 +2,6 @@
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
-    <ion-nav-buttons side="right">
-        <a href="#/refuels/new" class="button button-icon icon ion-plus"></a>
-    </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list
             show-delete="false"
@@ -12,7 +9,7 @@
             can-swipe="true"
             class="padding">
                 <ion-item ng-repeat="car in cars" href="#/refuels/by-car/{{car._id}}" class="item-thumbnail-left single-vehicle-item">
-                    <img src="{{car.image || 'http://ionicframework.com/img/docs/blue-album.jpg'}}">
+                    <img ng-src="{{car.image || 'http://ionicframework.com/img/docs/blue-album.jpg'}}">
                     <h2>{{car.make + ' ' + car.model}}</h2>
                     <p>{{car.refuels.length}} refuels</p>
                     <!-- <fs-area interval="minute" bind="formatRefuelsForGraph(car.refuels)" /> -->

@@ -5,7 +5,7 @@ angular.module('settings', [])
 
         $stateProvider
 
-        .state('app.settingsList', {
+            .state('app.settingsList', {
             url: '/settings',
             /*resolve: {
             Settings: 'Setting'

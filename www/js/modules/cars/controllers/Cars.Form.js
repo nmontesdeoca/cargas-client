@@ -1,11 +1,8 @@
 angular.module('cars')
 
-.config(['$compileProvider',
-    function ($compileProvider) {
-        $compileProvider.imgSrcSanitizationWhitelist(
-            /^\s*(https?|ftp|mailto|file|tel):/);
-    }
-])
+.config(['$compileProvider', function ($compileProvider) {
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|content):/);
+}])
 
 .controller('Cars.Form', [
     '$scope',
@@ -20,13 +17,13 @@ angular.module('cars')
     'Car',
     'Fuel',
     'Camera',
-    function ($scope, $ionicPopup, $ionicViewService, $ionicModal,
-        $ionicActionSheet, car, fuels, makes, Utils, Car, Fuel, Camera) {
+    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, $ionicActionSheet, car,
+        fuels, makes, Utils, Car, Fuel, Camera) {
 
         var getFuels = function () {
             var sortedFuels = _.sortBy(Fuel.query(), 'name');
             sortedFuels.push({
-                name:'Add New Fuel',
+                name: 'Add New Fuel',
                 value: 'newFuel'
             });
             return sortedFuels;
@@ -58,8 +55,9 @@ angular.module('cars')
             $scope.fuelModal = modal;
         });
 
-        $scope.$on('modal.hidden', function() {
-            if (arguments[1].modalEl.id === 'new-fuel-modal' && $scope.car.fuel && $scope.car.fuel.value === 'newFuel') {
+        $scope.$on('modal.hidden', function () {
+            if (arguments[1].modalEl.id === 'new-fuel-modal' && $scope.car.fuel &&
+                $scope.car.fuel.value === 'newFuel') {
                 $scope.car.fuel = null;
             }
         });
@@ -122,14 +120,14 @@ angular.module('cars')
                     },
                     buttonClicked: function (index) {
                         switch (index) {
-                        case 0:
-                            takePhoto(Camera.PictureSourceType.CAMERA);
-                            break;
-                        case 1:
-                            takePhoto(Camera.PictureSourceType.SAVEDPHOTOALBUM);
-                            break;
-                        default:
-                            break;
+                            case 0:
+                                takePhoto(Camera.PictureSourceType.CAMERA);
+                                break;
+                            case 1:
+                                takePhoto(Camera.PictureSourceType.SAVEDPHOTOALBUM);
+                                break;
+                            default:
+                                break;
                         }
                         return true;
                     }
@@ -141,7 +139,7 @@ angular.module('cars')
                     }).then(function (imageURI) {
                         $scope.car.image = imageURI;
                     }, function (err) {
-                        console.error(err);
+                        alert(err);
                     });
                 };
         };

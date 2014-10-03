@@ -31,14 +31,15 @@ angular.module('utils', [])
 .factory('Utils', function () {
     return {
 
+        formatSmallNumber: function (number) {
+            return number > 9 ? number : '0' + number;
+        },
+
         formatDateForInput: function (date) {
-            var month = parseInt(date.getMonth(), 10) + 1;
+            var month = this.formatSmallNumber(date.getMonth() + 1),
+                day = this.formatSmallNumber(date.getDate());
 
-            month = month > 9 ? month : '0' + month;
-
-            return date.getFullYear() + '-' +
-                month + '-' +
-                date.getDate();
+            return date.getFullYear() + '-' + month + '-' + day;
         },
 
         formatDateToTime: function (formattedDate) {
@@ -622,164 +623,157 @@ angular.module('utils', [])
     };
 })
 
-.factory('LocalStorage', ['$window',
-    function ($window) {
-        var prefix = '';
-        return {
-            set: function (key, value) {
-                $window.localStorage[prefix + key] = value;
+.factory('LocalStorage', ['$window', function ($window) {
+    var prefix = '';
+    return {
+        set: function (key, value) {
+            $window.localStorage[prefix + key] = value;
+        },
+        get: function (key, defaultValue) {
+            return $window.localStorage[prefix + key] || defaultValue;
+        },
+        setObject: function (key, value) {
+            $window.localStorage[prefix + key] = JSON.stringify(value);
+        },
+        getObject: function (key) {
+            return JSON.parse($window.localStorage[prefix + key] || '{}');
+        }
+    };
+}])
+
+.factory('Model', ['LocalStorage', function (LocalStorage) {
+    return function (storageKey, singleModel) {
+
+        var setProperties = function (value, key) {
+                this[key] = value;
             },
-            get: function (key, defaultValue) {
-                return $window.localStorage[prefix + key] || defaultValue;
-            },
-            setObject: function (key, value) {
-                $window.localStorage[prefix + key] = JSON.stringify(value);
-            },
-            getObject: function (key) {
-                return JSON.parse($window.localStorage[prefix + key] ||
-                    '{}');
-            }
+
+            Model = function (properties) {
+                angular.forEach(properties, angular.bind(this, setProperties));
+            };
+
+        Model.get = function (idObject, object) {
+            var model = singleModel ?
+                Model.query() :
+                _.findWhere(Model.query(), idObject);
+
+            return object ? model : new Model(model);
         };
-    }
-])
 
-.factory('Model', ['LocalStorage',
-    function (LocalStorage) {
-        return function (storageKey, singleModel) {
+        Model.query = function () {
+            var data = LocalStorage.getObject(storageKey);
 
-            var setProperties = function (value, key) {
-                    this[key] = value;
-                },
-
-                Model = function (properties) {
-                    angular.forEach(properties, angular.bind(this,
-                        setProperties));
-                };
-
-            Model.get = function (idObject, object) {
-                var model = singleModel ?
-                    Model.query() :
-                    _.findWhere(Model.query(), idObject);
-
-                return object ? model : new Model(model);
-            };
-
-            Model.query = function () {
-                var data = LocalStorage.getObject(storageKey);
-
-                if (data) {
-                    if (singleModel) {
-                        if (data.inactive) {
-                            data = null;
-                        } else {
-                            data = new Model(data);
-                        }
+            if (data) {
+                if (singleModel) {
+                    if (data.inactive) {
+                        data = null;
                     } else {
-                        data = _.chain(data).filter(function (model) {
-                            return !model.inactive;
-                        }).map(function (model) {
-                            return new Model(model);
-                        }).value();
+                        data = new Model(data);
                     }
-                }
-
-                return data || (singleModel ? {} : []);
-            };
-
-            Model.prototype.set = function (properties) {
-                _.extend(this, properties);
-                return this;
-            };
-
-            Model.prototype.get = function (property) {
-                return this[property];
-            };
-
-            Model.prototype.$save = function (callback) {
-                var models = Model.query();
-
-                this.updatedAt = Date.now();
-
-                if (this._id) {
-                    _.extend(
-                        (singleModel ? models : _.findWhere(models, {
-                            _id: this._id
-                        })),
-                        this
-                    );
                 } else {
-                    /**
-                     * _id is the updatedAt, because we can use it as identifier and also contains
-                     * the date and time of createdAt
-                     */
-                    this._id = this.updatedAt;
-
-                    if (singleModel) {
-                        models = this;
-                    } else {
-                        models.push(this);
-                    }
+                    data = _.chain(data).filter(function (model) {
+                        return !model.inactive;
+                    }).map(function (model) {
+                        return new Model(model);
+                    }).value();
                 }
-
-                LocalStorage.setObject(storageKey, models);
-                callback && callback.apply(this, [this]);
-            };
-
-            Model.prototype.$remove = function (callback) {
-                var models = Model.query();
-
-                if (this._id) {
-                    if (singleModel) {
-                        models.inactive = true;
-                        // models = {};
-                    } else {
-                        _.findWhere(models, {
-                            _id: this._id
-                        }).inactive = true;
-                        // models = _.without(models, _.findWhere(models, { _id: this._id }));
-                    }
-                }
-
-                LocalStorage.setObject(storageKey, models);
-                callback && callback.apply(this, [this]);
-            };
-
-            return Model;
-
-        };
-    }
-])
-
-.factory('Camera', ['$q',
-    function ($q) {
-        var camera = navigator.camera || {
-            PictureSourceType: {}
-        };
-
-        return {
-            isAvailable: camera.getPicture,
-
-            PictureSourceType: camera.PictureSourceType,
-
-            getPicture: function (options) {
-                var q = $q.defer();
-                if (!this.isAvailable) {
-                    q.reject('No Camera found');
-                } else {
-                    options = angular.extend({
-                        destinationType: camera.DestinationType.FILE_URI
-                    }, options);
-
-                    camera.getPicture(function (result) {
-                        // Do any magic you need
-                        q.resolve(result);
-                    }, function (err) {
-                        q.reject(err);
-                    }, options);
-                }
-
-                return q.promise;
             }
+
+            return data || (singleModel ? {} : []);
         };
-    }
-]);
+
+        Model.prototype.set = function (properties) {
+            _.extend(this, properties);
+            return this;
+        };
+
+        Model.prototype.get = function (property) {
+            return this[property];
+        };
+
+        Model.prototype.$save = function (callback) {
+            var models = Model.query();
+
+            this.updatedAt = Date.now();
+
+            if (this._id) {
+                _.extend(
+                    (singleModel ? models : _.findWhere(models, {
+                        _id: this._id
+                    })),
+                    this
+                );
+            } else {
+                /**
+                 * _id is the updatedAt, because we can use it as identifier and also contains
+                 * the date and time of createdAt
+                 */
+                this._id = this.updatedAt;
+
+                if (singleModel) {
+                    models = this;
+                } else {
+                    models.push(this);
+                }
+            }
+
+            LocalStorage.setObject(storageKey, models);
+            callback && callback.apply(this, [this]);
+        };
+
+        Model.prototype.$remove = function (callback) {
+            var models = Model.query();
+
+            if (this._id) {
+                if (singleModel) {
+                    models.inactive = true;
+                    // models = {};
+                } else {
+                    _.findWhere(models, {
+                        _id: this._id
+                    }).inactive = true;
+                    // models = _.without(models, _.findWhere(models, { _id: this._id }));
+                }
+            }
+
+            LocalStorage.setObject(storageKey, models);
+            callback && callback.apply(this, [this]);
+        };
+
+        return Model;
+
+    };
+}])
+
+.factory('Camera', ['$q', function ($q) {
+    var camera = navigator.camera || {
+        PictureSourceType: {}
+    };
+
+    return {
+        isAvailable: camera.getPicture,
+
+        PictureSourceType: camera.PictureSourceType,
+
+        getPicture: function (options) {
+            var q = $q.defer();
+            if (!this.isAvailable) {
+                q.reject('No Camera found');
+            } else {
+                options = angular.extend({
+                    quality: 50,
+                    destinationType: camera.DestinationType.FILE_URI
+                }, options);
+
+                camera.getPicture(function (result) {
+                    // Do any magic you need
+                    q.resolve(result);
+                }, function (err) {
+                    q.reject(err);
+                }, options);
+            }
+
+            return q.promise;
+        }
+    };
+}]);
