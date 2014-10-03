@@ -4,12 +4,10 @@ angular.module('refuels')
     '$scope',
     '$ionicPopup',
     '$ionicListDelegate',
-    'refuels',
     'fuels',
     'car',
-    function ($scope, $ionicPopup, $ionicListDelegate, refuels, fuels, car) {
+    function ($scope, $ionicPopup, $ionicListDelegate, fuels, car) {
 
-        $scope.refuels = refuels;
         $scope.fuels = fuels;
         $scope.car = car;
 
