@@ -12,6 +12,22 @@ angular.module('utils', [])
     };
 })
 
+.filter('timeAgo', function() {
+    return function(value) {
+        var unit = 'days',
+            timeAgo;
+        
+        if (value <= 1) {
+            unit = value < 1 ? 'less than a day' : 'day';
+        } 
+        // else if (!(value % 7)) {
+        //     unit = value == 7 ? 'week' : 'weeks';
+        // }
+        timeAgo = (value < 1) ? '' : Math.round(value) + ' ';
+        return timeAgo + unit + ' ago'
+    }
+})
+
 .factory('Utils', function () {
     return {
 
@@ -591,6 +607,17 @@ angular.module('utils', [])
             if (!Car.query().length) {
                 newCar.byDefault = true;
             }
+        },
+
+
+        calculateDays: function (dateBefore, dateAfter) {
+            var oneDay = 24*60*60*1000, // hours*minutes*seconds*milliseconds
+                dateBefore = new Date(dateBefore),
+                dateAfter = new Date(dateAfter);
+
+            // parseFloat instead of Math.round so the filter can know if is less than a day
+            // Math round is in the filter (timeAgo)
+            return parseFloat(Math.abs((dateBefore.getTime() - dateAfter.getTime())/(oneDay)));
         }
     };
 })

@@ -9,7 +9,8 @@
         <ion-list
             show-delete="false"
             show-reorder="false"
-            can-swipe="true">
+            can-swipe="true"
+            class="padding">
                 <ion-item ng-repeat="car in cars" href="#/refuels/by-car/{{car._id}}" class="item-thumbnail-left single-vehicle-item">
                     <img src="{{car.image || 'http://ionicframework.com/img/docs/blue-album.jpg'}}">
                     <h2>{{car.make + ' ' + car.model}}</h2>
