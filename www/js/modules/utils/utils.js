@@ -15,14 +15,15 @@ angular.module('utils', [])
 .factory('Utils', function () {
     return {
 
+        formatSmallNumber: function (number) {
+            return number > 9 ? number : '0' + number;
+        },
+
         formatDateForInput: function (date) {
-            var month = parseInt(date.getMonth(), 10) + 1;
+            var month = this.formatSmallNumber(date.getMonth() + 1),
+                day = this.formatSmallNumber(date.getDate());
 
-            month = month > 9 ? month : '0' + month;
-
-            return date.getFullYear() + '-' +
-                month + '-' +
-                date.getDate();
+            return date.getFullYear() + '-' + month + '-' + day;
         },
 
         formatDateToTime: function (formattedDate) {
