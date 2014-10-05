@@ -15,7 +15,11 @@ angular.module('starter', [
         $ionicPlatform.ready(function () {
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
+                StatusBar.hide();
+            }
+
+            if (window.ionic) {
+                ionic.Platform && ionic.Platform.fullScreen && ionic.Platform.fullScreen();
             }
 
             // to make underscore available at any template
