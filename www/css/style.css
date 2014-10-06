@@ -47,7 +47,7 @@
 
 /* background */
 .pane {
-    background: url(/img/backgrounds/night1.jpg);
+    background: url(../img/backgrounds/night1.jpg);
     background-position: center center;
     background-size: auto 100%;
     /*font-family: 'Ubuntu Condensed', sans-serif;*/
