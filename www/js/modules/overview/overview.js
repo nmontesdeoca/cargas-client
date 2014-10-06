@@ -34,6 +34,12 @@ angular.module('overview', [])
             menuContent: {
                 templateUrl: 'templates/overview/overview.html',
                 controller: 'Overview'
+            },
+            'withData@app.overview': {
+                templateUrl: 'templates/overview/overview-with-data.html'
+            },
+            'noData@app.overview': {
+                templateUrl: 'templates/overview/overview-no-data.html'
             }
         }
     })
