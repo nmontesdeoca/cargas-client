@@ -17,14 +17,6 @@
     border: none;
 }
 
-.platform-android ion-side-menu .bar-header {
-    display: none;
-}
-
-.platform-android ion-side-menu .has-header {
-    top: 0;
-}
-
 .item-select select {
     direction: ltr;
     left: 35%;
