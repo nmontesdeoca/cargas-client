@@ -17,14 +17,6 @@
     border: none;
 }
 
-.platform-android ion-side-menu .bar-header {
-    display: none;
-}
-
-.platform-android ion-side-menu .has-header {
-    top: 0;
-}
-
 .item-select select {
     direction: ltr;
     left: 35%;
@@ -50,7 +42,7 @@
     font-family: 'Montserrat', sans-serif!important;
 }
 .pane {
-    background: url(/img/backgrounds/night1.jpg);
+    background: url(../img/backgrounds/night1.jpg);
     background-position: center center;
     background-size: auto 100%;
 }
