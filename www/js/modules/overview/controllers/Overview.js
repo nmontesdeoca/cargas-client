@@ -17,7 +17,7 @@ angular.module('overview')
         });
 
 
-    	_.extend($scope, {
+        _.extend($scope, {
             'cars': cars,
             'refuels': refuels,
             'lastRefuel': lastRefuel,
@@ -28,43 +28,43 @@ angular.module('overview')
         });
 
 
-    	// var today = new Date(),
-    	// 	refuelsThisYear = Refuel.getRefuelsByMonth(today.getMonth(), today.getYear()),
-    	// 	refuelsLastYear = Refuel.getRefuelsByMonth(today.getMonth(), today.getYear() - 1);
+        // var today = new Date(),
+        // 	refuelsThisYear = Refuel.getRefuelsByMonth(today.getMonth(), today.getYear()),
+        // 	refuelsLastYear = Refuel.getRefuelsByMonth(today.getMonth(), today.getYear() - 1);
 
-    	// $scope.carsRefueledThisMonth = function() {
-	    // 	var cars = $scope.cars;
-	    // 	cars = _.filter(cars, function(car) {
-	    		
-	    // 		car.refuels = car.getRefuelsByMonth(today.getMonth(), today.getYear());
-	    // 		_.extend(car,{
-	    // 			'totalSpent': car.getTotalSpent(),
-	    // 			'totalCapacity': car.getTotalCapacity()
-	    // 		});
-	    // 		return car.getRefuels().length > 0;
-	    // 	});
-	    // 	return cars;
-    	// };
+        // $scope.carsRefueledThisMonth = function() {
+        // 	var cars = $scope.cars;
+        // 	cars = _.filter(cars, function(car) {
 
-    	// totalSpentCompare = function() {
-    	// 	var thisYear = function() {
-					// return _.reduce(refuelsThisYear, function (memo, current) {
-					// 	return memo + current.get('amount');
-					// }, 0);
-    	// 		},
-    	// 		lastYear = function() {
-					// return _.reduce(refuelsLastYear, function (memo, current) {
-					// 	return memo + current.get('amount');
-					// }, 0);
-    	// 		};
-    	// 	return {
-    	// 		"entries": [
-     //                {time: 1, count: thisYear()},
-					// {time: 2, count: lastYear()}
-    	// 		]
-    	// 	};
-    	// };
-     //    $scope.totalSpentComparison = totalSpentCompare();
-    	
+        // 		car.refuels = car.getRefuelsByMonth(today.getMonth(), today.getYear());
+        // 		_.extend(car,{
+        // 			'totalSpent': car.getTotalSpent(),
+        // 			'totalCapacity': car.getTotalCapacity()
+        // 		});
+        // 		return car.getRefuels().length > 0;
+        // 	});
+        // 	return cars;
+        // };
+
+        // totalSpentCompare = function() {
+        // 	var thisYear = function() {
+        // return _.reduce(refuelsThisYear, function (memo, current) {
+        // 	return memo + current.get('amount');
+        // }, 0);
+        // 		},
+        // 		lastYear = function() {
+        // return _.reduce(refuelsLastYear, function (memo, current) {
+        // 	return memo + current.get('amount');
+        // }, 0);
+        // 		};
+        // 	return {
+        // 		"entries": [
+        //                {time: 1, count: thisYear()},
+        // {time: 2, count: lastYear()}
+        // 		]
+        // 	};
+        // };
+        //    $scope.totalSpentComparison = totalSpentCompare();
+
     }
 ]);

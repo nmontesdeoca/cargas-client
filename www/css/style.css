@@ -18,6 +18,7 @@
 }
 
 .item-select select {
+    background: transparent;
     direction: ltr;
     left: 35%;
     padding-left: 10px;
