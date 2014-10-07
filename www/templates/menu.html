@@ -3,13 +3,16 @@
         <ion-nav-bar class="bar bar-calm nav-title-slide-ios7">
             <ion-nav-back-button class="button-clear"><i class="icon ion-ios7-arrow-back"></i> Back</ion-nav-back-button>
         </ion-nav-bar>
-        <ion-nav-view name="menuContent" animation="slide-left-right"class="menu-content"></ion-nav-view>
+        <ion-nav-view name="menuContent" animation="slide-left-right" class="menu-content"></ion-nav-view>
     </ion-pane>
 
     <ion-side-menu side="left">
         <ion-content class="dark-bg">
             <ion-list>
-                <ion-item ng-repeat="menuItem in menuItems" class="item-dark" nav-clear menu-close href="{{menuItem.link}}">{{menuItem.name}}</ion-item>
+                <ion-item ng-repeat="menuItem in menuItems" class="item-dark item-icon-left" nav-clear menu-close href="{{menuItem.link}}">
+                    <i class="icon ion-{{menuItem.iconName}}"></i>
+                    {{menuItem.name}}
+                </ion-item>
             </ion-list>
         </ion-content>
     </ion-side-menu>

@@ -39,23 +39,26 @@
 
 
 /* background */
+* {
+    font-family: 'Montserrat', sans-serif!important;
+}
 .pane {
     background: url(../img/backgrounds/night1.jpg);
     background-position: center center;
     background-size: auto 100%;
-    /*font-family: 'Ubuntu Condensed', sans-serif;*/
 }
-.bar.bar-header {
+.menu-content .bar.bar-header {
     background: none;
     border: none;
 
 }
-.bar.bar-header * {
-    text-shadow: 1px 1px 0px rgba(0,0,0,0.6);
+.menu-content .bar.bar-header * {
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.6);    
 }
 
 .button.big-main-button {
-    background: #000;
+    background: #333;
+    border: 2px solid #000;
 }
 .menu-content .list {
     padding: 10px;
@@ -74,4 +77,7 @@
     font-size: 30px;
     letter-spacing: 1.1;
     text-shadow: 1px 1px 0 rgba(0,0,0,0.7);
+}
+.item-select select {
+    background: transparent;
 }
