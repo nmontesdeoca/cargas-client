@@ -3,9 +3,9 @@ angular.module('cars', [])
 .config(['$stateProvider',
     function ($stateProvider) {
 
-    $stateProvider
+        $stateProvider
 
-        .state('app.carList', {
+            .state('app.carList', {
             url: '/cars',
             resolve: {
                 cars: ['Car',

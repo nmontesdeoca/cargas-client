@@ -1,6 +1,5 @@
 angular.module('stats', ['spents'])
 
-.config(['$stateProvider', function($stateProvider) {
+.config(['$stateProvider', function ($stateProvider) {
 
-}])
-;
+}]);

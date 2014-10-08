@@ -36,13 +36,15 @@ angular.module('refuels')
         };
 
         $scope.formatRefuelsForGraph = function (refuels) {
-            var entries = _.map(refuels, function(refuel) {
+            var entries = _.map(refuels, function (refuel) {
                 return {
                     time: refuel.date,
                     count: refuel.amount
-                }
+                };
             });
-            return { 'entries': entries };
+            return {
+                'entries': entries
+            };
         };
 
 

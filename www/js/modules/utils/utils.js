@@ -39,8 +39,8 @@ angular.module('utils', [])
     };
 })
 
-.filter('timeAgo', function() {
-    return function(value) {
+.filter('timeAgo', function () {
+    return function (value) {
         var unit = 'days',
             timeAgo;
 
@@ -644,13 +644,14 @@ angular.module('utils', [])
 
 
         calculateDays: function (dateBefore, dateAfter) {
-            var oneDay = 24*60*60*1000, // hours*minutes*seconds*milliseconds
-                dateBefore = new Date(dateBefore),
-                dateAfter = new Date(dateAfter);
+            var oneDay = 24 * 60 * 60 * 1000, // hours * minutes * seconds * milliseconds
+                dateBeforeMs = new Date(dateBefore).getTime(),
+                dateAfterMs = new Date(dateAfter).getTime();
 
             // parseFloat instead of Math.round so the filter can know if is less than a day
             // Math round is in the filter (timeAgo)
-            return parseFloat(Math.abs((dateBefore.getTime() - dateAfter.getTime())/(oneDay)));
+            return parseFloat(Math.abs((dateBeforeMs - dateAfterMs) / (
+                oneDay)));
         }
     };
 })
