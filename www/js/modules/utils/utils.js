@@ -5,23 +5,29 @@ angular.module('utils', [])
         restrict: 'A',
         link: function ($scope, $element, $attrs) {
             Flickr.search('road,car,' + (Utils.isNight() ? 'night' : 'day')).then(function (data) {
-                var photos = data.photos.photo,
-                    index = Math.round(Math.random() * photos.length),
-                    item = photos[index],
+                var image = new Image(),
+                    photos = data && data.photos && data.photos.photo,
+                    index,
+                    item,
+                    url;
+
+                if (photos && photos.length) {
+                    index = Math.round(Math.random() * photos.length);
+                    item = photos[index];
                     url = 'http://farm' + item.farm + '.static.flickr.com/' +
                         item.server + '/' +
-                        item.id + '_' + item.secret + '.jpg',
-                    image = new Image();
+                        item.id + '_' + item.secret + '.jpg';
 
-                /**
-                 * create an image with the image src on the fly in order
-                 * to get the url fetched, so when we place the background
-                 * the image loads instantly
-                 */
-                image.src = url;
-                image.onload = function () {
-                    $element.css('background-image', 'url(' + url + ')');
-                };
+                    /**
+                     * create an image with the image src on the fly in order
+                     * to get the url fetched, so when we place the background
+                     * the image loads instantly
+                     */
+                    image.src = url;
+                    image.onload = function () {
+                        $element.css('background-image', 'url(' + url + ')');
+                    };
+                }
             });
         }
     };
