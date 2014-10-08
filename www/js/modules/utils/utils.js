@@ -1,5 +1,32 @@
 angular.module('utils', [])
 
+.directive('randomBackground', ['Flickr', 'Utils', function (Flickr, Utils) {
+    return {
+        restrict: 'A',
+        link: function ($scope, $element, $attrs) {
+            Flickr.search('road,car,' + (Utils.isNight() ? 'night' : 'day')).then(function (data) {
+                var photos = data.photos.photo,
+                    index = Math.round(Math.random() * photos.length),
+                    item = photos[index],
+                    url = 'http://farm' + item.farm + '.static.flickr.com/' +
+                        item.server + '/' +
+                        item.id + '_' + item.secret + '.jpg',
+                    image = new Image();
+
+                /**
+                 * create an image with the image src on the fly in order
+                 * to get the url fetched, so when we place the background
+                 * the image loads instantly
+                 */
+                image.src = url;
+                image.onload = function () {
+                    $element.css('background-image', 'url(' + url + ')');
+                };
+            });
+        }
+    };
+}])
+
 .filter('distance', function () {
     return function (value) {
         return value += ' kms';
@@ -16,16 +43,16 @@ angular.module('utils', [])
     return function(value) {
         var unit = 'days',
             timeAgo;
-        
+
         if (value <= 1) {
             unit = value < 1 ? 'less than a day' : 'day';
-        } 
+        }
         // else if (!(value % 7)) {
         //     unit = value == 7 ? 'week' : 'weeks';
         // }
         timeAgo = (value < 1) ? '' : Math.round(value) + ' ';
-        return timeAgo + unit + ' ago'
-    }
+        return timeAgo + unit + ' ago';
+    };
 })
 
 .factory('Utils', function () {
@@ -562,6 +589,11 @@ angular.module('utils', [])
             return years;
         },
 
+        isNight: function () {
+            var hours = new Date().getHours();
+            return  hours < 7 || hours > 19;
+        },
+
         millisecondsToSeconds: function (milliseconds) {
             return milliseconds / 1000;
         },
@@ -772,6 +804,36 @@ angular.module('utils', [])
                     q.reject(err);
                 }, options);
             }
+
+            return q.promise;
+        }
+    };
+}])
+
+.factory('Flickr', ['$q', '$resource', function ($q, $resource) {
+    var flickrSearch = $resource('https://api.flickr.com/services/rest/', {
+        method: 'flickr.photos.search',
+        jsoncallback: 'JSON_CALLBACK',
+        api_key: 'c49a72ec017c4cf6e5c7c019e9f4a1bf',
+        format: 'json'
+    }, {
+        get: {
+            method: 'JSONP'
+        }
+    });
+
+    return {
+        search: function (tags) {
+            var q = $q.defer();
+
+            flickrSearch.get({
+                tags: tags,
+                tag_mode: 'all'
+            }, function(data) {
+                q.resolve(data);
+            }, function(error) {
+                q.reject(error);
+            });
 
             return q.promise;
         }
