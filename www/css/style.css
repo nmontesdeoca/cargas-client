@@ -43,9 +43,13 @@
     font-family: 'Montserrat', sans-serif!important;
 }
 .pane {
-    background: url(../img/backgrounds/night1.jpg);
+    background: transparent;
     background-position: center center;
     background-size: auto 100%;
+    transition: background 1s ease;
+}
+.random-background {
+    background-image: url(../img/backgrounds/night1.jpg);
 }
 .menu-content .bar.bar-header {
     background: none;
@@ -53,7 +57,7 @@
 
 }
 .menu-content .bar.bar-header * {
-    text-shadow: 1px 1px 0px rgba(0,0,0,0.6);    
+    text-shadow: 1px 1px 0px rgba(0,0,0,0.6);
 }
 
 .button.big-main-button {
@@ -78,6 +82,8 @@
     letter-spacing: 1.1;
     text-shadow: 1px 1px 0 rgba(0,0,0,0.7);
 }
+
+ion-nav-view,
 .item-select select {
     background: transparent;
 }

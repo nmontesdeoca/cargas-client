@@ -1,5 +1,6 @@
 angular.module('starter', [
     'ionic',
+    'ngResource',
     'overview',
     'profile',
     'cars',
