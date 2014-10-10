@@ -4,7 +4,7 @@ angular.module('refuels', [])
 
     $stateProvider
 
-        .state('app.refuelList', {
+    .state('app.refuelList', {
         url: '/refuels',
         resolve: {
             refuels: ['Refuel', function (Refuel) {
@@ -37,8 +37,7 @@ angular.module('refuels', [])
             fuels: ['Fuel', function (Fuel) {
                 return _.sortBy(Fuel.query(), 'name');
             }],
-            car: ['$stateParams', 'Car', 'Refuel', function ($stateParams, Car,
-                Refuel) {
+            car: ['$stateParams', 'Car', 'Refuel', function ($stateParams, Car, Refuel) {
                 var car = Car.get({
                     _id: Number($stateParams.carId)
                 });
