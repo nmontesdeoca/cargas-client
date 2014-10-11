@@ -5,7 +5,7 @@ angular.module('settings', [])
 
         $stateProvider
 
-            .state('app.settingsList', {
+        .state('app.settingsList', {
             url: '/settings',
             /*resolve: {
             Settings: 'Setting'
@@ -26,6 +26,45 @@ angular.module('settings', [])
             views: {
                 menuContent: {
                     templateUrl: 'templates/settings/terms-conditions.html',
+                    controller: 'Settings'
+                }
+            }
+        })
+
+        .state('app.settingsLanguage', {
+            url: '/settings/language',
+            /*resolve: {
+            Settings: 'Setting'
+        },*/
+            views: {
+                menuContent: {
+                    templateUrl: 'templates/settings/language.html',
+                    controller: 'Settings'
+                }
+            }
+        })
+
+        .state('app.settingsUnits', {
+            url: '/settings/units',
+            /*resolve: {
+            Settings: 'Setting'
+        },*/
+            views: {
+                menuContent: {
+                    templateUrl: 'templates/settings/units.html',
+                    controller: 'Settings'
+                }
+            }
+        })
+
+        .state('app.settingsHelp', {
+            url: '/settings/help',
+            /*resolve: {
+            Settings: 'Setting'
+        },*/
+            views: {
+                menuContent: {
+                    templateUrl: 'templates/settings/help.html',
                     controller: 'Settings'
                 }
             }

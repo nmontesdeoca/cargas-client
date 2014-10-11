@@ -4,7 +4,7 @@
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list>
-            <ion-item ng-repeat="setting in settings" class="item" href="{{setting.link}}">{{setting.name}}</ion-item>
+            <ion-item ng-repeat="setting in settings" class="item" ui-sref="{{setting.state}}">{{setting.name}}</ion-item>
         </ion-list>
     </ion-content>
 </ion-view>

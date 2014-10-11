@@ -3,7 +3,7 @@
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-nav-buttons side="right">
-        <a href="#/cars/new" class="button button-icon icon ion-plus"></a>
+        <a ui-sref="app.carNew" class="button button-icon icon ion-plus"></a>
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list
@@ -11,7 +11,7 @@
             show-reorder="false"
             can-swipe="true">
 
-            <ion-item ng-repeat="car in cars" href="#/cars/{{car._id}}" class="item-thumbnail-left">
+            <ion-item ng-repeat="car in cars" ui-sref="app.carEdit({id: car._id})" class="item-thumbnail-left">
                 <img ng-src="{{car.image || 'http://ionicframework.com/img/docs/blue-album.jpg'}}">
                 <h2>{{car.make}} {{car.model}}</h2>
                 <p>{{car.year}}</p>

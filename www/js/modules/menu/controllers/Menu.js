@@ -7,31 +7,38 @@ angular.module('starter')
         $scope.menuItems = [{
             iconName: 'stats-bars',
             name: 'Overview',
-            link: '#/overview'
+            link: '#/overview',
+            state: 'app.overview'
         }, {
             iconName: 'person',
             name: 'Profile',
-            link: '#/profile'
+            link: '#/profile',
+            state: 'app.profile'
         }, {
             iconName: 'model-s',
             name: 'Vehicles',
-            link: '#/cars'
+            link: '#/cars',
+            state: 'app.carList'
         }, {
             iconName: 'stats-bars',
             name: 'Fuels',
-            link: '#/fuels'
+            link: '#/fuels',
+            state: 'app.fuelList'
         }, {
             iconName: 'waterdrop',
             name: 'Refuels',
-            link: '#/refuels'
+            link: '#/refuels',
+            state: 'app.refuelList'
         }, {
             iconName: 'stats-bars',
             name: 'Spents',
-            link: '#/spents'
+            link: '#/spents',
+            state: 'app.spents'
         }, {
             iconName: 'gear-a',
             name: 'Settings',
-            link: '#/settings'
+            link: '#/settings',
+            state: 'app.settingsList'
         }
         // ,
         // {

@@ -6,19 +6,24 @@ angular.module('settings')
 
         $scope.settings = [{
             name: 'Units',
-            link: '#/settings/units'
+            link: '#/settings/units',
+            state: 'app.settingsUnits'
         }, {
             name: 'Language',
-            link: '#/settings/language'
+            link: '#/settings/language',
+            state: 'app.settingsLanguage'
         }, {
             name: 'Terms and Conditions',
-            link: '#/settings/terms-conditions'
+            link: '#/settings/terms-conditions',
+            state: 'app.settingsTerms'
         }, {
             name: 'About',
-            link: '#/settings/about'
+            link: '#/settings/about',
+            state: 'app.settingsAbout'
         }, {
             name: 'Help',
-            link: '#/settings/help'
+            link: '#/settings/help',
+            state: 'app.settingsHelp'
         }];
 
     }
