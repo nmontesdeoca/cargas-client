@@ -21,34 +21,28 @@ angular.module('spents', [])
                         return Refuel.getTotalCapacity();
                     }
                 ],
-                spentByYear: ['Refuel', 'Utils',
-                    function (Refuel, Utils) {
-                        var firstDate = Refuel.getFirstRefuel().date,
-                            lastDate = Refuel.getLastRefuel().date;
-
-                        return Refuel.getTotalSpent() /
-                            Utils.millisecondsToYears(lastDate -
-                                firstDate);
+                spentByYear: ['Refuel',
+                    function (Refuel) {
+                        if (Refuel.hasRefuels()) {
+                            return Refuel.getSpentByYear();
+                        }
+                        return 0;
                     }
                 ],
-                spentByMonth: ['Refuel', 'Utils',
-                    function (Refuel, Utils) {
-                        var firstDate = Refuel.getFirstRefuel().date,
-                            lastDate = Refuel.getLastRefuel().date;
-
-                        return Refuel.getTotalSpent() /
-                            Utils.millisecondsToMonths(lastDate -
-                                firstDate);
+                spentByMonth: ['Refuel',
+                    function (Refuel) {
+                        if (Refuel.hasRefuels()) {
+                            return Refuel.getSpentByMonth();
+                        }
+                        return 0;
                     }
                 ],
-                spentByDay: ['Refuel', 'Utils',
-                    function (Refuel, Utils) {
-                        var firstDate = Refuel.getFirstRefuel().date,
-                            lastDate = Refuel.getLastRefuel().date;
-
-                        return Refuel.getTotalSpent() /
-                            Utils.millisecondsToDays(lastDate -
-                                firstDate);
+                spentByDay: ['Refuel',
+                    function (Refuel) {
+                        if (Refuel.hasRefuels()) {
+                            return Refuel.getSpentByDay();
+                        }
+                        return 0;
                     }
                 ]
             },

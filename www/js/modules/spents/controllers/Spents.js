@@ -17,5 +17,7 @@ angular.module('spents')
         $scope.spentByDay = spentByDay;
         $scope.totalKilometers = totalKilometers;
         $scope.totalCapacity = totalCapacity;
+        $scope.spentByKilometer = totalKilometers ? totalSpent / totalKilometers : 0;
+        $scope.kilometersByLiter = totalCapacity ? totalKilometers / totalCapacity : 0;
     }
 ]);

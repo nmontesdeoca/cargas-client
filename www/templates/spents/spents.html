@@ -9,6 +9,10 @@
                 <p>{{totalSpent | currency}}</p>
             </ion-item>
             <ion-item class="item">
+                <h2>Total capacity</h2>
+                <p>{{totalCapacity | number | capacity}}</p>
+            </ion-item>
+            <ion-item class="item">
                 <h2>Spent by year</h2>
                 <p>{{spentByYear | currency}}</p>
             </ion-item>
@@ -22,11 +26,11 @@
             </ion-item>
             <ion-item class="item">
                 <h2>Spent by kilometer</h2>
-                <p>{{totalSpent / totalKilometers | currency}}</p>
+                <p>{{spentByKilometer | currency}}</p>
             </ion-item>
             <ion-item class="item">
                 <h2>Kilometers by liter</h2>
-                <p>{{totalKilometers / totalCapacity | number}}</p>
+                <p>{{kilometersByLiter | number}}</p>
             </ion-item>
         </ion-list>
     </ion-content>

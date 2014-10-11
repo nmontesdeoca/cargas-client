@@ -13,8 +13,73 @@ angular.module('refuels')
          * return the total kilometers (last refuel kms - first refuel kms)
          */
         RefuelModel.getTotalKilometers = function () {
-            return this.getLastRefuel().overallKilometers - this.getFirstRefuel()
-                .overallKilometers;
+            var firstRefuel = this.getFirstRefuel(),
+                lastRefuel = this.getLastRefuel();
+
+            if (!firstRefuel) {
+                return 0;
+            }
+
+            return lastRefuel.overallKilometers - firstRefuel.overallKilometers;
+        };
+
+        /**
+         * return the spent by year amount
+         * precondition: RefuelModel.hasRefuels()
+         */
+        RefuelModel.getSpentByYear = function () {
+            return Utils.millisecondsToYears(this.getSpentByMilisecond());
+        };
+
+        /**
+         * return the spent by month amount
+         * precondition: RefuelModel.hasRefuels()
+         */
+        RefuelModel.getSpentByMonth = function () {
+            return Utils.millisecondsToMonths(this.getSpentByMilisecond());
+        };
+
+        /**
+         * return the spent by day amount
+         * precondition: RefuelModel.hasRefuels()
+         */
+        RefuelModel.getSpentByDay = function () {
+            return Utils.millisecondsToDays(this.getSpentByMilisecond());
+        };
+
+        /**
+         * return the spent by hour amount
+         * precondition: RefuelModel.hasRefuels()
+         */
+        RefuelModel.getSpentByHour = function () {
+            return Utils.millisecondsToHours(this.getSpentByMilisecond());
+        };
+
+        /**
+         * return the spent by minute amount
+         * precondition: RefuelModel.hasRefuels()
+         */
+        RefuelModel.getSpentByMinute = function () {
+            return Utils.millisecondsToMinutes(this.getSpentByMilisecond());
+        };
+
+        /**
+         * return the spent by second amount
+         * precondition: RefuelModel.hasRefuels()
+         */
+        RefuelModel.getSpentBySecond = function () {
+            return Utils.millisecondsToSeconds(this.getSpentByMilisecond());
+        };
+
+        /**
+         * return the spent by millisecond amount
+         * precondition: RefuelModel.hasRefuels()
+         */
+        RefuelModel.getSpentByMilisecond = function () {
+            var firstDate = Refuel.getFirstRefuel().date,
+                lastDate = Refuel.getLastRefuel().date;
+
+            return Refuel.getTotalSpent() / (lastDate - firstDate);
         };
 
         /**
