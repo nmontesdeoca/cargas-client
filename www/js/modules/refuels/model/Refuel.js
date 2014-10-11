@@ -11,16 +11,24 @@ angular.module('refuels')
 
         /**
          * return the total kilometers (last refuel kms - first refuel kms)
+         * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getTotalKilometers = function () {
             var firstRefuel = this.getFirstRefuel(),
                 lastRefuel = this.getLastRefuel();
 
-            if (!firstRefuel) {
-                return 0;
-            }
-
             return lastRefuel.overallKilometers - firstRefuel.overallKilometers;
+        };
+
+        /**
+         * return the total kilometers (last refuel data - first refuel date)
+         * precondition: RefuelModel.hasRefuels()
+         */
+        RefuelModel.getTotalMilliseconds = function () {
+            var firstDate = this.getFirstRefuel().date,
+                lastDate = this.getLastRefuel().date;
+
+            return lastDate - firstDate;
         };
 
         /**
@@ -28,7 +36,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getSpentByYear = function () {
-            return Utils.millisecondsToYears(this.getSpentByMilisecond());
+            return this.getTotalSpent() / Utils.millisecondsToYears(this.getTotalMilliseconds());
         };
 
         /**
@@ -36,7 +44,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getSpentByMonth = function () {
-            return Utils.millisecondsToMonths(this.getSpentByMilisecond());
+            return this.getTotalSpent() / Utils.millisecondsToMonths(this.getTotalMilliseconds());
         };
 
         /**
@@ -44,7 +52,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getSpentByDay = function () {
-            return Utils.millisecondsToDays(this.getSpentByMilisecond());
+            return this.getTotalSpent() / Utils.millisecondsToDays(this.getTotalMilliseconds());
         };
 
         /**
@@ -52,7 +60,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getSpentByHour = function () {
-            return Utils.millisecondsToHours(this.getSpentByMilisecond());
+            return this.getTotalSpent() / Utils.millisecondsToHours(this.getTotalMilliseconds());
         };
 
         /**
@@ -60,7 +68,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getSpentByMinute = function () {
-            return Utils.millisecondsToMinutes(this.getSpentByMilisecond());
+            return this.getTotalSpent() / Utils.millisecondsToMinutes(this.getTotalMilliseconds());
         };
 
         /**
@@ -68,7 +76,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getSpentBySecond = function () {
-            return Utils.millisecondsToSeconds(this.getSpentByMilisecond());
+            return this.getTotalSpent() / Utils.millisecondsToSeconds(this.getTotalMilliseconds());
         };
 
         /**
@@ -76,10 +84,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getSpentByMilisecond = function () {
-            var firstDate = Refuel.getFirstRefuel().date,
-                lastDate = Refuel.getLastRefuel().date;
-
-            return Refuel.getTotalSpent() / (lastDate - firstDate);
+            return this.getTotalSpent() / (this.getTotalMilliseconds());
         };
 
         /**

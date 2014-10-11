@@ -13,7 +13,10 @@ angular.module('spents', [])
                 ],
                 totalKilometers: ['Refuel',
                     function (Refuel) {
-                        return Refuel.getTotalKilometers();
+                        if (Refuel.hasRefuels()) {
+                            return Refuel.getTotalKilometers();
+                        }
+                        return 0;
                     }
                 ],
                 totalCapacity: ['Refuel',

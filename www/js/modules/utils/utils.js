@@ -627,8 +627,9 @@ angular.module('utils', [])
         },
 
         millisecondsToMonths: function (milliseconds) {
-            // we use 30 days here, but maybe we need to investigate which is the best way
-            return this.millisecondsToDays(milliseconds) / 30;
+            // we use 30.4166666667 days here, but maybe we need to investigate which is the best way
+            // http://www.convertunits.com/from/days/to/month
+            return this.millisecondsToDays(milliseconds) / 30.4166666667;
         },
 
         millisecondsToYears: function (milliseconds) {
