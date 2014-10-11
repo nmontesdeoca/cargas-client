@@ -4,15 +4,25 @@ angular.module('utils', [])
     return {
         restrict: 'A',
         link: function ($scope, $element, $attrs) {
-            Flickr.search('highway,' + (Utils.isNight() ? 'night' : 'day')).then(function (data) {
+            var time = Utils.isNight() ? 'night' : 'day';
+
+            Flickr.search({
+                tags: 'highway,' + time,
+                tag_mode: 'all',
+                text: 'highway road street ' + time,
+                // TODO before set 500 pages we need to know if there are 500 results ?
+                page: Math.round(Math.random() * 500),
+                per_page: 1,
+                media: 'photos',
+                privacy_filter: 1,
+                content_type: 4
+            }).then(function (data) {
                 var image = new Image(),
                     photos = data && data.photos && data.photos.photo,
-                    index,
                     item,
                     url;
 
                 if (photos && photos.length) {
-                    // index = Math.round(Math.random() * (photos.length - 1));
                     item = photos[0];
                     url = 'http://farm' + item.farm + '.static.flickr.com/' +
                         item.server + '/' +
@@ -830,23 +840,10 @@ angular.module('utils', [])
     });
 
     return {
-        search: function (tags) {
+        search: function (options) {
             var q = $q.defer();
 
-            flickrSearch.get({
-                tags: tags,
-                tag_mode: 'all',
-                text: 'highway road street ' + tags.split(',')[1],
-                page: Math.round(Math.random() * 500),
-                per_page: 1,
-                media: 'photos',
-                privacy_filter: 1,
-                content_type: 4
-            }, function(data) {
-                q.resolve(data);
-            }, function(error) {
-                q.reject(error);
-            });
+            flickrSearch.get(options, q.resolve, q.reject);
 
             return q.promise;
         }
