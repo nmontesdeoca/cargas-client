@@ -1,6 +1,6 @@
-angular.module('spents')
+angular.module('stats')
 
-.controller('Spents', [
+.controller('Stats', [
     '$scope',
     'totalSpent',
     'spentByYear',
@@ -8,9 +8,9 @@ angular.module('spents')
     'spentByDay',
     'totalKilometers',
     'totalCapacity',
-    function ($scope, totalSpent, spentByYear, spentByMonth, spentByDay,
-        totalKilometers, totalCapacity) {
-        // we can use a simple object with all the data instead of multiple parameters
+    function ($scope, totalSpent, spentByYear, spentByMonth, spentByDay, totalKilometers,
+        totalCapacity) {
+
         $scope.totalSpent = totalSpent;
         $scope.spentByYear = spentByYear;
         $scope.spentByMonth = spentByMonth;

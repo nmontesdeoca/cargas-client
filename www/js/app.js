@@ -6,7 +6,7 @@ angular.module('starter', [
     'cars',
     'refuels',
     'fuels',
-    'spents',
+    'stats',
     'settings',
     'utils'
 ])
