@@ -849,4 +849,35 @@ angular.module('utils', [])
             return q.promise;
         }
     };
+}])
+
+.factory('UnitsService', ['Setting', function(Setting) {
+    var capacityUnits = [
+        {
+            name: 'Litres (LT)',
+            unitName: 'lt'
+        },
+        {
+            name: 'Gallons (GAL)',
+            unitName: 'gal'
+        }
+    ];
+
+    var selectedUnit;
+
+    var getCapacityUnits = function() {
+        return capacityUnits;
+    };
+    var setCapacityUnit = function(unit) {
+        selectedUnit = unit;
+    };
+    var getSelectedCapacity = function() {
+        return selectedUnit;
+    };
+
+    return {
+        getCapacityUnits: getCapacityUnits,
+        setCapacityUnit: setCapacityUnit,
+        getSelectedCapacity: getSelectedCapacity
+    };
 }]);
