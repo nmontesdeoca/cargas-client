@@ -2,22 +2,49 @@ angular.module('stats')
 
 .controller('Stats', [
     '$scope',
-    'totalSpent',
-    'spentByYear',
-    'spentByMonth',
-    'spentByDay',
-    'totalKilometers',
-    'totalCapacity',
-    function ($scope, totalSpent, spentByYear, spentByMonth, spentByDay, totalKilometers,
-        totalCapacity) {
+    '$state',
+    'Car',
+    'data',
+    'cars',
+    function ($scope, $state, Car, data, cars) {
+        $scope.cars = cars;
 
-        $scope.totalSpent = totalSpent;
-        $scope.spentByYear = spentByYear;
-        $scope.spentByMonth = spentByMonth;
-        $scope.spentByDay = spentByDay;
-        $scope.totalKilometers = totalKilometers;
-        $scope.totalCapacity = totalCapacity;
-        $scope.spentByKilometer = totalKilometers ? totalSpent / totalKilometers : 0;
-        $scope.kilometersByLiter = totalCapacity ? totalKilometers / totalCapacity : 0;
+        $scope.filter = {
+            car: ''
+        };
+
+        $scope.$watch('filter.car', function (newFilter, oldFilter) {
+            if (newFilter) {
+                $scope.car = Car.get({
+                    _id: Number(newFilter)
+                });
+
+                $scope.totalSpent = $scope.car.getTotalSpent();
+                $scope.totalCapacity = $scope.car.getTotalCapacity();
+
+                if ($scope.car.hasMoreThanOneRefuel()) {
+                    $scope.spentByYear = $scope.car.getSpentByYear();
+                    $scope.spentByMonth = $scope.car.getSpentByMonth();
+                    $scope.spentByDay = $scope.car.getSpentByDay();
+                    $scope.spentByKilometer = $scope.car.getSpentByKilometer();
+                    $scope.kilometersByLiter = $scope.car.getKilometersByLiter();
+                } else {
+                    $scope.spentByYear = 0;
+                    $scope.spentByMonth = 0;
+                    $scope.spentByDay = 0;
+                    $scope.spentByKilometer = 0;
+                    $scope.kilometersByLiter = 0;
+                }
+
+            } else {
+                $scope.totalSpent = data.totalSpent;
+                $scope.spentByYear = data.spentByYear;
+                $scope.spentByMonth = data.spentByMonth;
+                $scope.spentByDay = data.spentByDay;
+                $scope.totalCapacity = data.totalCapacity;
+                $scope.spentByKilometer = data.spentByKilometer;
+                $scope.kilometersByLiter = data.kilometersByLiter;
+            }
+        });
     }
 ]);

@@ -6,48 +6,42 @@ angular.module('stats', [])
         $stateProvider.state('app.stats', {
             url: '/stats',
             resolve: {
-                totalSpent: ['Refuel',
-                    function (Refuel) {
-                        return Refuel.getTotalSpent();
+                data: ['Refuel', function (Refuel) {
+                    var data = {
+                        kilometersByLiter: 0,
+                        totalCapacity: Refuel.getTotalCapacity(),
+                        totalKilometers: 0,
+                        totalSpent: Refuel.getTotalSpent(),
+                        spentByDay: 0,
+                        spentByKilometer: 0,
+                        spentByMonth: 0,
+                        spentByYear: 0
+                    };
+
+                    if (Refuel.hasMoreThanOneRefuel()) {
+                        _.extend(data, {
+                            totalKilometers: Refuel.getTotalKilometers(),
+                            spentByDay: Refuel.getSpentByDay(),
+                            spentByMonth: Refuel.getSpentByMonth(),
+                            spentByYear: Refuel.getSpentByYear()
+                        });
+
+                        data.kilometersByLiter = data.totalKilometers / data.totalCapacity;
+                        data.spentByKilometer = data.totalSpent / data.totalKilometers;
                     }
-                ],
-                totalKilometers: ['Refuel',
-                    function (Refuel) {
-                        if (Refuel.hasRefuels()) {
-                            return Refuel.getTotalKilometers();
-                        }
-                        return 0;
-                    }
-                ],
-                totalCapacity: ['Refuel',
-                    function (Refuel) {
-                        return Refuel.getTotalCapacity();
-                    }
-                ],
-                spentByYear: ['Refuel',
-                    function (Refuel) {
-                        if (Refuel.hasRefuels()) {
-                            return Refuel.getSpentByYear();
-                        }
-                        return 0;
-                    }
-                ],
-                spentByMonth: ['Refuel',
-                    function (Refuel) {
-                        if (Refuel.hasRefuels()) {
-                            return Refuel.getSpentByMonth();
-                        }
-                        return 0;
-                    }
-                ],
-                spentByDay: ['Refuel',
-                    function (Refuel) {
-                        if (Refuel.hasRefuels()) {
-                            return Refuel.getSpentByDay();
-                        }
-                        return 0;
-                    }
-                ]
+
+                    return data;
+                }],
+                cars: ['Car', function (Car) {
+                    var cars = Car.query();
+
+                    return _.object(
+                        _.pluck(cars, '_id'),
+                        _.map(cars, function (car) {
+                            return car.getName();
+                        })
+                    );
+                }],
             },
             views: {
                 menuContent: {

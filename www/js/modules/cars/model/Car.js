@@ -1,7 +1,7 @@
 angular.module('cars')
 
-.factory('Car', ['Model', 'Utils', 'Refuel',
-    function (Model, Utils, Refuel) {
+.factory('Car', ['Model', 'Utils', 'Refuel', 'TIME',
+    function (Model, Utils, Refuel, TIME) {
 
         var CarModel = Model('cars');
 
@@ -54,6 +54,106 @@ angular.module('cars')
             }, 0);
         };
 
+        /**
+         * returns true if the car has been refueled, false in other case
+         */
+        CarModel.prototype.hasRefuels = function () {
+            return !!this.getRefuels().length;
+        };
+
+        /**
+         * returns true if the car has been refueled more than one time, false in other case
+         */
+        CarModel.prototype.hasMoreThanOneRefuel = function () {
+            return this.getRefuels().length > 1;
+        };
+
+        /**
+         * return the first refuel for a car
+         * precondition: this.hasRefuels()
+         */
+        CarModel.prototype.getFirstRefuel = function () {
+            return _.last(this.getRefuels());
+        };
+
+        /**
+         * return the last refuel for a car
+         * precondition: this.hasRefuels()
+         */
+        CarModel.prototype.getLastRefuel = function () {
+            return _.first(this.getRefuels());
+        };
+
+
+        /**
+         * return the total time between the first and the last refuel for a car
+         * the unit used will be the passed by parameter using the constant
+         * TIME
+         * precondition: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getTotalTime = function (timeUnit) {
+            var firstDate = this.getFirstRefuel().date,
+                lastDate = this.getLastRefuel().date;
+
+            return Utils.convertTime(lastDate - firstDate, timeUnit);
+        };
+
+        /**
+         * return the spent by year amount in refuels for a car
+         * precondition: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getSpentByYear = function () {
+            return this.getTotalSpent() / this.getTotalTime(TIME.YEARS);
+        };
+
+        /**
+         * return the spent by month amount in refuels for a car
+         * precondition: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getSpentByMonth = function () {
+            return this.getTotalSpent() / this.getTotalTime(TIME.MONTHS);
+        };
+
+        /**
+         * return the spent by day amount in refuels for a car
+         * precondition: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getSpentByDay = function () {
+            return this.getTotalSpent() / this.getTotalTime(TIME.DAYS);
+        };
+
+        /**
+         * return the spent by hour amount in refuels for a car
+         * precondition: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getSpentByHour = function () {
+            return this.getTotalSpent() / this.getTotalTime(TIME.HOURS);
+        };
+
+        /**
+         * return the spent by minute amount in refuels for a car
+         * precondition: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getSpentByMinute = function () {
+            return this.getTotalSpent() / this.getTotalTime(TIME.MINUTES);
+        };
+
+        /**
+         * return the spent by second amount in refuels for a car
+         * precondition: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getSpentBySecond = function () {
+            return this.getTotalSpent() / this.getTotalTime(TIME.SECONDS);
+        };
+
+        /**
+         * return the spent by millisecond amount in refuels for  car
+         * precondition: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getSpentByMilisecond = function () {
+            return this.getTotalSpent() / this.getTotalTime(TIME.MILLISECONDS);
+        };
+
         /*
          * returns total capacity spent in refuels for a car
          */
@@ -72,7 +172,7 @@ angular.module('cars')
             var refuels = Refuel.getRefuelsByMonth(month, year);
             // practically the same as the getTotalSpent function
             return _.where(refuels, {
-                'car': this._id.toString()
+                car: this._id.toString()
             });
         };
 
@@ -81,6 +181,33 @@ angular.module('cars')
          */
         CarModel.prototype.getName = function () {
             return this.make + " " + this.model;
+        };
+
+        /**
+         * returns the total kilometers traveled for a car
+         * preconditions: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getTotalKilometers = function () {
+            var firstRefuelKilometers = this.getFirstRefuel().overallKilometers,
+                lastRefuelKilometers = this.getLastRefuel().overallKilometers;
+                
+            return lastRefuelKilometers - firstRefuelKilometers;
+        };
+
+        /**
+         * returns the amount spent by kilometer
+         * preconditions: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getSpentByKilometer = function () {
+            return this.getTotalSpent() / this.getTotalKilometers();
+        };
+
+        /**
+         * returns the kilometers traveled with one liter of fuel
+         * preconditions: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getKilometersByLiter = function () {
+            return this.getTotalKilometers() / this.getTotalCapacity();
         };
 
         return CarModel;

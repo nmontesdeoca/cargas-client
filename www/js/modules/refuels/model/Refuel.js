@@ -26,6 +26,13 @@ angular.module('refuels')
 
             _.each(refuelsByCar, function (carRefuels) {
                 var refuels = _.sortBy(carRefuels, 'date').reverse();
+
+                /**
+                 * we can not use the car.getTotalKilometers() here
+                 * because we will need Car as a dependency, but
+                 * Car has already Refuel as a dependency
+                 */
+
                 totalKilometers += (
                     _.first(refuels).overallKilometers - _.last(refuels).overallKilometers
                 );
@@ -41,27 +48,10 @@ angular.module('refuels')
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getTotalTime = function (timeUnit) {
-            debugger;
             var firstDate = RefuelModel.getFirstRefuel().date,
-                lastDate = RefuelModel.getLastRefuel().date,
-                milliseconds = lastDate - firstDate;
+                lastDate = RefuelModel.getLastRefuel().date;
 
-            switch (timeUnit) {
-                case TIME.SECONDS:
-                    return Utils.millisecondsToSeconds(milliseconds);
-                case TIME.MINUTES:
-                    return Utils.millisecondsToMinutes(milliseconds);
-                case TIME.HOURS:
-                    return Utils.millisecondsToHours(milliseconds);
-                case TIME.DAYS:
-                    return Utils.millisecondsToDays(milliseconds);
-                case TIME.MONTHS:
-                    return Utils.millisecondsToMonths(milliseconds);
-                case TIME.YEARS:
-                    return Utils.millisecondsToYears(milliseconds);
-            }
-
-            return milliseconds;
+            return Utils.convertTime(lastDate - firstDate, timeUnit);
         };
 
         /**
@@ -167,6 +157,13 @@ angular.module('refuels')
         };
 
         /**
+         * returns true if there is at least two refuels, false otherwise
+         */
+        RefuelModel.hasMoreThanOneRefuel = function () {
+            return RefuelModel.query().length > 1;
+        };
+
+        /**
          * returns refuels by car id
          */
         RefuelModel.getRefuelsByCarId = function (carId) {
@@ -201,30 +198,6 @@ angular.module('refuels')
 
             return refuels;
         };
-
-        // /**
-        //  * returns total spent by car id
-        //  */
-        // RefuelModel.getTotalSpentByCarId = function (carId) {
-        //     var refuelsByCar = RefuelModel.getRefuelsByCarId(carId);
-
-        //     // practically the same as the getTotalSpent function
-        //     return _.reduce(refuelsByCar, function (memo, current) {
-        //         return memo + current.get('amount');
-        //     }, 0);
-        // };
-
-        // *
-        //  * returns total gas filled by car id
-
-        // RefuelModel.getTotalCapacityByCarId = function (carId) {
-        //     var refuelsByCar = RefuelModel.getRefuelsByCarId(carId);
-
-        //     // practically the same as the getTotalCapacity function
-        //     return _.reduce(refuelsByCar, function (memo, current) {
-        //         return memo + current.get('capacity');
-        //     }, 0);
-        // };
 
         /**
          * Instance methods

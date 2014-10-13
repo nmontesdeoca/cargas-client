@@ -4,6 +4,12 @@
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list>
+            <label class="item item-input item-select">
+                <div class="input-label">Vehicle</div>
+                <select ng-model="filter.car" ng-options="key as value for (key, value) in cars">
+                    <option value="">All</option>
+                </select>
+            </label>
             <ion-item class="item">
                 <h2>Total spent</h2>
                 <p>{{totalSpent | currency}}</p>
