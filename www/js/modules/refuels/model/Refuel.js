@@ -10,14 +10,28 @@ angular.module('refuels')
          */
 
         /**
-         * return the total kilometers (last refuel kms - first refuel kms)
+         * return all the refuels grouped by car
+         */
+        RefuelModel.getRefuelsByCar = function () {
+             return _.groupBy(RefuelModel.query(), 'car');
+        };
+
+        /**
+         * return the total kilometers between all of the cars
          * precondition: RefuelModel.hasRefuels()
          */
         RefuelModel.getTotalKilometers = function () {
-            var firstRefuel = this.getFirstRefuel(),
-                lastRefuel = this.getLastRefuel();
+            var refuelsByCar = RefuelModel.getRefuelsByCar(),
+                totalKilometers = 0;
 
-            return lastRefuel.overallKilometers - firstRefuel.overallKilometers;
+            _.each(refuelsByCar, function (carRefuels) {
+                var refuels = _.sortBy(carRefuels, 'date').reverse();
+                totalKilometers += (
+                    _.first(refuels).overallKilometers - _.last(refuels).overallKilometers
+                );
+            });
+
+            return totalKilometers;
         };
 
         /**
