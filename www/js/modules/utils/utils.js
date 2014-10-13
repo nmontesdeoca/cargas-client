@@ -103,6 +103,13 @@ angular.module('utils', [])
     };
 })
 
+.filter('days', function () {
+    return function (value) {
+        value = parseInt(value);
+        return value += ' day' + (value > 1 ? 's' : '');
+    };
+})
+
 .factory('Utils', ['TIME', function (TIME) {
     return {
 
@@ -128,6 +135,28 @@ angular.module('utils', [])
             date.setDate(day);
             date.setHours(0);
             return date.getTime();
+        },
+
+        getAverageDataBetweenRefuels: function (refuels, property) {
+            var total = 0,
+                i = 0,
+                length = refuels.length - 1;
+
+            for (; i < length; i++) {
+                total += (refuels[i][property] - refuels[i + 1][property]);
+            }
+
+            return total / length;
+        },
+
+        getAverageDistanceBetweenRefuels: function (refuels) {
+            return this.getAverageDataBetweenRefuels(refuels, 'overallKilometers');
+        },
+
+        getAverageTimeBetweenRefuels: function (refuels) {
+            var milliseconds = this.getAverageDataBetweenRefuels(refuels, 'date');
+
+            return this.convertTime(milliseconds, TIME.DAYS);
         },
 
         getMakes: function () {

@@ -13,7 +13,7 @@ angular.module('refuels')
          * return all the refuels grouped by car
          */
         RefuelModel.getRefuelsByCar = function () {
-             return _.groupBy(RefuelModel.query(), 'car');
+             return _.groupBy(RefuelModel.getRefuelsSortByDate(), 'car');
         };
 
         /**
@@ -45,7 +45,7 @@ angular.module('refuels')
          * return the total time between the first and the last refuel
          * the unit used will be the passed by parameter using the constant
          * TIME
-         * precondition: RefuelModel.hasRefuels()
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getTotalTime = function (timeUnit) {
             var firstDate = RefuelModel.getFirstRefuel().date,
@@ -56,7 +56,7 @@ angular.module('refuels')
 
         /**
          * return the spent by year amount
-         * precondition: RefuelModel.hasRefuels()
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByYear = function () {
             return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.YEARS);
@@ -64,7 +64,7 @@ angular.module('refuels')
 
         /**
          * return the spent by month amount
-         * precondition: RefuelModel.hasRefuels()
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByMonth = function () {
             return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.MONTHS);
@@ -72,7 +72,7 @@ angular.module('refuels')
 
         /**
          * return the spent by day amount
-         * precondition: RefuelModel.hasRefuels()
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByDay = function () {
             return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.DAYS);
@@ -80,7 +80,7 @@ angular.module('refuels')
 
         /**
          * return the spent by hour amount
-         * precondition: RefuelModel.hasRefuels()
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByHour = function () {
             return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.HOURS);
@@ -88,7 +88,7 @@ angular.module('refuels')
 
         /**
          * return the spent by minute amount
-         * precondition: RefuelModel.hasRefuels()
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByMinute = function () {
             return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.MINUTES);
@@ -96,7 +96,7 @@ angular.module('refuels')
 
         /**
          * return the spent by second amount
-         * precondition: RefuelModel.hasRefuels()
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentBySecond = function () {
             return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.SECONDS);
@@ -104,7 +104,7 @@ angular.module('refuels')
 
         /**
          * return the spent by millisecond amount
-         * precondition: RefuelModel.hasRefuels()
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByMilisecond = function () {
             return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.MILLISECONDS);
@@ -197,6 +197,33 @@ angular.module('refuels')
             });
 
             return refuels;
+        };
+
+        /**
+         * returns the average timestamp between refuels
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
+         */
+        RefuelModel.getAverageTimeBetweenRefuels = function () {
+            return Utils.getAverageTimeBetweenRefuels(RefuelModel.getRefuelsSortByDate());
+        };
+
+        /**
+         * returns the average distance between refuels
+         * precondition: RefuelModel.hasMoreThanOneRefuel()
+         */
+        RefuelModel.getAverageDistanceBetweenRefuels = function () {
+            var refuelsByCar = RefuelModel.getRefuelsByCar(),
+                distance = 0,
+                count = 0;
+
+            _.each(refuelsByCar, function (carRefuels) {
+                if (carRefuels.length > 1) {
+                    distance += Utils.getAverageDistanceBetweenRefuels(carRefuels);
+                    count++;
+                }
+            });
+
+            return distance / count;
         };
 
         /**

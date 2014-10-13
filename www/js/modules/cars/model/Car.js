@@ -190,7 +190,7 @@ angular.module('cars')
         CarModel.prototype.getTotalKilometers = function () {
             var firstRefuelKilometers = this.getFirstRefuel().overallKilometers,
                 lastRefuelKilometers = this.getLastRefuel().overallKilometers;
-                
+
             return lastRefuelKilometers - firstRefuelKilometers;
         };
 
@@ -208,6 +208,22 @@ angular.module('cars')
          */
         CarModel.prototype.getKilometersByLiter = function () {
             return this.getTotalKilometers() / this.getTotalCapacity();
+        };
+
+        /**
+         * returns the average timestamp between refuels for a car
+         * preconditions: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getAverageTimeBetweenRefuels = function () {
+            return Utils.getAverageTimeBetweenRefuels(this.getRefuels());
+        };
+
+        /**
+         * returns the average distance between refuels for a car
+         * preconditions: this.hasMoreThanOneRefuel()
+         */
+        CarModel.prototype.getAverageDistanceBetweenRefuels = function () {
+            return Utils.getAverageDistanceBetweenRefuels(this.getRefuels());
         };
 
         return CarModel;

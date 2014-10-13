@@ -38,6 +38,14 @@
                 <h2>Kilometers by liter</h2>
                 <p>{{kilometersByLiter | number}}</p>
             </ion-item>
+            <ion-item class="item">
+                <h2>Average time between refuels</h2>
+                <p>{{averageTimeBetweenRefuels | number | days}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Average distance between refuels</h2>
+                <p>{{averageDistanceBetweenRefuels | distance}}</p>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
