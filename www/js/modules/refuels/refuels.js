@@ -79,7 +79,7 @@ angular.module('refuels', [])
                     return _.object(
                         _.pluck(cars, '_id'),
                         _.map(cars, function (car) {
-                            return car.make + ' ' + car.model;
+                            return car.getName();
                         })
                     );
                 }
@@ -127,7 +127,7 @@ angular.module('refuels', [])
                     return _.object(
                         _.pluck(cars, '_id'),
                         _.map(cars, function (car) {
-                            return car.make + ' ' + car.model;
+                            return car.getName();
                         })
                     );
                 }

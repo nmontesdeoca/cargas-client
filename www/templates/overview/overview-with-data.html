@@ -24,7 +24,7 @@
 <!--             	<h3>This month so far</h3>
 <ul>
 	<ion-item ng-repeat="car in carsRefueledThisMonth()">
-		<h4>{{car.make + ' ' + car.model}} </h4>
+		<h4>{{car.getName()}} </h4>
         <strong>{{car.refuels.length}} refuels</strong> -
 		<strong>{{car.totalSpent | currency}}</strong> -
 		<strong>{{car.totalCapacity | capacity}}</strong>
