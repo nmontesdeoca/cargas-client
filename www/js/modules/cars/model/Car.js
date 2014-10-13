@@ -68,7 +68,7 @@ angular.module('cars')
          * get refueled cars (cars that have at least one refuel)
          */
         CarModel.getRefueledCars = function () {
-            var cars = this.query();
+            var cars = CarModel.query();
 
             return _.filter(cars, function (car) {
                 return car.getRefuels().length > 0;
