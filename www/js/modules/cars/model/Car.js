@@ -6,6 +6,25 @@ angular.module('cars')
         var CarModel = Model('cars');
 
         /**
+         * Class methods - Static method
+         */
+
+        /*
+         * get refueled cars (cars that have at least one refuel)
+         */
+        CarModel.getRefueledCars = function () {
+            var cars = CarModel.query();
+
+            return _.filter(cars, function (car) {
+                return car.getRefuels().length > 0;
+            });
+        };
+
+        /**
+         * Instance methods
+         */
+
+        /**
          * replace the current fuel object with the correct one from the list
          * if the second parameter "id" is present, the correct fuel will be that
          */
@@ -62,17 +81,6 @@ angular.module('cars')
          */
         CarModel.prototype.getName = function () {
             return this.make + " " + this.model;
-        };
-
-        /*
-         * get refueled cars (cars that have at least one refuel)
-         */
-        CarModel.getRefueledCars = function () {
-            var cars = CarModel.query();
-
-            return _.filter(cars, function (car) {
-                return car.getRefuels().length > 0;
-            });
         };
 
         return CarModel;
