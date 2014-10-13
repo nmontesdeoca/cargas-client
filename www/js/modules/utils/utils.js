@@ -48,6 +48,22 @@ angular.module('utils', [])
     }
 ])
 
+.directive('fixTransparentIonItem', function () {
+    return {
+        restrict: 'A',
+        link: function ($scope, $element, $attrs) {
+
+            $element.on('drag', function () {
+                $element.find('a').css('background-color', 'white');
+            });
+
+            $element.on('release', function () {
+                $element.find('a').css('background-color', 'transparent');
+            });
+        }
+    };
+})
+
 .filter('distance', function () {
     return function (value) {
         return value += ' kms';

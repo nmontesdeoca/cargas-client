@@ -11,7 +11,7 @@
             show-reorder="false"
             can-swipe="true">
 
-            <ion-item ng-repeat="fuel in fuels" ui-sref="app.fuelEdit({id: fuel._id})" class="item">
+            <ion-item ng-repeat="fuel in fuels" ui-sref="app.fuelEdit({id: fuel._id})" class="item" fix-transparent-ion-item>
                 <h2>{{fuel.name}}</h2>
                 <p>{{fuel.price | currency}}</p>
                 <ion-option-button class="button-assertive" ng-click="delete(fuel)">Delete</ion-option-button>
