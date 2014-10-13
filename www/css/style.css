@@ -1,4 +1,3 @@
-/* Empty. Add your own CSS if you like */
 .no-padding {
     padding: 0;
 }
@@ -46,7 +45,7 @@
     background: transparent;
     background-position: center center;
     background-size: auto 100%;
-    transition: background 1s ease;
+    /*transition: background 1s ease;*/
 }
 .random-background {
     background-image: url(../img/backgrounds/night1.jpg);

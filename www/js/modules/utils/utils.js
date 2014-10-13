@@ -1,47 +1,52 @@
 angular.module('utils', [])
 
-.directive('randomBackground', ['Flickr', 'Utils', function (Flickr, Utils) {
-    return {
-        restrict: 'A',
-        link: function ($scope, $element, $attrs) {
-            var time = Utils.isNight() ? 'night' : 'day';
+.directive('randomBackground', ['Flickr', 'Utils',
+    function (Flickr, Utils) {
+        return {
+            restrict: 'A',
+            link: function ($scope, $element, $attrs) {
+                var time = Utils.isNight() ? 'night' : 'day';
 
-            Flickr.search({
-                tags: 'highway,' + time,
-                tag_mode: 'all',
-                text: 'highway road street ' + time,
-                // TODO before set 500 pages we need to know if there are 500 results ?
-                page: Math.round(Math.random() * 500),
-                per_page: 1,
-                media: 'photos',
-                privacy_filter: 1,
-                content_type: 4
-            }).then(function (data) {
-                var image = new Image(),
-                    photos = data && data.photos && data.photos.photo,
-                    item,
-                    url;
+                Flickr.search({
+                    tags: 'highway,' + time,
+                    tag_mode: 'all',
+                    text: 'highway road street ' + time,
+                    // TODO before set 500 pages we need to know if there are 500 results ?
+                    page: Math.round(Math.random() * 500),
+                    per_page: 1,
+                    media: 'photos',
+                    privacy_filter: 1,
+                    content_type: 4
+                }).then(function (data) {
+                    var image = new Image(),
+                        photos = data && data.photos && data.photos.photo,
+                        item,
+                        url;
 
-                if (photos && photos.length) {
-                    item = photos[0];
-                    url = 'http://farm' + item.farm + '.static.flickr.com/' +
-                        item.server + '/' +
-                        item.id + '_' + item.secret + '.jpg';
+                    if (photos && photos.length) {
+                        item = photos[0];
+                        url = 'http://farm' + item.farm + '.static.flickr.com/' +
+                            item.server + '/' +
+                            item.id + '_' + item.secret + '.jpg';
 
-                    /**
-                     * create an image with the image src on the fly in order
-                     * to get the url fetched, so when we place the background
-                     * the image loads instantly
-                     */
-                    image.src = url;
-                    image.onload = function () {
-                        $element.css('background-image', 'url(' + url + ')');
-                    };
-                }
-            });
-        }
-    };
-}])
+                        /**
+                         * create an image with the image src on the fly in order
+                         * to get the url fetched, so when we place the background
+                         * the image loads instantly
+                         */
+                        image.src = url;
+                        image.onload = function () {
+                            $element.css('background-image', 'url(' + url + ')');
+                            Utils.hideSplahscreen();
+                        };
+                    } else {
+                        Utils.hideSplahscreen();
+                    }
+                });
+            }
+        };
+    }
+])
 
 .filter('distance', function () {
     return function (value) {
@@ -669,6 +674,12 @@ angular.module('utils', [])
             // Math round is in the filter (timeAgo)
             return parseFloat(Math.abs((dateBeforeMs - dateAfterMs) / (
                 oneDay)));
+        },
+
+        hideSplahscreen: function () {
+            setTimeout(function () {
+                navigator.splashscreen && navigator.splashscreen.hide();
+            }, 1000);
         }
     };
 })

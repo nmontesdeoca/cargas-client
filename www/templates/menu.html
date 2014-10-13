@@ -9,7 +9,8 @@
     <ion-side-menu side="left">
         <ion-content class="dark-bg">
             <ion-list>
-                <ion-item ng-repeat="menuItem in menuItems" class="item-dark item-icon-left" nav-clear menu-close ui-sref="{{menuItem.state}}">
+                <ion-item ng-repeat="menuItem in menuItems" class="item-dark item-icon-left" nav-clear menu-close
+                ui-sref="{{menuItem.state}}">
                     <i class="icon ion-{{menuItem.iconName}}"></i>
                     {{menuItem.name}}
                 </ion-item>
