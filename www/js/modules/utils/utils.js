@@ -1,5 +1,16 @@
 angular.module('utils', [])
 
+.constant('TIME', {
+    MILLISECONDS: 1,
+    SECONDS: 2,
+    MINUTES: 3,
+    HOURS: 4,
+    DAYS: 5,
+    WEEKS: 6, // maybe we don't use this
+    MONTHS: 7,
+    YEARS: 8
+})
+
 .directive('randomBackground', ['Flickr', 'Utils',
     function (Flickr, Utils) {
         return {
