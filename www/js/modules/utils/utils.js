@@ -1,5 +1,16 @@
 angular.module('utils', [])
 
+.constant('TIME', {
+    MILLISECONDS: 1,
+    SECONDS: 2,
+    MINUTES: 3,
+    HOURS: 4,
+    DAYS: 5,
+    WEEKS: 6, // maybe we don't use this
+    MONTHS: 7,
+    YEARS: 8
+})
+
 .directive('randomBackground', ['Flickr', 'Utils',
     function (Flickr, Utils) {
         return {
@@ -55,6 +66,22 @@ angular.module('utils', [])
     }
 ])
 
+.directive('fixTransparentIonItem', function () {
+    return {
+        restrict: 'A',
+        link: function ($scope, $element, $attrs) {
+
+            $element.on('drag', function () {
+                $element.find('a').css('background-color', 'white');
+            });
+
+            $element.on('release', function () {
+                $element.find('a').css('background-color', 'transparent');
+            });
+        }
+    };
+})
+
 .filter('distance', function () {
     return function (value) {
         return value += ' kms';
@@ -83,7 +110,19 @@ angular.module('utils', [])
     };
 })
 
-.factory('Utils', function () {
+.filter('average', function () {
+    return function (value) {
+        return parseInt(value);
+    };
+})
+
+.filter('days', function () {
+    return function (value) {
+        return value += ' day' + (value > 1 ? 's' : '');
+    };
+})
+
+.factory('Utils', ['TIME', function (TIME) {
     return {
 
         formatSmallNumber: function (number) {
@@ -108,6 +147,28 @@ angular.module('utils', [])
             date.setDate(day);
             date.setHours(0);
             return date.getTime();
+        },
+
+        getAverageDataBetweenRefuels: function (refuels, property) {
+            var total = 0,
+                i = 0,
+                length = refuels.length - 1;
+
+            for (; i < length; i++) {
+                total += (refuels[i][property] - refuels[i + 1][property]);
+            }
+
+            return total / length;
+        },
+
+        getAverageDistanceBetweenRefuels: function (refuels) {
+            return this.getAverageDataBetweenRefuels(refuels, 'overallKilometers');
+        },
+
+        getAverageTimeBetweenRefuels: function (refuels) {
+            var milliseconds = this.getAverageDataBetweenRefuels(refuels, 'date');
+
+            return this.convertTime(milliseconds, TIME.DAYS);
         },
 
         getMakes: function () {
@@ -622,30 +683,44 @@ angular.module('utils', [])
             return  hours < 7 || hours > 19;
         },
 
-        millisecondsToSeconds: function (milliseconds) {
-            return milliseconds / 1000;
-        },
+        convertTime: function (milliseconds, timeUnit) {
+            var millisecondsToSeconds = function (milliseconds) {
+                    return milliseconds / 1000;
+                },
+                millisecondsToMinutes = function (milliseconds) {
+                    return millisecondsToSeconds(milliseconds) / 60;
+                },
+                millisecondsToHours = function (milliseconds) {
+                    return millisecondsToMinutes(milliseconds) / 60;
+                },
+                millisecondsToDays = function (milliseconds) {
+                    return millisecondsToHours(milliseconds) / 24;
+                },
+                millisecondsToMonths = function (milliseconds) {
+                    // we use 30.4166666667 days here, but maybe we need to investigate which is the best way
+                    // http://www.convertunits.com/from/days/to/month
+                    return millisecondsToDays(milliseconds) / 30.4166666667;
+                },
+                millisecondsToYears = function (milliseconds) {
+                    return millisecondsToMonths(milliseconds) / 12;
+                };
 
-        millisecondsToMinutes: function (milliseconds) {
-            return this.millisecondsToSeconds(milliseconds) / 60;
-        },
+            switch (timeUnit) {
+                case TIME.SECONDS:
+                    return millisecondsToSeconds(milliseconds);
+                case TIME.MINUTES:
+                    return millisecondsToMinutes(milliseconds);
+                case TIME.HOURS:
+                    return millisecondsToHours(milliseconds);
+                case TIME.DAYS:
+                    return millisecondsToDays(milliseconds);
+                case TIME.MONTHS:
+                    return millisecondsToMonths(milliseconds);
+                case TIME.YEARS:
+                    return millisecondsToYears(milliseconds);
+            }
 
-        millisecondsToHours: function (milliseconds) {
-            return this.millisecondsToMinutes(milliseconds) / 60;
-        },
-
-        millisecondsToDays: function (milliseconds) {
-            return this.millisecondsToHours(milliseconds) / 24;
-        },
-
-        millisecondsToMonths: function (milliseconds) {
-            // we use 30.4166666667 days here, but maybe we need to investigate which is the best way
-            // http://www.convertunits.com/from/days/to/month
-            return this.millisecondsToDays(milliseconds) / 30.4166666667;
-        },
-
-        millisecondsToYears: function (milliseconds) {
-            return this.millisecondsToMonths(milliseconds) / 12;
+            return milliseconds;
         },
 
         replaceFuel: function (fuels, id) {
@@ -723,7 +798,7 @@ angular.module('utils', [])
             }
         }
     };
-})
+}])
 
 .factory('LocalStorage', ['$window', function ($window) {
     var prefix = '';

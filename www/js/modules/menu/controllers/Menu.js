@@ -31,22 +31,15 @@ angular.module('starter')
             state: 'app.refuelList'
         }, {
             iconName: 'stats-bars',
-            name: 'Spents',
-            link: '#/spents',
-            state: 'app.spents'
+            name: 'Stats',
+            link: '#/stats',
+            state: 'app.stats'
         }, {
             iconName: 'gear-a',
             name: 'Settings',
             link: '#/settings',
             state: 'app.settingsList'
-        }
-        // ,
-        // {
-        //     iconName: 'stats-bars',
-        //     name: 'Stats',
-        //     link: '#/stats'
-        // }
-        ];
+        }];
 
     }
 ]);

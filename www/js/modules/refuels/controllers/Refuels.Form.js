@@ -133,7 +133,7 @@ angular.module('refuels')
                 $scope.cars = _.object(
                     _.pluck(cars, '_id'),
                     _.map(cars, function (car) {
-                        return car.make + ' ' + car.model;
+                        return car.getName();
                     })
                 );
                 // I think we should have only strings or integers as ids

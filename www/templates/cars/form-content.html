@@ -36,7 +36,7 @@
             <button ng-click="getPhoto()" class="button icon-left ion-camera button-small button-positive">Take Photo</button>
         </label>
         <label class="item item-input padding item-photo" ng-show="car.image">
-            <img ng-src="{{car.image}}" alt="{{car.make + ' ' + car.model}}">
+            <img ng-src="{{car.image}}" alt="{{car.getName()}}">
         </label>
         <div class="item item-toggle">
             Vehicle by Default

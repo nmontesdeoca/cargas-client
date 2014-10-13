@@ -13,7 +13,7 @@
             class="padding">
                 <ion-item ng-repeat="car in cars" ui-sref="app.refuelListByCar({carId: car._id})" class="item-thumbnail-left single-vehicle-item">
                     <img ng-src="{{car.image || 'http://ionicframework.com/img/docs/blue-album.jpg'}}">
-                    <h2>{{car.make + ' ' + car.model}}</h2>
+                    <h2>{{car.getName()}}</h2>
                     <p>{{car.refuels.length}} refuels</p>
                     <!-- <fs-area interval="minute" bind="formatRefuelsForGraph(car.refuels)" /> -->
                 </ion-item>

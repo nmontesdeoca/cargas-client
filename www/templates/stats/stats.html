@@ -1,9 +1,15 @@
-<ion-view title="Spents">
+<ion-view title="Stats">
     <ion-nav-buttons side="left">
         <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list>
+            <label class="item item-input item-select">
+                <div class="input-label">Vehicle</div>
+                <select ng-model="filter.car" ng-options="key as value for (key, value) in cars">
+                    <option value="">All</option>
+                </select>
+            </label>
             <ion-item class="item">
                 <h2>Total spent</h2>
                 <p>{{totalSpent | currency}}</p>
@@ -31,6 +37,14 @@
             <ion-item class="item">
                 <h2>Kilometers by liter</h2>
                 <p>{{kilometersByLiter | number}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Average time between refuels</h2>
+                <p>{{averageTimeBetweenRefuels | average | days}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Average distance between refuels</h2>
+                <p>{{averageDistanceBetweenRefuels | average | distance}}</p>
             </ion-item>
         </ion-list>
     </ion-content>

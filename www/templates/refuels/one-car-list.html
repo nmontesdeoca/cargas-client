@@ -11,7 +11,7 @@
             show-reorder="false"
             can-swipe="true">
             <div class="item">
-                Viewing refuels for your: <strong>{{car.make + ' ' + car.model}}</strong>
+                Viewing refuels for your: <strong>{{car.getName()}}</strong>
             </div>
             <ion-item ng-repeat="refuel in car.refuels" ui-sref="app.refuelEdit({id: refuel._id})" class="item">
                 <h2>{{refuel.date | date:'dd/MM/yyyy'}}</h2>
