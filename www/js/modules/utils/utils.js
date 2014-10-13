@@ -103,9 +103,14 @@ angular.module('utils', [])
     };
 })
 
+.filter('average', function () {
+    return function (value) {
+        return parseInt(value);
+    };
+})
+
 .filter('days', function () {
     return function (value) {
-        value = parseInt(value);
         return value += ' day' + (value > 1 ? 's' : '');
     };
 })
