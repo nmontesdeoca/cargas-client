@@ -1,7 +1,21 @@
 <ion-view title="Units">
     <ion-content class="has-header">
-        <div class="padding">
-            This is the placeholder of Units page.
+        <div class="list padding">
+			<div ng-repeat="(unitsByTypeName, unitsByType) in units">
+			
+				<div class="item item-divider item-dark">
+					{{unitsByTypeName}}
+				</div>
+
+				<label class="item item-radio" ng-repeat="(singleUnitId, singleUnit) in unitsByType" ng-click="setUnit(unitsByTypeName, singleUnitId)">
+					<input type="radio" name="group-{{unitsByTypeName}}" ng-checked="isSelectedUnit(unitsByTypeName, singleUnitId)">
+					<div class="item-content">
+					  {{singleUnit.name}}
+					</div>
+					<i class="radio-icon ion-checkmark"></i>
+				</label>
+
+			</div>
         </div>
     </ion-content>
 </ion-view>

@@ -666,6 +666,33 @@ angular.module('utils', [])
             }], 'make');
         },
 
+        getUnits: function (typeOfUnit) {
+            var units = {
+                'capacity': {
+                    'lt': {
+                        'name': 'Litres',
+                        'unitDisplay': 'lts'
+                    },
+                    'gal': {
+                        'name': 'Gallons',
+                        'unitDisplay': 'gals'
+                    }
+                },
+                'distance': {
+                    'km': {
+                        'name': 'Kilometres',
+                        'unitDisplay': 'kms'
+                    },
+                    'mile': {
+                        'name': 'Miles',
+                        'unitDisplay': 'miles'
+                    }
+                }
+            };
+
+            return typeOfUnit ? units[typeOfUnit] : units;
+        },
+
         getYears: function () {
             var years = [],
                 actualYear = new Date().getFullYear(),
@@ -976,4 +1003,25 @@ angular.module('utils', [])
             return q.promise;
         }
     };
-}]);
+}])
+
+// .factory('UnitsService', function() {
+
+//     var selectedUnits = {};
+
+//     var getUnits = function(typeOfUnit) {
+//         return units[typeOfUnit];
+//     };
+//     var setUnit = function(typeOfUnit, unit) {
+//         selectedUnits[typeOfUnit] = unit;
+//     };
+//     var getSelectedUnit = function(typeOfUnit) {
+//         return selectedUnits[typeofUnit];
+//     };
+
+//     return {
+//         getUnits: getUnits,
+//         setUnit: setUnit,
+//         getSelectedUnit: getSelectedUnit
+//     };
+// });
