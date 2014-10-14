@@ -6,12 +6,22 @@ angular.module('stats')
     'Car',
     'data',
     'cars',
-    function ($scope, $state, Car, data, cars) {
+    'defaultCar',
+    function ($scope, $state, Car, data, cars, defaultCar) {
+        
+        var carKeys = Object.keys(cars);
+
         $scope.cars = cars;
 
         $scope.filter = {
             car: ''
         };
+
+        // not display All filter if there is only one car
+        $scope.showFilterAll = carKeys.length === 1 ? false : true;
+
+        // set filter as the default car (maybe this is not needed)
+        $scope.filter.car = defaultCar._id.toString();
 
         $scope.$watch('filter.car', function (newFilter, oldFilter) {
             if (newFilter) {
@@ -23,7 +33,7 @@ angular.module('stats')
                 $scope.totalCapacity = $scope.car.getTotalCapacity();
 
                 if ($scope.car.hasMoreThanOneRefuel()) {
-                    $scope.getAverageDistanceBetweenRefuels =
+                    $scope.averageDistanceBetweenRefuels =
                         $scope.car.getAverageDistanceBetweenRefuels();
                     $scope.averageTimeBetweenRefuels = $scope.car.getAverageTimeBetweenRefuels();
                     $scope.spentByYear = $scope.car.getSpentByYear();

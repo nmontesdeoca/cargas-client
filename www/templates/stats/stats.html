@@ -7,7 +7,7 @@
             <label class="item item-input item-select">
                 <div class="input-label">Vehicle</div>
                 <select ng-model="filter.car" ng-options="key as value for (key, value) in cars">
-                    <option value="">All</option>
+                    <option value="" ng-show="showFilterAll">All</option>
                 </select>
             </label>
             <ion-item class="item">

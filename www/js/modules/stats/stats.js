@@ -48,6 +48,11 @@ angular.module('stats', [])
                         })
                     );
                 }],
+                defaultCar: ['Car', function (Car) {
+                    return Car.get({
+                        byDefault: true
+                    });
+                }]
             },
             views: {
                 menuContent: {
