@@ -46,13 +46,15 @@ angular.module('settings', [])
 
         .state('app.settingsUnits', {
             url: '/settings/units',
-            /*resolve: {
-            Settings: 'Setting'
-        },*/
+            resolve: {
+                setting: ['Setting', function(Setting) {
+                    return Setting.query();
+                }]
+            },
             views: {
                 menuContent: {
                     templateUrl: 'templates/settings/units.html',
-                    controller: 'Settings'
+                    controller: 'Units'
                 }
             }
         })

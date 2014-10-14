@@ -86,3 +86,6 @@ ion-nav-view,
 .item-select select {
     background: transparent;
 }
+.item-divider {
+    text-transform: capitalize;
+}
