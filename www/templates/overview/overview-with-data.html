@@ -1,24 +1,32 @@
-<ion-item class="info-box">
-    <h2>
-        Last refuel to
-        <strong>{{lastRefuel.car.getName()}}</strong>
-    </h2>
-    <p>
-        <i class="ion-waterdrop"></i> {{ lastRefuel.capacity | capacity }} -
-        {{lastRefuel.amount | currency}}
-        <span class="item-note">{{lastRefuel.daysAgo | timeAgo}}</span>
-
-    </p>
-</ion-item>
-
-<ion-item class="info-box item overview-totals">
-    <h3>
-        Total Spent: <strong>{{totals.totalSpent | currency}}</strong>
-    </h3>
-    <h3>
-        Total Capacity: <strong>{{totals.totalCapacity | number | capacity}}</strong>
-    </h3>
-</ion-item>
+<ion-card class="info-box">
+    <div class="item item-divider item-dark">
+        Last refuel
+    </div>
+    <div class="item">
+        <strong class="h4">{{lastRefuel.car.getName()}}</strong>
+        <p>
+            <i class="ion-waterdrop"></i> {{ lastRefuel.capacity | capacity }} -
+            {{lastRefuel.amount | currency}}
+        </p>
+    </div>
+    <div class="item item-divider">
+        <p>
+            <span class="item-note">{{lastRefuel.daysAgo | timeAgo}}</span>
+        </p>
+    </div>
+</ion-card>
+<br/>
+<ion-card class="info-box overview-totals">
+    <div class="item item-divider item-dark">
+        Total Stats
+    </div>
+    <div class="item">
+        Total Spent <strong class="badge badge-positive">{{totals.totalSpent | currency}}</strong>
+    </div>
+    <div class="item">
+        Total Capacity <strong class="badge badge-balanced">{{totals.totalCapacity | number | capacity}}</strong>
+    </div>
+</ion-card>
 
 <button ui-sref="app.refuelNew" class="button icon-left ion-plus button-dark button-block big-main-button">Add New Refuel</button>
 <!--             	<h3>This month so far</h3>
