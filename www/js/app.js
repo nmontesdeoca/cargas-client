@@ -11,8 +11,8 @@ angular.module('starter', [
     'utils'
 ])
 
-.run(['$ionicPlatform', '$rootScope',
-    function ($ionicPlatform, $rootScope) {
+.run(['$ionicPlatform', '$rootScope', 'Setting',
+    function ($ionicPlatform, $rootScope, Setting) {
         $ionicPlatform.ready(function () {
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
@@ -25,6 +25,8 @@ angular.module('starter', [
 
             // to make underscore available at any template
             $rootScope._ = _;
+
+            Setting.initialize();
         });
     }
 ])

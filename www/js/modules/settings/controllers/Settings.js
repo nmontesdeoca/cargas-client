@@ -2,10 +2,7 @@ angular.module('settings')
 
 .controller('Settings', [
     '$scope',
-    'UnitsService',
-    function ($scope, UnitsService) {
-        $scope.capacityUnits = UnitsService.getCapacityUnits();
-        $scope.selectedCapacity = UnitsService.getSelectedCapacity();
+    function ($scope) {
 
         $scope.settings = [{
             name: 'Units',
@@ -29,18 +26,5 @@ angular.module('settings')
             state: 'app.settingsHelp'
         }];
 
-
-        //units
-        $scope.$watch('selectedCapacity', function(newCapacityUnit) {
-            UnitsService.setCapacityUnit(newCapacityUnit);
-        });
-
-        $scope.setCapacityUnit = function (unit) {
-            $scope.selectedCapacity = unit;
-        };
-
-        $scope.isSelectedCapacityUnit = function(unit) {
-            return $scope.selectedCapacity === unit;
-        };
     }
 ]);

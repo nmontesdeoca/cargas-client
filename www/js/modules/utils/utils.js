@@ -593,6 +593,33 @@ angular.module('utils', [])
             }], 'make');
         },
 
+        getUnits: function (typeOfUnit) {
+            var units = {
+                'capacity': {
+                    'lt': {
+                        'name': 'Litres',
+                        'unitDisplay': 'lts'
+                    },
+                    'gal': {
+                        'name': 'Gallons',
+                        'unitDisplay': 'gals'
+                    }
+                },
+                'distance': {
+                    'km': {
+                        'name': 'Kilometres',
+                        'unitDisplay': 'kms'
+                    },
+                    'mile': {
+                        'name': 'Miles',
+                        'unitDisplay': 'miles'
+                    }
+                }
+            };
+
+            return typeOfUnit ? units[typeOfUnit] : units;
+        },
+
         getYears: function () {
             var years = [],
                 actualYear = new Date().getFullYear(),
@@ -851,33 +878,23 @@ angular.module('utils', [])
     };
 }])
 
-.factory('UnitsService', ['Setting', function(Setting) {
-    var capacityUnits = [
-        {
-            name: 'Litres (LT)',
-            unitName: 'lt'
-        },
-        {
-            name: 'Gallons (GAL)',
-            unitName: 'gal'
-        }
-    ];
+// .factory('UnitsService', function() {
 
-    var selectedUnit;
+//     var selectedUnits = {};
 
-    var getCapacityUnits = function() {
-        return capacityUnits;
-    };
-    var setCapacityUnit = function(unit) {
-        selectedUnit = unit;
-    };
-    var getSelectedCapacity = function() {
-        return selectedUnit;
-    };
+//     var getUnits = function(typeOfUnit) {
+//         return units[typeOfUnit];
+//     };
+//     var setUnit = function(typeOfUnit, unit) {
+//         selectedUnits[typeOfUnit] = unit;
+//     };
+//     var getSelectedUnit = function(typeOfUnit) {
+//         return selectedUnits[typeofUnit];
+//     };
 
-    return {
-        getCapacityUnits: getCapacityUnits,
-        setCapacityUnit: setCapacityUnit,
-        getSelectedCapacity: getSelectedCapacity
-    };
-}]);
+//     return {
+//         getUnits: getUnits,
+//         setUnit: setUnit,
+//         getSelectedUnit: getSelectedUnit
+//     };
+// });
