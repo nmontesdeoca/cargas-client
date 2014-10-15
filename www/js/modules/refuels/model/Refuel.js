@@ -114,7 +114,7 @@ angular.module('refuels')
          * adds each refuel capacity and return the total
          */
         RefuelModel.getTotalCapacity = function () {
-            return _.reduce(RefuelModel.query(), function (memo, current) {
+            return _.reduce(RefuelModel.getRefuelsSortByDate().slice(0, -1), function (memo, current) {
                 return memo + current.get('capacity');
             }, 0);
         };
@@ -123,7 +123,7 @@ angular.module('refuels')
          * adds each refuel amount and return the total spent
          */
         RefuelModel.getTotalSpent = function () {
-            return _.reduce(RefuelModel.query(), function (memo, current) {
+            return _.reduce(RefuelModel.getRefuelsSortByDate().slice(0, -1), function (memo, current) {
                 return memo + current.get('amount');
             }, 0);
         };
