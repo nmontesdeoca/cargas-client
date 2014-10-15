@@ -47,7 +47,7 @@ angular.module('cars')
          * returns total money spent in refuels for a car
          */
         CarModel.prototype.getTotalSpent = function () {
-            var refuels = this.getRefuels();
+            var refuels = this.getRefuels().slice(1);
 
             return _.reduce(refuels, function (memo, current) {
                 return memo + current.get('amount');
@@ -158,7 +158,7 @@ angular.module('cars')
          * returns total capacity spent in refuels for a car
          */
         CarModel.prototype.getTotalCapacity = function () {
-            var refuels = this.getRefuels();
+            var refuels = this.getRefuels().slice(1);
             // practically the same as the getTotalSpent function
             return _.reduce(refuels, function (memo, current) {
                 return memo + current.get('capacity');
