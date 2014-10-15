@@ -168,7 +168,7 @@ angular.module('refuels')
          */
         RefuelModel.getRefuelsByCarId = function (carId) {
             return _.where(RefuelModel.query(), {
-                'car': carId
+                car: carId
             });
         };
 
@@ -247,15 +247,19 @@ angular.module('refuels')
         RefuelModel.prototype.getPreviousRefuel = function () {
             var index,
                 self = this,
-                refuels = RefuelModel.getRefuelsSortByDate();
+                refuels = _.sortBy(RefuelModel.getRefuelsByCarId(self.car), 'date').reverse();
 
-            _.find(refuels, function (refuel, _index) {
-                // _index + 1 because _index is the index of the current refuel,
-                // and we want the next one
-                index = _index + 1;
-                return self._id === refuel._id;
-            });
-
+            if (this._id) {
+                _.find(refuels, function (refuel, _index) {
+                    // _index + 1 because _index is the index of the current refuel,
+                    // and we want the next one
+                    index = _index + 1;
+                    return self._id === refuel._id;
+                });
+            } else {
+                index = 0;
+            }
+            
             return refuels[index];
         };
 

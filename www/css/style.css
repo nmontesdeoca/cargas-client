@@ -83,7 +83,8 @@
 }
 
 ion-nav-view,
-.item-select select {
+.item-select select,
+.item-input input[readonly] {
     background: transparent;
 }
 .item-divider {

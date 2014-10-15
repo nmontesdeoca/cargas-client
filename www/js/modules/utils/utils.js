@@ -88,6 +88,12 @@ angular.module('utils', [])
     };
 })
 
+.filter('consumption', function () {
+    return function (value) {
+        return value += ' kms/l';
+    };
+})
+
 .filter('capacity', function () {
     return function (value) {
         return value += ' lts';

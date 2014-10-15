@@ -5,7 +5,6 @@ angular.module('refuels')
     '$ionicPopup',
     '$state',
     '$ionicModal',
-    '$filter',
     'Refuel',
     'Car',
     'Fuel',
@@ -14,8 +13,8 @@ angular.module('refuels')
     'fuels',
     'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, $filter, Refuel, Car, Fuel,
-        refuel, cars, fuels, Utils, carByDefault) {
+    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, refuel, cars, fuels,
+        Utils, carByDefault) {
 
         $scope.refuel = refuel;
         $scope.fuels = fuels;
@@ -190,15 +189,27 @@ angular.module('refuels')
             $scope.newMakeModelModal.remove();
         });
 
-        if (Refuel.hasRefuels() && refuel._id !== Refuel.getFirstRefuel()._id) {
-            $scope.previousRefuel = refuel.getPreviousRefuel();
+        $scope.$watch('refuel.car + refuel.overallKilometers + refuel.capacity',
+            function (newData, oldData) {
 
-            $scope.$watch(
-                '(refuel.overallKilometers - previousRefuel.overallKilometers) / refuel.capacity',
-                function (newConsumption, oldConsumption) {
-                    refuel.consumption = $filter('number')(newConsumption);
+            var car = Car.get({
+                    _id: Number($scope.refuel.car)
+                }),
+                previousRefuel = $scope.refuel.getPreviousRefuel(),
+                distance;
+
+            if (car && previousRefuel && previousRefuel._id !== $scope.refuel._id) {
+                distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
+                _.extend($scope.refuel, {
+                    distance: distance,
+                    consumption: (distance / $scope.refuel.capacity)
                 });
-        }
-
+            } else {
+                _.extend($scope.refuel, {
+                    distance: 0,
+                    consumption: 0
+                });
+            }
+        });
     }
 ]);
