@@ -47,6 +47,18 @@ angular.module('cars')
          * returns total money spent in refuels for a car
          */
         CarModel.prototype.getTotalSpent = function () {
+            var refuels = this.getRefuels();
+
+            return _.reduce(refuels, function (memo, current) {
+                return memo + current.get('amount');
+            }, 0);
+        };
+
+        /*
+         * returns total money spent in refuels for a car for stats
+         * doesn't take into account the first refuel made
+         */
+        CarModel.prototype.getTotalSpentForStats = function () {
             var refuels = this.getRefuels().slice(0, -1);
 
             return _.reduce(refuels, function (memo, current) {
@@ -158,8 +170,20 @@ angular.module('cars')
          * returns total capacity spent in refuels for a car
          */
         CarModel.prototype.getTotalCapacity = function () {
+            var refuels = this.getRefuels();
+
+            return _.reduce(refuels, function (memo, current) {
+                return memo + current.get('capacity');
+            }, 0);
+        };
+
+        /*
+         * returns total capacity spent in refuels for a car for stats
+         * doesn't take into account the first refuel made
+         */
+        CarModel.prototype.getTotalCapacityForStats = function () {
             var refuels = this.getRefuels().slice(0, -1);
-            // practically the same as the getTotalSpent function
+
             return _.reduce(refuels, function (memo, current) {
                 return memo + current.get('capacity');
             }, 0);
@@ -199,7 +223,7 @@ angular.module('cars')
          * preconditions: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getSpentByKilometer = function () {
-            return this.getTotalSpent() / this.getTotalKilometers();
+            return this.getTotalSpentForStats() / this.getTotalKilometers();
         };
 
         /**
@@ -207,7 +231,7 @@ angular.module('cars')
          * preconditions: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getKilometersByLiter = function () {
-            return this.getTotalKilometers() / this.getTotalCapacity();
+            return this.getTotalKilometers() / this.getTotalCapacityForStats();
         };
 
         /**

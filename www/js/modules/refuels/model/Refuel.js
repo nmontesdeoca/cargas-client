@@ -42,6 +42,20 @@ angular.module('refuels')
         };
 
         /**
+         * returns kilometers by liters for all cars
+         */
+        RefuelModel.getKilometersByLiter = function () {
+            return RefuelModel.getTotalKilometers() / RefuelModel.getTotalCapacityForStats();
+        };
+
+        /**
+         * returns spent by kilometer for all cars
+         */
+        RefuelModel.getSpentByKilometer = function () {
+            return RefuelModel.getTotalSpentForStats() / RefuelModel.getTotalKilometers();
+        };
+
+        /**
          * return the total time between the first and the last refuel
          * the unit used will be the passed by parameter using the constant
          * TIME
@@ -114,18 +128,58 @@ angular.module('refuels')
          * adds each refuel capacity and return the total
          */
         RefuelModel.getTotalCapacity = function () {
-            return _.reduce(RefuelModel.getRefuelsSortByDate().slice(0, -1), function (memo, current) {
+            return _.reduce(RefuelModel.getRefuelsSortByDate(), function (memo, current) {
                 return memo + current.get('capacity');
             }, 0);
+        };
+
+        /**
+         * adds each refuel capacity and return the total
+         * used for some stats, this function doesn't take into account
+         * the first refuel of each car
+         */
+        RefuelModel.getTotalCapacityForStats = function () {
+            var refuelsByCar = RefuelModel.getRefuelsByCar(),
+                totalCapacity = 0;
+
+            _.each(refuelsByCar, function (carRefuels) {
+                var refuels = _.sortBy(carRefuels, 'date').reverse().slice(0, -1);
+
+                totalCapacity = _.reduce(refuels, function (total, refuel) {
+                    return total + refuel.capacity;
+                }, totalCapacity);
+            });
+
+            return totalCapacity;
         };
 
         /**
          * adds each refuel amount and return the total spent
          */
         RefuelModel.getTotalSpent = function () {
-            return _.reduce(RefuelModel.getRefuelsSortByDate().slice(0, -1), function (memo, current) {
+            return _.reduce(RefuelModel.getRefuelsSortByDate(), function (memo, current) {
                 return memo + current.get('amount');
             }, 0);
+        };
+
+        /**
+         * adds each refuel amount and return the total spent
+         * used for some stats, this function doesn't take into account
+         * the first refuel of each car
+         */
+        RefuelModel.getTotalSpentForStats = function () {
+            var refuelsByCar = RefuelModel.getRefuelsByCar(),
+                totalSpent = 0;
+
+            _.each(refuelsByCar, function (carRefuels) {
+                var refuels = _.sortBy(carRefuels, 'date').reverse().slice(0, -1);
+
+                totalSpent = _.reduce(refuels, function (total, refuel) {
+                    return total + refuel.amount;
+                }, totalSpent);
+            });
+
+            return totalSpent;
         };
 
         /**
@@ -259,7 +313,7 @@ angular.module('refuels')
             } else {
                 index = 0;
             }
-            
+
             return refuels[index];
         };
 

@@ -8,7 +8,7 @@ angular.module('stats')
     'cars',
     'defaultCar',
     function ($scope, $state, Car, data, cars, defaultCar) {
-        
+
         var carKeys = Object.keys(cars);
 
         $scope.cars = cars;
@@ -50,7 +50,6 @@ angular.module('stats')
                     $scope.spentByKilometer = 0;
                     $scope.kilometersByLiter = 0;
                 }
-
             } else {
                 $scope.averageDistanceBetweenRefuels = data.averageDistanceBetweenRefuels;
                 $scope.averageTimeBetweenRefuels = data.averageTimeBetweenRefuels;

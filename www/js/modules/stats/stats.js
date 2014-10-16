@@ -19,7 +19,6 @@ angular.module('stats', [])
                         totalCapacity: Refuel.getTotalCapacity(),
                         totalKilometers: 0,
                         totalSpent: Refuel.getTotalSpent()
-
                     };
 
                     if (Refuel.hasMoreThanOneRefuel()) {
@@ -32,8 +31,8 @@ angular.module('stats', [])
                             spentByYear: Refuel.getSpentByYear()
                         });
 
-                        data.kilometersByLiter = data.totalKilometers / data.totalCapacity;
-                        data.spentByKilometer = data.totalSpent / data.totalKilometers;
+                        data.kilometersByLiter = Refuel.getKilometersByLiter();
+                        data.spentByKilometer = Refuel.getSpentByKilometer();
                     }
 
                     return data;
