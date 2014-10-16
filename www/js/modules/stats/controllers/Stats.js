@@ -21,7 +21,7 @@ angular.module('stats')
         $scope.showFilterAll = carKeys.length === 1 ? false : true;
 
         // set filter as the default car (maybe this is not needed)
-        $scope.filter.car = defaultCar._id.toString();
+        $scope.filter.car = defaultCar._id ? defaultCar._id.toString() : '';
 
         $scope.$watch('filter.car', function (newFilter, oldFilter) {
             if (newFilter) {

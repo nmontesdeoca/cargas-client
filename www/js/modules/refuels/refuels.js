@@ -10,16 +10,19 @@ angular.module('refuels', [])
             refuels: ['Refuel', function (Refuel) {
                 return Refuel.getRefuelsSortByDate();
             }],
-            fuels: ['Fuel', function (Fuel) {
-                return _.sortBy(Fuel.query(), 'name');
-            }],
             cars: ['Car', 'Refuel', function (Car, Refuel) {
-                var cars = Car.getRefueledCars();
+                var cars = Car.query();
 
-                return _.map(cars, function (car) {
-                    return _.extend(car, {
-                        refuels: car.getRefuels()
-                    });
+                return _.object(
+                    _.pluck(cars, '_id'),
+                    _.map(cars, function (car) {
+                        return car.getName();
+                    })
+                );
+            }],
+            defaultCar: ['Car', function (Car) {
+                return Car.get({
+                    byDefault: true
                 });
             }]
         },
@@ -31,7 +34,7 @@ angular.module('refuels', [])
         }
     })
 
-    .state('app.refuelListByCar', {
+    /*.state('app.refuelListByCar', {
         url: '/refuels/by-car/:carId',
         resolve: {
             fuels: ['Fuel', function (Fuel) {
@@ -53,7 +56,7 @@ angular.module('refuels', [])
                 controller: 'OneCarRefuels'
             }
         }
-    })
+    })*/
 
     .state('app.refuelNew', {
         url: '/refuels/new',

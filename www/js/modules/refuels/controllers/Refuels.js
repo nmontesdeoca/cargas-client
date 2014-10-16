@@ -6,20 +6,32 @@ angular.module('refuels')
     '$ionicListDelegate',
     'Refuel',
     'refuels',
-    'fuels',
     'cars',
-    '$state',
-    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels, fuels, cars, $state) {
-        $scope.refuels = refuels;
-        $scope.fuels = fuels;
+    'defaultCar',
+    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels, cars, defaultCar) {
+
+        var carKeys = Object.keys(cars);
+
         $scope.cars = cars;
 
-        // if the car is only 1, go directly to see the refuels of that car
-        if (cars.length === 1) {
-            $state.go('app.refuelListByCar', {
-                carId: cars[0]._id
-            });
-        }
+        $scope.filter = {
+            car: ''
+        };
+
+        // not display All filter if there is only one car
+        $scope.showFilterAll = carKeys.length === 1 ? false : true;
+
+        // set filter as the default car (maybe this is not needed)
+        $scope.filter.car = defaultCar._id ? defaultCar._id.toString() : '';
+
+        $scope.$watch('filter.car', function (newFilter, oldFilter) {
+
+            if (newFilter) {
+                $scope.refuels = _.sortBy(Refuel.getRefuelsByCarId(newFilter), 'date').reverse();
+            } else {
+                $scope.refuels = refuels;
+            }
+        });
 
         $scope.delete = function (refuel) {
             $ionicPopup.confirm({
@@ -46,7 +58,5 @@ angular.module('refuels')
                 'entries': entries
             };
         };
-
-
     }
 ]);
