@@ -288,6 +288,20 @@ angular.module('refuels')
         };
 
         /**
+         * returns the average capacity of refuels for a car
+         */
+        RefuelModel.getAverageCapacity = function () {
+            return RefuelModel.getTotalCapacity() / RefuelModel.getRefuelsCount();
+        };
+
+        /**
+         * returns the average spent of refuels for a car
+         */
+        RefuelModel.getAverageSpent = function () {
+            return RefuelModel.getTotalSpent() / RefuelModel.getRefuelsCount();
+        };
+
+        /**
          * Instance methods
          */
 

@@ -7,11 +7,11 @@ angular.module('stats', [])
             url: '/stats',
             resolve: {
                 data: ['Refuel', function (Refuel) {
-                    debugger;
-
                     var data = {
                         averageDistanceBetweenRefuels: 0,
                         averageTimeBetweenRefuels: 0,
+                        averageCapacity: 0,
+                        averageSpent: 0,
                         kilometersByLiter: 0,
                         refuelsCount: Refuel.getRefuelsCount(),
                         spentByDay: 0,
@@ -25,6 +25,8 @@ angular.module('stats', [])
 
                     if (Refuel.hasMoreThanOneRefuel()) {
                         _.extend(data, {
+                            averageCapacity: Refuel.getAverageCapacity(),
+                            averageSpent: Refuel.getAverageSpent(),
                             averageDistanceBetweenRefuels: Refuel.getAverageDistanceBetweenRefuels(),
                             averageTimeBetweenRefuels: Refuel.getAverageTimeBetweenRefuels(),
                             totalKilometers: Refuel.getTotalKilometers(),

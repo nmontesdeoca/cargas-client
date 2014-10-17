@@ -257,6 +257,20 @@ angular.module('cars')
             return this.getRefuels().length;
         };
 
+        /**
+         * returns the average capacity of refuels for a car
+         */
+        CarModel.prototype.getAverageCapacity = function () {
+            return this.getTotalCapacity() / this.getRefuelsCount();
+        };
+
+        /**
+         * returns the average spent of refuels for a car
+         */
+        CarModel.prototype.getAverageSpent = function () {
+            return this.getTotalSpent() / this.getRefuelsCount();
+        };
+
         return CarModel;
     }
 ]);

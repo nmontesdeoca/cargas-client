@@ -37,6 +37,8 @@ angular.module('stats')
                     $scope.averageDistanceBetweenRefuels =
                         $scope.car.getAverageDistanceBetweenRefuels();
                     $scope.averageTimeBetweenRefuels = $scope.car.getAverageTimeBetweenRefuels();
+                    $scope.averageCapacity = $scope.car.getAverageCapacity();
+                    $scope.averageSpent = $scope.car.getAverageSpent();
                     $scope.spentByYear = $scope.car.getSpentByYear();
                     $scope.spentByMonth = $scope.car.getSpentByMonth();
                     $scope.spentByDay = $scope.car.getSpentByDay();
@@ -46,6 +48,8 @@ angular.module('stats')
                 } else {
                     $scope.averageDistanceBetweenRefuels = 0;
                     $scope.averageTimeBetweenRefuels = 0;
+                    $scope.averageCapacity = 0;
+                    $scope.averageSpent = 0;
                     $scope.spentByYear = 0;
                     $scope.spentByMonth = 0;
                     $scope.spentByDay = 0;
@@ -56,6 +60,8 @@ angular.module('stats')
             } else {
                 $scope.averageDistanceBetweenRefuels = data.averageDistanceBetweenRefuels;
                 $scope.averageTimeBetweenRefuels = data.averageTimeBetweenRefuels;
+                $scope.averageCapacity = data.averageCapacity;
+                $scope.averageSpent = data.averageSpent;
                 $scope.refuelsCount = data.refuelsCount;
                 $scope.totalSpent = data.totalSpent;
                 $scope.spentByYear = data.spentByYear;

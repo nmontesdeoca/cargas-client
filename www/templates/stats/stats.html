@@ -10,6 +10,7 @@
                     <option value="" ng-if="showFilterAll">All</option>
                 </select>
             </label>
+            <ion-item class="item item-divider">Totals</ion-item>
             <ion-item class="item">
                 <h2>Total spent</h2>
                 <p>{{totalSpent | currency}}</p>
@@ -18,6 +19,15 @@
                 <h2>Total capacity</h2>
                 <p>{{totalCapacity | number | capacity}}</p>
             </ion-item>
+            <ion-item class="item">
+                <h2>Total distance</h2>
+                <p>{{totalKilometers | distance}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Refuels count</h2>
+                <p>{{refuelsCount | number}}</p>
+            </ion-item>
+            <ion-item class="item item-divider">By Time</ion-item>
             <ion-item class="item">
                 <h2>Spent by year</h2>
                 <p>{{spentByYear | currency}}</p>
@@ -30,6 +40,7 @@
                 <h2>Spent by day</h2>
                 <p>{{spentByDay | currency}}</p>
             </ion-item>
+            <ion-item class="item item-divider">Averages</ion-item>
             <ion-item class="item">
                 <h2>Spent by kilometer</h2>
                 <p>{{spentByKilometer | currency}}</p>
@@ -47,12 +58,12 @@
                 <p>{{averageDistanceBetweenRefuels | average | distance}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Total distance</h2>
-                <p>{{totalKilometers | distance}}</p>
+                <h2>Average spent by refuel</h2>
+                <p>{{averageSpent | average | currency}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Refuels count</h2>
-                <p>{{refuelsCount | number}}</p>
+                <h2>Average capacity by refuel</h2>
+                <p>{{averageCapacity | average | capacity}}</p>
             </ion-item>
         </ion-list>
     </ion-content>
