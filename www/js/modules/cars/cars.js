@@ -5,7 +5,7 @@ angular.module('cars', [])
 
         $stateProvider
 
-            .state('app.carList', {
+        .state('app.carList', {
             url: '/cars',
             resolve: {
                 cars: ['Car',
@@ -76,17 +76,6 @@ angular.module('cars', [])
                     controller: 'Cars.Form'
                 }
             }
-        })
-
-        .state('app.carNewMakeModel', {
-            url: '/cars/new/make-model',
-            views: {
-                menuContent: {
-                    templateUrl: 'templates/cars/new-make-model.html',
-                    controller: 'Cars.Form'
-                }
-            }
         });
-
     }
 ]);

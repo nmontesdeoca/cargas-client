@@ -9,12 +9,12 @@ angular.module('starter')
             name: 'Overview',
             link: '#/overview',
             state: 'app.overview'
-        }, {
+        },/* {
             iconName: 'person',
             name: 'Profile',
             link: '#/profile',
             state: 'app.profile'
-        }, {
+        },*/ {
             iconName: 'model-s',
             name: 'Vehicles',
             link: '#/cars',

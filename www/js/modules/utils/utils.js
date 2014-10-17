@@ -1009,7 +1009,7 @@ angular.module('utils', [])
             return q.promise;
         }
     };
-}])
+}]);
 
 // .factory('UnitsService', function() {
 

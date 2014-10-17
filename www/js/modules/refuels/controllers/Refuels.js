@@ -5,10 +5,14 @@ angular.module('refuels')
     '$ionicPopup',
     '$ionicListDelegate',
     'Refuel',
+    'Car',
     'refuels',
     'cars',
     'defaultCar',
-    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, refuels, cars, defaultCar) {
+    'totalSpent',
+    'totalCapacity',
+    function ($scope, $ionicPopup, $ionicListDelegate, Refuel, Car, refuels, cars, defaultCar,
+            totalSpent, totalCapacity) {
 
         var carKeys = Object.keys(cars);
 
@@ -26,10 +30,19 @@ angular.module('refuels')
 
         $scope.$watch('filter.car', function (newFilter, oldFilter) {
 
+            var car;
+
             if (newFilter) {
                 $scope.refuels = _.sortBy(Refuel.getRefuelsByCarId(newFilter), 'date').reverse();
+                car = Car.get({
+                    _id: Number(newFilter)
+                });
+                $scope.totalSpent = car.getTotalSpent();
+                $scope.totalCapacity = car.getTotalCapacity();
             } else {
                 $scope.refuels = refuels;
+                $scope.totalSpent = totalSpent;
+                $scope.totalCapacity = totalCapacity;
             }
         });
 

@@ -58,7 +58,7 @@ angular.module('cars')
 
         $scope.$on('modal.hidden', function () {
             if (arguments[1].modalEl.id === 'new-fuel-modal' && $scope.car.fuel &&
-                $scope.car.fuel.value === 'newFuel') {
+                    $scope.car.fuel.value === 'newFuel') {
                 $scope.car.fuel = null;
             }
         });
