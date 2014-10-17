@@ -250,6 +250,13 @@ angular.module('cars')
             return Utils.getAverageDistanceBetweenRefuels(this.getRefuels());
         };
 
+        /**
+         * returns the number of refuels for a car
+         */
+        CarModel.prototype.getRefuelsCount = function () {
+            return this.getRefuels().length;
+        };
+
         return CarModel;
     }
 ]);

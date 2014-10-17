@@ -7,11 +7,13 @@ angular.module('stats', [])
             url: '/stats',
             resolve: {
                 data: ['Refuel', function (Refuel) {
+                    debugger;
 
                     var data = {
                         averageDistanceBetweenRefuels: 0,
                         averageTimeBetweenRefuels: 0,
                         kilometersByLiter: 0,
+                        refuelsCount: Refuel.getRefuelsCount(),
                         spentByDay: 0,
                         spentByKilometer: 0,
                         spentByMonth: 0,

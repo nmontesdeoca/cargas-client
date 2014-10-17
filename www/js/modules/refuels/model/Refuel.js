@@ -281,6 +281,13 @@ angular.module('refuels')
         };
 
         /**
+         * returns the number of refuels for all cars
+         */
+        RefuelModel.getRefuelsCount = function () {
+            return RefuelModel.getRefuelsSortByDate().length;
+        };
+
+        /**
          * Instance methods
          */
 

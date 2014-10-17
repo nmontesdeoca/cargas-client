@@ -46,6 +46,14 @@
                 <h2>Average distance between refuels</h2>
                 <p>{{averageDistanceBetweenRefuels | average | distance}}</p>
             </ion-item>
+            <ion-item class="item">
+                <h2>Total distance</h2>
+                <p>{{totalKilometers | distance}}</p>
+            </ion-item>
+            <ion-item class="item">
+                <h2>Refuels count</h2>
+                <p>{{refuelsCount | number}}</p>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-view>
