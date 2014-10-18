@@ -49,9 +49,7 @@
                     <span id="amount-label" class="input-label">Consumption</span>
                     <input type="text" ng-value="refuel.consumption | number | consumption" readonly>
                 </label>
-            </div>
-            <div class="padding">
-                <button ng-click="create()" class="button button-block button-positive activated"
+                <button ng-click="create()" class="button button-block big-main-button activated"
                     ng-disabled="newRefuelForm.$invalid">{{refuel._id ? 'Save' : 'Create'}}</button>
             </div>
         </form>
