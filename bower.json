@@ -1,10 +1,11 @@
 {
-    "name": "CarGas",
-    "private": "true",
-    "devDependencies": {
-        "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
-        "underscore": "~1.7.0",
-        "angular-resource": "~1.2.26",
-        "angular-translate": "~2.1.0"
-    }
+  "name": "CarGas",
+  "private": "true",
+  "dependencies": {
+    "ionic": "driftyco/ionic-bower#1.0.0-beta.13",
+    "underscore": "~1.7.0",
+    "angular-resource": "~1.2.26",
+    "angular-translate": "~2.4.1",
+    "angular-translate-loader-static-files": "~2.4.1"
+  }
 }

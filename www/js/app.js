@@ -1,6 +1,7 @@
 angular.module('starter', [
     'ionic',
     'ngResource',
+    'pascalprecht.translate',
     'overview',
     'profile',
     'cars',
@@ -34,7 +35,8 @@ angular.module('starter', [
 .config([
     '$stateProvider',
     '$urlRouterProvider',
-    function ($stateProvider, $urlRouterProvider) {
+    '$translateProvider',
+    function ($stateProvider, $urlRouterProvider, $translateProvider) {
         $stateProvider.state('app', {
             abstract: true,
             templateUrl: 'templates/menu.html',
@@ -42,5 +44,11 @@ angular.module('starter', [
         });
 
         $urlRouterProvider.otherwise('/overview');
+
+        $translateProvider.useStaticFilesLoader({
+            prefix: 'js/languages/',
+            suffix: '.json'
+        });
+        $translateProvider.preferredLanguage('en');
     }
 ]);
