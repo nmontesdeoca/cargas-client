@@ -46,7 +46,7 @@ angular.module('starter', [
         $urlRouterProvider.otherwise('/overview');
 
         $translateProvider.useStaticFilesLoader({
-            prefix: 'js/languages/',
+            prefix: 'languages/',
             suffix: '.json'
         });
         $translateProvider.preferredLanguage('en');
