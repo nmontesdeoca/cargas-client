@@ -1,30 +1,38 @@
-<ion-item class="info-box">
-    <h2>
-        Last refuel to
-        <strong>{{lastRefuel.car.getName()}}</strong>
-    </h2>
-    <p>
-        <i class="ion-waterdrop"></i> {{ lastRefuel.capacity | capacity }} -
-        {{lastRefuel.amount | currency}}
+<div class="info-box card">
+    <div class="item item-divider item-dark">
+        Last refuel
+    </div>
+    <div class="item">
+        <div class="h3">
+            <strong>{{lastRefuel.car.getName()}}</strong>
+        </div>
+        <p>
+            <i class="ion-waterdrop"></i> {{ lastRefuel.capacity | capacity }} -
+            {{lastRefuel.amount | currency}}
+        </p>
+    </div>
+    <div class="item">
         <span class="item-note">{{lastRefuel.daysAgo | timeAgo}}</span>
+    </div>
+</div>
 
-    </p>
-</ion-item>
-
-<ion-item class="info-box item overview-totals">
-    <h3>
-        Total Spent: <strong>{{totals.totalSpent | currency}}</strong>
-    </h3>
-    <h3>
-        Total Capacity: <strong>{{totals.totalCapacity | number | capacity}}</strong>
-    </h3>
-</ion-item>
+<div class="info-box card">
+    <div class="item item-divider item-dark">
+        Totals
+    </div>
+    <div class="item item-icon-right">
+        Spent: <span class="icon stat-number">{{totals.totalSpent | currency}}</span>
+    </div>
+    <div class="item item-icon-right">
+        Capacity: <span class="icon stat-number">{{totals.totalCapacity | number | capacity}}</span>
+    </div>
+</div>
 
 <button ui-sref="app.refuelNew" class="button icon-left ion-plus button-dark button-block big-main-button">Add New Refuel</button>
 <!--             	<h3>This month so far</h3>
 <ul>
 	<ion-item ng-repeat="car in carsRefueledThisMonth()">
-		<h4>{{car.getName()}} </h4>
+		<h4>{{car.make + ' ' + car.model}} </h4>
         <strong>{{car.refuels.length}} refuels</strong> -
 		<strong>{{car.totalSpent | currency}}</strong> -
 		<strong>{{car.totalCapacity | capacity}}</strong>

@@ -8,9 +8,7 @@
             <span class="input-label">Price</span>
             <input type="number" ng-model="fuel.price" required>
         </label>
-    </div>
-    <div class="padding">
-        <button ng-click="createFuel()" class="button button-block button-positive activated"
+        <button ng-click="createFuel()" class="button button-block activated big-main-button"
             ng-disabled="newFuel.$invalid">{{fuel._id ? 'Save' : 'Create'}}</button>
     </div>
 </form>
