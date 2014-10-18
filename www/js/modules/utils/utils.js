@@ -102,7 +102,7 @@ angular.module('utils', [])
 
 .filter('timeAgo', ['$filter', function ($filter) {
     return function (value) {
-        var unit = 'days',
+        var unit = $filter('translate')('DAYS'),
             timeAgo;
 
         if (value <= 1) {
