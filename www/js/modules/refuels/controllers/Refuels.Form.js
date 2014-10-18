@@ -38,10 +38,19 @@ angular.module('refuels')
         $scope.cars = getCars();
 
         $scope.refuel.replaceFuel($scope.fuels);
+        /**
+         * if there is a car already set
+         * we need to find it with the id inside
+         * the cars array
+         */
+        if ($scope.refuel.car) {
+            $scope.refuel.car = _.findWhere($scope.cars, { _id: Number($scope.refuel.car) });
+        }
 
         $scope.create = function () {
             // date saved as timestamp
             $scope.refuel.date = Utils.formatDateToTime($scope.refuel.date);
+            $scope.refuel.car = $scope.refuel.car._id.toString();
             $scope.refuel.$save(function () {
                 $state.go('app.refuelList');
             });
