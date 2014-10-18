@@ -1,16 +1,25 @@
+<<<<<<< HEAD
 <div class="info-box card">
+=======
+<ion-card class="info-box">
+>>>>>>> master
     <div class="item item-divider item-dark">
         Last refuel
     </div>
     <div class="item">
+<<<<<<< HEAD
         <div class="h3">
             <strong>{{lastRefuel.car.getName()}}</strong>
         </div>
+=======
+        <strong class="h4">{{lastRefuel.car.getName()}}</strong>
+>>>>>>> master
         <p>
             <i class="ion-waterdrop"></i> {{ lastRefuel.capacity | capacity }} -
             {{lastRefuel.amount | currency}}
         </p>
     </div>
+<<<<<<< HEAD
     <div class="item">
         <span class="item-note">{{lastRefuel.daysAgo | timeAgo}}</span>
     </div>
@@ -27,6 +36,26 @@
         Capacity: <span class="icon stat-number">{{totals.totalCapacity | number | capacity}}</span>
     </div>
 </div>
+=======
+    <div class="item item-divider">
+        <p>
+            <span class="item-note">{{lastRefuel.daysAgo | timeAgo}}</span>
+        </p>
+    </div>
+</ion-card>
+<br/>
+<ion-card class="info-box overview-totals">
+    <div class="item item-divider item-dark">
+        Total Stats
+    </div>
+    <div class="item">
+        Total Spent <strong class="badge badge-positive">{{totals.totalSpent | currency}}</strong>
+    </div>
+    <div class="item">
+        Total Capacity <strong class="badge badge-balanced">{{totals.totalCapacity | number | capacity}}</strong>
+    </div>
+</ion-card>
+>>>>>>> master
 
 <button ui-sref="app.refuelNew" class="button icon-left ion-plus button-dark button-block big-main-button">Add New Refuel</button>
 <!--             	<h3>This month so far</h3>
