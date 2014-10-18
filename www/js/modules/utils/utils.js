@@ -100,21 +100,21 @@ angular.module('utils', [])
     };
 })
 
-.filter('timeAgo', function () {
+.filter('timeAgo', ['$filter', function ($filter) {
     return function (value) {
         var unit = 'days',
             timeAgo;
 
         if (value <= 1) {
-            unit = value < 1 ? 'less than a day' : 'day';
+            unit = $filter('translate')(value < 1 ? 'LESS_THAN_A_DAY' : 'DAY');
         }
         // else if (!(value % 7)) {
         //     unit = value == 7 ? 'week' : 'weeks';
         // }
         timeAgo = (value < 1) ? '' : Math.round(value) + ' ';
-        return timeAgo + unit + ' ago';
+        return $filter('translate')('AGO', { data: timeAgo + unit });
     };
-})
+}])
 
 .filter('average', function () {
     return function (value) {

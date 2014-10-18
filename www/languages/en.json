@@ -1,6 +1,7 @@
 {
     "ABOUT": "About",
     "ADD_NEW_REFUEL": "Add New Refuel",
+    "AGO": "{{data}} ago",
     "ALL": "All",
     "AMOUNT": "Amount",
     "AVERAGES": "Averages",
@@ -10,6 +11,7 @@
     "CONSUMPTION": "Consumption",
     "CREATE": "Create",
     "DATE": "Date",
+    "DAY": "Day",
     "DEFAULT_VEHICLE": "Vehicle by Default",
     "DELETE": "Delete",
     "DESCRIPTION": "Description",
@@ -26,6 +28,7 @@
     "LANGUAGE": "Language",
     "LAST_NAME": "Last Name",
     "LAST_REFUEL": "Last refuel",
+    "LESS_THAN_A_DAY": "less than a day",
     "MAKE": "Make",
     "MODEL": "Model",
     "NAME": "Name",

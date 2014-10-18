@@ -1,6 +1,7 @@
 {
     "ABOUT": "Sobre Nosotros",
     "ADD_NEW_REFUEL": "Agregar Nuevo Refuel",
+    "AGO": "hace {{data}}",
     "ALL": "Todos",
     "AMOUNT": "Monto",
     "AVERAGES": "Promedios",
@@ -10,6 +11,7 @@
     "CONSUMPTION": "Consumo",
     "CREATE": "Crear",
     "DATE": "Fecha",
+    "DAY": "Dia",
     "DEFAULT_VEHICLE": "Vehiculo por defecto",
     "DELETE": "Borrar",
     "DESCRIPTION": "Descripcion",
@@ -26,6 +28,7 @@
     "LANGUAGE": "Lenguaje",
     "LAST_NAME": "Apellido",
     "LAST_REFUEL": "Ultima recarga",
+    "LESS_THAN_A_DAY": "menos de un dia",
     "MAKE": "Marca",
     "MODEL": "Modelo",
     "NAME": "Nombre",

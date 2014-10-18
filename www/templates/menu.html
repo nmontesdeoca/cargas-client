@@ -11,10 +11,34 @@
     <ion-side-menu side="left">
         <ion-content class="dark-bg">
             <ion-list>
-                <ion-item ng-repeat="menuItem in menuItems" class="item-dark item-icon-left" nav-clear menu-close
-                ui-sref="{{menuItem.state}}">
-                    <i class="icon ion-{{menuItem.iconName}}"></i>
-                    {{menuItem.name}}
+                <ion-item class="item-dark item-icon-left" nav-clear menu-close ui-sref="app.overview">
+                    <i class="icon ion-stats-bars"></i>
+                    {{'OVERVIEW' | translate}}
+                </ion-item>
+
+                <ion-item class="item-dark item-icon-left" nav-clear menu-close ui-sref="app.carList">
+                    <i class="icon ion-model-s"></i>
+                    {{'VEHICLES' | translate}}
+                </ion-item>
+
+                <ion-item class="item-dark item-icon-left" nav-clear menu-close ui-sref="app.fuelList">
+                    <i class="icon ion-stats-bars"></i>
+                    {{'FUELS' | translate}}
+                </ion-item>
+
+                <ion-item class="item-dark item-icon-left" nav-clear menu-close ui-sref="app.refuelList">
+                    <i class="icon ion-waterdrop"></i>
+                    {{'REFUELS' | translate}}
+                </ion-item>
+
+                <ion-item class="item-dark item-icon-left" nav-clear menu-close ui-sref="app.stats">
+                    <i class="icon ion-stats-bars"></i>
+                    {{'STATS' | translate}}
+                </ion-item>
+
+                <ion-item class="item-dark item-icon-left" nav-clear menu-close ui-sref="app.settingsList">
+                    <i class="icon ion-gear-a"></i>
+                    {{'SETTINGS' | translate}}
                 </ion-item>
             </ion-list>
         </ion-content>

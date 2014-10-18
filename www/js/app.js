@@ -12,8 +12,8 @@ angular.module('starter', [
     'utils'
 ])
 
-.run(['$ionicPlatform', '$rootScope', 'Setting',
-    function ($ionicPlatform, $rootScope, Setting) {
+.run(['$ionicPlatform', '$rootScope', '$translate', 'Setting',
+    function ($ionicPlatform, $rootScope, $translate, Setting) {
         $ionicPlatform.ready(function () {
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
@@ -22,6 +22,17 @@ angular.module('starter', [
 
             if (window.ionic) {
                 ionic.Platform && ionic.Platform.fullScreen && ionic.Platform.fullScreen();
+            }
+
+            if (navigator.globalization) {
+                navigator.globalization.getPreferredLanguage(
+                    function (language) {
+                        $translate.use(language.value.split('-').shift());
+                    },
+                    function () {
+                        console.log('Error getting language');
+                    }
+                );
             }
 
             // to make underscore available at any template
@@ -39,8 +50,7 @@ angular.module('starter', [
     function ($stateProvider, $urlRouterProvider, $translateProvider) {
         $stateProvider.state('app', {
             abstract: true,
-            templateUrl: 'templates/menu.html',
-            controller: 'Menu'
+            templateUrl: 'templates/menu.html'
         });
 
         $urlRouterProvider.otherwise('/overview');
