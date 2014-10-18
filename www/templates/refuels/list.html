@@ -1,4 +1,4 @@
-<ion-view title="Refuels">
+<ion-view title="{{'REFUELS' | translate}}">
     <ion-nav-buttons side="left">
         <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
@@ -11,9 +11,9 @@
             show-reorder="false"
             can-swipe="true">
             <label class="item item-input item-select">
-                <div class="input-label">Vehicle</div>
+                <div class="input-label" translate="VEHICLE"></div>
                 <select ng-model="filter.car" ng-options="key as value for (key, value) in cars">
-                    <option value="" ng-if="showFilterAll">All</option>
+                    <option value="" ng-if="showFilterAll" translate="ALL"></option>
                 </select>
             </label>
             <ion-item ng-repeat="refuel in refuels" ui-sref="app.refuelEdit({id: refuel._id})" class="item">
@@ -22,7 +22,7 @@
                 <ion-option-button class="button-assertive" ng-click="delete(refuel)">Delete</ion-option-button>
             </ion-item>
             <ion-item ng-if="refuels.length">
-                <h2>Totals</h2>
+                <h2 translate="TOTALS"></h2>
                 <p>{{totalSpent | currency}} - {{totalCapacity | capacity}}</p>
             </ion-item>
         </ion-list>

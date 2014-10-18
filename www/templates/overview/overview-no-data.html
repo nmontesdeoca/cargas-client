@@ -1,8 +1,8 @@
 <div ng-if="hasCars">
-	<h3>You have not submitted a refuel yet:</h3>
+	<h3 translate="WITHOUT_REFUEL"></h3>
 	<button ui-sref="app.refuelNew" class="button icon-left ion-plus button-dark button-block big-main-button">Add New Refuel</button>
 </div>
 <div ng-if="!hasCars">
-	<h3>Please, enter the data for your car</h3>
+	<h3 translate="WITHOUT_CAR"></h3>
 	<button ui-sref="app.carNew" class="button icon-left ion-plus button-dark button-block big-main-button">Add New Car</button>
 </div>

@@ -1,7 +1,5 @@
 <div class="info-box card">
-    <div class="item item-divider item-dark">
-        Last refuel
-    </div>
+    <div class="item item-divider item-dark" translate="LAST_REFUEL"></div>
     <div class="item">
         <div class="h3">
             <strong>{{lastRefuel.car.getName()}}</strong>
@@ -17,18 +15,16 @@
 </div>
 
 <div class="info-box card">
-    <div class="item item-divider item-dark">
-        Totals
+    <div class="item item-divider item-dark" translate="TOTALS"></div>
+    <div class="item item-icon-right">
+        {{'SPENT' | translate}}: <span class="icon stat-number">{{totals.totalSpent | currency}}</span>
     </div>
     <div class="item item-icon-right">
-        Spent: <span class="icon stat-number">{{totals.totalSpent | currency}}</span>
-    </div>
-    <div class="item item-icon-right">
-        Capacity: <span class="icon stat-number">{{totals.totalCapacity | number | capacity}}</span>
+        {{'CAPACITY' | translate}}: <span class="icon stat-number">{{totals.totalCapacity | number | capacity}}</span>
     </div>
 </div>
 
-<button ui-sref="app.refuelNew" class="button icon-left ion-plus button-dark button-block big-main-button">Add New Refuel</button>
+<button ui-sref="app.refuelNew" class="button icon-left ion-plus button-dark button-block big-main-button" translate="ADD_NEW_REFUEL"></button>
 <!--             	<h3>This month so far</h3>
 <ul>
 	<ion-item ng-repeat="car in carsRefueledThisMonth()">

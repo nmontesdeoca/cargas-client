@@ -3,54 +3,54 @@
         <form name="newRefuelForm">
             <div class="list">
                 <label class="item item-input">
-                    <span class="input-label">Date</span>
+                    <span class="input-label" translate="DATE"></span>
                     <input type="date" ng-model="refuel.date" required>
                 </label>
                 <label class="item item-input item-select">
-                    <span class="input-label">Vehicle</span>
+                    <span class="input-label" translate="VEHICLE"></span>
                     <select ng-model="refuel.car" ng-options="car as car.getName() for car in cars" required ng-change="addNewCar();">
-                        <option value="">Select</option>
+                        <option value="" translate="SELECT"></option>
                     </select>
                 </label>
 
                 <label class="item item-input">
-                    <span class="input-label">Odometer</span>
+                    <span class="input-label" translate="ODOMETER"></span>
                     <input type="number" ng-model="refuel.overallKilometers" required>
                 </label>
 
                 <label class="item item-input item-select">
-                    <span class="input-label">Fuel</span>
+                    <span class="input-label" translate="FUEL"></span>
                     <select ng-model="refuel.fuel" ng-options="fuel as fuel.name for fuel in fuels" ng-change="addNewFuel();" required>
-                        <option value="">Select</option>
+                        <option value="" translate="SELECT"></option>
                     </select>
                 </label>
 
                 <label class="item item-input">
-                    <span class="input-label">Fuel Price</span>
+                    <span class="input-label" translate="FUEL_PRICE"></span>
                     <input type="number" ng-model="refuel.fuelPrice" required>
                 </label>
 
                 <label class="item item-input">
-                    <span class="input-label">Capacity</span>
+                    <span class="input-label" translate="CAPACITY"></span>
                     <input type="number" ng-model="refuel.capacity" required>
                 </label>
 
                 <label class="item item-input">
-                    <span id="amount-label" class="input-label">Amount</span>
+                    <span id="amount-label" class="input-label" translate="AMOUNT"></span>
                     <input type="text" ng-model="refuel.amount" required>
                 </label>
 
                 <label class="item item-input" ng-show="refuel.distance">
-                    <span id="amount-label" class="input-label">Distance</span>
+                    <span id="amount-label" class="input-label" translate="DISTANCE"></span>
                     <input type="text" ng-value="refuel.distance | distance" readonly>
                 </label>
 
                 <label class="item item-input" ng-show="refuel.consumption">
-                    <span id="amount-label" class="input-label">Consumption</span>
+                    <span id="amount-label" class="input-label" translate="CONSUMPTION"></span>
                     <input type="text" ng-value="refuel.consumption | number | consumption" readonly>
                 </label>
                 <button ng-click="create()" class="button button-block big-main-button activated"
-                    ng-disabled="newRefuelForm.$invalid">{{refuel._id ? 'Save' : 'Create'}}</button>
+                    ng-disabled="newRefuelForm.$invalid">{{(refuel._id ? 'SAVE' : 'CREATE') | translate}}</button>
             </div>
         </form>
     </ion-content>

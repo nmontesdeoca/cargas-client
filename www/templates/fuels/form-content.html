@@ -1,14 +1,14 @@
 <form name="newFuel">
     <div class="list">
         <label class="item item-input">
-            <span class="input-label">Name</span>
+            <span class="input-label" translate="NAME"></span>
             <input type="text" ng-model="fuel.name" required>
         </label>
         <label class="item item-input">
-            <span class="input-label">Price</span>
+            <span class="input-label" translate="PRICE"></span>
             <input type="number" ng-model="fuel.price" required>
         </label>
         <button ng-click="createFuel()" class="button button-block activated big-main-button"
-            ng-disabled="newFuel.$invalid">{{fuel._id ? 'Save' : 'Create'}}</button>
+            ng-disabled="newFuel.$invalid">{{(fuel._id ? 'SAVE' : 'CREATE') | translate}}</button>
     </div>
 </form>

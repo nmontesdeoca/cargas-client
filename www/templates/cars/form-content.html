@@ -1,45 +1,45 @@
 <form name="newCarForm">
     <div class="list">
         <label class="item item-input item-select">
-            <span class="input-label">Make</span>
+            <span class="input-label" translate="MAKE"></span>
             <select ng-model="car.make" ng-options="car.make as car.make for car in makes" required>
-                <option value="">Select</option>
+                <option value="" translate="SELECT"></option>
             </select>
         </label>
         <label class="item item-input item-select">
-            <span class="input-label">Model</span>
+            <span class="input-label" translate="MODEL"></span>
             <select ng-model="car.model" ng-options="model as model for model in _.findWhere(makes, {make: car.make}).models" required>
-                <option value="">Select</option>
+                <option value="" translate="SELECT"></option>
             </select>
         </label>
         <label class="item item-input item-select">
-            <span class="input-label">Year</span>
+            <span class="input-label" translate="YEAR"></span>
             <select ng-model="car.year" ng-options="year for year in years" required>
-                <option value="">Select</option>
+                <option value="" translate="SELECT"></option>
             </select>
         </label>
         <!-- maybe this field could be not required -->
         <label class="item item-input item-select">
-            <span class="input-label">Fuel</span>
+            <span class="input-label" translate="FUEL"></span>
             <select ng-model="car.fuel" ng-options="fuel as fuel.name for fuel in fuels" ng-change="addNewFuel()">
-                <option value="">Select</option>
+                <option value="" translate="SELECT"></option>
             </select>
         </label>
         <!-- the next field could be the plake but the user needs to identify its vehicles,
         i.e. if their has two or more cars of the same make, model and year -->
         <label class="item item-input">
-            <span class="input-label">Description</span>
+            <span class="input-label" translate="DESCRIPTION"></span>
             <input type="text" ng-model="car.description">
         </label>
         <label class="item item-input" ng-show="displayTakePicture">
-            <span class="input-label">Picture</span>
+            <span class="input-label" translate="PICTURE"></span>
             <button ng-click="getPhoto()" class="button icon-left ion-camera button-small button-positive">Take Photo</button>
         </label>
         <label class="item item-input padding item-photo" ng-show="car.image">
             <img ng-src="{{car.image}}" alt="{{car.getName()}}">
         </label>
         <div class="item item-toggle">
-            Vehicle by Default
+            {{'DEFAULT_VEHICLE' | translate}}
             <label class="toggle toggle-possitive">
                 <input type="checkbox" ng-model="car.byDefault">
                 <div class="track">
@@ -48,9 +48,8 @@
             </label>
         </div>
         <button ng-click="createCar()" class="button button-block activated big-main-button"
-            ng-disabled="newCarForm.$invalid">{{car._id ? 'Save' : 'Create'}}</button>
-        <button class="button button-clear button-positive" ng-click="newMakeModelModal.show()">
-            Suggest new make and model
-        </button>
+            ng-disabled="newCarForm.$invalid">{{(car._id ? 'SAVE' : 'CREATE') | translate}}</button>
+        <button class="button button-clear button-positive" ng-click="newMakeModelModal.show()"
+            translate="SUGGEST_NEW_CAR"></button>
     </div>
 </form>

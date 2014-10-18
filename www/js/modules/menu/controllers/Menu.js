@@ -2,41 +2,42 @@ angular.module('starter')
 
 .controller('Menu', [
     '$scope',
-    function ($scope) {
+    '$filter',
+    function ($scope, $filter) {
 
         $scope.menuItems = [{
             iconName: 'stats-bars',
-            name: 'Overview',
+            name: $filter('translate')('OVERVIEW'),
             link: '#/overview',
             state: 'app.overview'
         },/* {
             iconName: 'person',
-            name: 'Profile',
+            name: $filter('translate')('PROFILE'),
             link: '#/profile',
             state: 'app.profile'
         },*/ {
             iconName: 'model-s',
-            name: 'Vehicles',
+            name: $filter('translate')('VEHICLES'),
             link: '#/cars',
             state: 'app.carList'
         }, {
             iconName: 'stats-bars',
-            name: 'Fuels',
+            name: $filter('translate')('FUELS'),
             link: '#/fuels',
             state: 'app.fuelList'
         }, {
             iconName: 'waterdrop',
-            name: 'Refuels',
+            name: $filter('translate')('REFUELS'),
             link: '#/refuels',
             state: 'app.refuelList'
         }, {
             iconName: 'stats-bars',
-            name: 'Stats',
+            name: $filter('translate')('STATS'),
             link: '#/stats',
             state: 'app.stats'
         }, {
             iconName: 'gear-a',
-            name: 'Settings',
+            name: $filter('translate')('SETTINGS'),
             link: '#/settings',
             state: 'app.settingsList'
         }];

@@ -1,4 +1,4 @@
-<ion-view title="Profile">
+<ion-view title="{{'PROFILE' | translate}}">
     <ion-nav-buttons side="left">
         <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
@@ -6,21 +6,21 @@
         <form name="profileForm">
             <div class="list">
                 <label class="item item-input">
-                    <span class="input-label">First Name</span>
+                    <span class="input-label" translate="FIRST_NAME"></span>
                     <input type="text" ng-model="profile.firstname" required>
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Last Name</span>
+                    <span class="input-label" translate="LAST_NAME"></span>
                     <input type="text" ng-model="profile.lastname" required>
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Email</span>
+                    <span class="input-label" translate="EMAIL"></span>
                     <input type="email" ng-model="profile.email" required>
                 </label>
             </div>
             <div class="padding">
                 <button ng-click="save()" class="button button-block button-positive activated"
-                    ng-disabled="profileForm.$invalid">Save</button>
+                    ng-disabled="profileForm.$invalid" translate="SAVE"></button>
             </div>
         </form>
     </ion-content>

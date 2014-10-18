@@ -1,23 +1,23 @@
 <ion-modal-view>
     <ion-header-bar class="bar bar-header bar-dark">
-          <h1 class="title">New Make and Model</h1>
+          <h1 class="title" translate="NEW_MAKE_MODEL"></h1>
           <button class="button icon ion-close no-border" ng-click="newMakeModelModal.hide()"></button>
     </ion-header-bar>
     <ion-content class="has-header">
         <form name="newMakeModelForm">
             <div class="list">
                 <label class="item item-input">
-                    <span class="input-label">Make</span>
+                    <span class="input-label" translate="MAKE"></span>
                     <input type="text" ng-model="newCar.make" required>
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Model</span>
+                    <span class="input-label" translate="MODEL"></span>
                     <input type="text" ng-model="newCar.model" required>
                 </label>
             </div>
             <div class="padding">
                 <button ng-click="newMakeModel()" class="button button-block button-positive activated"
-                    ng-disabled="newMakeModelForm.$invalid">Send</button>
+                    ng-disabled="newMakeModelForm.$invalid" translate="SEND"></button>
             </div>
         </form>
     </ion-content>

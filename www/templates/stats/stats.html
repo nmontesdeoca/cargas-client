@@ -1,68 +1,68 @@
-<ion-view title="Stats">
+<ion-view title="{{'STATS' | translate}}">
     <ion-nav-buttons side="left">
         <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list>
             <label class="item item-input item-select">
-                <div class="input-label">Vehicle</div>
+                <div class="input-label" translate="VEHICLE"></div>
                 <select ng-model="filter.car" ng-options="key as value for (key, value) in cars">
-                    <option value="" ng-if="showFilterAll">All</option>
+                    <option value="" ng-if="showFilterAll" translate="ALL"></option>
                 </select>
             </label>
-            <ion-item class="item item-divider">Totals</ion-item>
+            <ion-item class="item item-divider" translate="TOTALS"></ion-item>
             <ion-item class="item">
-                <h2>Total spent</h2>
+                <h2 translate="SPENT"></h2>
                 <p>{{totalSpent | currency}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Total capacity</h2>
+                <h2 translate="CAPACITY"></h2>
                 <p>{{totalCapacity | number | capacity}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Total distance</h2>
+                <h2 translate="DISTANCE"></h2>
                 <p>{{totalKilometers | distance}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Refuels count</h2>
+                <h2 translate="REFUELS_COUNT"></h2>
                 <p>{{refuelsCount | number}}</p>
             </ion-item>
-            <ion-item class="item item-divider">By Time</ion-item>
+            <ion-item class="item item-divider" translate="PER_TIME"></ion-item>
             <ion-item class="item">
-                <h2>Spent by year</h2>
+                <h2 translate="SPENT_PER_YEAR"></h2>
                 <p>{{spentByYear | currency}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Spent by month</h2>
+                <h2 translate="SPENT_PER_MONTH"></h2>
                 <p>{{spentByMonth | currency}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Spent by day</h2>
+                <h2 translate="SPENT_PER_DAY"></h2>
                 <p>{{spentByDay | currency}}</p>
             </ion-item>
-            <ion-item class="item item-divider">Averages</ion-item>
+            <ion-item class="item item-divider" translate="AVERAGES"></ion-item>
             <ion-item class="item">
-                <h2>Spent by kilometer</h2>
+                <h2 translate="SPENT_PER_KILOMETER"></h2>
                 <p>{{spentByKilometer | currency}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Kilometers by liter</h2>
+                <h2 translate="KILOMETERS_PER_LITRE"></h2>
                 <p>{{kilometersByLiter | number}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Average time between refuels</h2>
+                <h2 translate="TIME_BETWEEN_REFUELS"></h2>
                 <p>{{averageTimeBetweenRefuels | average | days}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Average distance between refuels</h2>
+                <h2 translate="DISTANCE_BETWEEN_REFUELS"></h2>
                 <p>{{averageDistanceBetweenRefuels | average | distance}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Average spent by refuel</h2>
+                <h2 translate="SPENT_PER_REFUEL"></h2>
                 <p>{{averageSpent | average | currency}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2>Average capacity by refuel</h2>
+                <h2 translate="CAPACITY_PER_REFUEL"></h2>
                 <p>{{averageCapacity | average | capacity}}</p>
             </ion-item>
         </ion-list>

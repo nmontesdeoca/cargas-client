@@ -2,26 +2,23 @@ angular.module('settings')
 
 .controller('Settings', [
     '$scope',
-    function ($scope) {
+    '$filter',
+    function ($scope, $filter) {
 
         $scope.settings = [{
-            name: 'Units',
+            name: $filter('translate')('UNITS'),
             link: '#/settings/units',
             state: 'app.settingsUnits'
         }, {
-            name: 'Language',
+            name: $filter('translate')('LANGUAGE'),
             link: '#/settings/language',
             state: 'app.settingsLanguage'
         }, {
-            name: 'Terms and Conditions',
-            link: '#/settings/terms-conditions',
-            state: 'app.settingsTerms'
-        }, {
-            name: 'About',
+            name: $filter('translate')('ABOUT'),
             link: '#/settings/about',
             state: 'app.settingsAbout'
         }, {
-            name: 'Help',
+            name: $filter('translate')('HELP'),
             link: '#/settings/help',
             state: 'app.settingsHelp'
         }];
