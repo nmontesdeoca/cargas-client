@@ -98,13 +98,9 @@ angular.module('refuels')
 
         $scope.$watch('refuel.car', function (newCar, oldCar) {
             var car;
-            if (newCar && newCar !== oldCar) {
-                car = Car.get({
-                    _id: parseInt(newCar, 10)
-                });
-
-                if (car.fuel && car.fuel._id) {
-                    $scope.refuel.replaceFuel($scope.fuels, car.fuel._id);
+            if (newCar) {
+                if (newCar.fuel && newCar.fuel._id) {
+                    $scope.refuel.replaceFuel($scope.fuels, newCar.fuel._id);
                 }
             }
         });
@@ -213,23 +209,24 @@ angular.module('refuels')
         $scope.$watch('refuel.car + refuel.overallKilometers + refuel.capacity',
             function (newData, oldData) {
 
-            var car = Car.get({
-                    _id: Number($scope.refuel.car)
-                }),
-                previousRefuel = $scope.refuel.getPreviousRefuel(),
+            var car = $scope.refuel.car,
+                previousRefuel,
                 distance;
 
-            if (car && previousRefuel && previousRefuel._id !== $scope.refuel._id) {
-                distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
-                _.extend($scope.refuel, {
-                    distance: distance,
-                    consumption: (distance / $scope.refuel.capacity)
-                });
-            } else {
-                _.extend($scope.refuel, {
-                    distance: 0,
-                    consumption: 0
-                });
+            _.extend($scope.refuel, {
+                distance: 0,
+                consumption: 0
+            });
+
+            if (car) {
+                previousRefuel = $scope.refuel.getPreviousRefuel();
+                if (previousRefuel && previousRefuel._id !== $scope.refuel._id) {
+                    distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
+                    _.extend($scope.refuel, {
+                        distance: distance,
+                        consumption: (distance / $scope.refuel.capacity)
+                    });
+                }
             }
         });
     }

@@ -322,7 +322,10 @@ angular.module('refuels')
         RefuelModel.prototype.getPreviousRefuel = function () {
             var index,
                 self = this,
-                refuels = _.sortBy(RefuelModel.getRefuelsByCarId(self.car), 'date').reverse();
+                refuels = _.sortBy(
+                    RefuelModel.getRefuelsByCarId(self.car._id.toString()),
+                    'date'
+                ).reverse();
 
             if (this._id) {
                 _.find(refuels, function (refuel, _index) {
