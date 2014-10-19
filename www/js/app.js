@@ -15,6 +15,8 @@ angular.module('starter', [
 .run(['$ionicPlatform', '$rootScope', '$translate', 'Setting',
     function ($ionicPlatform, $rootScope, $translate, Setting) {
         $ionicPlatform.ready(function () {
+            var settings = Setting.query();
+
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 StatusBar.hide();
@@ -24,21 +26,14 @@ angular.module('starter', [
                 ionic.Platform && ionic.Platform.fullScreen && ionic.Platform.fullScreen();
             }
 
-            if (navigator.globalization) {
-                navigator.globalization.getPreferredLanguage(
-                    function (language) {
-                        $translate.use(language.value.split('-').shift());
-                    },
-                    function () {
-                        console.log('Error getting language');
-                    }
-                );
+            if (!settings._id) {
+                settings.initialize();
+            } else {
+                $translate.use(settings.language);
             }
 
             // to make underscore available at any template
             $rootScope._ = _;
-
-            Setting.initialize();
         });
     }
 ])

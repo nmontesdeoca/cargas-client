@@ -1,5 +1,7 @@
 angular.module('settings', [])
 
+.constant('VALID_LANGUAGES', ['en', 'es'])
+
 .config(['$stateProvider',
     function ($stateProvider) {
 
@@ -20,13 +22,15 @@ angular.module('settings', [])
 
         .state('app.settingsLanguage', {
             url: '/settings/language',
-            /*resolve: {
-            Settings: 'Setting'
-        },*/
+            resolve: {
+                setting: ['Setting', function (Setting) {
+                    return Setting.query();
+                }]
+            },
             views: {
                 menuContent: {
-                    templateUrl: 'templates/settings/language.html',
-                    controller: 'Settings'
+                    templateUrl: 'templates/settings/languages.html',
+                    controller: 'Languages'
                 }
             }
         })
@@ -34,7 +38,7 @@ angular.module('settings', [])
         .state('app.settingsUnits', {
             url: '/settings/units',
             resolve: {
-                setting: ['Setting', function(Setting) {
+                setting: ['Setting', function (Setting) {
                     return Setting.query();
                 }]
             },
