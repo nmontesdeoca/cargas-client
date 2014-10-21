@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.cargas876110" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>CarGas</name>
-  <description>
-        An Ionic Framework and Cordova project.
+    <name>CarGas</name>
+    <description>
+        Administración de recargas de combustible de vehículos.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+    <author email="hi@ionicframework" href="http://ionicframework.com/">
+        CarGas Team
     </author>
-  <content src="index.html"/>
-  <access origin="*"/>
-  <preference name="SplashScreen" value="screen" />
-  <preference name="SplashScreenDelay" value="20000" />
-  <preference name="AutoHideSplashScreen" value="false" />
-  <preference name="webviewbounce" value="false"/>
-  <preference name="UIWebViewBounce" value="false"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="BackupWebStorage" value="none"/>
-  <feature name="StatusBar">
-    <param name="ios-package" value="CDVStatusBar" onload="true"/>
-  </feature>
-  <feature name="NetworkStatus">
-    <param name="ios-package" value="CDVConnection" />
-    <param name="android-package" value="org.apache.cordova.NetworkManager" />
-  </feature>
+    <content src="index.html"/>
+    <access origin="*"/>
+    <preference name="SplashScreen" value="screen" />
+    <preference name="SplashScreenDelay" value="20000" />
+    <preference name="AutoHideSplashScreen" value="false" />
+    <preference name="webviewbounce" value="false"/>
+    <preference name="UIWebViewBounce" value="false"/>
+    <preference name="DisallowOverscroll" value="true"/>
+    <preference name="BackupWebStorage" value="none"/>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" onload="true"/>
+    </feature>
+    <feature name="NetworkStatus">
+        <param name="ios-package" value="CDVConnection" />
+        <param name="android-package" value="org.apache.cordova.NetworkManager" />
+    </feature>
 </widget>

@@ -40,7 +40,7 @@
         </label>
         <div class="item item-toggle">
             {{'DEFAULT_VEHICLE' | translate}}
-            <label class="toggle toggle-possitive">
+            <label class="toggle toggle-dark">
                 <input type="checkbox" ng-model="car.byDefault">
                 <div class="track">
                     <div class="handle"></div>
@@ -49,7 +49,7 @@
         </div>
         <button ng-click="createCar()" class="button button-block activated big-main-button"
             ng-disabled="newCarForm.$invalid">{{(car._id ? 'SAVE' : 'CREATE') | translate}}</button>
-        <button class="button button-clear button-positive" ng-click="newMakeModelModal.show()"
+        <button class="button button-clear button-dark" ng-click="newMakeModelModal.show()"
             translate="SUGGEST_NEW_CAR"></button>
     </div>
 </form>

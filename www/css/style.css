@@ -16,10 +16,14 @@
     border: none;
 }
 
+.input-label {
+    width: 40%;
+}
+
 .item-select select {
     background: transparent;
     direction: ltr;
-    left: 35%;
+    left: 40%;
     padding-left: 10px;
 }
 
@@ -88,10 +92,12 @@
     letter-spacing: 1.1;
     text-shadow: 1px 1px 0 rgba(0,0,0,0.7);
 }
+.info-box.card:first-child {
+    margin-top: 0;
+}
 .info-box .stat-number {
     font-size: 22px;
 }
-
 
 ion-nav-view,
 .item-select select,
@@ -100,4 +106,8 @@ ion-nav-view,
 }
 .item-divider {
     text-transform: capitalize;
+}
+
+.button.button-dark.button-clear {
+    text-shadow: 1px 1px 0 white;
 }

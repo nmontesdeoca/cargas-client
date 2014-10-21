@@ -779,7 +779,6 @@ angular.module('utils', [])
             }
         },
 
-
         calculateDays: function (dateBefore, dateAfter) {
             var oneDay = 24 * 60 * 60 * 1000, // hours * minutes * seconds * milliseconds
                 dateBeforeMs = new Date(dateBefore).getTime(),

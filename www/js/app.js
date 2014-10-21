@@ -14,15 +14,18 @@ angular.module('starter', [
 
 .run(['$ionicPlatform', '$rootScope', '$translate', 'Setting',
     function ($ionicPlatform, $rootScope, $translate, Setting) {
-        $ionicPlatform.ready(function () {
-            var settings = Setting.query();
 
-            if (window.StatusBar) {
+        $ionicPlatform.ready(function () {
+
+            var isAndroid = /android/i.test(navigator.userAgent),
+                settings = Setting.query();
+
+            if (!isAndroid && window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 StatusBar.hide();
             }
 
-            if (window.ionic) {
+            if (!isAndroid && window.ionic) {
                 ionic.Platform && ionic.Platform.fullScreen && ionic.Platform.fullScreen();
             }
 
