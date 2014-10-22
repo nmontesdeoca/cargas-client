@@ -17,13 +17,13 @@
 }
 
 .input-label {
-    width: 40%;
+    width: 48%;
 }
 
 .item-select select {
     background: transparent;
     direction: ltr;
-    left: 40%;
+    left: 48%;
     padding-left: 10px;
 }
 
