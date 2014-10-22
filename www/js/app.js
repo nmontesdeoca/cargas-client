@@ -12,8 +12,8 @@ angular.module('starter', [
     'utils'
 ])
 
-.run(['$ionicPlatform', '$rootScope', '$translate', 'Setting',
-    function ($ionicPlatform, $rootScope, $translate, Setting) {
+.run(['$ionicPlatform', '$rootScope', '$translate', '$ionicSideMenuDelegate', 'Setting',
+    function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate, Setting) {
 
         $ionicPlatform.ready(function () {
 
@@ -29,6 +29,12 @@ angular.module('starter', [
                 ionic.Platform && ionic.Platform.fullScreen && ionic.Platform.fullScreen();
             }
 
+            if (isAndroid) {
+                $ionicPlatform.on('menubutton', function () {
+                    $ionicSideMenuDelegate.toggleLeft();
+                });
+            }
+
             if (!settings._id) {
                 settings.initialize();
             } else {
@@ -37,6 +43,9 @@ angular.module('starter', [
 
             // to make underscore available at any template
             $rootScope._ = _;
+
+            // if the social sharing plugin is not available the share button is hiding
+            $rootScope.socialSharingAvailable = !!(window.plugins && window.plugins.socialsharing);
         });
     }
 ])
@@ -48,7 +57,8 @@ angular.module('starter', [
     function ($stateProvider, $urlRouterProvider, $translateProvider) {
         $stateProvider.state('app', {
             abstract: true,
-            templateUrl: 'templates/menu.html'
+            templateUrl: 'templates/menu.html',
+            controller: 'menuController'
         });
 
         $urlRouterProvider.otherwise('/overview');
@@ -59,4 +69,17 @@ angular.module('starter', [
         });
         $translateProvider.preferredLanguage('en');
     }
-]);
+])
+
+.controller('menuController', ['$scope', '$filter', function ($scope, $filter) {
+
+    $scope.share = function () {
+        window.plugins.socialsharing.share(
+            $filter('translate')('SHARE_MESSAGE'),
+            null,
+            null,
+            'http://www.cargasapp.com/'
+        );
+    };
+
+}]);

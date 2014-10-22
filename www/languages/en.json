@@ -50,6 +50,8 @@
     "SELECT": "Select",
     "SEND": "Send",
     "SETTINGS": "Settings",
+    "SHARE": "Share",
+    "SHARE_MESSAGE": "This is the share message",
     "SPANISH": "Spanish",
     "SPENT": "Spent",
     "SPENT_PER_DAY": "Spent per day",

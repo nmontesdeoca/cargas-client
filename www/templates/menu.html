@@ -40,6 +40,10 @@
                     <i class="icon ion-gear-a"></i>
                     {{'SETTINGS' | translate}}
                 </ion-item>
+                <ion-item class="item-dark item-icon-left" nav-clear ng-click="share();" ng-if="socialSharingAvailable">
+                    <i class="icon ion-android-share"></i>
+                    {{'SHARE' | translate}}
+                </ion-item>
             </ion-list>
         </ion-content>
     </ion-side-menu>

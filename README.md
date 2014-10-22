@@ -14,6 +14,7 @@ Cordova Plugins used:
 * org.apache.cordova.network-information 0.2.12 "Network Information"
 * org.apache.cordova.splashscreen 0.3.3 "Splashscreen"
 * org.apache.cordova.statusbar 0.1.8 "StatusBar"
+* https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git 4.3.8 "PhoneGap Social Sharing"
 
 ### Contribuidores
 
