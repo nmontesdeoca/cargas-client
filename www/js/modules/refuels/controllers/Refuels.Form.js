@@ -5,19 +5,20 @@ angular.module('refuels')
     '$ionicPopup',
     '$state',
     '$ionicModal',
+    '$filter',
     'Refuel',
     'Car',
     'Fuel',
     'refuel',
     'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, Refuel, Car, Fuel, refuel,
+    function ($scope, $ionicPopup, $state, $ionicModal, $filter, Refuel, Car, Fuel, refuel,
             Utils, carByDefault) {
 
         var getCars = function () {
                 var cars = Car.query();
                 cars.push(new Car({
-                    make: 'Add New Vehicle',
+                    make: $filter('translate')('ADD_NEW_CAR'),
                     model: '',
                     value: 'newCar'
                 }));
@@ -27,7 +28,7 @@ angular.module('refuels')
             getFuels = function () {
                 var sortedFuels = _.sortBy(Fuel.query(), 'name');
                 sortedFuels.push({
-                    name: 'Add New Fuel',
+                    name: $filter('translate')('ADD_NEW_FUEL'),
                     value: 'newFuel'
                 });
                 return sortedFuels;
@@ -48,12 +49,39 @@ angular.module('refuels')
         }
 
         $scope.create = function () {
-            // date saved as timestamp
-            $scope.refuel.date = Utils.formatDateToTime($scope.refuel.date);
-            $scope.refuel.car = $scope.refuel.car._id.toString();
-            $scope.refuel.$save(function () {
-                $state.go('app.refuelList');
-            });
+            var previousRefuel = $scope.refuel.getPreviousRefuel(),
+                nextRefuel = $scope.refuel.getNextRefuel(),
+                message,
+                error = previousRefuel &&
+                    (previousRefuel.overallKilometers > $scope.refuel.overallKilometers) ||
+                    nextRefuel && (nextRefuel.overallKilometers < $scope.refuel.overallKilometers);
+
+            if (error) {
+                if (!previousRefuel) {
+                    message = $filter('translate')('SMALLER_THAN') + ' ' +
+                        nextRefuel.overallKilometers;
+                } else if (!nextRefuel) {
+                    message = $filter('translate')('GREATHER_THAN') + ' ' +
+                        previousRefuel.overallKilometers;
+                } else {
+                    message = $filter('translate')('BETWEEN') + ' ' +
+                        previousRefuel.overallKilometers +
+                        ' ' + $filter('translate')('AND') + ' ' +
+                        nextRefuel.overallKilometers;
+                }
+                $ionicPopup.alert({
+                    title: $filter('translate')('ERROR'),
+                    template: $filter('translate')('REFUEL_DOESNT_MAKE_SENSE') + '<br />' +
+                        $filter('translate')('IN_THIS_CASE_THE_ODOMETER') + ' ' + message
+                });
+            } else {
+                // date saved as timestamp
+                $scope.refuel.date = Utils.formatDateToTime($scope.refuel.date);
+                $scope.refuel.car = $scope.refuel.car._id.toString();
+                $scope.refuel.$save(function () {
+                    $state.go('app.refuelList');
+                });
+            }
         };
 
         $scope.$watch('refuel.fuel', function (newFuel, oldFuel) {
@@ -206,7 +234,7 @@ angular.module('refuels')
             $scope.newMakeModelModal.remove();
         });
 
-        $scope.$watch('refuel.car + refuel.overallKilometers + refuel.capacity',
+        $scope.$watch('refuel.date + refuel.car + refuel.overallKilometers + refuel.capacity',
             function (newData, oldData) {
 
             var car = $scope.refuel.car,
@@ -220,6 +248,7 @@ angular.module('refuels')
 
             if (car) {
                 previousRefuel = $scope.refuel.getPreviousRefuel();
+
                 if (previousRefuel && previousRefuel._id !== $scope.refuel._id) {
                     distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
                     _.extend($scope.refuel, {
