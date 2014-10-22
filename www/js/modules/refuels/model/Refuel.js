@@ -318,28 +318,53 @@ angular.module('refuels')
          * preconditions:
          *  there is one refuel at least and the current refuel is not the first
          *  RefuelModel.hasRefuels() && this._id !== RefuelModel.getFirstRefuel()._id
+         *  f***cking preconditions
          */
         RefuelModel.prototype.getPreviousRefuel = function () {
-            var index,
-                self = this,
+            var index = 0,
+                refuel,
+                condition,
+                currentDateTime = new Date(this.date).getTime(),
                 refuels = _.sortBy(
-                    RefuelModel.getRefuelsByCarId(self.car._id.toString()),
+                    RefuelModel.getRefuelsByCarId(this.car._id.toString()),
                     'date'
                 ).reverse();
 
-            if (this._id) {
-                _.find(refuels, function (refuel, _index) {
-                    // _index + 1 because _index is the index of the current refuel,
-                    // and we want the next one
-                    index = _index + 1;
-                    return self._id === refuel._id;
-                });
-            } else {
-                index = 0;
-            }
+            do {
+                refuel = refuels[index];
+                condition = refuel && currentDateTime < refuel.date;
+                condition && index++;
+            } while (condition);
 
             return refuels[index];
         };
+
+        /**
+         * get next refuel
+         * preconditions:
+         *  there is one refuel at least and the current refuel is not the last
+         *  RefuelModel.hasRefuels() && this._id !== RefuelModel.getLastRefuel()._id
+         *  f***cking preconditions
+         */
+        RefuelModel.prototype.getNextRefuel = function () {
+            var index = 0,
+                refuel,
+                condition,
+                currentDateTime = new Date(this.date).getTime() + (23 * 60 * 60 * 1000),
+                refuels = _.sortBy(
+                    RefuelModel.getRefuelsByCarId(this.car._id.toString()),
+                    'date'
+                );
+
+            do {
+                refuel = refuels[index];
+                condition = refuel && currentDateTime > refuel.date;
+                condition && index++;
+            } while (condition);
+
+            return refuels[index];
+        };
+
 
         return RefuelModel;
     }
