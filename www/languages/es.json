@@ -1,8 +1,8 @@
 {
     "ABOUT": "Sobre Nosotros",
-    "ADD_NEW_CAR": "Agregar Nuevo Vehiculo",
-    "ADD_NEW_FUEL": "Agregar Nuevo Combustible",
-    "ADD_NEW_REFUEL": "Agregar Nueva Recarga",
+    "ADD_NEW_CAR": "Nuevo Vehiculo",
+    "ADD_NEW_FUEL": "Nuevo Combustible",
+    "ADD_NEW_REFUEL": "Nueva Recarga",
     "AGO": "hace {{data}}",
     "ALL": "Todos",
     "AMOUNT": "Monto",
