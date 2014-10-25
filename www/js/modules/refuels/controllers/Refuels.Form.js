@@ -259,11 +259,43 @@ angular.module('refuels')
             }
         });
 
-        $scope.$watchGroup(
-            ['refuel.amount', 'refuel.capacity', 'refuel.fuelPrice'],
-            function () {
-                debugger;
-            }
+        $scope.$watch(
+            '[refuel.amount,refuel.capacity,refuel.fuelPrice]',
+            function (newValues, oldValues) {
+                var newAmount,
+                    newCapacity,
+                    newFuelPrice,
+                    oldAmount,
+                    oldCapacity,
+                    oldFuelPrice,
+                    toNumber;
+
+                if ($scope.autocalculated) {
+                    $scope.autocalculated = false;
+                } else {
+                    newAmount = newValues[0];
+                    newCapacity = newValues[1];
+                    newFuelPrice = newValues[2];
+                    oldAmount = oldValues[0];
+                    oldCapacity = oldValues[1];
+                    oldFuelPrice = oldValues[2];
+                    toNumber = function (number) {
+                        return Number(number.toFixed(2));
+                    };
+
+                    if (newAmount && newFuelPrice && (newAmount !== oldAmount || newFuelPrice !== oldFuelPrice)) {
+                        $scope.refuel.capacity = toNumber(newAmount / newFuelPrice);
+                        $scope.autocalculated = true;
+                    } else if (newCapacity && newFuelPrice && (newCapacity !== oldCapacity || newFuelPrice !== oldFuelPrice)) {
+                        $scope.refuel.amount = toNumber(newCapacity * newFuelPrice);
+                        $scope.autocalculated = true;
+                    } else if (newAmount && newCapacity && (newAmount !== oldAmount || newCapacity !== oldCapacity)) {
+                        $scope.refuel.fuelPrice = toNumber(newAmount / newCapacity);
+                        $scope.autocalculated = true;
+                    }
+                }
+            },
+            true
         );
     }
 ]);
