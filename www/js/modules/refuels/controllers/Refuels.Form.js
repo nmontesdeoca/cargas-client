@@ -96,33 +96,33 @@ angular.module('refuels')
             }
         });
 
-        // tests for edit 3 elements
-        $scope.$watch('refuel.fuelPrice * refuel.capacity', function (
-            newAmount, oldAmount) {
-            /*console.group('Amount');
-            console.log(newAmount);
-            console.log(oldAmount);
-            console.groupEnd();*/
-            if (newAmount !== oldAmount) {
-                $scope.refuel.amount = !isNaN(newAmount) ? Math.round(
-                    newAmount * 100) / 100 : '';
-            }
-        });
-
         // // tests for edit 3 elements
-        $scope.$watch('refuel.amount / refuel.capacity', function (
-            newFuelPrice, oldFuelPrice) {
-            /*console.group('Fuel Price');
-            console.log(newFuelPrice);
-            console.log(oldFuelPrice);
-            console.groupEnd();*/
-            // NaN !== NaN true
-            if (newFuelPrice !== oldFuelPrice && !isNaN(newFuelPrice) &&
-                    !isNaN(oldFuelPrice)) {
-                $scope.refuel.fuelPrice = !isNaN(newFuelPrice) ? Math.round(
-                    newFuelPrice * 100) / 100 : '';
-            }
-        });
+        // $scope.$watch('refuel.fuelPrice * refuel.capacity', function (
+        //     newAmount, oldAmount) {
+        //     /*console.group('Amount');
+        //     console.log(newAmount);
+        //     console.log(oldAmount);
+        //     console.groupEnd();*/
+        //     if (newAmount !== oldAmount) {
+        //         $scope.refuel.amount = !isNaN(newAmount) ? Math.round(
+        //             newAmount * 100) / 100 : '';
+        //     }
+        // });
+        //
+        // // // tests for edit 3 elements
+        // $scope.$watch('refuel.amount / refuel.capacity', function (
+        //     newFuelPrice, oldFuelPrice) {
+        //     /*console.group('Fuel Price');
+        //     console.log(newFuelPrice);
+        //     console.log(oldFuelPrice);
+        //     console.groupEnd();*/
+        //     // NaN !== NaN true
+        //     if (newFuelPrice !== oldFuelPrice && !isNaN(newFuelPrice) &&
+        //             !isNaN(oldFuelPrice)) {
+        //         $scope.refuel.fuelPrice = !isNaN(newFuelPrice) ? Math.round(
+        //             newFuelPrice * 100) / 100 : '';
+        //     }
+        // });
 
         $scope.$watch('refuel.car', function (newCar, oldCar) {
             var car;
@@ -258,5 +258,12 @@ angular.module('refuels')
                 }
             }
         });
+
+        $scope.$watchGroup(
+            ['refuel.amount', 'refuel.capacity', 'refuel.fuelPrice'],
+            function () {
+                debugger;
+            }
+        );
     }
 ]);
