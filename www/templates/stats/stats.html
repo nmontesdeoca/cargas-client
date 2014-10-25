@@ -4,8 +4,10 @@
     </ion-nav-buttons>
     <ion-content class="has-header">
         <ion-list>
-            <label class="item item-input item-select">
-                <div class="input-label" translate="VEHICLE"></div>
+            <label class="item item-input item-select select-with-icon">
+                <div class="input-label">
+                    <i class="icon ion-model-s"></i>
+                </div>
                 <select ng-model="filter.car" ng-options="key as value for (key, value) in cars">
                     <option value="" ng-if="showFilterAll" translate="ALL"></option>
                 </select>
