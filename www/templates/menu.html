@@ -12,7 +12,7 @@
         <ion-content class="dark-bg">
             <ion-list>
                 <ion-item class="item-dark item-icon-left" nav-clear menu-close ui-sref="app.overview">
-                    <i class="icon ion-stats-bars"></i>
+                    <i class="icon ion-speedometer"></i>
                     {{'OVERVIEW' | translate}}
                 </ion-item>
 
@@ -35,6 +35,7 @@
                     <i class="icon ion-gear-a"></i>
                     {{'SETTINGS' | translate}}
                 </ion-item>
+                
                 <ion-item class="item-dark item-icon-left" nav-clear ng-click="share();" ng-if="socialSharingAvailable">
                     <i class="icon ion-android-share"></i>
                     {{'SHARE' | translate}}

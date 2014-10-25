@@ -37,7 +37,7 @@
     "KILOMETERS_PER_LITRE": "Kilometros por litro",
     "LANGUAGE": "Idioma",
     "LAST_NAME": "Apellido",
-    "LAST_REFUEL": "Ultima recarga",
+    "LAST_REFUEL": "Última recarga",
     "LESS_THAN_A_DAY": "menos de un día",
     "MAKE": "Marca",
     "MODEL": "Modelo",
@@ -73,11 +73,13 @@
     "STATS": "Estadísticas",
     "SUGGEST_NEW_CAR": "Sugiere nueva marca y modelo",
     "TIME_BETWEEN_REFUELS": "Tiempo entre recargas",
+    "TODAY": "Hoy",
     "TOTALS": "Totales",
     "UNITS": "Unidades",
     "VEHICLE": "Vehículo",
     "VEHICLES": "Vehículos",
     "WITHOUT_CAR": "Debes entrar la información de tu auto",
     "WITHOUT_REFUEL": "No has realizado recargas aún",
-    "YEAR": "Año"
+    "YEAR": "Año",
+    "YESTERDAY": "Yesterday"
 }
