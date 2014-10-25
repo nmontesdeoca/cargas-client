@@ -674,24 +674,33 @@ angular.module('utils', [])
 
         getUnits: function (typeOfUnit) {
             var units = {
-                'capacity': {
-                    'lt': {
-                        'name': 'Litres',
-                        'unitDisplay': 'lts'
+                capacity: {
+                    lt: {
+                        name: 'Litres',
+                        unitDisplay: 'lts',
+                        ratio: 1
                     },
-                    'gal': {
-                        'name': 'Gallons',
-                        'unitDisplay': 'gals'
+                    gal: {
+                        name: 'Gallons(UK)',
+                        unitDisplay: 'gals',
+                        ratio: 4.54609
+                    },
+                    galUs: {
+                        name: 'Gallons(US)',
+                        unitDisplay: 'gals',
+                        ratio: 3.78541
                     }
                 },
-                'distance': {
-                    'km': {
-                        'name': 'Kilometres',
-                        'unitDisplay': 'kms'
+                distance: {
+                    km: {
+                        name: 'Kilometres',
+                        unitDisplay: 'kms',
+                        ratio: 1
                     },
-                    'mile': {
-                        'name': 'Miles',
-                        'unitDisplay': 'miles'
+                    mile: {
+                        name: 'Miles',
+                        unitDisplay: 'miles',
+                        ratio: 1.609
                     }
                 }
             };
