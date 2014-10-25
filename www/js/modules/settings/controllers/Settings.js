@@ -6,6 +6,10 @@ angular.module('settings')
     function ($scope, $filter) {
 
         $scope.settings = [{
+            name: $filter('translate')('FUELS'),
+            link: '#/fuels',
+            state: 'app.fuelList'
+        }, {
             name: $filter('translate')('UNITS'),
             link: '#/settings/units',
             state: 'app.settingsUnits'
@@ -22,6 +26,5 @@ angular.module('settings')
             link: '#/settings/help',
             state: 'app.settingsHelp'
         }];
-
     }
 ]);
