@@ -1,5 +1,5 @@
 <div class="info-box card">
-    <div class="item item-divider item-dark">
+    <div class="item item-divider card-heading">
         {{'LAST_REFUEL' | translate}}
         <span class="item-note">{{lastRefuel.date | timeAgo}}</span>
     </div>
@@ -15,7 +15,7 @@
 </div>
 
 <div class="info-box card">
-    <div class="item item-divider item-dark" translate="TOTALS"></div>
+    <div class="item item-divider card-heading" translate="TOTALS"></div>
     <div class="item item-icon-right">
         {{'SPENT' | translate}}: <span class="icon stat-number">{{totals.totalSpent | currency}}</span>
     </div>
