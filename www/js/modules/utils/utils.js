@@ -133,11 +133,14 @@ angular.module('utils', [])
     };
 })
 
-.filter('days', function () {
+.filter('days', ['$filter', function ($filter) {
     return function (value) {
-        return value += ' day' + (value > 1 ? 's' : '');
+        var translate = function (text) {
+            return $filter('translate')(text.toUpperCase());
+        };
+        return value += ' ' + translate(value > 1 ? 'days' : 'day');
     };
-})
+}])
 
 .factory('Utils', ['TIME', function (TIME) {
     return {

@@ -96,33 +96,33 @@ angular.module('refuels')
             }
         });
 
-        // tests for edit 3 elements
-        $scope.$watch('refuel.fuelPrice * refuel.capacity', function (
-            newAmount, oldAmount) {
-            /*console.group('Amount');
-            console.log(newAmount);
-            console.log(oldAmount);
-            console.groupEnd();*/
-            if (newAmount !== oldAmount) {
-                $scope.refuel.amount = !isNaN(newAmount) ? Math.round(
-                    newAmount * 100) / 100 : '';
-            }
-        });
-
         // // tests for edit 3 elements
-        $scope.$watch('refuel.amount / refuel.capacity', function (
-            newFuelPrice, oldFuelPrice) {
-            /*console.group('Fuel Price');
-            console.log(newFuelPrice);
-            console.log(oldFuelPrice);
-            console.groupEnd();*/
-            // NaN !== NaN true
-            if (newFuelPrice !== oldFuelPrice && !isNaN(newFuelPrice) &&
-                    !isNaN(oldFuelPrice)) {
-                $scope.refuel.fuelPrice = !isNaN(newFuelPrice) ? Math.round(
-                    newFuelPrice * 100) / 100 : '';
-            }
-        });
+        // $scope.$watch('refuel.fuelPrice * refuel.capacity', function (
+        //     newAmount, oldAmount) {
+        //     /*console.group('Amount');
+        //     console.log(newAmount);
+        //     console.log(oldAmount);
+        //     console.groupEnd();*/
+        //     if (newAmount !== oldAmount) {
+        //         $scope.refuel.amount = !isNaN(newAmount) ? Math.round(
+        //             newAmount * 100) / 100 : '';
+        //     }
+        // });
+        //
+        // // // tests for edit 3 elements
+        // $scope.$watch('refuel.amount / refuel.capacity', function (
+        //     newFuelPrice, oldFuelPrice) {
+        //     /*console.group('Fuel Price');
+        //     console.log(newFuelPrice);
+        //     console.log(oldFuelPrice);
+        //     console.groupEnd();*/
+        //     // NaN !== NaN true
+        //     if (newFuelPrice !== oldFuelPrice && !isNaN(newFuelPrice) &&
+        //             !isNaN(oldFuelPrice)) {
+        //         $scope.refuel.fuelPrice = !isNaN(newFuelPrice) ? Math.round(
+        //             newFuelPrice * 100) / 100 : '';
+        //     }
+        // });
 
         $scope.$watch('refuel.car', function (newCar, oldCar) {
             var car;
@@ -258,5 +258,44 @@ angular.module('refuels')
                 }
             }
         });
+
+        $scope.$watch(
+            '[refuel.amount,refuel.capacity,refuel.fuelPrice]',
+            function (newValues, oldValues) {
+                var newAmount,
+                    newCapacity,
+                    newFuelPrice,
+                    oldAmount,
+                    oldCapacity,
+                    oldFuelPrice,
+                    toNumber;
+
+                if ($scope.autocalculated) {
+                    $scope.autocalculated = false;
+                } else {
+                    newAmount = newValues[0];
+                    newCapacity = newValues[1];
+                    newFuelPrice = newValues[2];
+                    oldAmount = oldValues[0];
+                    oldCapacity = oldValues[1];
+                    oldFuelPrice = oldValues[2];
+                    toNumber = function (number) {
+                        return Number(number.toFixed(2));
+                    };
+
+                    if (newAmount && newFuelPrice && (newAmount !== oldAmount || newFuelPrice !== oldFuelPrice)) {
+                        $scope.refuel.capacity = toNumber(newAmount / newFuelPrice);
+                        $scope.autocalculated = true;
+                    } else if (newCapacity && newFuelPrice && (newCapacity !== oldCapacity || newFuelPrice !== oldFuelPrice)) {
+                        $scope.refuel.amount = toNumber(newCapacity * newFuelPrice);
+                        $scope.autocalculated = true;
+                    } else if (newAmount && newCapacity && (newAmount !== oldAmount || newCapacity !== oldCapacity)) {
+                        $scope.refuel.fuelPrice = toNumber(newAmount / newCapacity);
+                        $scope.autocalculated = true;
+                    }
+                }
+            },
+            true
+        );
     }
 ]);
