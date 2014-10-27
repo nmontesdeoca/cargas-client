@@ -100,19 +100,30 @@ angular.module('utils', [])
     };
 })
 
-.filter('timeAgo', ['$filter', function ($filter) {
+.filter('timeAgo', ['$filter', 'Utils', function ($filter, Utils) {
     return function (value) {
         var unit = $filter('translate')('DAYS'),
-            timeAgo;
+            agoText,
+            valueDate = new Date(value),
+            today = new Date(),
+            yesterday = new Date(),
+            timeAgo = Utils.calculateDays(today, value);
+        
+        yesterday.setDate(today.getDate() - 1);
 
-        if (value <= 1) {
-            unit = $filter('translate')(value < 1 ? 'LESS_THAN_A_DAY' : 'DAY');
+        if (valueDate.toDateString() == today.toDateString()) {
+            agoText = $filter('translate')('TODAY'); 
+        } else if (valueDate.toDateString() == yesterday.toDateString()) {
+            agoText = $filter('translate')('YESTERDAY');
+        } else {
+            timeAgo = Math.round(timeAgo) + ' ';
+            agoText = $filter('translate')('AGO', { data: timeAgo + unit });
         }
         // else if (!(value % 7)) {
         //     unit = value == 7 ? 'week' : 'weeks';
         // }
-        timeAgo = (value < 1) ? '' : Math.round(value) + ' ';
-        return $filter('translate')('AGO', { data: timeAgo + unit });
+        // return $filter('translate')('AGO', { data: timeAgo + unit });
+        return agoText;
     };
 }])
 
