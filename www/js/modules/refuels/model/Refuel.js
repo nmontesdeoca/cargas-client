@@ -365,6 +365,47 @@ angular.module('refuels')
             return refuels[index];
         };
 
+        RefuelModel.changeUnits = function (unit, newValue, oldValue) {
+            var units = Utils.getUnits(unit),
+                baseUnit = _.findWhere(units, {
+                    ratio: 1
+                }),
+                refuels = RefuelModel.query();
+            _.each(refuels, function (refuel) {
+                refuel.changeUnit({
+                    unit: unit,
+                    newUnit: units[newValue],
+                    oldUnit: units[oldValue],
+                    baseUnit: baseUnit
+                });
+            });
+        };
+
+        RefuelModel.prototype.changeUnit = function (param) {
+            // consumption should be updated too
+            if (param.unit === 'capacity') {
+                // capacity
+                if (param.newUnit.ratio === 1) {
+                    this.capacity = this.capacity * param.oldUnit.ratio;
+                } else if (param.oldUnit.ratio === 1) {
+                    this.capacity = this.capacity / param.newUnit.ratio;
+                } else {
+                    // use the base unit to do the calculation
+                }
+            } else if (param.unit === 'distance') {
+                // distance and overallKilometers
+                if (param.newUnit.ratio === 1) {
+                    this.distance = this.distance * param.oldUnit.ratio;
+                    this.overallKilometers = this.overallKilometers * param.oldUnit.ratio;
+                } else if (param.oldUnit.ratio === 1) {
+                    this.distance = this.distance / param.newUnit.ratio;
+                    this.overallKilometers = this.overallKilometers / param.newUnit.ratio;
+                } else {
+                    // use the base unit to do the calculation
+                }
+            }
+            this.$save();
+        };
 
         return RefuelModel;
     }

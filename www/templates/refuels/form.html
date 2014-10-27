@@ -42,7 +42,7 @@
 
                 <label class="item item-input" ng-show="refuel.distance">
                     <span id="amount-label" class="input-label" translate="DISTANCE"></span>
-                    <input type="text" ng-value="refuel.distance | number | distance" readonly>
+                    <input type="text" ng-value="refuel.distance | number | unit:'distance'" readonly>
                 </label>
 
                 <label class="item item-input" ng-show="refuel.consumption">

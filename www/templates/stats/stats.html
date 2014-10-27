@@ -19,11 +19,11 @@
             </ion-item>
             <ion-item class="item">
                 <h2 translate="CAPACITY"></h2>
-                <p>{{totalCapacity | number | capacity}}</p>
+                <p>{{totalCapacity | number | unit:'capacity'}}</p>
             </ion-item>
             <ion-item class="item">
                 <h2 translate="DISTANCE"></h2>
-                <p>{{totalKilometers | number | distance}}</p>
+                <p>{{totalKilometers | number | unit:'distance'}}</p>
             </ion-item>
             <ion-item class="item">
                 <h2 translate="REFUELS_COUNT"></h2>
@@ -57,7 +57,7 @@
             </ion-item>
             <ion-item class="item">
                 <h2 translate="DISTANCE_BETWEEN_REFUELS"></h2>
-                <p>{{averageDistanceBetweenRefuels | average | distance}}</p>
+                <p>{{averageDistanceBetweenRefuels | average | unit:'distance'}}</p>
             </ion-item>
             <ion-item class="item">
                 <h2 translate="SPENT_PER_REFUEL"></h2>
@@ -65,7 +65,7 @@
             </ion-item>
             <ion-item class="item">
                 <h2 translate="CAPACITY_PER_REFUEL"></h2>
-                <p>{{averageCapacity | average | capacity}}</p>
+                <p>{{averageCapacity | average | unit:'capacity'}}</p>
             </ion-item>
         </ion-list>
     </ion-content>

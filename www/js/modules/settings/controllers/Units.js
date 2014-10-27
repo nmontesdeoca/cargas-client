@@ -2,20 +2,43 @@ angular.module('settings')
 
 .controller('Units', [
     '$scope',
-    'Utils',
+    '$ionicPopup',
     'setting',
-    function ($scope, Utils, setting) {
-        $scope.units = Utils.getUnits();
-        // $scope.selectedCapacity = UnitsService.getSelectedCapacity();
+    'units',
+    'Refuel',
+    function ($scope, $ionicPopup, setting, units, Refuel) {
+
+        var triggerWatch = true,
+            changeUnit = function (newValue, oldValue, unit) {
+                if (triggerWatch && newValue && newValue !== oldValue) {
+                    $ionicPopup.confirm({
+                        title: 'Change capacity',
+                        template: 'El cambio de unidad bla bla bla...'
+                    }).then(function (yes) {
+                        if (yes) {
+                            Refuel.changeUnits(unit, newValue, oldValue);
+                            $scope.setting.$save();
+                        } else {
+                            triggerWatch = false;
+                            // set the previous unit again
+                            $scope.setting.selectedUnits[unit] = oldValue;
+                        }
+                    });
+                } else if (!triggerWatch) {
+                    triggerWatch = true;
+                }
+            };
+
+        $scope.units = units;
         $scope.setting = setting;
 
-        $scope.setUnit = function (typeOfUnit, unitId) {
-            $scope.setting.selectedUnits[typeOfUnit] = unitId;
-            $scope.setting.$save();
-        };
 
-        $scope.isSelectedUnit = function(typeOfUnit, unitId) {
-            return $scope.setting.selectedUnits[typeOfUnit] === unitId;
-        };
+        $scope.$watch('setting.selectedUnits.capacity', function (newCapacity, oldCapacity) {
+            changeUnit(newCapacity, oldCapacity, 'capacity');
+        });
+
+        $scope.$watch('setting.selectedUnits.distance', function (newDistance, oldDistance) {
+            changeUnit(newDistance, oldDistance, 'distance');
+        });
     }
 ]);

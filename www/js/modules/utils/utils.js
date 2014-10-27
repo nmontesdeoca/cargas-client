@@ -82,11 +82,14 @@ angular.module('utils', [])
     };
 })
 
-.filter('distance', function () {
-    return function (value) {
-        return value += ' kms';
+.filter('unit', ['Setting', 'Utils', function (Setting, Utils) {
+    return function (value, unit) {
+        var settings = Setting.query(),
+            selectedUnit = settings.selectedUnits[unit],
+            unitToDisplay = ' ' + Utils.getUnits(unit)[selectedUnit].unitDisplay;
+        return value += unitToDisplay;
     };
-})
+}])
 
 .filter('consumption', function () {
     return function (value) {
@@ -94,11 +97,13 @@ angular.module('utils', [])
     };
 })
 
+/*
 .filter('capacity', function () {
     return function (value) {
         return value += ' lts';
     };
 })
+*/
 
 .filter('timeAgo', ['$filter', function ($filter) {
     return function (value) {
@@ -132,6 +137,7 @@ angular.module('utils', [])
 }])
 
 .factory('Utils', ['TIME', function (TIME) {
+    
     return {
 
         formatSmallNumber: function (number) {
@@ -679,30 +685,30 @@ angular.module('utils', [])
             var units = {
                 capacity: {
                     lt: {
-                        name: 'Litres',
+                        keyName: 'LITERS',
                         unitDisplay: 'lts',
                         ratio: 1
                     },
-                    gal: {
-                        name: 'Gallons(UK)',
+                    galUK: {
+                        keyName: 'GALLONS_UK',
                         unitDisplay: 'gals',
                         ratio: 4.54609
                     },
-                    galUs: {
-                        name: 'Gallons(US)',
+                    galUS: {
+                        keyName: 'GALLONS_US',
                         unitDisplay: 'gals',
                         ratio: 3.78541
                     }
                 },
                 distance: {
                     km: {
-                        name: 'Kilometres',
+                        keyName: 'KILOMETERS',
                         unitDisplay: 'kms',
                         ratio: 1
                     },
                     mile: {
-                        name: 'Miles',
-                        unitDisplay: 'miles',
+                        keyName: 'MILES',
+                        unitDisplay: 'mil',
                         ratio: 1.609
                     }
                 }
