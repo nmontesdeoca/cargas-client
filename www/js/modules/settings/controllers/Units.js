@@ -32,13 +32,16 @@ angular.module('settings')
         $scope.units = units;
         $scope.setting = setting;
 
-
         $scope.$watch('setting.selectedUnits.capacity', function (newCapacity, oldCapacity) {
             changeUnit(newCapacity, oldCapacity, 'capacity');
         });
 
         $scope.$watch('setting.selectedUnits.distance', function (newDistance, oldDistance) {
             changeUnit(newDistance, oldDistance, 'distance');
+        });
+
+        $scope.$watch('setting.selectedUnits.consumption', function (newConsumption, oldConsumption) {
+            changeUnit(newConsumption, oldConsumption, 'consumption');
         });
     }
 ]);

@@ -93,12 +93,14 @@
 .overview-page .card {
     background: none;
 }
-.overview-page .item-divider {
+.item.card-heading {
     background: rgba(0, 0, 0,.75);
+    border-color: #666  ;
+    color: #fff;
     font-weight: normal;
     font-size: 15px;
 }
-.overview-page .item-divider .item-note {
+.item.card-heading .item-note {
     font-size: 12px;
 }
 
@@ -155,12 +157,12 @@ ion-nav-view,
     color: #fff;
     font-size: 26px;
     padding: 0;
-    width: 15%;
+    width: 32px;
 }
 
 .select-with-icon select {
     color: #fff;
-    left: 16%;
+    left: 48px;
     max-width: 97%;
 }
 
