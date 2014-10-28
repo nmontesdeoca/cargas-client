@@ -8,7 +8,8 @@ angular.module('settings')
             this.set({
                 selectedUnits: {
                     capacity: 'lt',
-                    distance: 'km'
+                    distance: 'km',
+                    consumption: 'kml'
                 }
             });
 

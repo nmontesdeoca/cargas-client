@@ -385,23 +385,19 @@ angular.module('refuels')
             // consumption should be updated too
             if (param.unit === 'capacity') {
                 // capacity
-                if (param.newUnit.ratio === 1) {
-                    this.capacity = this.capacity * param.oldUnit.ratio;
+                if (param.newUnit.ratio === 1 || param.oldUnit.ratio !== 1) {
+                    this.capacity = Number((this.capacity * param.oldUnit.ratio / param.newUnit.ratio).toFixed(3));
                 } else if (param.oldUnit.ratio === 1) {
-                    this.capacity = this.capacity / param.newUnit.ratio;
-                } else {
-                    // use the base unit to do the calculation
+                    this.capacity = Number((this.capacity / param.newUnit.ratio).toFixed(3));
                 }
             } else if (param.unit === 'distance') {
                 // distance and overallKilometers
-                if (param.newUnit.ratio === 1) {
-                    this.distance = this.distance * param.oldUnit.ratio;
-                    this.overallKilometers = this.overallKilometers * param.oldUnit.ratio;
+                if (param.newUnit.ratio === 1 || param.oldUnit.ratio !== 1) {
+                    this.distance = Number((this.distance * param.oldUnit.ratio / param.newUnit.ratio).toFixed(3));
+                    this.overallKilometers = Number((this.overallKilometers * param.oldUnit.ratio / param.newUnit.ratio).toFixed(3));
                 } else if (param.oldUnit.ratio === 1) {
-                    this.distance = this.distance / param.newUnit.ratio;
-                    this.overallKilometers = this.overallKilometers / param.newUnit.ratio;
-                } else {
-                    // use the base unit to do the calculation
+                    this.distance = Number((this.distance / param.newUnit.ratio).toFixed(3));
+                    this.overallKilometers = Number((this.overallKilometers / param.newUnit.ratio).toFixed(3));
                 }
             }
             this.$save();

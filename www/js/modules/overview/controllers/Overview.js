@@ -15,8 +15,7 @@ angular.module('overview')
             var lastRefuel = refuels[0];
 
             lastRefuel = _.extend(lastRefuel, {
-                car: Car.get(lastRefuel.car),
-                daysAgo: Utils.calculateDays(lastRefuel.date, new Date())
+                car: Car.get(lastRefuel.car)
             });
 
         	_.extend($scope, {

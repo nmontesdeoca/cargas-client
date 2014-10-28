@@ -78,11 +78,13 @@
     "STATS": "Stats",
     "SUGGEST_NEW_CAR": "Suggest new make and model",
     "TIME_BETWEEN_REFUELS": "Time between refuels",
+    "TODAY": "Today",
     "TOTALS": "Totals",
     "UNITS": "Units",
     "VEHICLE": "Vehicle",
     "VEHICLES": "Vehicles",
     "WITHOUT_CAR": "Please, enter the data for your car",
     "WITHOUT_REFUEL": "You have not submitted a refuel yet",
-    "YEAR": "Year"
+    "YEAR": "Year",
+    "YESTERDAY": "Yesterday"
 }

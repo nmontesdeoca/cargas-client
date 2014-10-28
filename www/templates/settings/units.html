@@ -12,14 +12,25 @@
 					<i class="radio-icon ion-checkmark"></i>
 				</label>
 			</div>
-            <!-- add class padding-bottom to the next div if a new unit is added to this page -->
-            <div>
+            <div class="padding-bottom">
                 <div class="item item-divider item-dark" translate="DISTANCE"></div>
                 <label class="item item-radio" ng-repeat="(singleUnitId, singleUnit) in units.distance">
                     <input type="radio" name="group-distance"
                         value="{{singleUnitId}}" ng-model="setting.selectedUnits.distance">
                     <div class="item-content">
                        {{singleUnit.keyName | translate}}
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+            <!-- add class padding-bottom to the next div if a new unit is added to this page -->
+            <div>
+                <div class="item item-divider item-dark" translate="CONSUMPTION"></div>
+                <label class="item item-radio" ng-repeat="(singleUnitId, singleUnit) in units.consumption">
+                    <input type="radio" name="group-consumption"
+                        value="{{singleUnitId}}" ng-model="setting.selectedUnits.consumption">
+                    <div class="item-content">
+                       {{singleUnit.unitDisplay}}
                     </div>
                     <i class="radio-icon ion-checkmark"></i>
                 </label>
