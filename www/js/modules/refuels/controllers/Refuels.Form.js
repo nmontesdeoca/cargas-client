@@ -206,33 +206,43 @@ angular.module('refuels')
             $scope.newMakeModelModal.remove();
         });
 
-        $scope.$watch('refuel.date + refuel.car + refuel.overallKilometers + refuel.capacity',
+        $scope.$watch('[refuel.date, refuel.car, refuel.overallKilometers, refuel.capacity]',
             function (newData, oldData) {
 
             var car = $scope.refuel.car,
                 previousRefuel,
-                distance;
+                previousRefuelNoPartial,
+                distance,
+                distanceForConsumption,
+                capacityForConsumption;
 
             _.extend($scope.refuel, {
                 distance: 0,
                 consumption: 0
             });
-
+debugger;
             if (car) {
+                previousRefuelNoPartial = $scope.refuel.getPreviousRefuelNoPartial();
                 previousRefuel = $scope.refuel.getPreviousRefuel();
 
                 if (previousRefuel && previousRefuel._id !== $scope.refuel._id) {
                     distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
-                    _.extend($scope.refuel, {
-                        distance: distance,
-                        consumption: (distance / $scope.refuel.capacity)
-                    });
+                    $scope.refuel.distance = distance;
+                    if (previousRefuelNoPartial) {
+                        distanceForConsumption = $scope.refuel.overallKilometers -
+                            previousRefuelNoPartial.overallKilometers;
+                        capacityForConsumption = Refuel.getCapacityBetweenRefuels(
+                            previousRefuelNoPartial,
+                            $scope.refuel
+                        );
+                        $scope.refuel.consumption = distanceForConsumption / capacityForConsumption;
+                    }
                 }
             }
-        });
+        }, true);
 
         $scope.$watch(
-            '[refuel.amount,refuel.capacity,refuel.fuelPrice]',
+            '[refuel.amount, refuel.capacity, refuel.fuelPrice]',
             function (newValues, oldValues) {
                 var newAmount,
                     newCapacity,

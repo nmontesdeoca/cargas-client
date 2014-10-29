@@ -302,6 +302,39 @@ angular.module('refuels')
         };
 
         /**
+         * get the total capacity between two refuels
+         */
+        RefuelModel.getCapacityBetweenRefuels = function (firstRefuel, lastRefuel) {
+            var refuel = firstRefuel.getNextRefuel(),
+                capacity = 0;
+
+            capacity += refuel ? refuel.capacity : 0;
+
+            while (refuel && refuel._id !== lastRefuel._id) {
+                capacity += refuel ? refuel.capacity : 0;
+                refuel = refuel.getNextRefuel();
+            }
+
+            return capacity;
+        };
+
+        RefuelModel.changeUnits = function (unit, newValue, oldValue) {
+            var units = Utils.getUnits(unit),
+                baseUnit = _.findWhere(units, {
+                    ratio: 1
+                }),
+                refuels = RefuelModel.query();
+            _.each(refuels, function (refuel) {
+                refuel.changeUnit({
+                    unit: unit,
+                    newUnit: units[newValue],
+                    oldUnit: units[oldValue],
+                    baseUnit: baseUnit
+                });
+            });
+        };
+
+        /**
          * Instance methods
          */
 
@@ -325,18 +358,33 @@ angular.module('refuels')
                 refuel,
                 condition,
                 currentDateTime = new Date(this.date).getTime(),
+                carId = typeof this.car === 'object' ?
+                    this.car._id.toString() : this.car,
                 refuels = _.sortBy(
-                    RefuelModel.getRefuelsByCarId(this.car._id.toString()),
+                    RefuelModel.getRefuelsByCarId(carId),
                     'date'
                 ).reverse();
 
             do {
                 refuel = refuels[index];
-                condition = refuel && currentDateTime < refuel.date;
+                condition = refuel && currentDateTime <= refuel.date;
                 condition && index++;
             } while (condition);
 
             return refuels[index];
+        };
+
+        /**
+         * get previous refuel that is no partial
+         */
+        RefuelModel.prototype.getPreviousRefuelNoPartial = function () {
+            var previousRefuel = this;
+
+            do {
+                previousRefuel = previousRefuel.getPreviousRefuel();
+            } while (previousRefuel && previousRefuel.partial);
+
+            return previousRefuel;
         };
 
         /**
@@ -351,8 +399,10 @@ angular.module('refuels')
                 refuel,
                 condition,
                 currentDateTime = new Date(this.date).getTime() + (23 * 60 * 60 * 1000),
+                carId = typeof this.car === 'object' ?
+                    this.car._id.toString() : this.car,
                 refuels = _.sortBy(
-                    RefuelModel.getRefuelsByCarId(this.car._id.toString()),
+                    RefuelModel.getRefuelsByCarId(carId),
                     'date'
                 );
 
@@ -363,22 +413,6 @@ angular.module('refuels')
             } while (condition);
 
             return refuels[index];
-        };
-
-        RefuelModel.changeUnits = function (unit, newValue, oldValue) {
-            var units = Utils.getUnits(unit),
-                baseUnit = _.findWhere(units, {
-                    ratio: 1
-                }),
-                refuels = RefuelModel.query();
-            _.each(refuels, function (refuel) {
-                refuel.changeUnit({
-                    unit: unit,
-                    newUnit: units[newValue],
-                    oldUnit: units[oldValue],
-                    baseUnit: baseUnit
-                });
-            });
         };
 
         RefuelModel.prototype.changeUnit = function (param) {
