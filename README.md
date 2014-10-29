@@ -16,7 +16,7 @@ Cordova Plugins used:
 * org.apache.cordova.statusbar 0.1.8 "StatusBar"
 * https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git 4.3.8 "PhoneGap Social Sharing"
 
-'''cordova plugins add com.ionic.keyboard org.apache.cordova.camera org.apache.cordova.console org.apache.cordova.device org.apache.cordova.globalization org.apache.cordova.network-information org.apache.cordova.splashscreen org.apache.cordova.statusbar https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git'''
+```cordova plugins add com.ionic.keyboard org.apache.cordova.camera org.apache.cordova.console org.apache.cordova.device org.apache.cordova.globalization org.apache.cordova.network-information org.apache.cordova.splashscreen org.apache.cordova.statusbar https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git```
 
 ### Contribuidores
 
