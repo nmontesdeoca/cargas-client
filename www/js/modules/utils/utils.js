@@ -113,12 +113,12 @@ angular.module('utils', [])
             today = new Date(),
             yesterday = new Date(),
             timeAgo = Utils.calculateDays(today, value);
-        
+
         yesterday.setDate(today.getDate() - 1);
 
-        if (valueDate.toDateString() == today.toDateString()) {
-            agoText = $filter('translate')('TODAY'); 
-        } else if (valueDate.toDateString() == yesterday.toDateString()) {
+        if (valueDate.toDateString() === today.toDateString()) {
+            agoText = $filter('translate')('TODAY');
+        } else if (valueDate.toDateString() === yesterday.toDateString()) {
             agoText = $filter('translate')('YESTERDAY');
         } else {
             timeAgo = Math.round(timeAgo) + ' ';
@@ -148,7 +148,7 @@ angular.module('utils', [])
 }])
 
 .factory('Utils', ['TIME', function (TIME) {
-    
+
     return {
 
         formatSmallNumber: function (number) {
