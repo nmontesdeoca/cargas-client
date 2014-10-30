@@ -9,7 +9,8 @@ angular.module('starter', [
     'fuels',
     'stats',
     'settings',
-    'utils'
+    'utils',
+    'intro'
 ])
 
 .run(['$ionicPlatform', '$rootScope', '$translate', '$ionicSideMenuDelegate', 'Setting',
