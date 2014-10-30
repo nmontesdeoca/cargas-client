@@ -9,7 +9,7 @@
         <ion-list
             show-delete="false"
             show-reorder="false"
-            can-swipe="true">
+            can-swipe="false">
             <label class="item item-input item-select select-with-icon">
                 <div class="input-label">
                     <i class="icon ion-model-s"></i>
@@ -21,7 +21,6 @@
             <ion-item ng-repeat="refuel in refuels" ui-sref="app.refuelEdit({id: refuel._id})" class="item">
                 <h2>{{refuel.date | date:'dd/MM/yyyy'}}</h2>
                 <p>{{refuel.amount | currency}} - {{refuel.capacity | number | unit:'capacity'}}  {{refuel.fuel.name}}</p>
-                <ion-option-button class="button-assertive" ng-click="delete(refuel)">Delete</ion-option-button>
             </ion-item>
             <ion-item ng-if="refuels.length">
                 <h2 translate="TOTALS"></h2>

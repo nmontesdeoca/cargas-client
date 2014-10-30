@@ -58,6 +58,8 @@
                 </label>
                 <button ng-click="create()" class="button button-block big-main-button activated"
                     ng-disabled="newRefuelForm.$invalid">{{(refuel._id ? 'SAVE' : 'CREATE') | translate}}</button>
+                <button ng-click="delete(refuel)" class="button button-assertive button-block big-main-button activated"
+                    ng-disabled="newRefuelForm.$invalid" ng-show="refuel._id" translate="DELETE"></button>
             </div>
         </form>
     </ion-content>

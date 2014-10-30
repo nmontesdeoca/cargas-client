@@ -49,6 +49,8 @@
         </div>
         <button ng-click="createCar()" class="button button-block activated big-main-button"
             ng-disabled="newCarForm.$invalid">{{(car._id ? 'SAVE' : 'CREATE') | translate}}</button>
+        <button ng-click="deleteCar(car)" class="button button-assertive button-block activated big-main-button"
+            ng-disabled="newCarForm.$invalid" ng-show="car._id" translate="DELETE"></button>
         <button class="button button-clear button-dark" ng-click="newMakeModelModal.show()"
             translate="SUGGEST_NEW_CAR"></button>
     </div>

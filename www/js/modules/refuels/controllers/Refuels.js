@@ -2,9 +2,6 @@ angular.module('refuels')
 
 .controller('Refuels', [
     '$scope',
-    '$ionicPopup',
-    '$ionicListDelegate',
-    '$filter',
     'Refuel',
     'Car',
     'refuels',
@@ -12,9 +9,7 @@ angular.module('refuels')
     'defaultCar',
     'totalSpent',
     'totalCapacity',
-    function ($scope, $ionicPopup, $ionicListDelegate, $filter, Refuel, Car, refuels, cars,
-        defaultCar, totalSpent, totalCapacity) {
-
+    function ($scope, Refuel, Car, refuels, cars, defaultCar, totalSpent, totalCapacity) {
         var carKeys = Object.keys(cars);
 
         $scope.cars = cars;
@@ -46,20 +41,6 @@ angular.module('refuels')
                 $scope.totalCapacity = totalCapacity;
             }
         });
-
-        $scope.delete = function (refuel) {
-            $ionicPopup.confirm({
-                title: $filter('translate')('DELETE_REFUEL'),
-                template: $filter('translate')('REMOVE_REFUEL_QUESTION')
-            }).then(function (yes) {
-                if (yes) {
-                    refuel.$remove(function () {
-                        $scope.refuels = Refuel.getRefuelsSortByDate();
-                    });
-                }
-                $ionicListDelegate.closeOptionButtons();
-            });
-        };
 
         $scope.formatRefuelsForGraph = function (refuels) {
             var entries = _.map(refuels, function (refuel) {

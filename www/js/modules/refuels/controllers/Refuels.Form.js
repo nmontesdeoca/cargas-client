@@ -282,5 +282,17 @@ angular.module('refuels')
             },
             true
         );
+
+        $scope.delete = function (refuel) {
+            $ionicPopup.confirm({
+                title: $filter('translate')('DELETE_REFUEL'),
+                template: $filter('translate')('REMOVE_REFUEL_QUESTION')
+            }).then(function (yes) {
+                if (yes) {
+                    refuel.$remove();
+                    $state.go('app.refuelList');
+                }
+            });
+        };
     }
 ]);
