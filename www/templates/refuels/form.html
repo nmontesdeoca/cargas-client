@@ -47,12 +47,12 @@
                     <input type="number" ng-model="refuel.amount" required>
                 </label>
 
-                <label class="item item-input" ng-show="refuel.distance">
+                <label class="item item-input" ng-show="refuel.distance && refuel.distance > 0">
                     <span id="amount-label" class="input-label" translate="DISTANCE"></span>
                     <input type="text" ng-value="refuel.distance | number | unit:'distance'" readonly>
                 </label>
 
-                <label class="item item-input" ng-show="refuel.consumption">
+                <label class="item item-input" ng-show="refuel.consumption && refuel.consumption > 0">
                     <span id="amount-label" class="input-label" translate="CONSUMPTION"></span>
                     <input type="text" ng-value="refuel.consumption | number | consumption" readonly>
                 </label>

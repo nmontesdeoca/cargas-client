@@ -311,8 +311,8 @@ angular.module('refuels')
             capacity += refuel ? refuel.capacity : 0;
 
             while (refuel && refuel._id !== lastRefuel._id) {
-                capacity += refuel ? refuel.capacity : 0;
                 refuel = refuel.getNextRefuel();
+                capacity += refuel ? refuel.capacity : 0;
             }
 
             return capacity;

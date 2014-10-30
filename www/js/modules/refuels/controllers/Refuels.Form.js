@@ -206,40 +206,43 @@ angular.module('refuels')
             $scope.newMakeModelModal.remove();
         });
 
-        $scope.$watch('[refuel.date, refuel.car, refuel.overallKilometers, refuel.capacity]',
+        $scope.$watch(
+            '[refuel.date, refuel.car, refuel.overallKilometers, refuel.capacity, refuel.partial]',
             function (newData, oldData) {
 
-            var car = $scope.refuel.car,
-                previousRefuel,
-                previousRefuelNoPartial,
-                distance,
-                distanceForConsumption,
-                capacityForConsumption;
+                var car = $scope.refuel.car,
+                    previousRefuel,
+                    previousRefuelNoPartial,
+                    distance,
+                    distanceForConsumption,
+                    capacityForConsumption;
 
-            _.extend($scope.refuel, {
-                distance: 0,
-                consumption: 0
-            });
-debugger;
-            if (car) {
-                previousRefuelNoPartial = $scope.refuel.getPreviousRefuelNoPartial();
-                previousRefuel = $scope.refuel.getPreviousRefuel();
+                _.extend($scope.refuel, {
+                    distance: 0,
+                    consumption: 0
+                });
 
-                if (previousRefuel && previousRefuel._id !== $scope.refuel._id) {
-                    distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
-                    $scope.refuel.distance = distance;
-                    if (previousRefuelNoPartial) {
-                        distanceForConsumption = $scope.refuel.overallKilometers -
-                            previousRefuelNoPartial.overallKilometers;
-                        capacityForConsumption = Refuel.getCapacityBetweenRefuels(
-                            previousRefuelNoPartial,
-                            $scope.refuel
-                        );
-                        $scope.refuel.consumption = distanceForConsumption / capacityForConsumption;
+                if (car) {
+                    previousRefuelNoPartial = $scope.refuel.getPreviousRefuelNoPartial();
+                    previousRefuel = $scope.refuel.getPreviousRefuel();
+
+                    if (previousRefuel && previousRefuel._id !== $scope.refuel._id) {
+                        distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
+                        $scope.refuel.distance = distance;
+                        if (previousRefuelNoPartial && !$scope.refuel.partial) {
+                            distanceForConsumption = $scope.refuel.overallKilometers -
+                                previousRefuelNoPartial.overallKilometers;
+                            capacityForConsumption = Refuel.getCapacityBetweenRefuels(
+                                previousRefuelNoPartial,
+                                $scope.refuel
+                            );
+                            $scope.refuel.consumption = distanceForConsumption / capacityForConsumption;
+                        }
                     }
                 }
-            }
-        }, true);
+            },
+            true
+        );
 
         $scope.$watch(
             '[refuel.amount, refuel.capacity, refuel.fuelPrice]',
