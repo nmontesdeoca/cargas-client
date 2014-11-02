@@ -148,15 +148,22 @@ angular.module('cars')
         };
 
         $scope.deleteCar = function (car) {
-            $ionicPopup.confirm({
-                title: $filter('translate')('DELETE_CAR'),
-                template: $filter('translate')('DELETE_CAR_QUESTION')
-            }).then(function (yes) {
-                if (yes) {
-                    car.$remove();
-                    $state.go('app.carList');
-                }
-            });
+            if (car.getRefuelsCount()) {
+                $ionicPopup.alert({
+                    title: $filter('translate')('DELETE_CAR'),
+                    template: $filter('translate')('DELETE_REFUELS_MESSAGE')
+                });
+            } else {
+                $ionicPopup.confirm({
+                    title: $filter('translate')('DELETE_CAR'),
+                    template: $filter('translate')('DELETE_CAR_QUESTION')
+                }).then(function (yes) {
+                    if (yes) {
+                        car.$remove();
+                        $state.go('app.carList');
+                    }
+                });
+            }
         };
     }
 ]);

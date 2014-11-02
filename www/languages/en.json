@@ -25,6 +25,7 @@
     "DELETE_FUEL": "Delete Fuel",
     "DELETE_FUEL_QUESTION": "Are you sure you want to remove this fuel?",
     "DELETE_REFUEL": "Delete Refuel",
+    "DELETE_REFUELS_MESSAGE": "You should delete all the refuels for this vehicle first",
     "DESCRIPTION": "Description",
     "DISTANCE": "Distance",
     "DISTANCE_BETWEEN_REFUELS": "Distance between refuels",

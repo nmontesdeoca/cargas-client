@@ -25,6 +25,7 @@
     "DELETE_FUEL": "Borrar Combustible",
     "DELETE_FUEL_QUESTION": "Está seguro que quiere borrar este combustible?",
     "DELETE_REFUEL": "Borrar Recarga",
+    "DELETE_REFUELS_MESSAGE": "Debes borrar primero todas las recargas de este vehiculo",
     "DESCRIPTION": "Descripción",
     "DISTANCE": "Distancia",
     "DISTANCE_BETWEEN_REFUELS": "Distancia entre recargas",
