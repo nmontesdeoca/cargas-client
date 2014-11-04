@@ -75,7 +75,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByYear = function () {
-            return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.YEARS);
+            return RefuelModel.getTotalSpentForStats() / RefuelModel.getTotalTime(TIME.YEARS);
         };
 
         /**
@@ -83,7 +83,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByMonth = function () {
-            return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.MONTHS);
+            return RefuelModel.getTotalSpentForStats() / RefuelModel.getTotalTime(TIME.MONTHS);
         };
 
         /**
@@ -91,7 +91,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByDay = function () {
-            return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.DAYS);
+            return RefuelModel.getTotalSpentForStats() / RefuelModel.getTotalTime(TIME.DAYS);
         };
 
         /**
