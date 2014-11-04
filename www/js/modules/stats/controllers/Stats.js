@@ -43,7 +43,7 @@ angular.module('stats')
                     $scope.spentByMonth = $scope.car.getSpentByMonth();
                     $scope.spentByDay = $scope.car.getSpentByDay();
                     $scope.spentByKilometer = $scope.car.getSpentByKilometer();
-                    $scope.kilometersByLiter = $scope.car.getKilometersByLiter();
+                    $scope.kilometersByLiter = $scope.car.getConsumption();
                     $scope.totalKilometers = $scope.car.getTotalKilometers();
                 } else {
                     $scope.averageDistanceBetweenRefuels = 0;

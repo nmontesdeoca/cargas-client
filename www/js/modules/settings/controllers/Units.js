@@ -3,20 +3,23 @@ angular.module('settings')
 .controller('Units', [
     '$scope',
     '$ionicPopup',
+    '$filter',
     'setting',
     'units',
     'Refuel',
-    function ($scope, $ionicPopup, setting, units, Refuel) {
+    function ($scope, $ionicPopup, $filter, setting, units, Refuel) {
 
         var triggerWatch = true,
             changeUnit = function (newValue, oldValue, unit) {
                 if (triggerWatch && newValue && newValue !== oldValue) {
                     $ionicPopup.confirm({
-                        title: 'Change capacity',
-                        template: 'El cambio de unidad bla bla bla...'
+                        title: $filter('translate')('CHANGE_' + unit.toUpperCase()),
+                        template: $filter('translate')('CHANGE_UNIT_MSG')
                     }).then(function (yes) {
                         if (yes) {
-                            Refuel.changeUnits(unit, newValue, oldValue);
+                            if (unit === 'distance' || unit === 'capacity') {
+                                Refuel.changeUnits(unit, newValue, oldValue);
+                            }
                             $scope.setting.$save();
                         } else {
                             triggerWatch = false;

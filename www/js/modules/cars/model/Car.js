@@ -230,8 +230,10 @@ angular.module('cars')
          * returns the kilometers traveled with one liter of fuel
          * preconditions: this.hasMoreThanOneRefuel()
          */
-        CarModel.prototype.getKilometersByLiter = function () {
-            return this.getTotalKilometers() / this.getTotalCapacityForStats();
+        CarModel.prototype.getConsumption = function () {
+            // return this.getTotalKilometers() / this.getTotalCapacityForStats();
+            return Utils.calculateConsumption(this.getTotalKilometers(),
+                this.getTotalCapacityForStats());
         };
 
         /**

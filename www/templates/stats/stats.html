@@ -48,8 +48,8 @@
                 <p>{{spentByKilometer | currency}}</p>
             </ion-item>
             <ion-item class="item">
-                <h2 translate="KILOMETERS_PER_LITRE"></h2>
-                <p>{{kilometersByLiter | number}}</p>
+                <h2 translate="CONSUMPTION"></h2>
+                <p>{{kilometersByLiter | number | unit:'consumption'}}</p>
             </ion-item>
             <ion-item class="item">
                 <h2 translate="TIME_BETWEEN_REFUELS"></h2>

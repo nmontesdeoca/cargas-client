@@ -35,7 +35,7 @@ angular.module('stats', [])
                             spentByYear: Refuel.getSpentByYear()
                         });
 
-                        data.kilometersByLiter = Refuel.getKilometersByLiter();
+                        data.kilometersByLiter = Refuel.getConsumption();
                         data.spentByKilometer = Refuel.getSpentByKilometer();
                     }
 

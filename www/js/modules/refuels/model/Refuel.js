@@ -44,8 +44,10 @@ angular.module('refuels')
         /**
          * returns kilometers by liters for all cars
          */
-        RefuelModel.getKilometersByLiter = function () {
-            return RefuelModel.getTotalKilometers() / RefuelModel.getTotalCapacityForStats();
+        RefuelModel.getConsumption = function () {
+            // return RefuelModel.getTotalKilometers() / RefuelModel.getTotalCapacityForStats();
+            return Utils.calculateConsumption(this.getTotalKilometers(),
+                this.getTotalCapacityForStats());
         };
 
         /**
@@ -320,16 +322,12 @@ angular.module('refuels')
 
         RefuelModel.changeUnits = function (unit, newValue, oldValue) {
             var units = Utils.getUnits(unit),
-                baseUnit = _.findWhere(units, {
-                    ratio: 1
-                }),
                 refuels = RefuelModel.query();
             _.each(refuels, function (refuel) {
                 refuel.changeUnit({
                     unit: unit,
                     newUnit: units[newValue],
-                    oldUnit: units[oldValue],
-                    baseUnit: baseUnit
+                    oldUnit: units[oldValue]
                 });
             });
         };

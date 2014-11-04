@@ -33,7 +33,7 @@
         </label>
         <label class="item item-input" ng-show="displayTakePicture">
             <span class="input-label" translate="PICTURE"></span>
-            <button ng-click="getPhoto()" class="button icon-left ion-camera button-small button-positive">Take Photo</button>
+            <button ng-click="getPhoto()" class="button icon-left ion-camera button-small button-dark">Take Photo</button>
         </label>
         <label class="item item-input padding item-photo" ng-show="car.image">
             <img ng-src="{{car.image}}" alt="{{car.getName()}}">
@@ -47,9 +47,9 @@
                 </div>
             </label>
         </div>
-        <button ng-click="createCar()" class="button button-block activated big-main-button"
+        <button ng-click="createCar()" class="button button-block big-main-button"
             ng-disabled="newCarForm.$invalid">{{(car._id ? 'SAVE' : 'CREATE') | translate}}</button>
-        <button ng-click="deleteCar(car)" class="button button-assertive button-block activated big-main-button"
+        <button ng-click="deleteCar(car)" class="button button-block big-main-button delete"
             ng-disabled="newCarForm.$invalid" ng-show="car._id" translate="DELETE"></button>
         <button class="button button-clear button-dark" ng-click="newMakeModelModal.show()"
             translate="SUGGEST_NEW_CAR"></button>

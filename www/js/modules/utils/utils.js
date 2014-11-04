@@ -91,20 +91,6 @@ angular.module('utils', [])
     };
 }])
 
-.filter('consumption', function () {
-    return function (value) {
-        return value += ' kms/l';
-    };
-})
-
-/*
-.filter('capacity', function () {
-    return function (value) {
-        return value += ' lts';
-    };
-})
-*/
-
 .filter('timeAgo', ['$filter', 'Utils', function ($filter, Utils) {
     return function (value) {
         var unit = $filter('translate')('DAYS'),
@@ -147,7 +133,7 @@ angular.module('utils', [])
     };
 }])
 
-.factory('Utils', ['TIME', function (TIME) {
+.factory('Utils', ['TIME', 'Setting', function (TIME, Setting) {
 
     return {
 
@@ -725,30 +711,67 @@ angular.module('utils', [])
                 },
                 consumption: {
                     kml: {
-                        unitDisplay: 'kms/lt'
+                        unitDisplay: 'kms/l'
+                    },
+                    mpl: {
+                        unitDisplay: 'mil/l'
                     },
                     lkm: {
                         unitDisplay: 'lts/km'
+                    },
+                    gUSkm: {
+                        unitDisplay: 'gal(US)/km'
+                    },
+                    gUKkm: {
+                        unitDisplay: 'gal(UK)/km'
                     },
                     l100km: {
                         unitDisplay: 'lts/100kms'
                     },
                     mpgUS: {
-                        unitDisplay: 'mpg (US)'
+                        unitDisplay: 'mpg(US)'
                     },
                     mpgUK: {
-                        unitDisplay: 'mpg (UK)'
+                        unitDisplay: 'mpg(UK)'
                     },
                     kmgUS: {
-                        unitDisplay: 'kms/gal (US)'
+                        unitDisplay: 'kms/gal(US)'
                     },
                     kmgUK: {
-                        unitDisplay: 'kms/gal (UK)'
+                        unitDisplay: 'kms/gal(UK)'
                     }
                 }
             };
 
             return typeOfUnit ? units[typeOfUnit] : units;
+        },
+
+        calculateConsumption: function (distance, capacity) {
+
+            var settings = Setting.query(),
+                selectedUnit = settings.selectedUnits.consumption;
+
+            switch (selectedUnit) {
+
+                // distance / capacity calculations
+                case 'kml':
+                case 'mpl':
+                case 'mpgUS':
+                case 'mpgUK':
+                case 'kmgUS':
+                case 'kmgUK':
+                    return distance / capacity;
+
+                // capacity - distance calculations
+                case 'lkm':
+                case 'gUSkm':
+                case 'gUKkm':
+                    return capacity / distance;
+                case 'l100km':
+                    return capacity / distance * 100;
+                default:
+                    return null;
+            }
         },
 
         getYears: function () {
