@@ -11,13 +11,23 @@ angular.module('utils', [])
     YEARS: 8
 })
 
-.directive('randomBackground', ['Flickr', 'Utils',
-    function (Flickr, Utils) {
+.directive('randomBackground', [/*'Flickr', */'Utils',
+    function (/*Flickr, */Utils) {
         return {
             restrict: 'A',
             link: function ($scope, $element, $attrs) {
 
-                Utils.network.isOnline(function () {
+                var time = Utils.isNight() ? 'night' : 'day',
+                    day = new Date().getDay(),
+                    image = new Image(),
+                    url = '/img/backgrounds/' + time + '/' + day + '.jpg';
+                image.src = url;
+                image.onload = function () {
+                    $element.css('background-image', 'url(' + url + ')');
+                    Utils.hideSplahscreen();
+                };
+
+                /*Utils.network.isOnline(function () {
 
                     var time = Utils.isNight() ? 'night' : 'day';
 
@@ -48,6 +58,7 @@ angular.module('utils', [])
                              * to get the url fetched, so when we place the background
                              * the image loads instantly
                              */
+                             /*
                             image.src = url;
                             image.onload = function () {
                                 $element.css('background-image', 'url(' + url + ')');
@@ -60,7 +71,7 @@ angular.module('utils', [])
                 },
                 function () {
                     Utils.hideSplahscreen();
-                });
+                });*/
             }
         };
     }

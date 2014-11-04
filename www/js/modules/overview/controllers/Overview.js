@@ -19,12 +19,13 @@ angular.module('overview')
             });
 
         	_.extend($scope, {
-                'cars': cars,
-                'refuels': refuels,
-                'lastRefuel': lastRefuel,
-                'totals': {
-                    'totalSpent': Refuel.getTotalSpent(),
-                    'totalCapacity': Refuel.getTotalCapacity()
+                cars: cars,
+                refuels: refuels,
+                lastRefuel: lastRefuel,
+                totals: {
+                    totalSpent: Refuel.getTotalSpent(),
+                    totalCapacity: Refuel.getTotalCapacity(),
+                    totalDistance: Refuel.getTotalKilometers()
                 }
             });
         }

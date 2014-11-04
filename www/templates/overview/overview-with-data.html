@@ -22,6 +22,9 @@
     <div class="item item-icon-right">
         {{'CAPACITY' | translate}}: <span class="icon stat-number">{{totals.totalCapacity | number | unit:'capacity'}}</span>
     </div>
+    <div class="item item-icon-right">
+        {{'DISTANCE' | translate}}: <span class="icon stat-number">{{totals.totalDistance | number | unit:'distance'}}</span>
+    </div>
 </div>
 
 <button ui-sref="app.refuelNew" class="button icon-left ion-plus button-balanced button-block" translate="ADD_NEW_REFUEL"></button>

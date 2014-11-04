@@ -52,7 +52,8 @@
     /*transition: background 1s ease;*/
 }
 .random-background {
-    background-image: url(../img/backgrounds/night1.jpg);
+    /*background-image: url(../img/backgrounds/night1.jpg);*/
+    background-color: #eee;
 }
 .menu-content .bar.bar-header {
     background: none;
