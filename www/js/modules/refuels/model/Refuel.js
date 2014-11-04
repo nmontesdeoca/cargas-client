@@ -310,7 +310,9 @@ angular.module('refuels')
             var refuel = firstRefuel.getNextRefuel(),
                 capacity = 0;
 
-            capacity += refuel ? refuel.capacity : 0;
+            capacity += refuel ?
+                refuel.capacity :
+                (lastRefuel ? lastRefuel.capacity : 0);
 
             while (refuel && refuel._id !== lastRefuel._id) {
                 refuel = refuel.getNextRefuel();
