@@ -8,7 +8,7 @@
             <strong>{{lastRefuel.car.getName()}}</strong>
         </div>
         <p>
-            <i class="ion-waterdrop"></i> {{ lastRefuel.capacity | capacity }} -
+            <i class="ion-waterdrop"></i> {{ lastRefuel.capacity | number | unit:'capacity' }} -
             {{lastRefuel.amount | currency}}
         </p>
     </div>
@@ -20,7 +20,7 @@
         {{'SPENT' | translate}}: <span class="icon stat-number">{{totals.totalSpent | currency}}</span>
     </div>
     <div class="item item-icon-right">
-        {{'CAPACITY' | translate}}: <span class="icon stat-number">{{totals.totalCapacity | number | capacity}}</span>
+        {{'CAPACITY' | translate}}: <span class="icon stat-number">{{totals.totalCapacity | number | unit:'capacity'}}</span>
     </div>
 </div>
 
@@ -31,7 +31,7 @@
 		<h4>{{car.make + ' ' + car.model}} </h4>
         <strong>{{car.refuels.length}} refuels</strong> -
 		<strong>{{car.totalSpent | currency}}</strong> -
-		<strong>{{car.totalCapacity | capacity}}</strong>
+		<strong>{{car.totalCapacity | unit:'capacity'}}</strong>
 	</ion-item>
 </ul> -->
 <!--                 <p>Total spent compared to same month last year</p>

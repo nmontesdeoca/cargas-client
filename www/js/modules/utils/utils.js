@@ -82,11 +82,14 @@ angular.module('utils', [])
     };
 })
 
-.filter('distance', function () {
-    return function (value) {
-        return value += ' kms';
+.filter('unit', ['Setting', 'Utils', function (Setting, Utils) {
+    return function (value, unit) {
+        var settings = Setting.query(),
+            selectedUnit = settings.selectedUnits[unit],
+            unitToDisplay = ' ' + Utils.getUnits(unit)[selectedUnit].unitDisplay;
+        return value += unitToDisplay;
     };
-})
+}])
 
 .filter('consumption', function () {
     return function (value) {
@@ -94,11 +97,13 @@ angular.module('utils', [])
     };
 })
 
+/*
 .filter('capacity', function () {
     return function (value) {
         return value += ' lts';
     };
 })
+*/
 
 .filter('timeAgo', ['$filter', 'Utils', function ($filter, Utils) {
     return function (value) {
@@ -108,12 +113,12 @@ angular.module('utils', [])
             today = new Date(),
             yesterday = new Date(),
             timeAgo = Utils.calculateDays(today, value);
-        
+
         yesterday.setDate(today.getDate() - 1);
 
-        if (valueDate.toDateString() == today.toDateString()) {
-            agoText = $filter('translate')('TODAY'); 
-        } else if (valueDate.toDateString() == yesterday.toDateString()) {
+        if (valueDate.toDateString() === today.toDateString()) {
+            agoText = $filter('translate')('TODAY');
+        } else if (valueDate.toDateString() === yesterday.toDateString()) {
             agoText = $filter('translate')('YESTERDAY');
         } else {
             timeAgo = Math.round(timeAgo) + ' ';
@@ -143,6 +148,7 @@ angular.module('utils', [])
 }])
 
 .factory('Utils', ['TIME', function (TIME) {
+
     return {
 
         formatSmallNumber: function (number) {
@@ -688,24 +694,56 @@ angular.module('utils', [])
 
         getUnits: function (typeOfUnit) {
             var units = {
-                'capacity': {
-                    'lt': {
-                        'name': 'Litres',
-                        'unitDisplay': 'lts'
+                capacity: {
+                    lt: {
+                        keyName: 'LITERS',
+                        unitDisplay: 'lts',
+                        ratio: 1
                     },
-                    'gal': {
-                        'name': 'Gallons',
-                        'unitDisplay': 'gals'
+                    galUK: {
+                        keyName: 'GALLONS_UK',
+                        unitDisplay: 'gals',
+                        ratio: 4.54609
+                    },
+                    galUS: {
+                        keyName: 'GALLONS_US',
+                        unitDisplay: 'gals',
+                        ratio: 3.78541
                     }
                 },
-                'distance': {
-                    'km': {
-                        'name': 'Kilometres',
-                        'unitDisplay': 'kms'
+                distance: {
+                    km: {
+                        keyName: 'KILOMETERS',
+                        unitDisplay: 'kms',
+                        ratio: 1
                     },
-                    'mile': {
-                        'name': 'Miles',
-                        'unitDisplay': 'miles'
+                    mile: {
+                        keyName: 'MILES',
+                        unitDisplay: 'mil',
+                        ratio: 1.609
+                    }
+                },
+                consumption: {
+                    kml: {
+                        unitDisplay: 'kms/lt'
+                    },
+                    lkm: {
+                        unitDisplay: 'lts/km'
+                    },
+                    l100km: {
+                        unitDisplay: 'lts/100kms'
+                    },
+                    mpgUS: {
+                        unitDisplay: 'mpg (US)'
+                    },
+                    mpgUK: {
+                        unitDisplay: 'mpg (UK)'
+                    },
+                    kmgUS: {
+                        unitDisplay: 'kms/gal (US)'
+                    },
+                    kmgUK: {
+                        unitDisplay: 'kms/gal (UK)'
                     }
                 }
             };

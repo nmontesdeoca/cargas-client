@@ -96,34 +96,6 @@ angular.module('refuels')
             }
         });
 
-        // // tests for edit 3 elements
-        // $scope.$watch('refuel.fuelPrice * refuel.capacity', function (
-        //     newAmount, oldAmount) {
-        //     /*console.group('Amount');
-        //     console.log(newAmount);
-        //     console.log(oldAmount);
-        //     console.groupEnd();*/
-        //     if (newAmount !== oldAmount) {
-        //         $scope.refuel.amount = !isNaN(newAmount) ? Math.round(
-        //             newAmount * 100) / 100 : '';
-        //     }
-        // });
-        //
-        // // // tests for edit 3 elements
-        // $scope.$watch('refuel.amount / refuel.capacity', function (
-        //     newFuelPrice, oldFuelPrice) {
-        //     /*console.group('Fuel Price');
-        //     console.log(newFuelPrice);
-        //     console.log(oldFuelPrice);
-        //     console.groupEnd();*/
-        //     // NaN !== NaN true
-        //     if (newFuelPrice !== oldFuelPrice && !isNaN(newFuelPrice) &&
-        //             !isNaN(oldFuelPrice)) {
-        //         $scope.refuel.fuelPrice = !isNaN(newFuelPrice) ? Math.round(
-        //             newFuelPrice * 100) / 100 : '';
-        //     }
-        // });
-
         $scope.$watch('refuel.car', function (newCar, oldCar) {
             var car;
             if (newCar) {
@@ -234,33 +206,46 @@ angular.module('refuels')
             $scope.newMakeModelModal.remove();
         });
 
-        $scope.$watch('refuel.date + refuel.car + refuel.overallKilometers + refuel.capacity',
+        $scope.$watch(
+            '[refuel.date, refuel.car, refuel.overallKilometers, refuel.capacity, refuel.partial]',
             function (newData, oldData) {
 
-            var car = $scope.refuel.car,
-                previousRefuel,
-                distance;
+                var car = $scope.refuel.car,
+                    previousRefuel,
+                    previousRefuelNoPartial,
+                    distance,
+                    distanceForConsumption,
+                    capacityForConsumption;
 
-            _.extend($scope.refuel, {
-                distance: 0,
-                consumption: 0
-            });
+                _.extend($scope.refuel, {
+                    distance: 0,
+                    consumption: 0
+                });
 
-            if (car) {
-                previousRefuel = $scope.refuel.getPreviousRefuel();
+                if (car) {
+                    previousRefuelNoPartial = $scope.refuel.getPreviousRefuelNoPartial();
+                    previousRefuel = $scope.refuel.getPreviousRefuel();
 
-                if (previousRefuel && previousRefuel._id !== $scope.refuel._id) {
-                    distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
-                    _.extend($scope.refuel, {
-                        distance: distance,
-                        consumption: (distance / $scope.refuel.capacity)
-                    });
+                    if (previousRefuel && previousRefuel._id !== $scope.refuel._id) {
+                        distance = $scope.refuel.overallKilometers - previousRefuel.overallKilometers;
+                        $scope.refuel.distance = distance;
+                        if (previousRefuelNoPartial && !$scope.refuel.partial) {
+                            distanceForConsumption = $scope.refuel.overallKilometers -
+                                previousRefuelNoPartial.overallKilometers;
+                            capacityForConsumption = Refuel.getCapacityBetweenRefuels(
+                                previousRefuelNoPartial,
+                                $scope.refuel
+                            );
+                            $scope.refuel.consumption = distanceForConsumption / capacityForConsumption;
+                        }
+                    }
                 }
-            }
-        });
+            },
+            true
+        );
 
         $scope.$watch(
-            '[refuel.amount,refuel.capacity,refuel.fuelPrice]',
+            '[refuel.amount, refuel.capacity, refuel.fuelPrice]',
             function (newValues, oldValues) {
                 var newAmount,
                     newCapacity,
@@ -297,5 +282,17 @@ angular.module('refuels')
             },
             true
         );
+
+        $scope.delete = function (refuel) {
+            $ionicPopup.confirm({
+                title: $filter('translate')('DELETE_REFUEL'),
+                template: $filter('translate')('REMOVE_REFUEL_QUESTION')
+            }).then(function (yes) {
+                if (yes) {
+                    refuel.$remove();
+                    $state.go('app.refuelList');
+                }
+            });
+        };
     }
 ]);

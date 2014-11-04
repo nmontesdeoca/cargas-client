@@ -13,6 +13,13 @@
                     </select>
                 </label>
 
+                <label class="item item-checkbox checkbox-custom">
+                    <span class="input-label" translate="PARTIAL_REFUEL"></span>
+                    <label class="checkbox checkbox-dark">
+                        <input type="checkbox" ng-model="refuel.partial">
+                    </label>
+                </label>
+
                 <label class="item item-input">
                     <span class="input-label" translate="ODOMETER"></span>
                     <input type="number" ng-model="refuel.overallKilometers" required>
@@ -40,17 +47,19 @@
                     <input type="number" ng-model="refuel.amount" required>
                 </label>
 
-                <label class="item item-input" ng-show="refuel.distance">
+                <label class="item item-input" ng-show="refuel.distance && refuel.distance > 0">
                     <span id="amount-label" class="input-label" translate="DISTANCE"></span>
-                    <input type="text" ng-value="refuel.distance | number | distance" readonly>
+                    <input type="text" ng-value="refuel.distance | number | unit:'distance'" readonly>
                 </label>
 
-                <label class="item item-input" ng-show="refuel.consumption">
+                <label class="item item-input" ng-show="refuel.consumption && refuel.consumption > 0">
                     <span id="amount-label" class="input-label" translate="CONSUMPTION"></span>
                     <input type="text" ng-value="refuel.consumption | number | consumption" readonly>
                 </label>
                 <button ng-click="create()" class="button button-block big-main-button activated"
                     ng-disabled="newRefuelForm.$invalid">{{(refuel._id ? 'SAVE' : 'CREATE') | translate}}</button>
+                <button ng-click="delete(refuel)" class="button button-assertive button-block big-main-button activated"
+                    ng-disabled="newRefuelForm.$invalid" ng-show="refuel._id" translate="DELETE"></button>
             </div>
         </form>
     </ion-content>

@@ -11,6 +11,8 @@ angular.module('cars')
     '$ionicViewService',
     '$ionicModal',
     '$ionicActionSheet',
+    '$state',
+    '$filter',
     'car',
     'fuels',
     'makes',
@@ -18,13 +20,13 @@ angular.module('cars')
     'Car',
     'Fuel',
     'Camera',
-    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, $ionicActionSheet, car,
-        fuels, makes, Utils, Car, Fuel, Camera) {
+    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, $ionicActionSheet, $state,
+        $filter, car, fuels, makes, Utils, Car, Fuel, Camera) {
 
         var getFuels = function () {
             var sortedFuels = _.sortBy(Fuel.query(), 'name');
             sortedFuels.push({
-                name: 'Add New Fuel',
+                name: $filter('translate')('ADD_NEW_FUEL'),
                 value: 'newFuel'
             });
             return sortedFuels;
@@ -143,6 +145,25 @@ angular.module('cars')
                         alert(err);
                     });
                 };
+        };
+
+        $scope.deleteCar = function (car) {
+            if (car.getRefuelsCount()) {
+                $ionicPopup.alert({
+                    title: $filter('translate')('DELETE_CAR'),
+                    template: $filter('translate')('DELETE_REFUELS_MESSAGE')
+                });
+            } else {
+                $ionicPopup.confirm({
+                    title: $filter('translate')('DELETE_CAR'),
+                    template: $filter('translate')('DELETE_CAR_QUESTION')
+                }).then(function (yes) {
+                    if (yes) {
+                        car.$remove();
+                        $state.go('app.carList');
+                    }
+                });
+            }
         };
     }
 ]);

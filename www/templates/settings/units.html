@@ -1,21 +1,40 @@
 <ion-view title="{{'UNITS' | translate}}">
     <ion-content class="has-header">
         <div class="list padding">
-			<div ng-repeat="(unitsByTypeName, unitsByType) in units">
-
-				<div class="item item-divider card-heading">
-					{{unitsByTypeName}}
-				</div>
-
-				<label class="item item-radio" ng-repeat="(singleUnitId, singleUnit) in unitsByType" ng-click="setUnit(unitsByTypeName, singleUnitId)">
-					<input type="radio" name="group-{{unitsByTypeName}}" ng-checked="isSelectedUnit(unitsByTypeName, singleUnitId)">
+			<div class="padding-bottom">
+				<div class="item item-divider item-dark" translate="CAPACITY"></div>
+				<label class="item item-radio" ng-repeat="(singleUnitId, singleUnit) in units.capacity">
+					<input type="radio" name="group-capacity"
+                        value="{{singleUnitId}}" ng-model="setting.selectedUnits.capacity">
 					<div class="item-content">
-					  {{singleUnit.name}}
+					   {{singleUnit.keyName | translate}}
 					</div>
 					<i class="radio-icon ion-checkmark"></i>
 				</label>
-				<br>
 			</div>
+            <div class="padding-bottom">
+                <div class="item item-divider item-dark" translate="DISTANCE"></div>
+                <label class="item item-radio" ng-repeat="(singleUnitId, singleUnit) in units.distance">
+                    <input type="radio" name="group-distance"
+                        value="{{singleUnitId}}" ng-model="setting.selectedUnits.distance">
+                    <div class="item-content">
+                       {{singleUnit.keyName | translate}}
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
+            <!-- add class padding-bottom to the next div if a new unit is added to this page -->
+            <div>
+                <div class="item item-divider item-dark" translate="CONSUMPTION"></div>
+                <label class="item item-radio" ng-repeat="(singleUnitId, singleUnit) in units.consumption">
+                    <input type="radio" name="group-consumption"
+                        value="{{singleUnitId}}" ng-model="setting.selectedUnits.consumption">
+                    <div class="item-content">
+                       {{singleUnit.unitDisplay}}
+                    </div>
+                    <i class="radio-icon ion-checkmark"></i>
+                </label>
+            </div>
         </div>
     </ion-content>
 </ion-view>

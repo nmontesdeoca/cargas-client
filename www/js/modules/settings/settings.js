@@ -9,9 +9,6 @@ angular.module('settings', [])
 
         .state('app.settingsList', {
             url: '/settings',
-            /*resolve: {
-            Settings: 'Setting'
-        },*/
             views: {
                 menuContent: {
                     templateUrl: 'templates/settings/settings.html',
@@ -40,6 +37,9 @@ angular.module('settings', [])
             resolve: {
                 setting: ['Setting', function (Setting) {
                     return Setting.query();
+                }],
+                units: ['Utils', function (Utils) {
+                    return Utils.getUnits();
                 }]
             },
             views: {

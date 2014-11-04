@@ -10,5 +10,7 @@
         </label>
         <button ng-click="createFuel()" class="button button-block activated big-main-button"
             ng-disabled="newFuel.$invalid">{{(fuel._id ? 'SAVE' : 'CREATE') | translate}}</button>
+        <button ng-click="deleteFuel(fuel)" class="button button-assertive button-block activated big-main-button"
+            ng-disabled="newFuel.$invalid" ng-show="fuel._id" translate="DELETE"></button>
     </div>
 </form>
