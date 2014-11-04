@@ -20,7 +20,7 @@ angular.module('utils', [])
                 var time = Utils.isNight() ? 'night' : 'day',
                     day = new Date().getDay(),
                     image = new Image(),
-                    url = '/img/backgrounds/' + time + '/' + day + '.jpg';
+                    url = 'img/backgrounds/' + time + '/' + day + '.jpg';
                 image.src = url;
                 image.onload = function () {
                     $element.css('background-image', 'url(' + url + ')');
