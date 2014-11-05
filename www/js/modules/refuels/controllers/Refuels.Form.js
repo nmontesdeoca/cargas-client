@@ -6,14 +6,15 @@ angular.module('refuels')
     '$state',
     '$ionicModal',
     '$filter',
+    '$ionicViewService',
     'Refuel',
     'Car',
     'Fuel',
     'refuel',
     'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, $filter, Refuel, Car, Fuel, refuel,
-            Utils, carByDefault) {
+    function ($scope, $ionicPopup, $state, $ionicModal, $filter, $ionicViewService, Refuel, Car,
+        Fuel, refuel, Utils, carByDefault) {
 
         var getCars = function () {
                 var cars = Car.query();
@@ -79,7 +80,13 @@ angular.module('refuels')
                 $scope.refuel.date = Utils.formatDateToTime($scope.refuel.date);
                 $scope.refuel.car = $scope.refuel.car._id.toString();
                 $scope.refuel.$save(function () {
-                    $state.go('app.refuelList');
+                    var backView = $ionicViewService.getBackView();
+
+                    if (backView) {
+                        backView.go();
+                    } else {
+                        $state.go('app.refuelList');
+                    }
                 });
             }
         };
