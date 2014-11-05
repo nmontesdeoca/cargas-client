@@ -85,10 +85,6 @@ angular.module('refuels')
         };
 
         $scope.$watch('refuel.fuel', function (newFuel, oldFuel) {
-            /*console.group('Fuel');
-            console.log(newFuel);
-            console.log(oldFuel);
-            console.groupEnd();*/
             if (newFuel && (newFuel !== oldFuel || !$scope.refuel._id)) {
                 $scope.refuel.fuelPrice = newFuel.price;
             } else if (!newFuel) {
@@ -137,7 +133,6 @@ angular.module('refuels')
             Utils.unsetDefaultCar(Car, $scope.car);
 
             $scope.car.$save(function () {
-                // var cars = Car.query();
                 $scope.cars = getCars();
                 // I think we should have only strings or integers as ids
                 $scope.refuel.car = $scope.car._id.toString();
@@ -236,7 +231,8 @@ angular.module('refuels')
                                 previousRefuelNoPartial,
                                 $scope.refuel
                             );
-                            $scope.refuel.consumption = distanceForConsumption / capacityForConsumption;
+                            $scope.refuel.consumption = Utils.calculateConsumption(distanceForConsumption,
+                                capacityForConsumption);
                         }
                     }
                 }

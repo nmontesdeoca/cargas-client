@@ -13,10 +13,13 @@
                     </select>
                 </label>
 
-                <label class="item item-checkbox checkbox-custom">
-                    <span class="input-label" translate="PARTIAL_REFUEL"></span>
-                    <label class="checkbox checkbox-dark">
+                <label class="item item-toggle">
+                    {{'PARTIAL_REFUEL' | translate}}
+                    <label class="toggle toggle-dark">
                         <input type="checkbox" ng-model="refuel.partial">
+                        <div class="track">
+                            <div class="handle"></div>
+                        </div>
                     </label>
                 </label>
 
@@ -54,11 +57,11 @@
 
                 <label class="item item-input" ng-show="refuel.consumption && refuel.consumption > 0">
                     <span id="amount-label" class="input-label" translate="CONSUMPTION"></span>
-                    <input type="text" ng-value="refuel.consumption | number | consumption" readonly>
+                    <input type="text" ng-value="refuel.consumption | number | unit:'consumption'" readonly>
                 </label>
-                <button ng-click="create()" class="button button-block big-main-button activated"
+                <button ng-click="create()" class="button button-block big-main-button"
                     ng-disabled="newRefuelForm.$invalid">{{(refuel._id ? 'SAVE' : 'CREATE') | translate}}</button>
-                <button ng-click="delete(refuel)" class="button button-assertive button-block big-main-button activated"
+                <button ng-click="delete(refuel)" class="button button-block big-main-button delete"
                     ng-disabled="newRefuelForm.$invalid" ng-show="refuel._id" translate="DELETE"></button>
             </div>
         </form>

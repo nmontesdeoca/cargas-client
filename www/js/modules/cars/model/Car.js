@@ -115,7 +115,7 @@ angular.module('cars')
          * precondition: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getSpentByYear = function () {
-            return this.getTotalSpent() / this.getTotalTime(TIME.YEARS);
+            return this.getTotalSpentForStats() / this.getTotalTime(TIME.YEARS);
         };
 
         /**
@@ -123,7 +123,7 @@ angular.module('cars')
          * precondition: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getSpentByMonth = function () {
-            return this.getTotalSpent() / this.getTotalTime(TIME.MONTHS);
+            return this.getTotalSpentForStats() / this.getTotalTime(TIME.MONTHS);
         };
 
         /**
@@ -131,7 +131,7 @@ angular.module('cars')
          * precondition: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getSpentByDay = function () {
-            return this.getTotalSpent() / this.getTotalTime(TIME.DAYS);
+            return this.getTotalSpentForStats() / this.getTotalTime(TIME.DAYS);
         };
 
         /**
@@ -139,7 +139,7 @@ angular.module('cars')
          * precondition: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getSpentByHour = function () {
-            return this.getTotalSpent() / this.getTotalTime(TIME.HOURS);
+            return this.getTotalSpentForStats() / this.getTotalTime(TIME.HOURS);
         };
 
         /**
@@ -147,7 +147,7 @@ angular.module('cars')
          * precondition: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getSpentByMinute = function () {
-            return this.getTotalSpent() / this.getTotalTime(TIME.MINUTES);
+            return this.getTotalSpentForStats() / this.getTotalTime(TIME.MINUTES);
         };
 
         /**
@@ -155,7 +155,7 @@ angular.module('cars')
          * precondition: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getSpentBySecond = function () {
-            return this.getTotalSpent() / this.getTotalTime(TIME.SECONDS);
+            return this.getTotalSpentForStats() / this.getTotalTime(TIME.SECONDS);
         };
 
         /**
@@ -163,7 +163,7 @@ angular.module('cars')
          * precondition: this.hasMoreThanOneRefuel()
          */
         CarModel.prototype.getSpentByMilisecond = function () {
-            return this.getTotalSpent() / this.getTotalTime(TIME.MILLISECONDS);
+            return this.getTotalSpentForStats() / this.getTotalTime(TIME.MILLISECONDS);
         };
 
         /*
@@ -230,8 +230,10 @@ angular.module('cars')
          * returns the kilometers traveled with one liter of fuel
          * preconditions: this.hasMoreThanOneRefuel()
          */
-        CarModel.prototype.getKilometersByLiter = function () {
-            return this.getTotalKilometers() / this.getTotalCapacityForStats();
+        CarModel.prototype.getConsumption = function () {
+            // return this.getTotalKilometers() / this.getTotalCapacityForStats();
+            return Utils.calculateConsumption(this.getTotalKilometers(),
+                this.getTotalCapacityForStats());
         };
 
         /**

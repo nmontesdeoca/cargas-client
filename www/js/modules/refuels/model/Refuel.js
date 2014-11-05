@@ -44,8 +44,10 @@ angular.module('refuels')
         /**
          * returns kilometers by liters for all cars
          */
-        RefuelModel.getKilometersByLiter = function () {
-            return RefuelModel.getTotalKilometers() / RefuelModel.getTotalCapacityForStats();
+        RefuelModel.getConsumption = function () {
+            // return RefuelModel.getTotalKilometers() / RefuelModel.getTotalCapacityForStats();
+            return Utils.calculateConsumption(this.getTotalKilometers(),
+                this.getTotalCapacityForStats());
         };
 
         /**
@@ -73,7 +75,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByYear = function () {
-            return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.YEARS);
+            return RefuelModel.getTotalSpentForStats() / RefuelModel.getTotalTime(TIME.YEARS);
         };
 
         /**
@@ -81,7 +83,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByMonth = function () {
-            return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.MONTHS);
+            return RefuelModel.getTotalSpentForStats() / RefuelModel.getTotalTime(TIME.MONTHS);
         };
 
         /**
@@ -89,7 +91,7 @@ angular.module('refuels')
          * precondition: RefuelModel.hasMoreThanOneRefuel()
          */
         RefuelModel.getSpentByDay = function () {
-            return RefuelModel.getTotalSpent() / RefuelModel.getTotalTime(TIME.DAYS);
+            return RefuelModel.getTotalSpentForStats() / RefuelModel.getTotalTime(TIME.DAYS);
         };
 
         /**
@@ -320,16 +322,12 @@ angular.module('refuels')
 
         RefuelModel.changeUnits = function (unit, newValue, oldValue) {
             var units = Utils.getUnits(unit),
-                baseUnit = _.findWhere(units, {
-                    ratio: 1
-                }),
                 refuels = RefuelModel.query();
             _.each(refuels, function (refuel) {
                 refuel.changeUnit({
                     unit: unit,
                     newUnit: units[newValue],
-                    oldUnit: units[oldValue],
-                    baseUnit: baseUnit
+                    oldUnit: units[oldValue]
                 });
             });
         };
