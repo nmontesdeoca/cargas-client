@@ -1,0 +1,10 @@
+@-webkit-keyframes imgAnimate {
+  0%, 100% {
+    transform: translate(-210px, 0);
+    /*transform: scale(1);*/
+  }
+  50% {
+    transform: translate(-300px, 0);
+    /*transform: scale(1.15);*/
+  }
+}

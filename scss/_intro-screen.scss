@@ -1,0 +1,77 @@
+/* intro screen */
+.slider {
+    height: 100%;
+    
+    .slide-content {
+        @extend .animated;
+        @extend .bounceInUp;
+        color: #fff;
+        height: 100%;
+        padding: 20px;
+        text-shadow: 1px 1px 0 rgba(0,0,0,.5);
+    }
+}
+ion-slide {
+    overflow: hidden
+}
+.slider-pager .slider-pager-page {
+    color: #fff;
+}
+#intro-page {
+    .main-title {
+        
+    }
+}
+.initial-slide {
+    h3 {
+        color: #fff;
+        font-size: 20px;
+        height: 74px;
+        left: 0;
+        letter-spacing: 1px;
+        margin-top: -37px;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        top: 48%;
+
+        .app-name {
+            display: block;
+            font-size: 35px;
+            letter-spacing: 0;
+            margin-top: 4px;
+        }
+    }
+}
+
+.bg-image {
+    -webkit-animation: imgAnimate 120s infinite;
+    /*animation: imgAnimate .5s infinite;*/
+    max-height: 100%;
+    position: absolute;
+}
+.start-tutorial {   
+    @extend .animated;
+    @extend .pulse;
+    -webkit-animation-delay: 2.5s;
+    -webkit-animation-iteration-count:infinite;
+    color: #fff;
+    display: block;
+    font-size: 17px;
+    left: 0;
+    margin-top: 30px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-shadow: 0px 0px 15px #3EA50A;
+    top: 69%;
+    width: 100%;
+}
+.intro-text {
+    line-height: 1.6;
+    p {
+        color: #000;
+        font-size: 16px;
+        text-shadow: 1px 1px 0 rgba(0,0,0,.25);
+    }
+}
