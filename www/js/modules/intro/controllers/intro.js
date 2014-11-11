@@ -1,5 +1,11 @@
 angular.module('intro')
 
-.controller('Intro', ['$ionicSlideBoxDelegate', '$state', function($ionicSlideBoxDelegate) {
-
+.controller('Intro', [
+	'$scope',
+	'$ionicSlideBoxDelegate',
+	'$state',
+	function($scope, $ionicSlideBoxDelegate, $state) {
+		$scope.slideChanged = function() {
+			$state.transitionTo('intro.initialCarForm');
+		};
 }]);
