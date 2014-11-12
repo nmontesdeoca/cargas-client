@@ -2,6 +2,7 @@ angular.module('starter', [
     'ionic',
     'ngResource',
     'pascalprecht.translate',
+    'tmh.dynamicLocale',
     'overview',
     'profile',
     'cars',
@@ -13,8 +14,15 @@ angular.module('starter', [
     'intro'
 ])
 
-.run(['$ionicPlatform', '$rootScope', '$translate', '$ionicSideMenuDelegate', 'Setting',
-    function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate, Setting) {
+.run([
+    '$ionicPlatform',
+    '$rootScope',
+    '$translate',
+    '$ionicSideMenuDelegate',
+    'tmhDynamicLocale',
+    'Setting',
+    function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate, tmhDynamicLocale,
+        Setting) {
 
         $ionicPlatform.ready(function () {
 
@@ -42,6 +50,8 @@ angular.module('starter', [
                 $translate.use(settings.language);
             }
 
+            tmhDynamicLocale.set(settings.locale || 'es-uy');
+
             // to make underscore available at any template
             $rootScope._ = _;
 
@@ -55,7 +65,8 @@ angular.module('starter', [
     '$stateProvider',
     '$urlRouterProvider',
     '$translateProvider',
-    function ($stateProvider, $urlRouterProvider, $translateProvider) {
+    'tmhDynamicLocaleProvider',
+    function ($stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider) {
         $stateProvider.state('app', {
             abstract: true,
             templateUrl: 'templates/menu.html',
@@ -69,6 +80,8 @@ angular.module('starter', [
             suffix: '.json'
         });
         $translateProvider.preferredLanguage('en');
+
+        tmhDynamicLocaleProvider.localeLocationPattern('lib/angular-i18n/angular-locale_{{locale}}.js');
     }
 ])
 

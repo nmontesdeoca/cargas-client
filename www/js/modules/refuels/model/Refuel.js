@@ -310,7 +310,9 @@ angular.module('refuels')
             var refuel = firstRefuel.getNextRefuel(),
                 capacity = 0;
 
-            capacity += refuel ? refuel.capacity : 0;
+            capacity += refuel ?
+                refuel.capacity :
+                (lastRefuel ? lastRefuel.capacity : 0);
 
             while (refuel && refuel._id !== lastRefuel._id) {
                 refuel = refuel.getNextRefuel();
@@ -355,7 +357,6 @@ angular.module('refuels')
             var index = 0,
                 refuel,
                 condition,
-                currentDateTime = new Date(this.date).getTime(),
                 carId = typeof this.car === 'object' ?
                     this.car._id.toString() : this.car,
                 refuels = _.sortBy(
@@ -365,7 +366,7 @@ angular.module('refuels')
 
             do {
                 refuel = refuels[index];
-                condition = refuel && currentDateTime <= refuel.date;
+                condition = refuel && this.overallKilometers <= refuel.overallKilometers;
                 condition && index++;
             } while (condition);
 
@@ -396,7 +397,6 @@ angular.module('refuels')
             var index = 0,
                 refuel,
                 condition,
-                currentDateTime = new Date(this.date).getTime() + (23 * 60 * 60 * 1000),
                 carId = typeof this.car === 'object' ?
                     this.car._id.toString() : this.car,
                 refuels = _.sortBy(
@@ -406,7 +406,7 @@ angular.module('refuels')
 
             do {
                 refuel = refuels[index];
-                condition = refuel && currentDateTime > refuel.date;
+                condition = refuel && this.overallKilometers >= refuel.overallKilometers;
                 condition && index++;
             } while (condition);
 

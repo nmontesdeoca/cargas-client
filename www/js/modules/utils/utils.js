@@ -722,34 +722,59 @@ angular.module('utils', [])
                 },
                 consumption: {
                     kml: {
-                        unitDisplay: 'kms/l'
-                    },
-                    mpl: {
-                        unitDisplay: 'mil/l'
+                        unitDisplay: 'kms/l',
+                        capacity: 'lt',
+                        distance: 'km'
                     },
                     lkm: {
-                        unitDisplay: 'lts/km'
-                    },
-                    gUSkm: {
-                        unitDisplay: 'gal(US)/km'
-                    },
-                    gUKkm: {
-                        unitDisplay: 'gal(UK)/km'
+                        unitDisplay: 'lts/km',
+                        capacity: 'lt',
+                        distance: 'km'
                     },
                     l100km: {
-                        unitDisplay: 'lts/100kms'
+                        unitDisplay: 'lts/100kms',
+                        capacity: 'lt',
+                        distance: 'km'
+                    },
+                    mpl: {
+                        unitDisplay: 'mil/l',
+                        capacity: 'lt',
+                        distance: 'mile'
+                    },
+                    lpm: {
+                        unitDisplay: 'l/mil',
+                        capacity: 'lt',
+                        distance: 'mile'
+                    },
+                    gUSkm: {
+                        unitDisplay: 'gal(US)/km',
+                        capacity: 'galUS',
+                        distance: 'km'
+                    },
+                    gUKkm: {
+                        unitDisplay: 'gal(UK)/km',
+                        capacity: 'galUK',
+                        distance: 'km'
                     },
                     mpgUS: {
-                        unitDisplay: 'mpg(US)'
+                        unitDisplay: 'mpg(US)',
+                        capacity: 'galUS',
+                        distance: 'mile'
                     },
                     mpgUK: {
-                        unitDisplay: 'mpg(UK)'
+                        unitDisplay: 'mpg(UK)',
+                        capacity: 'galUK',
+                        distance: 'mile'
                     },
                     kmgUS: {
-                        unitDisplay: 'kms/gal(US)'
+                        unitDisplay: 'kms/gal(US)',
+                        capacity: 'galUS',
+                        distance: 'km'
                     },
                     kmgUK: {
-                        unitDisplay: 'kms/gal(UK)'
+                        unitDisplay: 'kms/gal(UK)',
+                        capacity: 'galUK',
+                        distance: 'km'
                     }
                 }
             };
@@ -775,6 +800,7 @@ angular.module('utils', [])
 
                 // capacity - distance calculations
                 case 'lkm':
+                case 'lpm':
                 case 'gUSkm':
                 case 'gUKkm':
                     return capacity / distance;

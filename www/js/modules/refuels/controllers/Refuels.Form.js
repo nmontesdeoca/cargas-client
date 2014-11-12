@@ -6,14 +6,15 @@ angular.module('refuels')
     '$state',
     '$ionicModal',
     '$filter',
+    '$ionicViewService',
     'Refuel',
     'Car',
     'Fuel',
     'refuel',
     'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, $filter, Refuel, Car, Fuel, refuel,
-            Utils, carByDefault) {
+    function ($scope, $ionicPopup, $state, $ionicModal, $filter, $ionicViewService, Refuel, Car,
+        Fuel, refuel, Utils, carByDefault) {
 
         var getCars = function () {
                 var cars = Car.query();
@@ -49,37 +50,52 @@ angular.module('refuels')
         }
 
         $scope.create = function () {
-            var previousRefuel = $scope.refuel.getPreviousRefuel(),
+            var currentRefuelDate = Utils.formatDateToTime($scope.refuel.date),
+                previousRefuel = $scope.refuel.getPreviousRefuel(),
                 nextRefuel = $scope.refuel.getNextRefuel(),
                 message,
-                error = previousRefuel &&
-                    (previousRefuel.overallKilometers > $scope.refuel.overallKilometers) ||
-                    nextRefuel && (nextRefuel.overallKilometers < $scope.refuel.overallKilometers);
+                formatDate = function (date) {
+                    return $filter('date')(Utils.formatDateForInput(new Date(date)));
+                },
+                error =
+                    previousRefuel && (previousRefuel.date > currentRefuelDate) ||
+                    nextRefuel && (nextRefuel.date < currentRefuelDate);
 
             if (error) {
                 if (!previousRefuel) {
-                    message = $filter('translate')('SMALLER_THAN') + ' ' +
-                        nextRefuel.overallKilometers;
+                    message = $filter('translate')('BEFORE_THAN', {
+                        date: formatDate(nextRefuel.date)
+                    });
                 } else if (!nextRefuel) {
-                    message = $filter('translate')('GREATHER_THAN') + ' ' +
-                        previousRefuel.overallKilometers;
+                    message = $filter('translate')('LATER_THAN', {
+                        date: formatDate(previousRefuel.date)
+                    });
                 } else {
-                    message = $filter('translate')('BETWEEN') + ' ' +
-                        previousRefuel.overallKilometers +
-                        ' ' + $filter('translate')('AND') + ' ' +
-                        nextRefuel.overallKilometers;
+                    message = $filter('translate')('BETWEEN', {
+                        before: formatDate(previousRefuel.date),
+                        after: formatDate(nextRefuel.date)
+                    });
                 }
                 $ionicPopup.alert({
                     title: $filter('translate')('ERROR'),
-                    template: $filter('translate')('REFUEL_DOESNT_MAKE_SENSE') + '<br />' +
-                        $filter('translate')('IN_THIS_CASE_THE_ODOMETER') + ' ' + message
+                    template: $filter('translate')('REFUEL_DOESNT_MAKE_SENSE') +
+                        '<br />' +
+                        $filter('translate')('IN_THIS_CASE_THE_DATE', {
+                            message: message
+                        })
                 });
             } else {
                 // date saved as timestamp
-                $scope.refuel.date = Utils.formatDateToTime($scope.refuel.date);
+                $scope.refuel.date = currentRefuelDate;
                 $scope.refuel.car = $scope.refuel.car._id.toString();
                 $scope.refuel.$save(function () {
-                    $state.go('app.refuelList');
+                    var backView = $ionicViewService.getBackView();
+
+                    if (backView) {
+                        backView.go();
+                    } else {
+                        $state.go('app.refuelList');
+                    }
                 });
             }
         };

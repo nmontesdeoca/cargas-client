@@ -20,6 +20,7 @@ angular.module('settings')
     	};
 
         model.prototype.setPreferredLanguage = function (language) {
+            this.locale = language;
             this.language = language.value.split('-').shift();
             if (!_.contains(VALID_LANGUAGES, this.language)) {
                 this.language = 'en';
