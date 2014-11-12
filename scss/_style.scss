@@ -74,17 +74,21 @@
     }    
 }
 
-.overview-page {
-    .button-balanced {
-        background: #3EA50A;
-        border: 1px solid #1F4909;
-        border-radius: 4px;
-        box-shadow: 0px 0px 4px rgba(255,255,255,.7) inset;
-        font-size: 19px;
-        text-shadow: 1px 1px 1px #555;
-        text-transform: uppercase;
-    }
+.big-action-button {
+    @extend .button;
+    @extend .icon-left;
+    @extend .button-balanced;
+    @extend .button-block;
+    background: #3EA50A;
+    border: 1px solid #1F4909;
+    border-radius: 4px;
+    box-shadow: 0px 0px 4px rgba(255,255,255,.7) inset;
+    font-size: 19px;
+    text-shadow: 1px 1px 1px #555;
+    text-transform: uppercase;
+}
 
+.overview-page {
     h3 {
         text-shadow: 1px 1px 1px rgba(0,0,0,.7);
         color: #fff;

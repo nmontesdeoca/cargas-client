@@ -2,10 +2,35 @@ angular.module('intro')
 
 .controller('Intro', [
 	'$scope',
-	'$ionicSlideBoxDelegate',
-	'$state',
-	function($scope, $ionicSlideBoxDelegate, $state) {
+    'cars',
+    'refuels',
+    'Refuel',
+    'Car',
+    'Utils',
+    function ($scope, cars, refuels, Refuel, Car, Utils) {
+
+        $scope.hasRefuels = !!refuels.length;
+        $scope.hasCars = !!cars.length;
+        if ($scope.hasRefuels) {
+            var lastRefuel = refuels[0];
+
+            lastRefuel = _.extend(lastRefuel, {
+                car: Car.get(lastRefuel.car)
+            });
+
+        	_.extend($scope, {
+                cars: cars,
+                refuels: refuels,
+                lastRefuel: lastRefuel,
+                totals: {
+                    totalSpent: Refuel.getTotalSpent(),
+                    totalCapacity: Refuel.getTotalCapacity(),
+                    totalDistance: Refuel.getTotalKilometers()
+                }
+            });
+        }
+
 		$scope.slideChanged = function() {
-			$state.transitionTo('intro.initialCarForm');
+			// $state.transitionTo('intro.initialCarForm');
 		};
 }]);

@@ -12,18 +12,13 @@
     }
 }
 ion-slide {
-    overflow: hidden
+    overflow: hidden;
 }
 .slider-pager .slider-pager-page {
     color: #fff;
 }
-#intro-page {
+.intro-main-slide {
     .main-title {
-        
-    }
-}
-.initial-slide {
-    h3 {
         color: #fff;
         font-size: 20px;
         height: 74px;
@@ -70,8 +65,41 @@ ion-slide {
 .intro-text {
     line-height: 1.6;
     p {
-        color: #000;
+        color: #fff;
+        font-size: 19px;
+        text-shadow: 1px 1px 0 rgba(0,0,0,.35);
+    }
+    .paragraph-1 {
+        margin: 14px 0;
+    }
+    .small-paragraph {
         font-size: 16px;
-        text-shadow: 1px 1px 0 rgba(0,0,0,.25);
+        a {
+            color: rgb(26, 107, 199);
+            font-weight: bold;
+            text-shadow: none;
+        }
+    }
+    img {
+        border: 1px solid #7C7C7C;
+        border-radius: 3px;
+        box-shadow: 0 0 27px rgba(50, 50, 50, 0.4);
+        margin: 0 auto;
+        max-width: 100%;
     }
 }
+.intro-slide-4 {
+    .main-title {
+        left: 20px;
+        right: 20px;
+    }
+}
+// .intro-slide-2 {
+//     .paragraph-1 {
+//         margin-top: 105px;
+//         color: #0B4074;
+//     }
+//     .paragraph-2 {
+//         margin-top: 20px;
+//     }
+// }
