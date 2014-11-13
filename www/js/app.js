@@ -10,7 +10,8 @@ angular.module('starter', [
     'fuels',
     'stats',
     'settings',
-    'utils'
+    'utils',
+    'intro'
 ])
 
 .run([
