@@ -10347,13 +10347,23 @@ Copyright (c) 2013 Daniel Eden
   animation-name: zoomOutUp; }
 
 @-webkit-keyframes imgAnimate {
-  0%, 100% {
-    transform: translate(-210px, 0);
-    /*transform: scale(1);*/ }
+  0% {
+    -ms-transform: translate(-210px, 0);
+    -moz-transform: translate(-210px, 0);
+    -webkit-transform: translate(-210px, 0);
+    transform: translate(-210px, 0); }
 
   50% {
-    transform: translate(-300px, 0);
-    /*transform: scale(1.15);*/ } }
+    -ms-transform: translate(-300px, 0);
+    -moz-transform: translate(-300px, 0);
+    -webkit-transform: translate(-300px, 0);
+    transform: translate(-300px, 0); }
+
+  100% {
+    -ms-transform: translate(-210px, 0);
+    -moz-transform: translate(-210px, 0);
+    -webkit-transform: translate(-210px, 0);
+    transform: translate(-210px, 0); } }
 
 * {
   font-family: 'Montserrat', sans-serif !important; }

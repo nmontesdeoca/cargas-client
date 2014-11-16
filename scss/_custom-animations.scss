@@ -1,10 +1,20 @@
 @-webkit-keyframes imgAnimate {
-  0%, 100% {
+  0% {
+    -ms-transform: translate(-210px, 0);
+    -moz-transform: translate(-210px, 0);
+    -webkit-transform: translate(-210px, 0);
     transform: translate(-210px, 0);
-    /*transform: scale(1);*/
   }
   50% {
+    -ms-transform: translate(-300px, 0);
+    -moz-transform: translate(-300px, 0);
+    -webkit-transform: translate(-300px, 0);
     transform: translate(-300px, 0);
-    /*transform: scale(1.15);*/
+  }
+  100% {
+    -ms-transform: translate(-210px, 0);
+    -moz-transform: translate(-210px, 0);
+    -webkit-transform: translate(-210px, 0);
+    transform: translate(-210px, 0);
   }
 }
