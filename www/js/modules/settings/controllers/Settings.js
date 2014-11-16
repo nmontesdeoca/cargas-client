@@ -23,8 +23,8 @@ angular.module('settings')
             state: 'app.settingsAbout'
         }, {
             name: $filter('translate')('HELP'),
-            link: '#/settings/help',
-            state: 'app.settingsHelp'
+            link: '#/intro',
+            state: 'intro'
         }];
     }
 ]);

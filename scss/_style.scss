@@ -42,7 +42,7 @@
 
 .item-photo {
     display: block;
- 
+
     img {
         max-width: 100%;
     }
@@ -62,7 +62,7 @@
     /*transition: background 1s ease;*/
 }
 .random-background {
-    background-image: url(../img/backgrounds/night1.jpg);
+    background-image: url(../img/backgrounds/night/1.jpg);
 }
 .menu-content {
     .bar.bar-header {
@@ -71,7 +71,7 @@
         * {
             text-shadow: 1px 1px 0px rgba(0,0,0,0.6);
         }
-    }    
+    }
 }
 
 .big-action-button {
@@ -99,12 +99,12 @@
     }
     .card {
         background: none;
-    }    
+    }
 }
 
 .item {
     background: rgba(255,255,255,0.9);
-    
+
     .item-content {
         background: none;
     }
@@ -143,7 +143,7 @@
 }
 .overview-totals {
     margin-top: 10px;
- 
+
     .col strong {
         color: #fff;
         font-size: 30px;
@@ -157,7 +157,7 @@
     }
     .stat-number {
         font-size: 22px;
-    }    
+    }
 }
 
 

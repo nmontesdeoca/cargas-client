@@ -1,7 +1,7 @@
 angular.module('settings')
 
-.factory('Setting', ['Model', '$translate', 'VALID_LANGUAGES',
-    function (Model, $translate, VALID_LANGUAGES) {
+.factory('Setting', ['Model', '$translate', '$state', 'VALID_LANGUAGES',
+    function (Model, $translate, $state, VALID_LANGUAGES) {
     	var model = Model('settings', true);
 
     	model.prototype.initialize = function () {
@@ -16,7 +16,9 @@ angular.module('settings')
             navigator.globalization &&
                 navigator.globalization.getPreferredLanguage(_.bind(this.setPreferredLanguage, this));
 
-            this.$save();
+            this.$save(function () {
+                $state.go('intro');
+            });
     	};
 
         model.prototype.setPreferredLanguage = function (language) {

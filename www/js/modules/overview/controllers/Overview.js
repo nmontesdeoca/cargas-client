@@ -7,7 +7,11 @@ angular.module('overview')
     'Refuel',
     'Car',
     'Utils',
-    function ($scope, cars, refuels, Refuel, Car, Utils) {
+    '$ionicViewService',
+    function ($scope, cars, refuels, Refuel, Car, Utils, $ionicViewService) {
+
+        $ionicViewService.clearHistory();
+
         //add the car object to the last refuel
         $scope.hasRefuels = !!refuels.length;
         $scope.hasCars = !!cars.length;
