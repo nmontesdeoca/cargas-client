@@ -1,0 +1,21 @@
+<ion-view title="{{'ABOUT' | translate}}">
+    <ion-content class="has-header">
+        <div class="padding">
+            <form novalidate>
+                <label>
+                    <span>Para exportar</span>
+                    <textarea ng-model="data.exportdata" name="export" rows="8" columns="20" readonly></textarea>
+                </label>
+
+                <label>
+                    <span>Para importar</span>
+                    <textarea ng-model="data.importdata" name="import" rows="8" columns="20"></textarea>
+                </label>
+
+                <label>
+                    <button type="button" ng-click="import()" name="button">Importar</button>
+                </label>
+            </form>
+        </div>
+    </ion-content>
+</ion-view>
