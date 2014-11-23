@@ -29,6 +29,12 @@ angular.module('starter', [
             var isAndroid = /android/i.test(navigator.userAgent),
                 settings = Setting.query();
 
+            if (window.analytics) {
+                window.analytics.startTrackerWithId('UA-16179838-10');
+            } else {
+                console.log('Google Analytics Unavailable');
+            }
+
             if (!isAndroid && window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 StatusBar.hide();
