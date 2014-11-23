@@ -6,6 +6,10 @@ angular.module('profile')
     'profile',
     function ($scope, $ionicPopup, profile) {
 
+        if (window.analytics) {
+            window.analytics.trackView('Profile');
+        }
+
         $scope.profile = profile;
 
         $scope.save = function () {

@@ -9,6 +9,10 @@ angular.module('fuels')
     'fuel',
     function ($scope, $ionicViewService, $ionicPopup, $filter, $state, fuel) {
 
+        if (window.analytics) {
+            window.analytics.trackView('Fuels.Form');
+        }
+
         $scope.fuel = fuel;
 
         $scope.createFuel = function () {

@@ -6,6 +6,10 @@ angular.module('settings')
     'LocalStorage',
     function ($scope, $filter, LocalStorage) {
 
+        if (window.analytics) {
+            window.analytics.trackView('Settings');
+        }
+
         $scope.data = {
             exportdata: JSON.stringify({
                 cars: LocalStorage.get('cars'),
