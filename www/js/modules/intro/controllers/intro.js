@@ -8,11 +8,6 @@ angular.module('intro')
     'Car',
     'Utils',
     function ($scope, cars, refuels, Refuel, Car, Utils) {
-
-		if (window.analytics) {
-			window.analytics.trackView('Intro');
-		}
-
         $scope.hasRefuels = !!refuels.length;
         $scope.hasCars = !!cars.length;
         if ($scope.hasRefuels) {

@@ -51,10 +51,6 @@ angular.module('settings')
                 $scope.units.consumption = consumptionUnits;
             };
 
-        if (window.analytics) {
-            window.analytics.trackView('Settings');
-        }
-
         $scope.setting = setting;
         filterConsumptionUnits();
 
