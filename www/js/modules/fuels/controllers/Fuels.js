@@ -4,10 +4,6 @@ angular.module('fuels')
     '$scope',
     'fuels',
     function ($scope, fuels) {
-        if (window.analytics) {
-            window.analytics.trackView('Fuels');
-        }
-
         $scope.fuels = fuels;
     }
 ]);

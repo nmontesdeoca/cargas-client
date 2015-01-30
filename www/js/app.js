@@ -32,6 +32,9 @@ angular.module('starter', [
 
             if (window.analytics) {
                 window.analytics.startTrackerWithId('UA-16179838-10');
+                $rootScope.$on('$stateChangeSuccess', function (event, toState) {
+                    window.analytics.trackView(toState);
+                });
             } else {
                 console.log('Google Analytics Unavailable');
             }

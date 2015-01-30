@@ -10,10 +10,6 @@ angular.module('stats')
     function ($scope, $state, Car, data, cars, defaultCar) {
         var carKeys = Object.keys(cars);
 
-        if (window.analytics) {
-            window.analytics.trackView('Stats');
-        }
-
         $scope.cars = cars;
 
         $scope.filter = {

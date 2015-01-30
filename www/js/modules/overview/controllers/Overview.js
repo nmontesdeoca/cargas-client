@@ -9,11 +9,6 @@ angular.module('overview')
     'Utils',
     '$ionicViewService',
     function ($scope, cars, refuels, Refuel, Car, Utils, $ionicViewService) {
-
-        if (window.analytics) {
-            window.analytics.trackView('Overview');
-        }
-
         $ionicViewService.clearHistory();
 
         //add the car object to the last refuel

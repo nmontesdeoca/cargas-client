@@ -12,10 +12,6 @@ angular.module('refuels')
     function ($scope, Refuel, Car, refuels, cars, defaultCar, totalSpent, totalCapacity) {
         var carKeys = Object.keys(cars);
 
-        if (window.analytics) {
-            window.analytics.trackView('Refuels');
-        }
-
         $scope.cars = cars;
 
         $scope.filter = {
