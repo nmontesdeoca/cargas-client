@@ -22,9 +22,11 @@ angular.module('settings')
                                 Refuel.changeUnits(unit, newValue, oldValue);
                                 filterConsumptionUnits();
                                 // consumption unit selected is not in consumption units displayed
-                                if (!($scope.setting.selectedUnits.consumption in $scope.units.consumption)) {
+                                if (!($scope.setting.selectedUnits.consumption in
+                                    $scope.units.consumption)) {
                                     triggerWatch = false;
-                                    $scope.setting.selectedUnits.consumption = Object.keys($scope.units.consumption)[0];
+                                    $scope.setting.selectedUnits.consumption =
+                                        Object.keys($scope.units.consumption)[0];
                                 }
                             }
                             $scope.setting.$save();
@@ -44,7 +46,7 @@ angular.module('settings')
                 $scope.units = _.extend({}, units);
                 _.each($scope.units.consumption, function (value, key) {
                     if (value.capacity === $scope.setting.selectedUnits.capacity &&
-                            value.distance === $scope.setting.selectedUnits.distance) {
+                        value.distance === $scope.setting.selectedUnits.distance) {
                         consumptionUnits[key] = value;
                     }
                 });
@@ -66,7 +68,8 @@ angular.module('settings')
             changeUnit(newDistance, oldDistance, 'distance');
         });
 
-        $scope.$watch('setting.selectedUnits.consumption', function (newConsumption, oldConsumption) {
+        $scope.$watch('setting.selectedUnits.consumption', function (newConsumption,
+            oldConsumption) {
             changeUnit(newConsumption, oldConsumption, 'consumption');
         });
     }

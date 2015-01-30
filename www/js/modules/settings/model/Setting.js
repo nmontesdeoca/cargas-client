@@ -2,9 +2,9 @@ angular.module('settings')
 
 .factory('Setting', ['Model', '$translate', '$state', 'VALID_LANGUAGES',
     function (Model, $translate, $state, VALID_LANGUAGES) {
-    	var model = Model('settings', true);
+        var model = Model('settings', true);
 
-    	model.prototype.initialize = function () {
+        model.prototype.initialize = function () {
             this.set({
                 selectedUnits: {
                     capacity: 'lt',
@@ -14,12 +14,13 @@ angular.module('settings')
             });
 
             navigator.globalization &&
-                navigator.globalization.getPreferredLanguage(_.bind(this.setPreferredLanguage, this));
+                navigator.globalization.getPreferredLanguage(_.bind(this.setPreferredLanguage,
+                    this));
 
             this.$save(function () {
                 $state.go('intro');
             });
-    	};
+        };
 
         model.prototype.setPreferredLanguage = function (language) {
             this.locale = language;

@@ -5,7 +5,7 @@
 @import "animate";
 
 // Custom animations
-@import "custom-animations";
+// @import "custom-animations";
 
 * {
     font-family: 'Montserrat', sans-serif!important;
@@ -131,6 +131,10 @@
         border-radius: 4px;
         box-shadow: 0px 0px 7px rgba(255,255,255,.3) inset;
         text-transform: uppercase;
+
+        &.delete {
+            background: #CC2311;
+        }
     }
 }
 
@@ -200,6 +204,12 @@ ion-nav-view,
 
 .checkbox-custom {
     padding: 6px 0 5px 60px;
+}
+
+.modal-wrapper {
+    .button-wrapper {
+        margin: 0 9px 0 10px;
+    }
 }
 
 @import "intro-screen";

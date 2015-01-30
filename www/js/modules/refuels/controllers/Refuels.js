@@ -33,7 +33,8 @@ angular.module('refuels')
             var car;
 
             if (newFilter) {
-                $scope.refuels = _.sortBy(Refuel.getRefuelsByCarId(newFilter), 'date').reverse();
+                $scope.refuels = _.sortBy(Refuel.getRefuelsByCarId(newFilter),
+                    'date').reverse();
                 car = Car.get({
                     _id: Number(newFilter)
                 });

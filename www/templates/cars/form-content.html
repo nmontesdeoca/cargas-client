@@ -47,10 +47,12 @@
                 </div>
             </label>
         </div>
-        <button ng-click="createCar()" class="button button-block big-main-button"
-            ng-disabled="newCarForm.$invalid">{{(car._id ? 'SAVE' : 'CREATE') | translate}}</button>
-        <button ng-click="deleteCar(car)" class="button button-block big-main-button delete"
-            ng-disabled="newCarForm.$invalid" ng-show="car._id" translate="DELETE"></button>
+        <div class="button-wrapper">
+            <button ng-click="createCar()" class="button button-block big-main-button"
+                ng-disabled="newCarForm.$invalid">{{(car._id ? 'SAVE' : 'CREATE') | translate}}</button>
+            <button ng-click="deleteCar(car)" class="button button-block big-main-button delete"
+                ng-disabled="newCarForm.$invalid" ng-show="car._id" translate="DELETE"></button>
+        </div>
         <button class="button button-clear button-dark" ng-click="newMakeModelModal.show()"
             translate="SUGGEST_NEW_CAR"></button>
     </div>

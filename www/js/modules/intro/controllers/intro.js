@@ -1,7 +1,7 @@
 angular.module('intro')
 
 .controller('Intro', [
-	'$scope',
+    '$scope',
     'cars',
     'refuels',
     'Refuel',
@@ -9,9 +9,9 @@ angular.module('intro')
     'Utils',
     function ($scope, cars, refuels, Refuel, Car, Utils) {
 
-		if (window.analytics) {
-			window.analytics.trackView('Intro');
-		}
+        if (window.analytics) {
+            window.analytics.trackView('Intro');
+        }
 
         $scope.hasRefuels = !!refuels.length;
         $scope.hasCars = !!cars.length;
@@ -22,7 +22,7 @@ angular.module('intro')
                 car: Car.get(lastRefuel.car)
             });
 
-        	_.extend($scope, {
+            _.extend($scope, {
                 cars: cars,
                 refuels: refuels,
                 lastRefuel: lastRefuel,
@@ -34,7 +34,8 @@ angular.module('intro')
             });
         }
 
-		$scope.slideChanged = function() {
-			// $state.transitionTo('intro.initialCarForm');
-		};
-}]);
+        $scope.slideChanged = function () {
+            // $state.transitionTo('intro.initialCarForm');
+        };
+    }
+]);

@@ -13,7 +13,7 @@ angular.module('refuels')
          * return all the refuels grouped by car
          */
         RefuelModel.getRefuelsByCar = function () {
-             return _.groupBy(RefuelModel.getRefuelsSortByDate(), 'car');
+            return _.groupBy(RefuelModel.getRefuelsSortByDate(), 'car');
         };
 
         /**
@@ -145,7 +145,8 @@ angular.module('refuels')
                 totalCapacity = 0;
 
             _.each(refuelsByCar, function (carRefuels) {
-                var refuels = _.sortBy(carRefuels, 'date').reverse().slice(0, -1);
+                var refuels = _.sortBy(carRefuels, 'date').reverse().slice(0, -
+                    1);
 
                 totalCapacity = _.reduce(refuels, function (total, refuel) {
                     return total + refuel.capacity;
@@ -174,7 +175,8 @@ angular.module('refuels')
                 totalSpent = 0;
 
             _.each(refuelsByCar, function (carRefuels) {
-                var refuels = _.sortBy(carRefuels, 'date').reverse().slice(0, -1);
+                var refuels = _.sortBy(carRefuels, 'date').reverse().slice(0, -
+                    1);
 
                 totalSpent = _.reduce(refuels, function (total, refuel) {
                     return total + refuel.amount;
@@ -274,7 +276,8 @@ angular.module('refuels')
 
             _.each(refuelsByCar, function (carRefuels) {
                 if (carRefuels.length > 1) {
-                    distance += Utils.getAverageDistanceBetweenRefuels(carRefuels);
+                    distance += Utils.getAverageDistanceBetweenRefuels(
+                        carRefuels);
                     count++;
                 }
             });
@@ -358,7 +361,7 @@ angular.module('refuels')
                 refuel,
                 condition,
                 carId = typeof this.car === 'object' ?
-                    this.car._id.toString() : this.car,
+                this.car._id.toString() : this.car,
                 refuels = _.sortBy(
                     RefuelModel.getRefuelsByCarId(carId),
                     'date'
@@ -398,7 +401,7 @@ angular.module('refuels')
                 refuel,
                 condition,
                 carId = typeof this.car === 'object' ?
-                    this.car._id.toString() : this.car,
+                this.car._id.toString() : this.car,
                 refuels = _.sortBy(
                     RefuelModel.getRefuelsByCarId(carId),
                     'date'
@@ -418,18 +421,24 @@ angular.module('refuels')
             if (param.unit === 'capacity') {
                 // capacity
                 if (param.newUnit.ratio === 1 || param.oldUnit.ratio !== 1) {
-                    this.capacity = Number((this.capacity * param.oldUnit.ratio / param.newUnit.ratio).toFixed(3));
+                    this.capacity = Number((this.capacity * param.oldUnit.ratio / param
+                        .newUnit.ratio).toFixed(3));
                 } else if (param.oldUnit.ratio === 1) {
-                    this.capacity = Number((this.capacity / param.newUnit.ratio).toFixed(3));
+                    this.capacity = Number((this.capacity / param.newUnit.ratio).toFixed(
+                        3));
                 }
             } else if (param.unit === 'distance') {
                 // distance and overallKilometers
                 if (param.newUnit.ratio === 1 || param.oldUnit.ratio !== 1) {
-                    this.distance = Number((this.distance * param.oldUnit.ratio / param.newUnit.ratio).toFixed(3));
-                    this.overallKilometers = Number((this.overallKilometers * param.oldUnit.ratio / param.newUnit.ratio).toFixed(3));
+                    this.distance = Number((this.distance * param.oldUnit.ratio / param
+                        .newUnit.ratio).toFixed(3));
+                    this.overallKilometers = Number((this.overallKilometers * param.oldUnit
+                        .ratio / param.newUnit.ratio).toFixed(3));
                 } else if (param.oldUnit.ratio === 1) {
-                    this.distance = Number((this.distance / param.newUnit.ratio).toFixed(3));
-                    this.overallKilometers = Number((this.overallKilometers / param.newUnit.ratio).toFixed(3));
+                    this.distance = Number((this.distance / param.newUnit.ratio).toFixed(
+                        3));
+                    this.overallKilometers = Number((this.overallKilometers / param.newUnit
+                        .ratio).toFixed(3));
                 }
             }
             this.$save();

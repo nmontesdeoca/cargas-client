@@ -21,7 +21,8 @@ angular.module('starter', [
     '$ionicSideMenuDelegate',
     'tmhDynamicLocale',
     'Setting',
-    function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate, tmhDynamicLocale,
+    function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate,
+        tmhDynamicLocale,
         Setting) {
 
         $ionicPlatform.ready(function () {
@@ -62,7 +63,8 @@ angular.module('starter', [
             $rootScope._ = _;
 
             // if the social sharing plugin is not available the share button is hiding
-            $rootScope.socialSharingAvailable = !!(window.plugins && window.plugins.socialsharing);
+            $rootScope.socialSharingAvailable = !!(window.plugins && window.plugins
+                .socialsharing);
         });
     }
 ])
@@ -72,7 +74,8 @@ angular.module('starter', [
     '$urlRouterProvider',
     '$translateProvider',
     'tmhDynamicLocaleProvider',
-    function ($stateProvider, $urlRouterProvider, $translateProvider, tmhDynamicLocaleProvider) {
+    function ($stateProvider, $urlRouterProvider, $translateProvider,
+        tmhDynamicLocaleProvider) {
         $stateProvider.state('app', {
             abstract: true,
             templateUrl: 'templates/menu.html',
@@ -87,7 +90,8 @@ angular.module('starter', [
         });
         $translateProvider.preferredLanguage('en');
 
-        tmhDynamicLocaleProvider.localeLocationPattern('lib/angular-i18n/angular-locale_{{locale}}.js');
+        tmhDynamicLocaleProvider.localeLocationPattern(
+            'lib/angular-i18n/angular-locale_{{locale}}.js');
     }
 ])
 

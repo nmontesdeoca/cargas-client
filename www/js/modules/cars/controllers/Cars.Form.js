@@ -20,7 +20,8 @@ angular.module('cars')
     'Car',
     'Fuel',
     'Camera',
-    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, $ionicActionSheet, $state,
+    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, $ionicActionSheet,
+        $state,
         $filter, car, fuels, makes, Utils, Car, Fuel, Camera) {
 
         var getFuels = function () {
@@ -60,7 +61,7 @@ angular.module('cars')
 
         $scope.$on('modal.hidden', function () {
             if (arguments[1].modalEl.id === 'new-fuel-modal' && $scope.car.fuel &&
-                    $scope.car.fuel.value === 'newFuel') {
+                $scope.car.fuel.value === 'newFuel') {
                 $scope.car.fuel = null;
             }
         });

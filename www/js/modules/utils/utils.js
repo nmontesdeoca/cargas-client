@@ -11,8 +11,8 @@ angular.module('utils', [])
     YEARS: 8
 })
 
-.directive('randomBackground', [/*'Flickr', */'Utils',
-    function (/*Flickr, */Utils) {
+.directive('randomBackground', [ /*'Flickr', */ 'Utils',
+    function ( /*Flickr, */ Utils) {
         return {
             restrict: 'A',
             link: function ($scope, $element, $attrs) {
@@ -58,7 +58,7 @@ angular.module('utils', [])
                              * to get the url fetched, so when we place the background
                              * the image loads instantly
                              */
-                             /*
+                /*
                             image.src = url;
                             image.onload = function () {
                                 $element.css('background-image', 'url(' + url + ')');
@@ -119,7 +119,9 @@ angular.module('utils', [])
             agoText = $filter('translate')('YESTERDAY');
         } else {
             timeAgo = Math.round(timeAgo) + ' ';
-            agoText = $filter('translate')('AGO', { data: timeAgo + unit });
+            agoText = $filter('translate')('AGO', {
+                data: timeAgo + unit
+            });
         }
         // else if (!(value % 7)) {
         //     unit = value == 7 ? 'week' : 'weeks';
@@ -798,7 +800,7 @@ angular.module('utils', [])
                 case 'kmgUK':
                     return distance / capacity;
 
-                // capacity - distance calculations
+                    // capacity - distance calculations
                 case 'lkm':
                 case 'lpm':
                 case 'gUSkm':
@@ -825,7 +827,7 @@ angular.module('utils', [])
 
         isNight: function () {
             var hours = new Date().getHours();
-            return  hours < 7 || hours > 19;
+            return hours < 7 || hours > 19;
         },
 
         convertTime: function (milliseconds, timeUnit) {
@@ -930,12 +932,15 @@ angular.module('utils', [])
                         self.isOnline(isOnlineCallback, isOfflineCallback);
                     } else {
                         self.attempt = 1;
-                        isOnline = networkState !== 0 && networkState !== 'unknown' &&
+                        isOnline = networkState !== 0 && networkState !==
+                            'unknown' &&
                             networkState !== 'none';
                         if (isOnline) {
-                            typeof isOnlineCallback === 'function' && isOnlineCallback();
+                            typeof isOnlineCallback === 'function' &&
+                                isOnlineCallback();
                         } else {
-                            typeof isOfflineCallback === 'function' && isOfflineCallback();
+                            typeof isOfflineCallback === 'function' &&
+                                isOfflineCallback();
                         }
                     }
                 }, 500);

@@ -26,7 +26,7 @@ angular.module('overview')
                 car: Car.get(lastRefuel.car)
             });
 
-        	_.extend($scope, {
+            _.extend($scope, {
                 cars: cars,
                 refuels: refuels,
                 lastRefuel: lastRefuel,

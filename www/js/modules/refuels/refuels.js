@@ -4,7 +4,7 @@ angular.module('refuels', [])
 
     $stateProvider
 
-    .state('app.refuelList', {
+        .state('app.refuelList', {
         url: '/refuels',
         resolve: {
             refuels: ['Refuel', function (Refuel) {

@@ -13,7 +13,8 @@ angular.module('refuels')
     'refuel',
     'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, $filter, $ionicViewService, Refuel, Car,
+    function ($scope, $ionicPopup, $state, $ionicModal, $filter, $ionicViewService, Refuel,
+        Car,
         Fuel, refuel, Utils, carByDefault) {
 
         var getCars = function () {
@@ -46,7 +47,9 @@ angular.module('refuels')
          * the cars array
          */
         if ($scope.refuel.car) {
-            $scope.refuel.car = _.findWhere($scope.cars, { _id: Number($scope.refuel.car) });
+            $scope.refuel.car = _.findWhere($scope.cars, {
+                _id: Number($scope.refuel.car)
+            });
         }
 
         $scope.create = function () {
@@ -58,8 +61,8 @@ angular.module('refuels')
                     return $filter('date')(Utils.formatDateForInput(new Date(date)));
                 },
                 error =
-                    previousRefuel && (previousRefuel.date > currentRefuelDate) ||
-                    nextRefuel && (nextRefuel.date < currentRefuelDate);
+                previousRefuel && (previousRefuel.date > currentRefuelDate) ||
+                nextRefuel && (nextRefuel.date < currentRefuelDate);
 
             if (error) {
                 if (!previousRefuel) {
@@ -202,10 +205,11 @@ angular.module('refuels')
 
         $scope.$on('modal.hidden', function () {
             if (arguments[1].modalEl.id === 'new-fuel-modal' && $scope.refuel.fuel &&
-                    $scope.refuel.fuel.value === 'newFuel') {
+                $scope.refuel.fuel.value === 'newFuel') {
                 $scope.refuel.fuel = null;
-            } else if (arguments[1].modalEl.id === 'new-car-modal' && $scope.refuel.car &&
-                    $scope.refuel.car.value === 'newCar') {
+            } else if (arguments[1].modalEl.id === 'new-car-modal' && $scope.refuel
+                .car &&
+                $scope.refuel.car.value === 'newCar') {
                 $scope.refuel.car = null;
             }
         });
@@ -247,7 +251,8 @@ angular.module('refuels')
                                 previousRefuelNoPartial,
                                 $scope.refuel
                             );
-                            $scope.refuel.consumption = Utils.calculateConsumption(distanceForConsumption,
+                            $scope.refuel.consumption = Utils.calculateConsumption(
+                                distanceForConsumption,
                                 capacityForConsumption);
                         }
                     }
@@ -280,13 +285,16 @@ angular.module('refuels')
                         return Number(number.toFixed(2));
                     };
 
-                    if (newAmount && newFuelPrice && (newAmount !== oldAmount || newFuelPrice !== oldFuelPrice)) {
+                    if (newAmount && newFuelPrice && (newAmount !== oldAmount ||
+                        newFuelPrice !== oldFuelPrice)) {
                         $scope.refuel.capacity = toNumber(newAmount / newFuelPrice);
                         $scope.autocalculated = true;
-                    } else if (newCapacity && newFuelPrice && (newCapacity !== oldCapacity || newFuelPrice !== oldFuelPrice)) {
+                    } else if (newCapacity && newFuelPrice && (newCapacity !==
+                        oldCapacity || newFuelPrice !== oldFuelPrice)) {
                         $scope.refuel.amount = toNumber(newCapacity * newFuelPrice);
                         $scope.autocalculated = true;
-                    } else if (newAmount && newCapacity && (newAmount !== oldAmount || newCapacity !== oldCapacity)) {
+                    } else if (newAmount && newCapacity && (newAmount !== oldAmount ||
+                        newCapacity !== oldCapacity)) {
                         $scope.refuel.fuelPrice = toNumber(newAmount / newCapacity);
                         $scope.autocalculated = true;
                     }
