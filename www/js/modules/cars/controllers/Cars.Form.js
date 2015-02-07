@@ -8,7 +8,7 @@ angular.module('cars')
 .controller('Cars.Form', [
     '$scope',
     '$ionicPopup',
-    '$ionicViewService',
+    '$ionicHistory',
     '$ionicModal',
     '$ionicActionSheet',
     '$state',
@@ -20,7 +20,7 @@ angular.module('cars')
     'Car',
     'Fuel',
     'Camera',
-    function ($scope, $ionicPopup, $ionicViewService, $ionicModal, $ionicActionSheet,
+    function ($scope, $ionicPopup, $ionicHistory, $ionicModal, $ionicActionSheet,
         $state,
         $filter, car, fuels, makes, Utils, Car, Fuel, Camera) {
 
@@ -47,7 +47,7 @@ angular.module('cars')
             // this is to ensure that always there is only one car by default
             Utils.unsetDefaultCar(Car, $scope.car);
             $scope.car.$save(function () {
-                var backView = $ionicViewService.getBackView();
+                var backView = $ionicHistory.backView();
                 backView && backView.go();
             });
         };

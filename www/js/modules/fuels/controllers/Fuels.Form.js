@@ -2,17 +2,17 @@ angular.module('fuels')
 
 .controller('Fuels.Form', [
     '$scope',
-    '$ionicViewService',
+    '$ionicHistory',
     '$ionicPopup',
     '$filter',
     '$state',
     'fuel',
-    function ($scope, $ionicViewService, $ionicPopup, $filter, $state, fuel) {
+    function ($scope, $ionicHistory, $ionicPopup, $filter, $state, fuel) {
         $scope.fuel = fuel;
 
         $scope.createFuel = function () {
             $scope.fuel.$save(function () {
-                var backView = $ionicViewService.getBackView();
+                var backView = $ionicHistory.backView();
                 backView && backView.go();
             });
         };

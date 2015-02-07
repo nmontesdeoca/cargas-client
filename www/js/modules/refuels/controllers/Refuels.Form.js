@@ -6,14 +6,14 @@ angular.module('refuels')
     '$state',
     '$ionicModal',
     '$filter',
-    '$ionicViewService',
+    '$ionicHistory',
     'Refuel',
     'Car',
     'Fuel',
     'refuel',
     'Utils',
     'carByDefault',
-    function ($scope, $ionicPopup, $state, $ionicModal, $filter, $ionicViewService, Refuel,
+    function ($scope, $ionicPopup, $state, $ionicModal, $filter, $ionicHistory, Refuel,
         Car,
         Fuel, refuel, Utils, carByDefault) {
 
@@ -35,6 +35,9 @@ angular.module('refuels')
                 });
                 return sortedFuels;
             };
+
+        // TODO: please, change this. It is a fix for new Angular 1.3 input dates
+        refuel.date = new Date(refuel.date);
 
         $scope.refuel = refuel;
         $scope.fuels = getFuels();
@@ -92,7 +95,7 @@ angular.module('refuels')
                 $scope.refuel.date = currentRefuelDate;
                 $scope.refuel.car = $scope.refuel.car._id.toString();
                 $scope.refuel.$save(function () {
-                    var backView = $ionicViewService.getBackView();
+                    var backView = $ionicHistory.backView();
 
                     if (backView) {
                         backView.go();
