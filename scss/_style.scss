@@ -212,4 +212,9 @@ ion-nav-view,
     }
 }
 
+[nav-view-transition=ios][nav-view-direction=forward],
+[nav-view-transition=ios][nav-view-direction=back] {
+    background: transparent;
+}
+
 @import "intro-screen";
