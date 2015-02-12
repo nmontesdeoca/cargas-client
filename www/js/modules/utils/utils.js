@@ -162,16 +162,17 @@ angular.module('utils', [])
         },
 
         formatDateToTime: function (formattedDate) {
-            var splittedDate = formattedDate.split('-'),
-                year = parseInt(splittedDate[0], 10),
-                month = parseInt(splittedDate[1], 10) - 1,
-                day = parseInt(splittedDate[2], 10),
-                date = new Date();
-            date.setYear(year);
-            date.setMonth(month);
-            date.setDate(day);
-            date.setHours(0);
-            return date.getTime();
+            return formattedDate.getTime();
+            // var splittedDate = formattedDate.split('-'),
+            //     year = parseInt(splittedDate[0], 10),
+            //     month = parseInt(splittedDate[1], 10) - 1,
+            //     day = parseInt(splittedDate[2], 10),
+            //     date = new Date();
+            // date.setYear(year);
+            // date.setMonth(month);
+            // date.setDate(day);
+            // date.setHours(0);
+            // return date.getTime();
         },
 
         getAverageDataBetweenRefuels: function (refuels, property) {

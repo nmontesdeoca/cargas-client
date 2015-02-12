@@ -57,6 +57,7 @@ angular.module('refuels')
         }
 
         $scope.create = function () {
+            debugger;
             var currentRefuelDate = Utils.formatDateToTime($scope.refuel.date),
                 previousRefuel = $scope.refuel.getPreviousRefuel(),
                 nextRefuel = $scope.refuel.getNextRefuel(),
