@@ -57,7 +57,6 @@ angular.module('refuels')
         }
 
         $scope.create = function () {
-            debugger;
             var currentRefuelDate = Utils.formatDateToTime($scope.refuel.date),
                 previousRefuel = $scope.refuel.getPreviousRefuel(),
                 nextRefuel = $scope.refuel.getNextRefuel(),
@@ -66,8 +65,8 @@ angular.module('refuels')
                     return $filter('date')(Utils.formatDateForInput(new Date(date)));
                 },
                 error =
-                previousRefuel && (previousRefuel.date > currentRefuelDate) ||
-                nextRefuel && (nextRefuel.date < currentRefuelDate);
+                    previousRefuel && (previousRefuel.date > currentRefuelDate) ||
+                    nextRefuel && (nextRefuel.date < currentRefuelDate);
 
             if (error) {
                 if (!previousRefuel) {
