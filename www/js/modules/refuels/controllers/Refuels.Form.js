@@ -38,6 +38,7 @@ angular.module('refuels')
 
         // TODO: please, change this. It is a fix for new Angular 1.3 input dates
         var dateArray = refuel.date.split('-');
+        dateArray[1] = Number(dateArray[1]) - 1;
         refuel.date = new Date(dateArray[0], dateArray[1], dateArray[2]);
 
         $scope.refuel = refuel;
