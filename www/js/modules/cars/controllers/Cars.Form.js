@@ -1,10 +1,5 @@
 angular.module('cars')
 
-.config(['$compileProvider', function ($compileProvider) {
-    $compileProvider.imgSrcSanitizationWhitelist(
-        /^\s*(https?|ftp|mailto|file|tel|content):/);
-}])
-
 .controller('Cars.Form', [
     '$scope',
     '$ionicPopup',

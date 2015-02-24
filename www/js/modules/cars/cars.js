@@ -1,11 +1,13 @@
 angular.module('cars', [])
 
-.config(['$stateProvider',
-    function ($stateProvider) {
+.config(['$stateProvider', '$compileProvider',
+    function ($stateProvider, $compileProvider) {
+
+        $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|content):/);
 
         $stateProvider
 
-            .state('app.carList', {
+        .state('app.carList', {
             url: '/cars',
             resolve: {
                 cars: ['Car',
