@@ -3,6 +3,23 @@ angular.module('cars', [])
 .config(['$stateProvider', '$compileProvider',
     function ($stateProvider, $compileProvider) {
 
+        var resolveMakes = ['Utils', function (Utils) {
+                return Utils.getMakes();
+            }],
+
+            resolveFuels = ['Fuel', function (Fuel) {
+                /**
+                 * I couldn't have the text translated here so I returned a function
+                 * that will receive the translated text from the controller when it is used
+                 */
+                return function (text) {
+                    return [{
+                        name: text,
+                        value: 'newFuel'
+                    }].concat(_.sortBy(Fuel.query(), 'name'));
+                };
+            }];
+
         $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|tel|content):/);
 
         $stateProvider
@@ -32,16 +49,8 @@ angular.module('cars', [])
                         return new Car();
                     }
                 ],
-                fuels: ['Fuel',
-                    function (Fuel) {
-                        return _.sortBy(Fuel.query(), 'name');
-                    }
-                ],
-                makes: ['Utils',
-                    function (Utils) {
-                        return Utils.getMakes();
-                    }
-                ]
+                fuels: resolveFuels,
+                makes: resolveMakes
             },
             views: {
                 menuContent: {
@@ -61,16 +70,8 @@ angular.module('cars', [])
                         });
                     }
                 ],
-                fuels: ['Fuel',
-                    function (Fuel) {
-                        return _.sortBy(Fuel.query(), 'name');
-                    }
-                ],
-                makes: ['Utils',
-                    function (Utils) {
-                        return Utils.getMakes();
-                    }
-                ]
+                fuels: resolveFuels,
+                makes: resolveMakes
             },
             views: {
                 menuContent: {
