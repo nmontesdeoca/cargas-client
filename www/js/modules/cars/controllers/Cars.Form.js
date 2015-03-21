@@ -16,12 +16,14 @@ angular.module('cars')
     'Fuel',
     'Camera',
     function ($scope, $ionicPopup, $ionicHistory, $ionicModal, $ionicActionSheet, $state, $filter,
-        car, fuels, makes, Utils, Car, Fuel, Camera) {
+        car, fuelsFunction, makes, Utils, Car, Fuel, Camera) {
 
-        // http://stackoverflow.com/questions/21714655/angular-js-angular-ui-router-reloading-current-state-refresh-data
+        var translate = $filter('translate');
 
-        fuels = fuels($filter('translate')('ADD_NEW_FUEL'));
-        
+        // http://stackoverflow.com/quevstions/21714655/angular-js-angular-ui-router-reloading-current-state-refresh-data
+
+        fuels = fuelsFunction(translate('ADD_NEW_FUEL'));
+
         $scope.car = car;
         $scope.fuels = fuels;
         $scope.makes = makes;
@@ -140,13 +142,13 @@ angular.module('cars')
         $scope.deleteCar = function (car) {
             if (car.getRefuelsCount()) {
                 $ionicPopup.alert({
-                    title: $filter('translate')('DELETE_CAR'),
-                    template: $filter('translate')('DELETE_REFUELS_MESSAGE')
+                    title: translate('DELETE_CAR'),
+                    template: translate('DELETE_REFUELS_MESSAGE')
                 });
             } else {
                 $ionicPopup.confirm({
-                    title: $filter('translate')('DELETE_CAR'),
-                    template: $filter('translate')('DELETE_CAR_QUESTION')
+                    title: translate('DELETE_CAR'),
+                    template: translate('DELETE_CAR_QUESTION')
                 }).then(function (yes) {
                     if (yes) {
                         car.$remove();
