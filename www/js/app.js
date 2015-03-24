@@ -22,8 +22,7 @@ angular.module('starter', [
     'tmhDynamicLocale',
     'Setting',
     function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate,
-        tmhDynamicLocale,
-        Setting) {
+        tmhDynamicLocale, Setting) {
 
         $ionicPlatform.ready(function () {
 
@@ -65,9 +64,9 @@ angular.module('starter', [
             // to make underscore available at any template
             $rootScope._ = _;
 
-            // if the social sharing plugin is not available the share button is hiding
-            $rootScope.socialSharingAvailable = !!(window.plugins && window.plugins
-                .socialsharing);
+            // if social sharing plugin is not available hide the share button
+            $rootScope.socialSharingAvailable = !!(window.plugins &&
+                window.plugins.socialsharing);
         });
     }
 ])
@@ -77,8 +76,10 @@ angular.module('starter', [
     '$urlRouterProvider',
     '$translateProvider',
     'tmhDynamicLocaleProvider',
+    '$ionicConfigProvider',
     function ($stateProvider, $urlRouterProvider, $translateProvider,
-        tmhDynamicLocaleProvider) {
+        tmhDynamicLocaleProvider, $ionicConfigProvider) {
+
         $stateProvider.state('app', {
             abstract: true,
             templateUrl: 'templates/menu.html',
@@ -91,10 +92,21 @@ angular.module('starter', [
             prefix: 'languages/',
             suffix: '.json'
         });
+
         $translateProvider.preferredLanguage('en');
 
         tmhDynamicLocaleProvider.localeLocationPattern(
             'lib/angular-i18n/angular-locale_{{locale}}.js');
+
+        // just for test in browser
+        $ionicConfigProvider.views.transition('android');
+        // do not cache views
+        $ionicConfigProvider.views.maxCache(0);
+        // forward cache
+        $ionicConfigProvider.views.forwardCache(true);
+        // prefetch all the templates until now
+        $ionicConfigProvider.templates.maxPrefetch(24);
+
     }
 ])
 
