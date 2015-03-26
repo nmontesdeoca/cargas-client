@@ -77,6 +77,7 @@ angular.module('utils', [])
     }
 ])
 
+/*
 .directive('fixTransparentIonItem', function () {
     return {
         restrict: 'A',
@@ -92,6 +93,7 @@ angular.module('utils', [])
         }
     };
 })
+*/
 
 .filter('unit', ['Setting', 'Utils', function (Setting, Utils) {
     return function (value, unit) {
@@ -1126,25 +1128,14 @@ angular.module('utils', [])
             return q.promise;
         }
     };
+}])
+
+.factory('FirebaseRef', ['$rootScope', 'FIREBASEURL', function ($rootScope, FIREBASEURL) {
+    $rootScope.FirebaseRef = $rootScope.FirebaseRef || new Firebase(FIREBASEURL);
+    return $rootScope.FirebaseRef;
+}])
+
+.factory('Auth', ['$rootScope', '$firebaseAuth', 'FirebaseRef', function ($rootScope, $firebaseAuth, FirebaseRef) {
+    $rootScope.Auth = $rootScope.Auth || $firebaseAuth(FirebaseRef);
+    return $rootScope.Auth;
 }]);
-
-// .factory('UnitsService', function() {
-
-//     var selectedUnits = {};
-
-//     var getUnits = function(typeOfUnit) {
-//         return units[typeOfUnit];
-//     };
-//     var setUnit = function(typeOfUnit, unit) {
-//         selectedUnits[typeOfUnit] = unit;
-//     };
-//     var getSelectedUnit = function(typeOfUnit) {
-//         return selectedUnits[typeofUnit];
-//     };
-
-//     return {
-//         getUnits: getUnits,
-//         setUnit: setUnit,
-//         getSelectedUnit: getSelectedUnit
-//     };
-// });

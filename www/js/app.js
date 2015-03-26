@@ -1,8 +1,9 @@
-angular.module('starter', [
+angular.module('cargas', [
     'ionic',
     'ngResource',
     'pascalprecht.translate',
     'tmh.dynamicLocale',
+    'firebase',
     'overview',
     'profile',
     'cars',
@@ -14,6 +15,8 @@ angular.module('starter', [
     'intro'
 ])
 
+.constant('FIREBASEURL', 'https://cargas-app.firebaseio.com/')
+
 .run([
     '$ionicPlatform',
     '$rootScope',
@@ -21,12 +24,13 @@ angular.module('starter', [
     '$ionicSideMenuDelegate',
     'tmhDynamicLocale',
     'Setting',
+    'Auth',
     function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate,
-        tmhDynamicLocale, Setting) {
+        tmhDynamicLocale, Setting, Auth) {
 
         $ionicPlatform.ready(function () {
 
-            var isAndroid = /android/i.test(navigator.userAgent),
+            var isAndroid = ionic.Platform.isAndroid(),
                 settings = Setting.query();
 
             if (window.analytics) {

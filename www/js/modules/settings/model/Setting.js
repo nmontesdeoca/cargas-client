@@ -13,9 +13,14 @@ angular.module('settings')
                 }
             });
 
-            navigator.globalization &&
+            if (navigator.globalization) {
                 navigator.globalization.getPreferredLanguage(_.bind(this.setPreferredLanguage,
                     this));
+            } else {
+                this.setPreferredLanguage({
+                    value: navigator.language
+                });
+            }
 
             this.$save(function () {
                 $state.go('intro');

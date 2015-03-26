@@ -1,24 +1,26 @@
 angular.module('profile', [])
 
-.config(['$stateProvider',
-    function ($stateProvider) {
+.config(['$stateProvider', function ($stateProvider) {
 
-        $stateProvider.state('app.profile', {
-            url: '/profile',
-            resolve: {
-                profile: ['Profile',
-                    function (Profile) {
-                        return Profile.query();
-                    }
-                ]
-            },
-            views: {
-                menuContent: {
-                    templateUrl: 'templates/profile/profile.html',
-                    controller: 'Profile'
+    $stateProvider.state('app.profile', {
+        url: '/profile',
+        resolve: {
+            profile: ['Profile',
+                function (Profile) {
+                    return Profile.query();
                 }
+            ],
+            loggedInData: ['Auth', function (Auth) {
+                    return Auth.$getAuth();
+                }
+            ]
+        },
+        views: {
+            menuContent: {
+                templateUrl: 'templates/profile/profile.html',
+                controller: 'Profile'
             }
-        });
+        }
+    });
 
-    }
-]);
+}]);

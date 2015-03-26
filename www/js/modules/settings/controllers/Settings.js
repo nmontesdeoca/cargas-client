@@ -5,11 +5,12 @@ angular.module('settings')
     '$filter',
     'LocalStorage',
     function ($scope, $filter, LocalStorage) {
+
         $scope.data = {
             exportdata: JSON.stringify({
                 cars: LocalStorage.get('cars'),
                 fuels: LocalStorage.get('fuels'),
-                profile: LocalStorage.get('profile'),
+                profile: LocalStorage.get('profile') || '',
                 refuels: LocalStorage.get('refuels'),
                 settings: LocalStorage.get('settings')
             })
