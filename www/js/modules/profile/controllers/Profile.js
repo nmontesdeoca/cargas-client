@@ -12,10 +12,11 @@ angular.module('profile')
     'LocalStorage',
     'FirebaseRef',
     'Auth',
+    'Sync',
     'profile',
     'loggedInData',
     function ($scope, $rootScope, $state, $ionicPopup, $ionicLoading, $firebaseAuth, $firebaseObject,
-            $translate, LocalStorage, FirebaseRef, Auth, profile, loggedInData) {
+            $translate, LocalStorage, FirebaseRef, Auth, Sync, profile, loggedInData) {
 
         var userRef,
             userObject,
@@ -44,18 +45,18 @@ angular.module('profile')
                         userObject = $firebaseObject(userRef);
 
                         userObject.$loaded().then(function() {
-                            // update local storage
-                            LocalStorage.setObject('cars', userObject.cars);
-                            LocalStorage.setObject('fuels', userObject.fuels);
-                            LocalStorage.setObject('profile', userObject.profile);
-                            LocalStorage.setObject('refuels', userObject.refuels);
-                            LocalStorage.setObject('settings', userObject.settings);
 
-                            $scope.profile = userObject.profile;
+                            // update local storage
+                            Sync.fromFirebase(userObject);
+
+                            $scope.profile = profile;
 
                             $translate.use(userObject.settings.language);
 
                             $ionicLoading.hide();
+                        })
+                        .catch(function (error) {
+                            console.log('Sync error:', error);
                         });
                     }
                 })
@@ -74,6 +75,9 @@ angular.module('profile')
 
                 // save profile in local storage
                 $scope.profile.$save(function () {
+
+                    // do not store the password
+                    delete $scope.profile.password;
 
                     // and then save in firebase
                     userRef.set({
@@ -122,18 +126,12 @@ angular.module('profile')
             });
 
             // update info
-            if (profile.uid) {
+            if (profile.uid || $scope.profile.uid) {
 
                 userRef = FirebaseRef.child('users').child(profile.uid);
 
                 // if really logged in, just update the info of current customer
-                if (loggedInData) {
-
-                    updateUserInfo(true);
-
-                } else {
-                    updateUserInfo();
-                }
+                updateUserInfo(loggedInData);
 
             } else {
                 // create user
@@ -170,23 +168,17 @@ angular.module('profile')
             authLogin();
         };
 
-        $scope.logout = function () {
-            Auth.$unauth();
-        };
-
         Auth.$onAuth(function(authData) {
 
             if (!authData) {
 
                 $scope.profile = {
-                    loginEmail: $scope.profile.email,
-                    loginPassword: $scope.profile.password
+                    loginEmail: $scope.profile.email
                 };
 
-                LocalStorage.setObject('cars', '');
-                LocalStorage.setObject('fuels', '');
-                LocalStorage.setObject('profile', $scope.profile);
-                LocalStorage.setObject('refuels', '');
+                Sync.fromFirebase({
+                    profile: $scope.profile
+                });
             }
 
             $scope.loggedIn = authData;

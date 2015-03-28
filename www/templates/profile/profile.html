@@ -3,9 +3,8 @@
         <button menu-toggle="left"class="button button-icon icon ion-navicon"></button>
     </ion-nav-buttons>
     <ion-content class="has-header">
-
+        <!-- REGISTER / UPDATE -->
         <form name="profileRegisterForm" novalidate>
-            <!-- REGISTER -->
             <div class="list">
                 <label class="item item-input">
                     <span class="input-label" translate="FIRST_NAME"></span>
@@ -23,16 +22,17 @@
                     <span class="input-label" translate="PASSWORD"></span>
                     <input type="password" ng-model="profile.password" required>
                 </label>
+                <div class="button-wrapper">
+                    <button ng-click="save()" class="button button-block activated big-main-button"
+                        ng-disabled="profileRegisterForm.$invalid">{{loggedIn ? 'UPDATE' : 'REGISTER' | translate}}</button>
+                    <button ng-if="loggedIn" ng-click="Auth.$unauth()" class="button button-block big-main-button delete" translate="LOGOUT"></button>
+                </div>
             </div>
-            <div class="button-wrapper">
-                <button ng-click="save()" class="button button-block activated big-main-button"
-                    ng-disabled="profileRegisterForm.$invalid">{{loggedIn ? 'UPDATE' : 'REGISTER' | translate}}</button>
-                <button ng-if="loggedIn" ng-click="logout()" class="button button-block big-main-button delete" translate="LOGOUT"></button>
-            </div>
-            <!-- END REGISTER -->
         </form>
+        <!-- END REGISTER / UPDATE -->
+
+        <!-- LOGIN -->
         <form name="profileLoginForm" ng-if="!loggedIn" novalidate>
-            <!-- LOGIN -->
             <div class="list no-padding-bottom">
                 <label class="item item-input">
                     <span class="input-label" translate="EMAIL"></span>
@@ -42,12 +42,12 @@
                     <span class="input-label" translate="PASSWORD"></span>
                     <input type="password" ng-model="profile.loginPassword" required>
                 </label>
+                <div class="button-wrapper">
+                    <button ng-click="login()" class="button button-block button-positive activated"
+                        ng-disabled="profileLoginForm.$invalid" translate="LOGIN"></button>
+                </div>
             </div>
-            <div class="padding no-padding-top">
-                <button ng-click="login()" class="button button-block button-positive activated"
-                    ng-disabled="profileLoginForm.$invalid" translate="LOGIN"></button>
-            </div>
-            <!-- END LOGIN -->
         </form>
+        <!-- END LOGIN -->
     </ion-content>
 </ion-view>

@@ -1138,4 +1138,23 @@ angular.module('utils', [])
 .factory('Auth', ['$rootScope', '$firebaseAuth', 'FirebaseRef', function ($rootScope, $firebaseAuth, FirebaseRef) {
     $rootScope.Auth = $rootScope.Auth || $firebaseAuth(FirebaseRef);
     return $rootScope.Auth;
+}])
+
+.factory('Sync', ['LocalStorage', function (LocalStorage) {
+
+    return {
+        // update local storage
+        fromFirebase: function (data) {
+            LocalStorage.setObject('cars', data.cars || '');
+            LocalStorage.setObject('fuels', data.fuels || '');
+            LocalStorage.setObject('profile', data.profile || '');
+            LocalStorage.setObject('refuels', data.refuels || '');
+            // only override the settings if there are in the object
+            data.settings && LocalStorage.setObject('settings', data.settings);
+        },
+
+        toFirebase: function () {
+            // maybe will be needed for specific operations
+        }
+    };
 }]);
