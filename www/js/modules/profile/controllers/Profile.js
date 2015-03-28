@@ -49,7 +49,9 @@ angular.module('profile')
                             // update local storage
                             Sync.fromFirebase(userObject);
 
-                            $scope.profile = profile;
+                            // maybe we can use $bindTo (we need investigate about it)
+                            // the extend it's because $scope.profile must be a Profile Model instance
+                            $scope.profile = _.extend(profile, userObject.profile);
 
                             $translate.use(userObject.settings.language);
 
@@ -117,7 +119,7 @@ angular.module('profile')
 
         $scope.profile = profile;
 
-        $scope.loggedIn = loggedInData || profile.uid;
+        $scope.loggedIn = loggedInData;// || profile.uid;
 
         $scope.save = function () {
 
@@ -126,12 +128,12 @@ angular.module('profile')
             });
 
             // update info
-            if (profile.uid || $scope.profile.uid) {
+            if ($scope.loggedIn && $scope.loggedIn.uid) {
 
-                userRef = FirebaseRef.child('users').child(profile.uid);
+                userRef = FirebaseRef.child('users').child($scope.loggedIn.uid);
 
                 // if really logged in, just update the info of current customer
-                updateUserInfo(loggedInData);
+                updateUserInfo($scope.loggedIn);
 
             } else {
                 // create user
@@ -173,7 +175,7 @@ angular.module('profile')
             if (!authData) {
 
                 $scope.profile = {
-                    loginEmail: $scope.profile.email
+                    loginEmail: $scope.profile.email || $scope.profile.loginEmail
                 };
 
                 Sync.fromFirebase({
