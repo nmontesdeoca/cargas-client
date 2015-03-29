@@ -24,12 +24,8 @@ angular.module('cargas', [
     '$ionicSideMenuDelegate',
     'tmhDynamicLocale',
     'Setting',
-    'Auth',
-    'FirebaseRef',
-    '$firebaseObject',
-    'Sync',
     function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate,
-        tmhDynamicLocale, Setting, Auth, FirebaseRef, $firebaseObject, Sync) {
+        tmhDynamicLocale, Setting) {
 
         $ionicPlatform.ready(function () {
 
@@ -74,7 +70,6 @@ angular.module('cargas', [
             // if social sharing plugin is not available hide the share button
             $rootScope.socialSharingAvailable = !!(window.plugins &&
                 window.plugins.socialsharing);
-
 
         });
     }
