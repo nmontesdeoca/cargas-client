@@ -125,10 +125,7 @@ angular.module('utils', [])
                 data: timeAgo + unit
             });
         }
-        // else if (!(value % 7)) {
-        //     unit = value == 7 ? 'week' : 'weeks';
-        // }
-        // return $filter('translate')('AGO', { data: timeAgo + unit });
+
         return agoText;
     };
 }])
@@ -910,7 +907,7 @@ angular.module('utils', [])
         hideSplahscreen: function () {
             setTimeout(function () {
                 navigator.splashscreen && navigator.splashscreen.hide();
-            }, 1000);
+            }, 600);
         },
 
         // this plugin is required
@@ -970,7 +967,8 @@ angular.module('utils', [])
     };
 }])
 
-.factory('Model', ['LocalStorage', function (LocalStorage) {
+.factory('Model', ['LocalStorage', 'Sync', function (LocalStorage, Sync) {
+
     return function (storageKey, singleModel) {
 
         var setProperties = function (value, key) {
@@ -1021,6 +1019,7 @@ angular.module('utils', [])
         };
 
         Model.prototype.$save = function (callback) {
+
             var models = Model.query();
 
             this.updatedAt = Date.now();
@@ -1047,10 +1046,16 @@ angular.module('utils', [])
             }
 
             LocalStorage.setObject(storageKey, models);
+
+            // save to firebase
+            Sync.toFirebase(storageKey, models);
+
+            // if the context is this why it is passed by parameter too?
             callback && callback.apply(this, [this]);
         };
 
         Model.prototype.$remove = function (callback) {
+
             var models = Model.query();
 
             if (this._id) {
@@ -1066,6 +1071,11 @@ angular.module('utils', [])
             }
 
             LocalStorage.setObject(storageKey, models);
+
+            // save to firebase
+            Sync.toFirebase(storageKey, models);
+
+            // if the context is this why it is passed by parameter too?
             callback && callback.apply(this, [this]);
         };
 
@@ -1140,21 +1150,37 @@ angular.module('utils', [])
     return $rootScope.Auth;
 }])
 
-.factory('Sync', ['LocalStorage', function (LocalStorage) {
+.factory('Sync', ['LocalStorage', 'FirebaseRef', 'Auth',
+    function (LocalStorage, FirebaseRef, Auth) {
 
-    return {
-        // update local storage
-        fromFirebase: function (data) {
-            LocalStorage.setObject('cars', data.cars || '');
-            LocalStorage.setObject('fuels', data.fuels || '');
-            LocalStorage.setObject('profile', data.profile || '');
-            LocalStorage.setObject('refuels', data.refuels || '');
-            // only override the settings if there are in the object
-            data.settings && LocalStorage.setObject('settings', data.settings);
-        },
+        return {
+            // update local storage
+            fromFirebase: function (data) {
+                LocalStorage.setObject('cars', data.cars || '');
+                LocalStorage.setObject('fuels', data.fuels || '');
+                LocalStorage.setObject('profile', data.profile || '');
+                LocalStorage.setObject('refuels', data.refuels || '');
+                // only override the settings if there are in the object
+                data.settings && LocalStorage.setObject('settings', data.settings);
+            },
 
-        toFirebase: function () {
-            // maybe will be needed for specific operations
-        }
-    };
-}]);
+            toFirebase: function (storageKey, value) {
+
+                var authData = Auth.$getAuth(),
+                userRef = authData ? FirebaseRef.child('users').child(authData.uid) : null,
+                modelRef;
+
+                // if user is logged in firebase and the model is not profile
+                // then save in firebase, profile model is saved from profile ctrler
+                if (userRef && storageKey !== 'profile') {
+                    // get the corresponding model reference (cars, fuels, refuels, etc)
+                    modelRef = userRef.child(storageKey);
+                    modelRef.set(value, function (error) {
+                        if (error) {
+                            console.log('save on firebase error:', error);
+                        }
+                    });
+                }
+            }
+        };
+    }]);

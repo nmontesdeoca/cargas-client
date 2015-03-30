@@ -14,8 +14,7 @@ angular.module('refuels')
     'Utils',
     'carByDefault',
     function ($scope, $ionicPopup, $state, $ionicModal, $filter, $ionicHistory, Refuel,
-        Car,
-        Fuel, refuel, Utils, carByDefault) {
+            Car, Fuel, refuel, Utils, carByDefault) {
 
         var getCars = function () {
                 var cars = Car.query();
@@ -34,14 +33,15 @@ angular.module('refuels')
                     value: 'newFuel'
                 });
                 return sortedFuels;
+            },
+
+            formatDate = function (date) {
+                return $filter('date')(Utils.formatDateForInput(date));
             };
 
-        // TODO: please, change this. It is a fix for new Angular 1.3 input dates
-        var dateArray = refuel.date.split('-');
-        dateArray[1] = Number(dateArray[1]) - 1;
-        refuel.date = new Date(dateArray[0], dateArray[1], dateArray[2]);
-
         $scope.refuel = refuel;
+        // this is to avoid an error when we save the date of the refuel as timestamp
+        $scope.refuel.inputDate = $scope.refuel.date;
         $scope.fuels = getFuels();
         $scope.cars = getCars();
 
@@ -58,13 +58,10 @@ angular.module('refuels')
         }
 
         $scope.create = function () {
-            var currentRefuelDate = Utils.formatDateToTime($scope.refuel.date),
+            var currentRefuelDate = Utils.formatDateToTime($scope.refuel.inputDate),
                 previousRefuel = $scope.refuel.getPreviousRefuel(),
                 nextRefuel = $scope.refuel.getNextRefuel(),
                 message,
-                formatDate = function (date) {
-                    return $filter('date')(Utils.formatDateForInput(new Date(date)));
-                },
                 error =
                     previousRefuel && (previousRefuel.date > currentRefuelDate) ||
                     nextRefuel && (nextRefuel.date < currentRefuelDate);
@@ -72,16 +69,16 @@ angular.module('refuels')
             if (error) {
                 if (!previousRefuel) {
                     message = $filter('translate')('BEFORE_THAN', {
-                        date: formatDate(nextRefuel.date)
+                        date: formatDate(new Date(nextRefuel.date))
                     });
                 } else if (!nextRefuel) {
                     message = $filter('translate')('LATER_THAN', {
-                        date: formatDate(previousRefuel.date)
+                        date: formatDate(new Date(previousRefuel.date))
                     });
                 } else {
                     message = $filter('translate')('BETWEEN', {
-                        before: formatDate(previousRefuel.date),
-                        after: formatDate(nextRefuel.date)
+                        before: formatDate(new Date(previousRefuel.date)),
+                        after: formatDate(new Date(nextRefuel.date))
                     });
                 }
                 $ionicPopup.alert({
@@ -242,7 +239,8 @@ angular.module('refuels')
                     consumption: 0
                 });
 
-                if (car) {
+                // in modal window car does not have an id
+                if (car && car._id) {
                     previousRefuelNoPartial = $scope.refuel.getPreviousRefuelNoPartial();
                     previousRefuel = $scope.refuel.getPreviousRefuel();
 

@@ -13,15 +13,27 @@ angular.module('overview', [])
                 // cars: ['Car', function (Car) {
                 //     return Car.query();
                 // }],
-                data: ['Refuel', 'Car', 'Auth', 'FirebaseRef', '$firebaseObject', 'Sync', '$translate', '$q',
-                    function (Refuel, Car, Auth, FirebaseRef, $firebaseObject, Sync, $translate, $q) {
+                data: [
+                    '$rootScope',
+                    'Refuel',
+                    'Car',
+                    'Auth',
+                    'FirebaseRef',
+                    '$firebaseObject',
+                    'Sync',
+                    '$translate',
+                    '$q',
+                    function ($rootScope, Refuel, Car, Auth, FirebaseRef,
+                            $firebaseObject, Sync, $translate, $q) {
 
                         var q = $q.defer(),
                             authData = Auth.$getAuth(),
                             userRef,
                             userObject;
 
-                        if (authData) {
+                        // if no data retrieved from firebase yet and
+                        // if the user is logged in firebase
+                        if (!$rootScope.syncOnLoad && authData) {
 
                             userRef = FirebaseRef.child('users').child(authData.uid);
 
@@ -33,6 +45,10 @@ angular.module('overview', [])
                                 Sync.fromFirebase(userObject);
 
                                 $translate.use(userObject.settings.language);
+
+                                $rootScope.syncOnLoad = true;
+
+                                console.log('sync on load!');
 
                                 q.resolve({
                                     refuels: Refuel.getRefuelsSortByDate(),
@@ -46,6 +62,7 @@ angular.module('overview', [])
                                     cars: Car.query()
                                 });
                             });
+
                         } else {
                             q.resolve({
                                 refuels: Refuel.getRefuelsSortByDate(),

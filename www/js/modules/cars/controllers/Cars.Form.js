@@ -15,17 +15,15 @@ angular.module('cars')
     'Car',
     'Fuel',
     'Camera',
-    function ($scope, $ionicPopup, $ionicHistory, $ionicModal, $ionicActionSheet, $state, $filter,
-        car, fuelsFunction, makes, Utils, Car, Fuel, Camera) {
+    function ($scope, $ionicPopup, $ionicHistory, $ionicModal, $ionicActionSheet, $state,
+            $filter, car, fuelsFunction, makes, Utils, Car, Fuel, Camera) {
 
         var translate = $filter('translate');
 
         // http://stackoverflow.com/quevstions/21714655/angular-js-angular-ui-router-reloading-current-state-refresh-data
 
-        fuels = fuelsFunction(translate('ADD_NEW_FUEL'));
-
         $scope.car = car;
-        $scope.fuels = fuels;
+        $scope.fuels = fuelsFunction(translate('ADD_NEW_FUEL'));
         $scope.makes = makes;
         $scope.years = Utils.getYears();
         $scope.displayTakePicture = !!Camera.isAvailable;
@@ -67,7 +65,7 @@ angular.module('cars')
         $scope.createFuel = function () {
             $scope.fuel.$save(function () {
                 // need to query all the fuels to get the new one
-                $scope.fuels = fuels;
+                $scope.fuels = fuelsFunction(translate('ADD_NEW_FUEL'));
                 $scope.car.replaceFuel($scope.fuels, $scope.fuel._id);
                 $scope.fuelModal.hide();
             });
@@ -134,7 +132,7 @@ angular.module('cars')
                     }).then(function (imageURI) {
                         $scope.car.image = imageURI;
                     }, function (err) {
-                        alert(err);
+                        console.log(err);
                     });
                 };
         };

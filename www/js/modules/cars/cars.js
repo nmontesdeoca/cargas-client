@@ -13,10 +13,10 @@ angular.module('cars', [])
                  * that will receive the translated text from the controller when it is used
                  */
                 return function (text) {
-                    return [{
+                    return _.sortBy(Fuel.query(), 'name').concat([{
                         name: text,
                         value: 'newFuel'
-                    }].concat(_.sortBy(Fuel.query(), 'name'));
+                    }]);
                 };
             }];
 

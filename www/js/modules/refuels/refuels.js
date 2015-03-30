@@ -47,7 +47,7 @@ angular.module('refuels', [])
                 function (Refuel, Utils) {
                     var refuel = new Refuel();
 
-                    refuel.date = Utils.formatDateForInput(new Date());
+                    refuel.date = new Date();
 
                     return refuel;
                 }
@@ -94,8 +94,7 @@ angular.module('refuels', [])
                         _id: parseInt($stateParams.id, 10)
                     });
 
-                    refuel.date = Utils.formatDateForInput(new Date(
-                        refuel.date));
+                    refuel.date = new Date(refuel.date);
 
                     return refuel;
                 }
