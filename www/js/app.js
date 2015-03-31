@@ -24,13 +24,17 @@ angular.module('cargas', [
     '$ionicSideMenuDelegate',
     'tmhDynamicLocale',
     'Setting',
+    'FIREBASEURL',
+    '$firebaseAuth',
     function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate,
-        tmhDynamicLocale, Setting) {
+        tmhDynamicLocale, Setting, FIREBASEURL, $firebaseAuth) {
 
         $ionicPlatform.ready(function () {
 
             var isAndroid = ionic.Platform.isAndroid(),
-                settings = Setting.query();
+                settings = Setting.query(),
+                firebaseRef,
+                auth;
 
             if (window.analytics) {
                 window.analytics.startTrackerWithId('UA-16179838-10');
@@ -71,6 +75,12 @@ angular.module('cargas', [
             $rootScope.socialSharingAvailable = !!(window.plugins &&
                 window.plugins.socialsharing);
 
+            firebaseRef = new Firebase(FIREBASEURL);
+            $rootScope.auth = $firebaseAuth(firebaseRef);
+            auth = $rootScope.auth.$getAuth();
+            if (auth) {
+                $rootScope.userRef = firebaseRef.child('users').child(auth.uid);
+            }
         });
     }
 ])
