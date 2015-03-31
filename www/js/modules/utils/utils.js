@@ -979,12 +979,12 @@ angular.module('utils', [])
                 angular.forEach(properties, angular.bind(this, setProperties));
             };
 
-        Model.get = function (idObject, object) {
+        Model.get = function (filterObject, isObject) {
             var model = singleModel ?
                 Model.query() :
-                _.findWhere(Model.query(), idObject);
+                _.findWhere(Model.query(), filterObject);
 
-            return object ? model : new Model(model);
+            return isObject ? model : new Model(model);
         };
 
         Model.query = function () {
@@ -1006,7 +1006,7 @@ angular.module('utils', [])
                 }
             }
 
-            return data || (singleModel ? {} : []);
+            return data || (singleModel ? new Model({}) : []);
         };
 
         Model.prototype.set = function (properties) {

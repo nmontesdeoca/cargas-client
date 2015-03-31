@@ -51,7 +51,8 @@ angular.module('profile')
 
                             // maybe we can use $bindTo (we need investigate about it)
                             // the extend it's because $scope.profile must be a Profile Model instance
-                            $scope.profile = _.extend(profile, userObject.profile);
+                            // added {} because we were overwriting the profile variable
+                            _.extend($scope.profile, profile, userObject.profile);
 
                             $translate.use(userObject.settings.language);
 

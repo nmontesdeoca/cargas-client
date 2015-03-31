@@ -16,9 +16,11 @@ angular.module('overview')
             var lastRefuel = data.refuels[0];
 
             lastRefuel = _.extend(lastRefuel, {
-                car: Car.get(lastRefuel.car)
+                car: Car.get({
+                    _id: Number(lastRefuel.car)
+                })
             });
-
+            
             _.extend($scope, {
                 cars: data.cars,
                 refuels: data.refuels,
