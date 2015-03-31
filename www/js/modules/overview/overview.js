@@ -17,25 +17,19 @@ angular.module('overview', [])
                     '$rootScope',
                     'Refuel',
                     'Car',
-                    'Auth',
-                    'FirebaseRef',
                     '$firebaseObject',
                     'Sync',
                     '$translate',
                     '$q',
-                    function ($rootScope, Refuel, Car, Auth, FirebaseRef,
-                            $firebaseObject, Sync, $translate, $q) {
+                    function ($rootScope, Refuel, Car, $firebaseObject, Sync, $translate, $q) {
 
                         var q = $q.defer(),
-                            authData = Auth.$getAuth(),
-                            userRef,
+                            userRef = $rootScope.userRef,
                             userObject;
 
                         // if no data retrieved from firebase yet and
                         // if the user is logged in firebase
-                        if (!$rootScope.syncOnLoad && authData) {
-
-                            userRef = FirebaseRef.child('users').child(authData.uid);
+                        if (!$rootScope.syncOnLoad && userRef) {
 
                             userObject = $firebaseObject(userRef);
 
