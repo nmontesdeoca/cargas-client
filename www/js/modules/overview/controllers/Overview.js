@@ -2,28 +2,29 @@ angular.module('overview')
 
 .controller('Overview', [
     '$scope',
-    'data',
+    'refuels',
+    'cars',
     'Refuel',
     'Car',
     '$ionicHistory',
-    function ($scope, data, Refuel, Car, $ionicHistory) {
+    function ($scope, refuels, cars, Refuel, Car, $ionicHistory) {
 
         $ionicHistory.clearHistory();
-        //add the car object to the last refuel
-        $scope.hasRefuels = !!data.refuels.length;
-        $scope.hasCars = !!data.cars.length;
+        // add the car object to the last refuel
+        $scope.hasRefuels = !!refuels.length;
+        $scope.hasCars = !!cars.length;
         if ($scope.hasRefuels) {
-            var lastRefuel = data.refuels[0];
+            var lastRefuel = refuels[0];
 
             lastRefuel = _.extend(lastRefuel, {
                 car: Car.get({
                     _id: Number(lastRefuel.car)
                 })
             });
-            
+
             _.extend($scope, {
-                cars: data.cars,
-                refuels: data.refuels,
+                cars: cars,
+                refuels: refuels,
                 lastRefuel: lastRefuel,
                 totals: {
                     totalSpent: Refuel.getTotalSpent(),

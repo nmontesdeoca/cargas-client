@@ -77,24 +77,6 @@ angular.module('utils', [])
     }
 ])
 
-/*
-.directive('fixTransparentIonItem', function () {
-    return {
-        restrict: 'A',
-        link: function ($scope, $element, $attrs) {
-
-            $element.on('drag', function () {
-                $element.find('a').css('background-color', 'white');
-            });
-
-            $element.on('release', function () {
-                $element.find('a').css('background-color', 'transparent');
-            });
-        }
-    };
-})
-*/
-
 .filter('unit', ['Setting', 'Utils', function (Setting, Utils) {
     return function (value, unit) {
         var settings = Setting.query(),
@@ -1150,8 +1132,7 @@ angular.module('utils', [])
     return $rootScope.Auth;
 }])
 
-.factory('Sync', ['LocalStorage', 'FirebaseRef', 'Auth',
-    function (LocalStorage, FirebaseRef, Auth) {
+.factory('Sync', ['LocalStorage', '$rootScope', function (LocalStorage, $rootScope) {
 
         return {
             // update local storage
@@ -1166,13 +1147,11 @@ angular.module('utils', [])
 
             toFirebase: function (storageKey, value) {
 
-                var authData = Auth.$getAuth(),
-                userRef = authData ? FirebaseRef.child('users').child(authData.uid) : null,
-                modelRef;
+                var modelRef;
 
                 // if user is logged in firebase and the model is not profile
                 // then save in firebase, profile model is saved from profile ctrler
-                if (userRef && storageKey !== 'profile') {
+                if ($rootScope.userRef && storageKey !== 'profile') {
                     // get the corresponding model reference (cars, fuels, refuels, etc)
                     modelRef = userRef.child(storageKey);
                     modelRef.set(value, function (error) {
