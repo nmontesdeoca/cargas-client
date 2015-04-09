@@ -1,78 +1,8 @@
-// this plugin is required
-// cordova plugin add org.apache.cordova.network-information
-var network = {
-
-        attempt: 1,
-
-        get: function () {
-            return navigator.connection && navigator.connection.type;
-        },
-
-        isOnline: function (isOnlineCallback, isOfflineCallback) {
-            var self = this;
-            // in android the plugin is not ready instantly
-            setTimeout(function () {
-                var networkState = self.get(),
-                    isOnline;
-                // alert(networkState);
-                if (networkState === 0 && self.attempt < 4) {
-                    self.attempt++;
-                    self.isOnline(isOnlineCallback, isOfflineCallback);
-                } else {
-                    self.attempt = 1;
-                    isOnline = networkState !== 0 && networkState !== 'unknown' &&
-                        networkState !== 'none' && networkState !== undefined;
-                    if (isOnline) {
-                        typeof isOnlineCallback === 'function' &&
-                            isOnlineCallback();
-                    } else {
-                        typeof isOfflineCallback === 'function' &&
-                            isOfflineCallback();
-                    }
-                }
-            }, 500);
-        }
-    },
-
-    firebaseRef,
-    userRef,
-    userObject;
-
-document.addEventListener('deviceready', function () {
-
-    network.isOnline(
-    // online fn
-    function () {
-
-        var auth;
-
-        firebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
-        auth = firebaseRef.getAuth();
-
-        if (auth) {
-            userRef = firebaseRef.child('users').child(auth.uid);
-            userRef.once('value', function (userSnapshot) {
-                userObject = userSnapshot.val();
-                angular.bootstrap(document.body, ['cargas']);
-            });
-        } else {
-            angular.bootstrap(document.body, ['cargas']);
-        }
-    },
-    // offline fn
-    function () {
-        angular.bootstrap(document.body, ['cargas']);
-    });
-
-}, false);
-
-
 angular.module('cargas', [
     'ionic',
     'ngResource',
     'pascalprecht.translate',
     'tmh.dynamicLocale',
-    'firebase',
     'overview',
     'profile',
     'cars',
@@ -83,8 +13,6 @@ angular.module('cargas', [
     'utils',
     'intro'
 ])
-
-.constant('FIREBASEURL', 'https://cargas-app.firebaseio.com/')
 
 .run([
     '$ionicPlatform',
@@ -102,7 +30,6 @@ angular.module('cargas', [
             var isAndroid = ionic.Platform.isAndroid(),
                 settings;
 
-
             // SYNC ----------------------------
             if (userObject) {
                 Sync.fromFirebase(userObject);
@@ -110,8 +37,12 @@ angular.module('cargas', [
 
             $rootScope.FirebaseRef = firebaseRef;
             $rootScope.userRef = userRef;
-            // END SYNC ------------------------
 
+            // reset global variables
+            firebaseRef = null;
+            userRef = null;
+            userObject = null;
+            // END SYNC ------------------------
 
             if (window.analytics) {
                 window.analytics.startTrackerWithId('UA-16179838-10');
@@ -153,6 +84,18 @@ angular.module('cargas', [
             // if social sharing plugin is not available hide the share button
             $rootScope.socialSharingAvailable = !!(window.plugins &&
                 window.plugins.socialsharing);
+
+            // triggered when the phone is connected to the internet
+            document.addEventListener('online', function () {
+                alert('is online');
+                isOnline = true;
+            }, false);
+
+            // triggered when the phone loose the internet connection
+            document.addEventListener('offline', function () {
+                alert('is offline');
+                isOnline = false;
+            }, false);
         });
     }
 ])

@@ -11,8 +11,7 @@ angular.module('utils', [])
     YEARS: 8
 })
 
-.directive('randomBackground', [ /*'Flickr', */ 'Utils',
-    function ( /*Flickr, */ Utils) {
+.directive('randomBackground', ['Utils', function (Utils) {
         return {
             restrict: 'A',
             link: function ($scope, $element, $attrs) {
@@ -26,52 +25,6 @@ angular.module('utils', [])
                     $element.css('background-image', 'url(' + url + ')');
                     Utils.hideSplahscreen();
                 };
-
-                /*Utils.network.isOnline(function () {
-
-                    var time = Utils.isNight() ? 'night' : 'day';
-
-                    Flickr.search({
-                        tags: 'highway,' + time,
-                        tag_mode: 'all',
-                        text: 'highway road street ' + time,
-                        // TODO before set 500 pages we need to know if there are 500 results ?
-                        page: Math.round(Math.random() * 500),
-                        per_page: 1,
-                        media: 'photos',
-                        privacy_filter: 1,
-                        content_type: 4
-                    }).then(function (data) {
-                        var image = new Image(),
-                            photos = data && data.photos && data.photos.photo,
-                            item,
-                            url;
-
-                        if (photos && photos.length) {
-                            item = photos[0];
-                            url = 'http://farm' + item.farm + '.static.flickr.com/' +
-                                item.server + '/' +
-                                item.id + '_' + item.secret + '.jpg';
-
-                            /**
-                             * create an image with the image src on the fly in order
-                             * to get the url fetched, so when we place the background
-                             * the image loads instantly
-                             */
-                /*
-                            image.src = url;
-                            image.onload = function () {
-                                $element.css('background-image', 'url(' + url + ')');
-                                Utils.hideSplahscreen();
-                            };
-                        } else {
-                            Utils.hideSplahscreen();
-                        }
-                    });
-                },
-                function () {
-                    Utils.hideSplahscreen();
-                });*/
             }
         };
     }
@@ -890,61 +843,23 @@ angular.module('utils', [])
             setTimeout(function () {
                 navigator.splashscreen && navigator.splashscreen.hide();
             }, 600);
-        },
-
-        // this plugin is required
-        // cordova plugin add org.apache.cordova.network-information
-        network: {
-
-            attempt: 1,
-
-            get: function () {
-                return navigator.connection && navigator.connection.type;
-            },
-
-            isOnline: function (isOnlineCallback, isOfflineCallback) {
-                var self = this;
-                // in android the plugin is not ready instantly
-                setTimeout(function () {
-                    var networkState = self.get(),
-                        isOnline;
-                    // alert(networkState);
-                    if (networkState === 0 && self.attempt < 4) {
-                        self.attempt++;
-                        self.isOnline(isOnlineCallback, isOfflineCallback);
-                    } else {
-                        self.attempt = 1;
-                        isOnline = networkState !== 0 && networkState !==
-                            'unknown' &&
-                            networkState !== 'none';
-                        if (isOnline) {
-                            typeof isOnlineCallback === 'function' &&
-                                isOnlineCallback();
-                        } else {
-                            typeof isOfflineCallback === 'function' &&
-                                isOfflineCallback();
-                        }
-                    }
-                }, 500);
-            }
         }
     };
 }])
 
 .factory('LocalStorage', ['$window', function ($window) {
-    var prefix = '';
     return {
         set: function (key, value) {
-            $window.localStorage[prefix + key] = value;
+            $window.localStorage[key] = value;
         },
         get: function (key, defaultValue) {
-            return $window.localStorage[prefix + key] || defaultValue;
+            return $window.localStorage[key] || defaultValue;
         },
         setObject: function (key, value) {
-            $window.localStorage[prefix + key] = JSON.stringify(value);
+            $window.localStorage[key] = JSON.stringify(value);
         },
         getObject: function (key) {
-            return JSON.parse($window.localStorage[prefix + key] || '{}');
+            return JSON.parse($window.localStorage[key] || '{}');
         }
     };
 }])
@@ -1002,7 +917,8 @@ angular.module('utils', [])
 
         Model.prototype.$save = function (callback) {
 
-            var models = Model.query();
+            var models = Model.query(),
+                lastConnection = Date.now();
 
             this.updatedAt = Date.now();
 
@@ -1028,9 +944,10 @@ angular.module('utils', [])
             }
 
             LocalStorage.setObject(storageKey, models);
+            LocalStorage.setObject('lastConnection', lastConnection);
 
             // save to firebase
-            Sync.toFirebase(storageKey, models);
+            Sync.toFirebase(storageKey, models, lastConnection);
 
             // if the context is this why it is passed by parameter too?
             callback && callback.apply(this, [this]);
@@ -1038,7 +955,8 @@ angular.module('utils', [])
 
         Model.prototype.$remove = function (callback) {
 
-            var models = Model.query();
+            var models = Model.query(),
+                lastConnection = Date.now();
 
             if (this._id) {
                 if (singleModel) {
@@ -1053,9 +971,10 @@ angular.module('utils', [])
             }
 
             LocalStorage.setObject(storageKey, models);
+            LocalStorage.setObject('lastConnection', lastConnection);
 
             // save to firebase
-            Sync.toFirebase(storageKey, models);
+            Sync.toFirebase(storageKey, models, lastConnection);
 
             // if the context is this why it is passed by parameter too?
             callback && callback.apply(this, [this]);
@@ -1099,39 +1018,6 @@ angular.module('utils', [])
     };
 }])
 
-.factory('Flickr', ['$q', '$resource', function ($q, $resource) {
-    var flickrSearch = $resource('https://api.flickr.com/services/rest/', {
-        method: 'flickr.photos.search',
-        jsoncallback: 'JSON_CALLBACK',
-        api_key: 'c49a72ec017c4cf6e5c7c019e9f4a1bf',
-        format: 'json'
-    }, {
-        get: {
-            method: 'JSONP'
-        }
-    });
-
-    return {
-        search: function (options) {
-            var q = $q.defer();
-
-            flickrSearch.get(options, q.resolve, q.reject);
-
-            return q.promise;
-        }
-    };
-}])
-
-.factory('FirebaseRef', ['$rootScope', 'FIREBASEURL', function ($rootScope, FIREBASEURL) {
-    $rootScope.FirebaseRef = $rootScope.FirebaseRef || new Firebase(FIREBASEURL);
-    return $rootScope.FirebaseRef;
-}])
-
-.factory('Auth', ['$rootScope', '$firebaseAuth', 'FirebaseRef', function ($rootScope, $firebaseAuth, FirebaseRef) {
-    $rootScope.Auth = $rootScope.Auth || $firebaseAuth(FirebaseRef);
-    return $rootScope.Auth;
-}])
-
 .factory('Sync', ['LocalStorage', '$rootScope', function (LocalStorage, $rootScope) {
 
         return {
@@ -1145,7 +1031,7 @@ angular.module('utils', [])
                 data.settings && LocalStorage.setObject('settings', data.settings);
             },
 
-            toFirebase: function (storageKey, value) {
+            toFirebase: function (storageKey, value, lastConnection) {
 
                 var modelRef;
 
@@ -1153,10 +1039,18 @@ angular.module('utils', [])
                 // then save in firebase, profile model is saved from profile ctrler
                 if ($rootScope.userRef && storageKey !== 'profile') {
                     // get the corresponding model reference (cars, fuels, refuels, etc)
-                    modelRef = userRef.child(storageKey);
+                    modelRef = $rootScope.userRef.child(storageKey);
                     modelRef.set(value, function (error) {
                         if (error) {
                             console.log('save on firebase error:', error);
+                        } else {
+                            // update last conection
+                            $rootScope.userRef.child('lastConnection')
+                                .set(lastConnection, function () {
+                                    if (error) {
+                                        console.log('update last connection error:', error);
+                                    }
+                                });
                         }
                     });
                 }

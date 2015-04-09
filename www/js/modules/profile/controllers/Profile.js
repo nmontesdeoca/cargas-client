@@ -3,31 +3,33 @@ angular.module('profile')
 .controller('Profile', [
     '$scope',
     '$rootScope',
-    '$state',
     '$ionicPopup',
     '$ionicLoading',
-    '$firebaseAuth',
-    '$firebaseObject',
     '$translate',
     'LocalStorage',
-    'FirebaseRef',
-    'Auth',
     'Sync',
-    'profile',
-    'loggedInData',
-    function ($scope, $rootScope, $state, $ionicPopup, $ionicLoading, $firebaseAuth, $firebaseObject,
-            $translate, LocalStorage, FirebaseRef, Auth, Sync, profile, loggedInData) {
+    'Profile',
+    function ($scope, $rootScope, $ionicPopup, $ionicLoading, $translate,
+            LocalStorage, Sync, Profile) {
 
-        var userRef,
-            userObject,
+        var authLogin = function (fromRegister) {
 
-            authLogin = function (fromRegister) {
+            $rootScope.FirebaseRef.authWithPassword({
+                email: $scope.profile.email || $scope.profile.loginEmail,
+                password: $scope.profile.password || $scope.profile.loginPassword
+            },
+            function (error, userData) {
 
-                Auth.$authWithPassword({
-                    email: $scope.profile.loginEmail || $scope.profile.email,
-                    password: $scope.profile.loginPassword || $scope.profile.password
-                })
-                .then(function (userData) {
+                if (error) {
+
+                    $ionicPopup.alert({
+                        title: 'Login Error',
+                        template: error
+                    });
+
+                    $ionicLoading.hide();
+
+                } else {
 
                     if (fromRegister) {
 
@@ -40,87 +42,86 @@ angular.module('profile')
 
                     } else {
 
-                        userRef = FirebaseRef.child('users').child(userData.uid);
+                        $rootScope.userRef = $rootScope.FirebaseRef.child('users').child(userData.uid);
 
-                        userObject = $firebaseObject(userRef);
+                        $rootScope.userRef.once('value', function (userSnapshot) {
 
-                        userObject.$loaded().then(function() {
-
+                            userObject = userSnapshot.val();
                             // update local storage
                             Sync.fromFirebase(userObject);
 
-                            // maybe we can use $bindTo (we need investigate about it)
-                            // the extend it's because $scope.profile must be a Profile Model instance
-                            // added {} because we were overwriting the profile variable
-                            _.extend($scope.profile, profile, userObject.profile);
+                            // update scope profile
+                            $scope.profile = Profile.query();
 
                             $translate.use(userObject.settings.language);
 
                             $ionicLoading.hide();
-                        })
-                        .catch(function (error) {
+
+                        }, function (error) {
                             console.log('Sync error:', error);
                         });
                     }
-                })
-                .catch(function (error) {
+                }
+            });
+        },
 
-                    $ionicPopup.alert({
-                        title: 'Login Error',
-                        template: error
-                    });
+        updateUserInfo = function (loggedIn, fromRegister) {
 
-                    $ionicLoading.hide();
-                });
-            },
+            // ensure that the profile is a Model
+            if (!($scope.profile instanceof Profile)) {
+                $scope.profile = new Profile($scope.profile);
+            }
 
-            updateUserInfo = function (loggedIn, fromRegister) {
+            // save profile in local storage
+            $scope.profile.$save(function () {
 
-                // save profile in local storage
-                $scope.profile.$save(function () {
+                var profileForFirebase = LocalStorage.getObject('profile');
 
-                    // do not store the password
-                    delete $scope.profile.password;
+                // do not store the password
+                delete profileForFirebase.password;
+                // delete loginEmail (don't needed in firebase)
+                delete profileForFirebase.loginEmail;
 
-                    // and then save in firebase
-                    userRef.set({
-                        email: $scope.profile.email,
-                        firstname: $scope.profile.firstname,
-                        lastname: $scope.profile.lastname,
-                        cars: LocalStorage.getObject('cars'),
-                        fuels: LocalStorage.getObject('fuels'),
-                        profile: LocalStorage.getObject('profile'),
-                        refuels: LocalStorage.getObject('refuels'),
-                        settings: LocalStorage.getObject('settings')
-                    },
-                    function (error) {
+                // and then save in firebase
+                $rootScope.userRef.set({
+                    // email: $scope.profile.email,
+                    // firstname: $scope.profile.firstname,
+                    // lastname: $scope.profile.lastname,
+                    cars: LocalStorage.getObject('cars'),
+                    fuels: LocalStorage.getObject('fuels'),
+                    profile: profileForFirebase,
+                    refuels: LocalStorage.getObject('refuels'),
+                    settings: LocalStorage.getObject('settings'),
+                    lastConnection: Date.now()
+                },
+                function (error) {
 
-                        if (!error) {
-                            // only close the modal
-                            if (loggedIn) {
-                                $ionicLoading.hide();
-                            } else {
-                                // logged in the recently created user
-                                // createUser method does not logged the user
-                                authLogin(fromRegister);
-                            }
-
-                        } else {
-
-                            $ionicPopup.alert({
-                                title: 'Error',
-                                template: error
-                            });
-
+                    if (!error) {
+                        // only close the modal
+                        if (loggedIn) {
                             $ionicLoading.hide();
+                        } else {
+                            // logged in the recently created user
+                            // createUser method does not logged the user
+                            authLogin(fromRegister);
                         }
-                    });
+
+                    } else {
+
+                        $ionicPopup.alert({
+                            title: 'Error',
+                            template: error
+                        });
+
+                        $ionicLoading.hide();
+                    }
                 });
-            };
+            });
+        };
 
-        $scope.profile = profile;
+        $scope.profile = Profile.query();
 
-        $scope.loggedIn = loggedInData;// || profile.uid;
+        $scope.loggedIn = $rootScope.FirebaseRef.getAuth(); // || profile.uid;
 
         $scope.save = function () {
 
@@ -131,33 +132,38 @@ angular.module('profile')
             // update info
             if ($scope.loggedIn && $scope.loggedIn.uid) {
 
-                userRef = FirebaseRef.child('users').child($scope.loggedIn.uid);
+                $rootScope.userRef = $rootScope.FirebaseRef.child('users').child($scope.loggedIn.uid);
 
                 // if really logged in, just update the info of current customer
                 updateUserInfo($scope.loggedIn);
 
             } else {
                 // create user
-                Auth.$createUser({
+                $rootScope.FirebaseRef.createUser({
                     email: $scope.profile.email,
                     password: $scope.profile.password
-                })
-                .then(function (userData) {
+                },
 
-                    userRef = FirebaseRef.child('users').child(userData.uid);
+                function (error, userData) {
 
-                    $scope.profile.uid = userData.uid;
+                    if (error) {
 
-                    updateUserInfo(false, true);
-                })
-                .catch(function (error) {
+                        $ionicPopup.alert({
+                            title: 'Error',
+                            template: error
+                        });
 
-                    $ionicPopup.alert({
-                        title: 'Error',
-                        template: error
-                    });
+                        $ionicLoading.hide();
 
-                    $ionicLoading.hide();
+                    } else {
+
+                        $rootScope.userRef = $rootScope.FirebaseRef.child('users')
+                            .child(userData.uid);
+
+                        $scope.profile.uid = userData.uid;
+
+                        updateUserInfo(false, true);
+                    }
                 });
             }
         };
@@ -171,7 +177,11 @@ angular.module('profile')
             authLogin();
         };
 
-        Auth.$onAuth(function(authData) {
+        $scope.logout = function () {
+            $rootScope.FirebaseRef.unauth();
+        };
+
+        $rootScope.FirebaseRef.onAuth(function(authData) {
 
             if (!authData) {
 

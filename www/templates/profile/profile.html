@@ -25,7 +25,7 @@
                 <div class="button-wrapper">
                     <button ng-click="save()" class="button button-block activated big-main-button"
                         ng-disabled="profileRegisterForm.$invalid">{{loggedIn ? 'UPDATE' : 'REGISTER' | translate}}</button>
-                    <button ng-if="loggedIn" ng-click="Auth.$unauth()" class="button button-block big-main-button delete" translate="LOGOUT"></button>
+                    <button ng-if="loggedIn" ng-click="logout()" class="button button-block big-main-button delete" translate="LOGOUT"></button>
                 </div>
             </div>
         </form>
@@ -43,7 +43,7 @@
                     <input type="password" ng-model="profile.loginPassword" required>
                 </label>
                 <div class="button-wrapper">
-                    <button ng-click="login()" class="button button-block button-positive activated"
+                    <button ng-click="login()" class="button button-block activated big-main-button"
                         ng-disabled="profileLoginForm.$invalid" translate="LOGIN"></button>
                 </div>
             </div>
