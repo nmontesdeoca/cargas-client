@@ -39,53 +39,53 @@ userRef,
 userObject;
 
 // use this code when send to your devide or test in emulator
-document.addEventListener('deviceready', function () {
-
-    network.isOnline(
-    // online fn
-    function () {
-
-        var auth;
-
-        firebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
-        auth = firebaseRef.getAuth();
-
-        if (auth) {
-            userRef = firebaseRef.child('users').child(auth.uid);
-            userRef.once('value', function (userSnapshot) {
-                userObject = userSnapshot.val();
-                // start the application after to get the user info
-                angular.bootstrap(document.body, ['cargas']);
-            });
-        } else {
-            angular.bootstrap(document.body, ['cargas']);
-        }
-    },
-    // offline fn
-    function () {
-        angular.bootstrap(document.body, ['cargas']);
-    });
-
-}, false);
+// document.addEventListener('deviceready', function () {
+//
+//     network.isOnline(
+//     // online fn
+//     function () {
+//
+//         var auth;
+//
+//         firebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
+//         auth = firebaseRef.getAuth();
+//
+//         if (auth) {
+//             userRef = firebaseRef.child('users').child(auth.uid);
+//             userRef.once('value', function (userSnapshot) {
+//                 userObject = userSnapshot.val();
+//                 // start the application after to get the user info
+//                 angular.bootstrap(document.body, ['cargas']);
+//             });
+//         } else {
+//             angular.bootstrap(document.body, ['cargas']);
+//         }
+//     },
+//     // offline fn
+//     function () {
+//         angular.bootstrap(document.body, ['cargas']);
+//     });
+//
+// }, false);
 
 
 // uncomment the next code to test on browser
-// document.addEventListener('DOMContentLoaded', function () {
-//
-//     var auth;
-//
-//     firebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
-//     auth = firebaseRef.getAuth();
-//
-//     if (auth) {
-//         userRef = firebaseRef.child('users').child(auth.uid);
-//         userRef.once('value', function (userSnapshot) {
-//             userObject = userSnapshot.val();
-//             // start the application after to get the user info
-//             angular.bootstrap(document.body, ['cargas']);
-//         });
-//     } else {
-//         angular.bootstrap(document.body, ['cargas']);
-//     }
-//
-// }, false);
+document.addEventListener('DOMContentLoaded', function () {
+
+    var auth;
+
+    firebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
+    auth = firebaseRef.getAuth();
+
+    if (auth) {
+        userRef = firebaseRef.child('users').child(auth.uid);
+        userRef.once('value', function (userSnapshot) {
+            userObject = userSnapshot.val();
+            // start the application after to get the user info
+            angular.bootstrap(document.body, ['cargas']);
+        });
+    } else {
+        angular.bootstrap(document.body, ['cargas']);
+    }
+
+}, false);

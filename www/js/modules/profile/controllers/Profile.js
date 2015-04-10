@@ -253,6 +253,9 @@ angular.module('profile')
                     Sync.fromFirebase({
                         profile: $scope.profile
                     });
+
+                    // reset the lastConnection key
+                    LocalStorage.setObject('lastConnection', 0);
                 }
 
                 $scope.loggedIn = authData;
