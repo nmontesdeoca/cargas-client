@@ -46,9 +46,40 @@ angular.module('profile')
 
                         $rootScope.userRef.once('value', function (userSnapshot) {
 
-                            userObject = userSnapshot.val();
-                            // update local storage
-                            Sync.fromFirebase(userObject);
+                            var userObject = userSnapshot.val(),
+                                lastLocalConnection = Number(LocalStorage.get('lastConnection'), 0),
+                                profileForFirebase;
+
+                            // we need to save to firebase
+                            if (userObject.lastConnection < lastLocalConnection) {
+
+                                profileForFirebase = LocalStorage.getObject('profile');
+
+                                // do not store the password
+                                delete profileForFirebase.password;
+                                // delete loginEmail (don't needed in firebase)
+                                delete profileForFirebase.loginEmail;
+
+                                // and then save in firebase
+                                $rootScope.userRef.set({
+                                    cars: LocalStorage.getObject('cars'),
+                                    fuels: LocalStorage.getObject('fuels'),
+                                    profile: profileForFirebase,
+                                    refuels: LocalStorage.getObject('refuels'),
+                                    settings: LocalStorage.getObject('settings'),
+                                    lastConnection: Date.now()
+                                },
+                                function (error) {
+                                    if (error) {
+                                        console.log('error saving data to firebase', error);
+                                    }
+                                });
+
+                            } else {
+                                // we need to save from firebase
+                                Sync.fromFirebase(userObject);
+                                LocalStorage.setObject('lastConnection', Date.now());
+                            }
 
                             // update scope profile
                             $scope.profile = Profile.query();
@@ -84,9 +115,6 @@ angular.module('profile')
 
                 // and then save in firebase
                 $rootScope.userRef.set({
-                    // email: $scope.profile.email,
-                    // firstname: $scope.profile.firstname,
-                    // lastname: $scope.profile.lastname,
                     cars: LocalStorage.getObject('cars'),
                     fuels: LocalStorage.getObject('fuels'),
                     profile: profileForFirebase,
@@ -121,9 +149,19 @@ angular.module('profile')
 
         $scope.profile = Profile.query();
 
-        $scope.loggedIn = $rootScope.FirebaseRef.getAuth(); // || profile.uid;
+        $scope.loggedIn = $rootScope.FirebaseRef && $rootScope.FirebaseRef.getAuth();
 
         $scope.save = function () {
+
+            if (!$rootScope.FirebaseRef) {
+
+                $ionicPopup.alert({
+                    title: 'No internet connection',
+                    template: 'You need to be online to do this operation'
+                });
+
+                return false;
+            }
 
             $ionicLoading.show({
                 template: $scope.loggedIn ? 'Updating info...' : 'Signing Up...'
@@ -170,31 +208,55 @@ angular.module('profile')
 
         $scope.login = function () {
 
-            $ionicLoading.show({
-                template: 'Loggin in...'
-            });
+            if ($rootScope.FirebaseRef) {
 
-            authLogin();
+                $ionicLoading.show({
+                    template: 'Loggin in...'
+                });
+
+                authLogin();
+
+            } else {
+
+                $ionicPopup.alert({
+                    title: 'No internet connection',
+                    template: 'You need to be online to do this operation'
+                });
+            }
         };
 
         $scope.logout = function () {
-            $rootScope.FirebaseRef.unauth();
-        };
 
-        $rootScope.FirebaseRef.onAuth(function(authData) {
+            if ($rootScope.FirebaseRef) {
 
-            if (!authData) {
+                $rootScope.FirebaseRef.unauth();
 
-                $scope.profile = {
-                    loginEmail: $scope.profile.email || $scope.profile.loginEmail
-                };
+            } else {
 
-                Sync.fromFirebase({
-                    profile: $scope.profile
+                $ionicPopup.alert({
+                    title: 'No internet connection',
+                    template: 'You need to be online to do this operation'
                 });
             }
+        };
 
-            $scope.loggedIn = authData;
-        });
+        if ($rootScope.FirebaseRef) {
+
+            $rootScope.FirebaseRef.onAuth(function(authData) {
+
+                if (!authData) {
+
+                    $scope.profile = {
+                        loginEmail: $scope.profile.email || $scope.profile.loginEmail
+                    };
+
+                    Sync.fromFirebase({
+                        profile: $scope.profile
+                    });
+                }
+
+                $scope.loggedIn = authData;
+            });
+        }
     }
 ]);

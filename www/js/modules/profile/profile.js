@@ -3,14 +3,7 @@ angular.module('profile', [])
 .config(['$stateProvider', function ($stateProvider) {
 
     $stateProvider.state('app.profile', {
-        url: '/profile',/*
-        resolve: {
-            profile: ['Profile',
-                function (Profile) {
-                    return Profile.query;
-                }
-            ]
-        },*/
+        url: '/profile',
         views: {
             menuContent: {
                 templateUrl: 'templates/profile/profile.html',

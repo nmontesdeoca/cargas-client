@@ -22,21 +22,55 @@ angular.module('cargas', [
     'tmhDynamicLocale',
     'Setting',
     'Sync',
+    'LocalStorage',
     function ($ionicPlatform, $rootScope, $translate, $ionicSideMenuDelegate,
-            tmhDynamicLocale, Setting, Sync) {
+            tmhDynamicLocale, Setting, Sync, LocalStorage) {
 
         $ionicPlatform.ready(function () {
 
             var isAndroid = ionic.Platform.isAndroid(),
+                lastLocalConnection = Number(LocalStorage.get('lastConnection'), 0),
+                profileForFirebase,
                 settings;
 
             // SYNC ----------------------------
-            if (userObject) {
-                Sync.fromFirebase(userObject);
-            }
-
             $rootScope.FirebaseRef = firebaseRef;
             $rootScope.userRef = userRef;
+
+            if (userObject) {
+
+//////////// MOVE THIS TO A FUNCTION THAT CAN BE USED HERE AND FROM PROFILE CTRLER ////////////////////////
+                // we need to save to firebase
+                if (userObject.lastConnection < lastLocalConnection) {
+
+                    profileForFirebase = LocalStorage.getObject('profile');
+
+                    // do not store the password
+                    delete profileForFirebase.password;
+                    // delete loginEmail (don't needed in firebase)
+                    delete profileForFirebase.loginEmail;
+
+                    // and then save in firebase
+                    $rootScope.userRef.set({
+                        cars: LocalStorage.getObject('cars'),
+                        fuels: LocalStorage.getObject('fuels'),
+                        profile: profileForFirebase,
+                        refuels: LocalStorage.getObject('refuels'),
+                        settings: LocalStorage.getObject('settings'),
+                        lastConnection: Date.now()
+                    },
+                    function (error) {
+                        if (error) {
+                            console.log('error saving data to firebase', error);
+                        }
+                    });
+
+                } else {
+                    // we need to save from firebase
+                    Sync.fromFirebase(userObject);
+                    LocalStorage.setObject('lastConnection', Date.now());
+                }
+            }
 
             // reset global variables
             firebaseRef = null;
@@ -87,14 +121,63 @@ angular.module('cargas', [
 
             // triggered when the phone is connected to the internet
             document.addEventListener('online', function () {
-                alert('is online');
-                isOnline = true;
+
+                var auth;
+
+                $rootScope.FirebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
+                auth = $rootScope.FirebaseRef.getAuth();
+
+                if (auth) {
+
+                    $rootScope.userRef = $rootScope.FirebaseRef.child('users').child(auth.uid);
+
+                    $rootScope.userRef.once('value', function (userSnapshot) {
+
+                        var userObject = userSnapshot.val(),
+                            lastLocalConnection = Number(LocalStorage.get('lastConnection'), 0),
+                            profileForFirebase;
+
+                        // we need to save to firebase
+                        if (userObject.lastConnection < lastLocalConnection) {
+
+                            profileForFirebase = LocalStorage.getObject('profile');
+
+                            // do not store the password
+                            delete profileForFirebase.password;
+                            // delete loginEmail (don't needed in firebase)
+                            delete profileForFirebase.loginEmail;
+
+                            // and then save in firebase
+                            $rootScope.userRef.set({
+                                cars: LocalStorage.getObject('cars'),
+                                fuels: LocalStorage.getObject('fuels'),
+                                profile: profileForFirebase,
+                                refuels: LocalStorage.getObject('refuels'),
+                                settings: LocalStorage.getObject('settings'),
+                                lastConnection: Date.now()
+                            },
+                            function (error) {
+                                if (error) {
+                                    console.log('error saving data to firebase', error);
+                                }
+                            });
+
+                        } else {
+                            // we need to save from firebase
+                            Sync.fromFirebase(userObject);
+                            LocalStorage.setObject('lastConnection', Date.now());
+                        }
+                    });
+                }
             }, false);
 
             // triggered when the phone loose the internet connection
             document.addEventListener('offline', function () {
-                alert('is offline');
-                isOnline = false;
+                if ($rootScope.FirebaseRef) {
+                    Firebase.goOffline();
+                    $rootScope.FirebaseRef = null;
+                    $rootScope.userRef = null;
+                }
             }, false);
         });
     }
