@@ -36,5 +36,9 @@
     "org.apache.cordova.statusbar",
     "https://github.com/EddyVerbruggen/SocialSharing-PhoneGap-Plugin.git",
     "https://github.com/danwilson/google-analytics-plugin.git"
+  ],
+  "cordovaPlatforms": [
+    "android",
+    "ios"
   ]
 }
