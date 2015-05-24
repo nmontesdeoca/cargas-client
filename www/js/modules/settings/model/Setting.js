@@ -17,9 +17,7 @@ angular.module('settings')
                 navigator.globalization.getPreferredLanguage(_.bind(this.setPreferredLanguage,
                     this));
             } else {
-                this.setPreferredLanguage({
-                    value: navigator.language
-                });
+                this.setPreferredLanguage(navigator.language);
             }
 
             this.$save(function () {
@@ -29,7 +27,7 @@ angular.module('settings')
 
         model.prototype.setPreferredLanguage = function (language) {
             this.locale = language;
-            this.language = language.value.split('-').shift();
+            this.language = (language.value || language).split('-').shift();
             if (!_.contains(VALID_LANGUAGES, this.language)) {
                 this.language = 'en';
             }
