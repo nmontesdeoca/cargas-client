@@ -3,11 +3,11 @@ angular.module('stats')
 .controller('Stats', [
     '$scope',
     '$state',
-    'Car',
+    'CarFactory',
     'data',
     'cars',
     'defaultCar',
-    function ($scope, $state, Car, data, cars, defaultCar) {
+    function ($scope, $state, CarFactory, data, cars, defaultCar) {
         var carKeys = Object.keys(cars);
 
         $scope.cars = cars;
@@ -24,7 +24,7 @@ angular.module('stats')
 
         $scope.$watch('filter.car', function (newFilter, oldFilter) {
             if (newFilter) {
-                $scope.car = Car.get({
+                $scope.car = CarFactory.get({
                     _id: Number(newFilter)
                 });
 

@@ -41,8 +41,8 @@ angular.module('stats', [])
 
                     return data;
                 }],
-                cars: ['Car', function (Car) {
-                    var cars = Car.query();
+                cars: ['CarFactory', function (CarFactory) {
+                    var cars = CarFactory.query();
 
                     return _.object(
                         _.pluck(cars, '_id'),
@@ -51,8 +51,8 @@ angular.module('stats', [])
                         })
                     );
                 }],
-                defaultCar: ['Car', function (Car) {
-                    return Car.get({
+                defaultCar: ['CarFactory', function (CarFactory) {
+                    return CarFactory.get({
                         byDefault: true
                     });
                 }]

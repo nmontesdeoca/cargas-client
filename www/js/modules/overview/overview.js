@@ -10,8 +10,8 @@ angular.module('overview', [])
                 refuels: ['Refuel', function (Refuel) {
                     return Refuel.getRefuelsSortByDate();
                 }],
-                cars: ['Car', function (Car) {
-                    return Car.query();
+                cars: ['CarFactory', function (CarFactory) {
+                    return CarFactory.query();
                 }]
             },
             views: {

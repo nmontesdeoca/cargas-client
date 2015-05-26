@@ -5,10 +5,9 @@ angular.module('overview')
     'refuels',
     'cars',
     'Refuel',
-    'Car',
+    'CarFactory',
     '$ionicHistory',
-    function ($scope, refuels, cars, Refuel, Car, $ionicHistory) {
-
+    function ($scope, refuels, cars, Refuel, CarFactory, $ionicHistory) {
         $ionicHistory.clearHistory();
         // add the car object to the last refuel
         $scope.hasRefuels = !!refuels.length;
@@ -17,7 +16,7 @@ angular.module('overview')
             var lastRefuel = refuels[0];
 
             lastRefuel = _.extend(lastRefuel, {
-                car: Car.get({
+                car: CarFactory.get({
                     _id: Number(lastRefuel.car)
                 })
             });

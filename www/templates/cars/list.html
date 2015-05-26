@@ -11,7 +11,11 @@
             show-reorder="false"
             can-swipe="false">
 
-            <ion-item ng-repeat="car in cars" ui-sref="app.carEdit({id: car._id})" class="item-thumbnail-left">
+            <ion-item
+                ng-repeat="car in controller.cars"
+                ui-sref="app.carEdit({id: car._id})"
+                class="item-thumbnail-left">
+                
                 <img ng-src="{{car.image || 'http://ionicframework.com/img/docs/blue-album.jpg'}}">
                 <h2>{{car.getName()}}</h2>
                 <p>{{car.year}}</p>

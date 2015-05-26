@@ -11,7 +11,7 @@
         /* jshint validthis:true */
         this.$get = RouterHelper;
 
-        RouterHelper.$inject = ['$state'];
+        // RouterHelper.$inject = ['$state'];
 
         function RouterHelper() {
             var hasOtherwise = false,
