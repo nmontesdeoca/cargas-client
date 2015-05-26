@@ -9,7 +9,8 @@
     "funcscope": false,
     "futurehostile": true,
     "globals": {
-        "angular": false
+        "angular": false,
+        "_": false
     },
     "globalstrict": false,
     "iterator": false,
