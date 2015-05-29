@@ -3,7 +3,6 @@
     "curly": true,
     "eqeqeq": true,
     "es3": false,
-    "es5": true,
     "forin": true,
     "freeze": true,
     "funcscope": false,
