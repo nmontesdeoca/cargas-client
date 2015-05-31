@@ -29,10 +29,6 @@ angular.module('settings')
             link: '#/settings/language',
             state: 'app.settingsLanguage'
         }, {
-            name: $filter('translate')('ABOUT'),
-            link: '#/settings/about',
-            state: 'app.settingsAbout'
-        }, {
             name: $filter('translate')('HELP'),
             link: '#/intro',
             state: 'intro'

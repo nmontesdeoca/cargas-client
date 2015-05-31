@@ -50,38 +50,12 @@ angular.module('settings', [])
             }
         })
 
-        .state('app.settingsHelp', {
-            url: '/settings/help',
-            /*resolve: {
-            Settings: 'Setting'
-        },*/
-            views: {
-                menuContent: {
-                    templateUrl: 'templates/settings/help.html',
-                    controller: 'Settings'
-                }
-            }
-        })
-
         .state('app.settingsData', {
             url: '/settings/data',
 
             views: {
                 menuContent: {
                     templateUrl: 'templates/settings/data.html',
-                    controller: 'Settings'
-                }
-            }
-        })
-
-        .state('app.settingsAbout', {
-            url: '/settings/about',
-            /*resolve: {
-            Settings: 'Setting'
-        },*/
-            views: {
-                menuContent: {
-                    templateUrl: 'templates/settings/about.html',
                     controller: 'Settings'
                 }
             }
