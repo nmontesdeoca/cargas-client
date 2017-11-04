@@ -7,7 +7,7 @@
     "url": "https://github.com/nmontesdeoca/cargas-client"
   },
   "engines": {
-    "node": "9.0.0"
+    "node": "8.9.0"
   },
   "dependencies": {
     "gulp": "^3.5.6",
