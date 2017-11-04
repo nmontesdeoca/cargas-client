@@ -11,7 +11,8 @@ angular.module('cargas', [
     'stats',
     'settings',
     'utils',
-    'intro'
+    'intro',
+    'templates'
 ])
 
 .run([
