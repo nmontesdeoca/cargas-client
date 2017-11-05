@@ -1,6 +1,6 @@
 import * as types from '../constants/actionTypes';
 
-const reducer = (state = [], action = {}) => {
+const fuels = (state = [], action = {}) => {
     switch (action.type) {
         case types.ADD_FUEL:
             return addFuel(state, action);
@@ -39,4 +39,4 @@ const updateFuel = (state, action) => {
 const removeFuel = (state, action) =>
     state.filter(fuel => fuel.id !== action.id);
 
-export default reducer;
+export default fuels;

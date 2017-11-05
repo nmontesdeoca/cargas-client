@@ -3,8 +3,9 @@ import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import '../css/App.css';
 import Home from './Home';
-import Fuels from './Fuels';
+import FuelsContainer from './FuelsContainer';
 
 class App extends Component {
     constructor(props) {
@@ -28,6 +29,7 @@ class App extends Component {
             <Router>
                 <div>
                     <AppBar
+                        style={{ position: 'fixed', top: 0 }}
                         title="CarGas"
                         onLeftIconButtonTouchTap={this.onMenuTouchTap}
                     />
@@ -38,15 +40,19 @@ class App extends Component {
                         onRequestChange={this.onRequestChange}
                     >
                         <Link to="/" className="no-decoration">
-                            <MenuItem>Home</MenuItem>
+                            <MenuItem onClick={this.onMenuTouchTap}>
+                                Home
+                            </MenuItem>
                         </Link>
                         <Link to="/fuels" className="no-decoration">
-                            <MenuItem>Fuels</MenuItem>
+                            <MenuItem onClick={this.onMenuTouchTap}>
+                                Fuels
+                            </MenuItem>
                         </Link>
                     </Drawer>
 
                     <Route exact path="/" component={Home} />
-                    <Route path="/fuels" component={Fuels} />
+                    <Route path="/fuels" component={FuelsContainer} />
                 </div>
             </Router>
         );
