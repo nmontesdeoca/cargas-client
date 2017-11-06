@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { withStyles } from 'material-ui/styles';
 import Home from './Home';
 import Header from './Header';
 import SideNavigation from './SideNavigation';
 import FuelsContainer from './FuelsContainer';
+
+const styles = {
+    container: {
+        paddingTop: 80
+    }
+};
 
 class App extends Component {
     constructor(props) {
@@ -23,6 +30,7 @@ class App extends Component {
         });
     };
     render() {
+        const { classes } = this.props;
         return (
             <Router>
                 <div>
@@ -31,7 +39,7 @@ class App extends Component {
                         open={this.state.sideNavigationOpen}
                         onRequestClose={this.onRequestClose}
                     />
-                    <div className="container">
+                    <div className={classes.container}>
                         <Route exact path="/" component={Home} />
                         <Route path="/fuels" component={FuelsContainer} />
                     </div>
@@ -41,4 +49,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default withStyles(styles)(App);

@@ -2,17 +2,26 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Drawer from 'material-ui/Drawer';
 import List, { ListItem, ListItemText } from 'material-ui/List';
-import '../css/SideNavigation.css';
+import { withStyles } from 'material-ui/styles';
 
-const SideNavigation = ({ open, onRequestClose }) => (
+const styles = {
+    noDecoration: {
+        textDecoration: 'none'
+    },
+    sideNavigation: {
+        width: 250
+    }
+};
+
+const SideNavigation = ({ open, onRequestClose, classes }) => (
     <Drawer open={open} onRequestClose={onRequestClose}>
-        <List>
-            <Link to="/" className="no-decoration">
+        <List className={classes.sideNavigation}>
+            <Link to="/" className={classes.noDecoration}>
                 <ListItem onClick={onRequestClose}>
                     <ListItemText primary="Home" />
                 </ListItem>
             </Link>
-            <Link to="/fuels" className="no-decoration">
+            <Link to="/fuels" className={classes.noDecoration}>
                 <ListItem onClick={onRequestClose}>
                     <ListItemText primary="Fuels" />
                 </ListItem>
@@ -21,4 +30,4 @@ const SideNavigation = ({ open, onRequestClose }) => (
     </Drawer>
 );
 
-export default SideNavigation;
+export default withStyles(styles)(SideNavigation);

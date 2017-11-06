@@ -5,6 +5,7 @@
     "dependencies": {
         "husky": "^0.14.3",
         "lint-staged": "^4.3.0",
+        "lodash": "^4.17.4",
         "material-ui": "^1.0.0-beta.19",
         "material-ui-icons": "^1.0.0-beta.17",
         "prettier": "^1.7.4",
@@ -14,6 +15,7 @@
         "react-router-dom": "^4.2.2",
         "react-scripts": "1.0.17",
         "redux": "^3.7.2",
+        "typeface-roboto": "0.0.43",
         "uuid": "^3.1.0"
     },
     "lint-staged": {
