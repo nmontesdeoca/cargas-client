@@ -57,7 +57,7 @@
             templates: './www/templates/**/*.html'
         };
 
-    gulp.task('default', ['sass', 'hint']);
+    gulp.task('default', ['sass', 'scripts', 'templates']);
 
     gulp.task('sass', function (done) {
         gulp.src('./scss/ionic.app.scss')
