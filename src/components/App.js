@@ -31,12 +31,14 @@ class App extends Component {
     };
     render() {
         const { classes } = this.props;
+        const { sideNavigationOpen } = this.state;
         return (
             <Router>
+                {/* A <Router> may have only one child element */}
                 <div>
                     <Header onMenuClick={this.onMenuClick} />
                     <SideNavigation
-                        open={this.state.sideNavigationOpen}
+                        open={sideNavigationOpen}
                         onRequestClose={this.onRequestClose}
                     />
                     <div className={classes.container}>
