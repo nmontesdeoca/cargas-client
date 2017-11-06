@@ -1,29 +1,36 @@
 import React from 'react';
-import { List, ListItem } from 'material-ui/List';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import ContentAdd from 'material-ui/svg-icons/content/add';
-import '../css/Fuels.css';
+import List, { ListItem, ListItemText } from 'material-ui/List';
+import { withStyles } from 'material-ui/styles';
+import Button from 'material-ui/Button';
+import AddIcon from 'material-ui-icons/Add';
 
-const Fuels = ({ fuels, onClick }) => (
+const styles = theme => ({
+    button: {
+        bottom: 20,
+        position: 'fixed',
+        right: 20
+    }
+});
+
+const Fuels = ({ fuels, onClick, classes }) => (
     <div>
         <List>
             {fuels.map(fuel => (
-                <ListItem
-                    key={fuel.id}
-                    insetChildren={true}
-                    primaryText={fuel.name}
-                    secondaryText={fuel.cost}
-                />
+                <ListItem key={fuel.id}>
+                    <ListItemText primary={fuel.name} secondary={fuel.cost} />
+                </ListItem>
             ))}
         </List>
-        <FloatingActionButton
+        <Button
+            fab
+            color="primary"
+            aria-label="add"
             onClick={onClick}
-            secondary={true}
-            className="floating-action-button"
+            className={classes.button}
         >
-            <ContentAdd />
-        </FloatingActionButton>
+            <AddIcon />
+        </Button>
     </div>
 );
 
-export default Fuels;
+export default withStyles(styles)(Fuels);
