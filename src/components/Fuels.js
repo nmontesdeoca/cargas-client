@@ -3,6 +3,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
+import DeleteIcon from 'material-ui-icons/Delete';
 
 const styles = theme => ({
     button: {
@@ -12,12 +13,16 @@ const styles = theme => ({
     }
 });
 
-const Fuels = ({ fuels, onClick, classes }) => (
+const Fuels = ({ fuels, addFuel, removeFuel, classes }) => (
     <div>
         <List>
-            {fuels.map(fuel => (
-                <ListItem key={fuel.id}>
-                    <ListItemText primary={fuel.name} secondary={fuel.cost} />
+            {fuels.map((fuel, index) => (
+                <ListItem key={fuel.id} divider={index + 1 !== fuels.length}>
+                    <ListItemText
+                        primary={`${fuel.name} ${fuel.id.substring(0, 4)}`}
+                        secondary={fuel.cost}
+                    />
+                    <DeleteIcon onClick={() => removeFuel(fuel.id)} />
                 </ListItem>
             ))}
         </List>
@@ -25,7 +30,7 @@ const Fuels = ({ fuels, onClick, classes }) => (
             fab
             color="primary"
             aria-label="add"
-            onClick={onClick}
+            onClick={addFuel}
             className={classes.button}
         >
             <AddIcon />

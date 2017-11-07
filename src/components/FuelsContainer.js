@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addFuel } from '../actions';
+import { addFuel, removeFuel } from '../actions';
 import Fuels from './Fuels';
 
 const mapStateToProps = (state, ownProps) => {
@@ -10,8 +10,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onClick: () => {
+        addFuel: () => {
             dispatch(addFuel('Super', 42.5));
+        },
+        removeFuel: id => {
+            dispatch(removeFuel(id));
         }
     };
 };
