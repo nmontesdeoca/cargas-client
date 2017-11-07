@@ -8,7 +8,8 @@ import FuelsContainer from './FuelsContainer';
 
 const styles = {
     container: {
-        paddingTop: 80
+        paddingBottom: 60,
+        paddingTop: 60
     }
 };
 

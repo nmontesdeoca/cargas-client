@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addFuel: () => {
-            dispatch(addFuel('Super', 42.5));
+        addFuel: (name, cost) => {
+            dispatch(addFuel(name, cost));
         },
         removeFuel: id => {
             dispatch(removeFuel(id));
