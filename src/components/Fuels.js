@@ -40,13 +40,11 @@ class Fuels extends Component {
         };
     }
 
-    getFuelName = fuel => `${fuel.name} ${fuel.id.substring(0, 4)}`;
-
     showRemoveFuelDialog = fuel => {
         this.setState({
             removeFuelDialogOpen: true,
             removingFuel: fuel.id,
-            removingFuelName: this.getFuelName(fuel)
+            removingFuelName: fuel.name
         });
     };
 
@@ -75,16 +73,15 @@ class Fuels extends Component {
         });
     };
 
-    handleInputChange = (name, value) => {
-        this.setState({
-            [name]: value
-        });
+    handleInputChange = event => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
 
-        if (value) {
-            this.setState({
-                [name + 'Error']: false
-            });
-        }
+        this.setState({
+            [name]: value,
+            [name + 'Error']: !value
+        });
     };
 
     render() {
@@ -145,13 +142,9 @@ class Fuels extends Component {
                             </InputLabel>
                             <Input
                                 id="name"
+                                name="addingFuelName"
                                 error={addingFuelNameError}
-                                onChange={e => {
-                                    this.handleInputChange(
-                                        'addingFuelName',
-                                        e.target.value
-                                    );
-                                }}
+                                onChange={this.handleInputChange}
                             />
                         </FormControl>
                         <FormControl className={classes.formControl}>
@@ -164,12 +157,9 @@ class Fuels extends Component {
                             <Input
                                 id="amount"
                                 type="number"
+                                name="addingFuelCost"
                                 error={addingFuelCostError}
-                                onChange={e =>
-                                    this.handleInputChange(
-                                        'addingFuelCost',
-                                        e.target.value
-                                    )}
+                                onChange={this.handleInputChange}
                                 startAdornment={
                                     <InputAdornment position="start">
                                         $
@@ -210,7 +200,7 @@ class Fuels extends Component {
                             divider={index + 1 !== fuels.length}
                         >
                             <ListItemText
-                                primary={this.getFuelName(fuel)}
+                                primary={fuel.name}
                                 secondary={fuel.cost}
                             />
                             <DeleteIcon
