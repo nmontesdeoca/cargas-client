@@ -12,6 +12,7 @@ import Dialog, {
     DialogContentText,
     DialogTitle
 } from 'material-ui/Dialog';
+import NumberFormat from 'react-number-format';
 
 const styles = theme => ({
     button: {
@@ -201,7 +202,15 @@ class Fuels extends Component {
                         >
                             <ListItemText
                                 primary={fuel.name}
-                                secondary={fuel.cost}
+                                secondary={
+                                    <NumberFormat
+                                        value={fuel.cost}
+                                        displayType={'text'}
+                                        decimalSeparator={','}
+                                        thousandSeparator={'.'}
+                                        prefix={'$'}
+                                    />
+                                }
                             />
                             <DeleteIcon
                                 onClick={() => this.showRemoveFuelDialog(fuel)}
