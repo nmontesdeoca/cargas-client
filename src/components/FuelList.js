@@ -25,7 +25,7 @@ const styles = theme => ({
     }
 });
 
-class Fuels extends Component {
+class FuelList extends Component {
     constructor(props) {
         super(props);
 
@@ -232,4 +232,4 @@ class Fuels extends Component {
     }
 }
 
-export default withStyles(styles)(Fuels);
+export default withStyles(styles)(FuelList);

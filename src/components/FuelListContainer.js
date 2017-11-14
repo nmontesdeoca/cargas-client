@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { addFuel, removeFuel } from '../actions';
-import Fuels from './Fuels';
+import FuelList from './FuelList';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -19,6 +19,8 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-const FuelsContainer = connect(mapStateToProps, mapDispatchToProps)(Fuels);
+const FuelListContainer = connect(mapStateToProps, mapDispatchToProps)(
+    FuelList
+);
 
-export default FuelsContainer;
+export default FuelListContainer;
