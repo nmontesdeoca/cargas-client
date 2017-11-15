@@ -4,7 +4,7 @@ import { withStyles } from 'material-ui/styles';
 import Home from './Home';
 import Header from './Header';
 import SideNavigation from './SideNavigation';
-import FuelListContainer from './FuelListContainer';
+import FuelListPage from './FuelListPage';
 
 const styles = {
     container: {
@@ -44,7 +44,7 @@ class App extends Component {
                     />
                     <div className={classes.container}>
                         <Route exact path="/" component={Home} />
-                        <Route path="/fuels" component={FuelListContainer} />
+                        <Route path="/fuels" component={FuelListPage} />
                     </div>
                 </div>
             </Router>

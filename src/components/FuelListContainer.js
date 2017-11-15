@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addFuel, removeFuel } from '../actions';
+import { removeFuel } from '../actions';
 import FuelList from './FuelList';
 
 const mapStateToProps = (state, ownProps) => {
@@ -10,9 +10,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        addFuel: (name, cost) => {
-            dispatch(addFuel(name, cost));
-        },
         removeFuel: id => {
             dispatch(removeFuel(id));
         }
