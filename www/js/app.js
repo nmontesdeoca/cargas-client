@@ -124,52 +124,62 @@ angular.module('cargas', [
             document.addEventListener('online', function () {
 
                 var auth;
+                var firebaseConfig = {
+                    apiKey: "AIzaSyAVlRa11jqlwqJf9cFVNHw2N3Xp9n4SE4I",
+                    authDomain: "cargas-app.firebaseapp.com",
+                    databaseURL: "https://cargas-app.firebaseio.com"
+                };
 
-                $rootScope.FirebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
-                auth = $rootScope.FirebaseRef.getAuth();
+                // $rootScope.FirebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
+                // Initialize Firebase
+                firebase.initializeApp(firebaseConfig);
+                $rootScope.FirebaseRef = firebase.database().ref();
+                auth = firebase.auth();
+                auth.onAuthStateChanged(function onAuthStateChanged(user) {
+                    if (user) {
+                        $rootScope.userRef = $rootScope.FirebaseRef.child('users').child(user.uid);
 
-                if (auth) {
+                        $rootScope.userRef.once('value', function (userSnapshot) {
 
-                    $rootScope.userRef = $rootScope.FirebaseRef.child('users').child(auth.uid);
+                            var userObject = userSnapshot.val,
+                                lastLocalConnection = Number(LocalStorage.get('lastConnection'), 0),
+                                profileForFirebase;
 
-                    $rootScope.userRef.once('value', function (userSnapshot) {
+                            // we need to save to firebase
+                            if (userObject.lastConnection < lastLocalConnection) {
 
-                        var userObject = userSnapshot.val(),
-                            lastLocalConnection = Number(LocalStorage.get('lastConnection'), 0),
-                            profileForFirebase;
+                                profileForFirebase = LocalStorage.getObject('profile');
 
-                        // we need to save to firebase
-                        if (userObject.lastConnection < lastLocalConnection) {
+                                // do not store the password
+                                delete profileForFirebase.password;
+                                // delete loginEmail (don't needed in firebase)
+                                delete profileForFirebase.loginEmail;
 
-                            profileForFirebase = LocalStorage.getObject('profile');
+                                // and then save in firebase
+                                $rootScope.userRef.set({
+                                    cars: LocalStorage.getObject('cars'),
+                                    fuels: LocalStorage.getObject('fuels'),
+                                    profile: profileForFirebase,
+                                    refuels: LocalStorage.getObject('refuels'),
+                                    settings: LocalStorage.getObject('settings'),
+                                    lastConnection: Date.now()
+                                },
+                                function (error) {
+                                    if (error) {
+                                        console.log('error saving data to firebase', error);
+                                    }
+                                });
 
-                            // do not store the password
-                            delete profileForFirebase.password;
-                            // delete loginEmail (don't needed in firebase)
-                            delete profileForFirebase.loginEmail;
-
-                            // and then save in firebase
-                            $rootScope.userRef.set({
-                                cars: LocalStorage.getObject('cars'),
-                                fuels: LocalStorage.getObject('fuels'),
-                                profile: profileForFirebase,
-                                refuels: LocalStorage.getObject('refuels'),
-                                settings: LocalStorage.getObject('settings'),
-                                lastConnection: Date.now()
-                            },
-                            function (error) {
-                                if (error) {
-                                    console.log('error saving data to firebase', error);
-                                }
-                            });
-
-                        } else {
-                            // we need to save from firebase
-                            Sync.fromFirebase(userObject);
-                            LocalStorage.setObject('lastConnection', Date.now());
-                        }
-                    });
-                }
+                            } else {
+                                // we need to save from firebase
+                                Sync.fromFirebase(userObject);
+                                LocalStorage.setObject('lastConnection', Date.now());
+                            }
+                        });
+                    } else {
+                        // User logged out
+                    }
+                });
             }, false);
 
             // triggered when the phone loose the internet connection

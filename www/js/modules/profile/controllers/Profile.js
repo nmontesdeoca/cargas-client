@@ -13,6 +13,23 @@ angular.module('profile')
             LocalStorage, Sync, Profile) {
 
         var authLogin = function (fromRegister) {
+            firebase.auth().signInWithEmailAndPassword(
+                $scope.profile.email || $scope.profile.loginEmail,
+                $scope.profile.password || $scope.profile.loginPassword
+            ).catch(function(error) {
+                // Handle Errors here.
+                // var errorCode = error.code;
+                // var errorMessage = error.message;
+
+                if (error) {
+                    $ionicPopup.alert({
+                        title: 'Login Error',
+                        template: error
+                    });
+
+                    $ionicLoading.hide();
+                }
+            });
 
             $rootScope.FirebaseRef.authWithPassword({
                 email: $scope.profile.email || $scope.profile.loginEmail,
@@ -146,10 +163,27 @@ angular.module('profile')
                 });
             });
         };
+        var auth = firebase.auth();
 
         $scope.profile = Profile.query();
 
-        $scope.loggedIn = $rootScope.FirebaseRef && $rootScope.FirebaseRef.getAuth();
+        $scope.loggedIn = null;
+        auth.onAuthStateChanged(function onAuthStateChanged(user) {
+            if (!user) {
+                $scope.profile = {
+                    loginEmail: $scope.profile.email || $scope.profile.loginEmail
+                };
+
+                Sync.fromFirebase({
+                    profile: $scope.profile
+                });
+
+                // reset the lastConnection key
+                LocalStorage.setObject('lastConnection', 0);
+            }
+
+            $scope.loggedIn = user;
+        });
 
         $scope.save = function () {
 
@@ -177,6 +211,22 @@ angular.module('profile')
 
             } else {
                 // create user
+                firebase.auth().createUserWithEmailAndPassword(
+                    $scope.profile.email,
+                    $scope.profile.password
+                ).catch(function(error) {
+                  // Handle Errors here.
+                  // var errorCode = error.code;
+                  // var errorMessage = error.message;
+                  if (error) {
+                      $ionicPopup.alert({
+                          title: 'Error',
+                          template: error
+                      });
+
+                      $ionicLoading.hide();
+                  }
+                });
                 $rootScope.FirebaseRef.createUser({
                     email: $scope.profile.email,
                     password: $scope.profile.password
@@ -229,7 +279,7 @@ angular.module('profile')
 
             if ($rootScope.FirebaseRef) {
 
-                $rootScope.FirebaseRef.unauth();
+                firebase.auth().signOut();
 
             } else {
 
@@ -240,26 +290,26 @@ angular.module('profile')
             }
         };
 
-        if ($rootScope.FirebaseRef) {
-
-            $rootScope.FirebaseRef.onAuth(function(authData) {
-
-                if (!authData) {
-
-                    $scope.profile = {
-                        loginEmail: $scope.profile.email || $scope.profile.loginEmail
-                    };
-
-                    Sync.fromFirebase({
-                        profile: $scope.profile
-                    });
-
-                    // reset the lastConnection key
-                    LocalStorage.setObject('lastConnection', 0);
-                }
-
-                $scope.loggedIn = authData;
-            });
-        }
+        // if ($rootScope.FirebaseRef) {
+        //
+        //     $rootScope.FirebaseRef.onAuth(function(authData) {
+        //
+        //         if (!authData) {
+        //
+        //             $scope.profile = {
+        //                 loginEmail: $scope.profile.email || $scope.profile.loginEmail
+        //             };
+        //
+        //             Sync.fromFirebase({
+        //                 profile: $scope.profile
+        //             });
+        //
+        //             // reset the lastConnection key
+        //             LocalStorage.setObject('lastConnection', 0);
+        //         }
+        //
+        //         $scope.loggedIn = authData;
+        //     });
+        // }
     }
 ]);

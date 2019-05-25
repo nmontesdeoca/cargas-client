@@ -73,19 +73,26 @@ userObject;
 document.addEventListener('DOMContentLoaded', function () {
 
     var auth;
-
-    firebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
-    auth = firebaseRef.getAuth();
-
-    if (auth) {
-        userRef = firebaseRef.child('users').child(auth.uid);
-        userRef.once('value', function (userSnapshot) {
-            userObject = userSnapshot.val();
-            // start the application after to get the user info
+    var firebaseConfig = {
+        apiKey: "AIzaSyAVlRa11jqlwqJf9cFVNHw2N3Xp9n4SE4I",
+        authDomain: "cargas-app.firebaseapp.com",
+        databaseURL: "https://cargas-app.firebaseio.com"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    // firebaseRef = new Firebase('https://cargas-app.firebaseio.com/');
+    firebaseRef = firebase.database().ref();
+    auth = firebase.auth();
+    auth.onAuthStateChanged(function onAuthStateChanged(user) {
+        if (user) {
+            userRef = firebaseRef.child('users').child(user.uid);
+            userRef.once('value', function (userSnapshot) {
+                userObject = userSnapshot.val();
+                // start the application after to get the user info
+                angular.bootstrap(document.body, ['cargas']);
+            });
+        } else {
             angular.bootstrap(document.body, ['cargas']);
-        });
-    } else {
-        angular.bootstrap(document.body, ['cargas']);
-    }
-
+        }
+    });
 }, false);
