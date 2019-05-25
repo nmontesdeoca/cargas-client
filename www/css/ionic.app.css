@@ -3085,7 +3085,7 @@ a:hover {
  */
 a {
   -webkit-user-drag: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent; }
   a[href]:hover {
     cursor: pointer; }
@@ -3322,7 +3322,7 @@ body,
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
   text-size-adjust: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -3714,7 +3714,7 @@ a.subdued {
   z-index: 11;
   width: 100%;
   height: 100%;
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .action-sheet-backdrop.active {
     background-color: rgba(0, 0, 0, 0.4); }
 
@@ -5330,7 +5330,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   z-index: 10;
   width: 100%;
   height: 100%;
-  background-color: transparent; }
+  background-color: rgba(0, 0, 0, 0); }
   .popover-backdrop.active {
     background-color: rgba(0, 0, 0, 0.1); }
 
@@ -5453,7 +5453,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   left: 0;
   bottom: 0;
   right: 0;
-  background: transparent;
+  background: rgba(0, 0, 0, 0);
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -7806,8 +7806,8 @@ input:checked + .checkbox-icon:after {
     width: 0;
     height: 0;
     border-top: 5px solid;
-    border-right: 5px solid transparent;
-    border-left: 5px solid transparent;
+    border-right: 5px solid rgba(0, 0, 0, 0);
+    border-left: 5px solid rgba(0, 0, 0, 0);
     color: #999;
     content: "";
     pointer-events: none; }
@@ -8273,7 +8273,7 @@ a.button, a.big-action-button {
 
 .button.disabled, .disabled.big-action-button,
 .button[disabled],
-[disabled].big-action-button {
+.big-action-button[disabled] {
   opacity: .4;
   cursor: default !important;
   pointer-events: none; }
@@ -8665,7 +8665,7 @@ a.button, a.big-action-button {
   -ms-user-select: none;
   user-select: none;
   -webkit-touch-callout: none;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
   -webkit-user-drag: none;
   -ms-touch-action: none;
@@ -11446,7 +11446,9 @@ Copyright (c) 2013 Daniel Eden
   .item.card-heading .item-note {
     font-size: 12px; }
 
-.button.disabled, .disabled.big-action-button, .button[disabled], [disabled].big-action-button {
+.button.disabled, .disabled.big-action-button,
+.button[disabled],
+.big-action-button[disabled] {
   opacity: 0.7; }
 
 .button.big-main-button, .big-main-button.big-action-button {
@@ -11501,11 +11503,15 @@ ion-nav-view,
     left: 48px;
     max-width: 97%; }
 
-.card .item:first-child, .list-inset .item:first-child, .padding > .list .item:first-child {
+.card .item:first-child,
+.list-inset .item:first-child,
+.padding > .list .item:first-child {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px; }
 
-.card .item:last-child, .list-inset .item:last-child, .padding > .list .item:last-child {
+.card .item:last-child,
+.list-inset .item:last-child,
+.padding > .list .item:last-child {
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px; }
 
@@ -11515,8 +11521,7 @@ ion-nav-view,
 .modal-wrapper .button-wrapper {
   margin: 0 9px 0 10px; }
 
-[nav-view-transition=ios][nav-view-direction=forward],
-[nav-view-transition=ios][nav-view-direction=back] {
+[nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
   background: transparent; }
 
 /* intro screen */
